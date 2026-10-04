@@ -3,8 +3,8 @@ const HomeScreen = {
   emits: ["new", "load", "book", "tutorial", "resume"],
   template: `<main class="home-screen">
 <div class="home-heading">
-<p class="eyebrow">AZURLANE CHESS / v0.3.1</p>
-<h1>\u78A7\u84DD\u6D77\u6218\u68CB</h1>
+<p class="eyebrow">AZURLANE CHESS / v0.3.2</p>
+<h1>碧蓝推演棋</h1>
 <p>\u7F16\u961F\uFF0C\u90E8\u7F72\uFF0C\u7136\u540E\u8BA9\u53CC\u65B9\u7684\u8BA1\u5212\u540C\u65F6\u6267\u884C</p>
 </div>
 <div class="home-grid">

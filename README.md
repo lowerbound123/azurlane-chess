@@ -1,4 +1,4 @@
-# 碧蓝海战棋 / azurlane chess v0.3.1
+# 碧蓝推演棋 / azurlane chess v0.3.2
 
 Vue 3 + Vite，纯静态网页游戏。 A playable PvAI prototype with home menu, fleet selection, deployment, untimed planning, simultaneous resolution, two-layer RTS fog, contextual ranges, all-friendly plan visibility, local persistence, and illustrated/action-gated tutorials.
 
