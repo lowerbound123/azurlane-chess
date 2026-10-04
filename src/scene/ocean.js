@@ -22,22 +22,27 @@ export function oceanMaterial(clock, color = 0x2986b4, strength = 1) {
         float swell=noise(sea*vec2(.12,.55)+drift*.5);
         float warp=noise(sea*vec2(.34,.8)-drift)*.7;
         // Thin anisotropic wavelets: long along x, densely layered along z.
-        vec2 p=sea*vec2(1.5,12.)+drift*vec2(1.,5.);
+        vec2 p=sea*vec2(.65,10.)+drift*vec2(1.,5.);
         p.y+=warp*3.;p.x+=swell*.4;
         float fine=ripple(p);
         float middle=ripple(sea*vec2(.55,4.3)+vec2(warp,time*.11));
         float filterWidth=max(fwidth(fine),.014);
-        float crest=smoothstep(.54-filterWidth,.77+filterWidth,fine);
+        // Density and brightness are separate: only the reflected strip has
+        // closely spaced pale crests; the open sea retains isolated blue ripples.
+        float band=exp(-pow((sea.x-13.+(swell-.5)*4.)/6.2,2.));
+        float farFade=pow(1.-depth,2.1);
+        float highlightZone=band*farFade;
+        float threshold=mix(.70,.53,highlightZone);
+        float crest=smoothstep(threshold-filterWidth,threshold+.19+filterWidth,fine);
         float trough=smoothstep(.28,.59,middle);
         // A wide, fragmented sky reflection, strongest toward the far water.
-        float band=exp(-pow((sea.x-14.+(swell-.5)*7.)/7.,2.));
-        float reflection=band*mix(.8,.10,depth);
+        float reflection=highlightZone*.95;
         vec3 farWater=vec3(.075,.39,.64),nearWater=vec3(.011,.065,.17);
         vec3 water=mix(farWater,nearWater,pow(depth,.7));
         water+=vec3(.014,.045,.068)*(swell-.5);
         water+=vec3(.045,.13,.20)*(trough-.43)*mix(.65,.12,depth);
-        water+=vec3(.11,.20,.24)*crest*(.035+reflection*1.7);
-        water+=vec3(.055,.10,.115)*reflection;
+        water+=vec3(.38,.51,.56)*crest*(.005+reflection*1.25);
+        water+=vec3(.022,.037,.045)*reflection;
         // Fainter broad ribbons sit beneath the sharp reflected fragments.
         float ribbon=smoothstep(.51,.72,middle);
         water+=vec3(.018,.045,.065)*ribbon*(.12+.35*(1.-depth)+reflection);
