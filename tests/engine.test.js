@@ -28,3 +28,28 @@ test('return plane follows moving mother and enters one-round rearm',()=>{const 
 test('return plane mother already dead destroys plane',()=>{const a=quiet(ship('cv',0,0,3,5)),b=quiet(ship('cv',1,0,13,10)),g=game([a,b]);a.hp=0;g.planes=[plane(a,'p0',h(1,5),{state:'return'})];const r=E.resolveRound(g);assert.equal(r.game.planes.length,0);assert.equal(get(r.game,a.id).destroyedPlanes,1);});
 test('round30 counts ship count before HP and excludes aircraft',()=>{const a=quiet(ship('dd',0,0,0,5)),b=quiet(ship('cv',0,1,0,12)),c=quiet(ship('bb',1,0,13,5)),g=game([a,b,c],{round:30});a.hp=1;b.hp=1;const r=E.resolveRound(g);assert.equal(r.game.winner,0);assert.equal(r.game.phase,'ended');});
 test('aircraft12 is outbound only; return has its own distance and skips rearm round',()=>{const a=quiet(E.createShip('cv',0,0,E.fromCR(0,5))),b=quiet(E.createShip('cv',1,0,E.fromCR(18,14)));let g=game([a,b]);for(let i=0;i<4;i++){const r=E.resolveRound(g,i===0?{[a.id]:{...E.emptyPlan(),planes:[{mode:'point',target:E.fromCR(12,5)}]}}:{});g=r.game;if(i<2){assert.equal(g.planes.length,1);assert(Math.abs(g.planes[0].traveled-(i+1)*6)<1e-7);assert.equal(g.planes[0].state,i<1?'outbound':'return');}else if(i<3){assert.equal(g.planes.length,1);assert.equal(g.planes[0].state,'return');}}assert.equal(g.planes.length,0);assert.equal(get(g,a.id).airReady[0],6);});
+test('carrier heals recovered aircraft once after rearm and preserves HP on relaunch',()=>{
+ for(const [heal,expected] of [[0,1],[1,2],[10,4]]){
+  const a=quiet(ship('cv',0,0,0,5)),b=quiet(ship('cv',1,0,13,12));
+  a.cfg.carrier={...a.cfg.carrier,stock:1,heal,plane:{...a.cfg.carrier.plane,hp:4}};
+  a.airReady=[Infinity];a.airHP=[4];
+  let g=game([a,b]);g.planes=[plane(a,'p0',h(1,5),{hp:1,cfg:{...a.cfg.carrier.plane},state:'return'})];
+  g=E.resolveRound(g).game;
+  assert.equal(get(g,a.id).airHP[0],1,'recovery does not heal immediately');
+  assert.equal(get(g,a.id).airReady[0],3);
+  g=E.resolveRound(g).game;assert.equal(get(g,a.id).airHP[0],expected,'completed rearm heals by configured amount, capped at max');
+  g=E.resolveRound(g).game;assert.equal(get(g,a.id).airHP[0],expected,'idle aircraft do not heal again');
+  g=E.resolveRound(g,{[a.id]:{...E.emptyPlan(),planes:[{mode:'point',target:h(10,5)}]}}).game;
+  assert.equal(g.planes.length,1);assert.equal(g.planes[0].hp,expected,'relaunch retains healed HP');
+ }
+});
+
+test('AI starts in upper-right deployment while player stays lower-left',()=>{
+ const g=E.createGame();
+ for(const team of [0,1]){
+  const zone=E.deployment(team);assert.equal(zone.length,9);
+  for(const h of zone){const {c,r}=E.toCR(h);assert(team===0?c<3&&r>=E.H-3:c>=E.W-3&&r<3);}
+  const ships=g.ships.filter(s=>s.team===team);assert.equal(new Set(ships.map(s=>E.key(s.pos))).size,5);
+  for(const s of ships){assert(zone.some(h=>E.same(h,s.pos)));assert(E.legal(g.map,s.pos));assert(!g.map.mines.some(h=>E.same(h,s.pos)));}
+ }
+});

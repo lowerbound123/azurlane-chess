@@ -4,12 +4,25 @@ import * as P from "./planning.js";
 import * as S from "./save.js";
 import * as T from "./tutorial-content.js";
 import { HomeScreen, SaveManager, TutorialBook, TutorialMenu } from "./screens.js";
+import { MapViewport } from "./map-viewport.js";
+import { playFrames } from "./playback.js";
 import "./style.css";
-const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
+const app = createApp({ components: { MapViewport, HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
   const screen = ref("home"), roster = ref([...E.DEFAULT_ROSTER]), slot = ref(0), seed = ref(20261004), game = ref(null), plans = ref({}), selected = ref("0-0"), mode = ref("move"), pendingTurn = ref(0), torpWindow = ref(0), planeMode = ref("point"), showRules = ref(false), toast = ref(""), busy = ref(false), playFrame = ref(null), playSpeed = ref(1), progress = ref(0), showLog = ref(false), hover = ref(null), finished = ref(null), history = ref({}), showRanges = ref(true), rangeMode = ref("auto"), replan = ref(false), showPlans = ref(true), saveOpen = ref(false), saveRecords = ref([]), saveNotice = ref(""), pendingSave = ref(null), saveStatus = ref(""), tutorial = ref(null), tutorialFixture = ref(null), tutorialFeedback = ref(""), practiceSave = ref(null);
+  const lastMovement = ref({});
+  const mapView = ref(null), mapZoom = ref(1), ordersOpen = ref(true), rangeToolsOpen = ref(false), portraitHint = ref(true), swapMode = ref(false), coachOpen = ref(false);
+  const modeLabel = computed(() => phase.value === 'deploy' ? (swapMode.value ? '交换位置：点另一艘友舰' : '部署') : ({move:'航线',torp:'鱼雷',main:'主炮',plane:'飞机',mine:'排雷'}[mode.value] || '查看'));
+  function locateShip() { if(ship.value) mapView.value?.focus(point(ship.value.pos)); }
+  function planeAngle(p) {
+    const units = playFrame.value?.ships || game.value?.ships || [];
+    const destination = p.state === 'return'
+      ? units.find(s => s.id === p.mother)?.xy
+      : (p.tracking ? units.find(s => s.id === p.targetId)?.xy : null) || E.hexToXY(p.target);
+    return destination ? Math.atan2(destination.y-p.xy.y, destination.x-p.xy.x)*180/Math.PI : 0;
+  }
   const saves = S.createSaveStorage();
   let normalSession = null;
-  let toastTimer, animationTimer;
+  let toastTimer, stopPlayback;
   const shapes = E.allHexes().map((h) => {
     const p = E.hexToXY(h);
     return { ...h, k: E.key(h), x: p.x * 25 + 35, y: p.y * 25 + 35 };
@@ -33,6 +46,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   const rays = computed(() => ship.value ? P.torpedoRays(ship.value, plan.value, knowledge.value, torpWindow.value) : []);
   const overlayType = computed(() => rangeMode.value !== "auto" ? rangeMode.value : mode.value === "move" ? "reach" : mode.value === "main" ? "main" : mode.value === "plane" ? "air" : mode.value === "mine" ? "sweep" : mode.value === "torp" ? "torp" : "reach");
   const overlayCells = computed(() => !showRanges.value || phase.value !== "plan" ? /* @__PURE__ */ new Set() : overlayType.value === "reach" ? new Set(certain.value.keys()) : overlayType.value === "torp" ? new Set(rays.value.flatMap((r) => r.cells).map(E.key).filter((k) => explored.value.has(k))) : new Set([...ranges.value[overlayType.value] || []].filter((k) => ["main", "air", "aa"].includes(overlayType.value) || explored.value.has(k))));
+  const routeConflicts = computed(() => ship.value && phase.value === 'plan'
+    ? P.friendlyRouteConflicts(ship.value, plan.value, own.value, plans.value, knowledge.value) : []);
   const canUndo = computed(() => !!history.value[selected.value]?.undo.length), canRedo = computed(() => !!history.value[selected.value]?.redo.length);
   const hoverHint = computed(() => {
     if (!hover.value || !ship.value) return "";
@@ -49,7 +64,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     else if (mode.value === "torp") hint += "\u91D1\u7EBF\uFF1A\u672C\u56DE\u5408\u822A\u7A0B \xB7 \u865A\u7EBF\uFF1A\u5269\u4F59\u5BFF\u547D\u8303\u56F4";
     return hint;
   });
-  const rangeHint = computed(() => overlayType.value === "reach" ? `\u822A\u7EBF\u672B\u7AEF\u5269\u4F59 ${Math.max(0, (ship.value?.cfg.speed || 0) - plan.value.moves.length)} \u6B65 \xB7 \u7EFF\u8272\u4E3A\u5DF2\u77E5\u53EF\u8FBE` : overlayType.value === "secondary" ? "\u526F\u70AE\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF1B\u6CBF\u9014\u4ECD\u53EF\u81EA\u52A8\u5F00\u706B" : overlayType.value === "aa" ? "\u9632\u7A7A\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF0C\u4E0D\u53D7\u5C9B\u5C7F\u906E\u6321" : overlayType.value === "main" ? "\u4E3B\u70AE\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u5C04\u7A0B\uFF0C\u53EF\u9694\u5C9B\u76F2\u5C04" : overlayType.value === "sweep" ? "\u6392\u96F7\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u4E0E\u5DF2\u77E5\u76F4\u89C6\u8303\u56F4" : overlayType.value === "air" ? "\u98DE\u673A\uFF1A\u6BCD\u8230\u8D77\u98DE\u4F4D\u7F6E\u7684\u5355\u7A0B 18 \u683C\u6781\u9650" : overlayType.value === "torp" ? "\u9C7C\u96F7\uFF1A\u5F53\u524D\u7A97\u53E3\u7684\u56DB\u4E2A\u5408\u6CD5\u4FA7\u5411\uFF1B\u5C9B\u5C7F\u5916\u7684\u672A\u77E5\u8DEF\u5F84\u4E0D\u4FDD\u8BC1\u7545\u901A" : "");
+  const rangeHint = computed(() => overlayType.value === "reach" ? `\u822A\u7EBF\u672B\u7AEF\u5269\u4F59 ${Math.max(0, (ship.value?.cfg.speed || 0) - plan.value.moves.length)} \u6B65 \xB7 \u7EFF\u8272\u4E3A\u5DF2\u77E5\u53EF\u8FBE` : overlayType.value === "secondary" ? "\u526F\u70AE\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF1B\u6CBF\u9014\u4ECD\u53EF\u81EA\u52A8\u5F00\u706B" : overlayType.value === "aa" ? "\u9632\u7A7A\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF0C\u4E0D\u53D7\u5C9B\u5C7F\u906E\u6321" : overlayType.value === "main" ? "\u4E3B\u70AE\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u5C04\u7A0B\uFF0C\u53EF\u9694\u5C9B\u76F2\u5C04" : overlayType.value === "sweep" ? "\u6392\u96F7\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u4E0E\u5DF2\u77E5\u76F4\u89C6\u8303\u56F4" : overlayType.value === "air" ? `飞机：母舰起飞位置的单程 ${ship.value?.cfg.carrier?.plane.range ?? E.RULES.plane.range} 格极限` : overlayType.value === "torp" ? "\u9C7C\u96F7\uFF1A\u5F53\u524D\u7A97\u53E3\u7684\u56DB\u4E2A\u5408\u6CD5\u4FA7\u5411\uFF1B\u5C9B\u5C7F\u5916\u7684\u672A\u77E5\u8DEF\u5F84\u4E0D\u4FDD\u8BC1\u7545\u901A" : "");
   const airborne = computed(() => displayPlanes.value.filter((p) => p.team === 0 && p.mother === selected.value));
   const previews = computed(() => own.value.filter(E.alive).map((s) => {
     const p = plans.value[s.id] || E.emptyPlan(), ns = E.route(s, p, knowledge.value);
@@ -118,7 +133,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     refreshSaves();
   }
   function applySavedState(state) {
-    clearTimeout(animationTimer);
+    swapMode.value=false; ordersOpen.value=true; mapView.value?.reset();
+    stopPlayback?.();
     clearTimeout(toastTimer);
     game.value = E.clone(state.game);
     E.updateExploration(game.value);
@@ -229,6 +245,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     }
   }
   function startLesson(id) {
+    ordersOpen.value=true; swapMode.value=false; mapView.value?.reset();
     if (!tutorial.value) {
       if (game.value) autosave();
       normalSession = game.value ? snapshot() : null;
@@ -262,7 +279,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     practiceSave.value = null;
   }
   function exitTutorial() {
-    clearTimeout(animationTimer);
+    stopPlayback?.();
     tutorial.value = null;
     tutorialFixture.value = null;
     tutorialFeedback.value = "";
@@ -272,6 +289,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     } else {
       game.value = null;
       plans.value = {};
+    lastMovement.value = {};
       busy.value = false;
       playFrame.value = null;
       finished.value = null;
@@ -328,7 +346,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   }
   function truncateNode(index, id) {
     if (phase.value !== "plan" || busy.value) return;
-    if (selected.value !== id) choose(game.value.ships.find((s) => s.id === id));
+    if (selected.value !== id || mode.value !== "move") return;
     trimRoute(index);
     teach({ type: "truncate", index });
   }
@@ -346,9 +364,10 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     if (E.TEMPLATES[t].role === role.value) roster.value[slot.value] = t;
   }
   function start() {
+    ordersOpen.value=true; swapMode.value=false; mapView.value?.reset();
     const requestedSeed = Number(seed.value);
     seed.value = Number.isFinite(requestedSeed) ? Math.max(-Number.MAX_SAFE_INTEGER, Math.min(Number.MAX_SAFE_INTEGER, Math.trunc(requestedSeed))) || 20261004 : 20261004;
-    clearTimeout(animationTimer);
+    stopPlayback?.();
     clearTimeout(toastTimer);
     busy.value = false;
     playFrame.value = null;
@@ -367,6 +386,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     game.value = E.createGame(roster.value, Number(seed.value) || 20261004);
     selected.value = "0-0";
     plans.value = {};
+    lastMovement.value = {};
     screen.value = "battle";
     mode.value = "move";
     finished.value = null;
@@ -374,6 +394,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   }
   function choose(s) {
     if (s.team !== 0 || !E.alive(s) || busy.value) return;
+    swapMode.value=false;
     selected.value = s.id;
     pendingTurn.value = 0;
     torpWindow.value = (plans.value[s.id]?.moves || []).length;
@@ -487,6 +508,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     torpWindow.value = plan.value.moves.length;
     replan.value = false;
     if (!state.path.every((x) => explored.value.has(E.key(x)))) say("\u8FD9\u662F\u672A\u63A2\u7D22\u7684\u8BD5\u63A2\u822A\u8DEF\uFF0C\u6267\u884C\u65F6\u53EF\u80FD\u88AB\u5C9B\u5C7F\u622A\u505C");
+    if (routeConflicts.value.length) say(`航路已记录 ${plan.value.moves.length} 步，但可能与 ${routeConflicts.value.join('、')} 碰撞并回退`);
+    else if (state.path.every(x => explored.value.has(E.key(x)))) say(`航路已记录，共 ${plan.value.moves.length} 步`);
     teach({ type: "route", target: { q: h.q, r: h.r } });
   }
   function setMode(m) {
@@ -507,7 +530,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     if (busy.value || !ship.value) return;
     const here = game.value.ships.find((s) => E.alive(s) && E.same(s.pos, h) && (s.team === 0 || visible.value.has(E.key(h))));
     if (phase.value === "deploy") {
-      if (here?.team === 0 && !forceMove) {
+      if (here?.team === 0 && !forceMove && !swapMode.value) {
         choose(here);
         return;
       }
@@ -516,6 +539,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
         here.pos = { ...ship.value.pos };
         here.xy = E.hexToXY(here.pos);
       }
+      if(swapMode.value && (!here || here.id===ship.value.id)) return say("请选择另一艘友舰交换位置，或取消交换");
+      swapMode.value=false;
       ship.value.pos = { q: h.q, r: h.r };
       ship.value.xy = E.hexToXY(h);
       E.updateExploration(game.value);
@@ -534,7 +559,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     }
     const p = edit();
     if (mode.value === "main") {
-      if (E.hexDist(ship.value.pos, h) > ship.value.cfg.main.range) return say("\u843D\u70B9\u8D85\u51FA\u4E3B\u70AE 12 \u683C\u5C04\u7A0B");
+      if (E.hexDist(ship.value.pos, h) > ship.value.cfg.main.range) return say(`落点超出主炮 ${ship.value.cfg.main.range} 格射程`);
       if (p.main.length >= ship.value.cfg.main.shots) return say("\u5DF2\u8BBE\u5B9A 3 \u4E2A\u843D\u70B9\uFF0C\u53EF\u5728\u884C\u52A8\u5217\u8868\u5220\u9664");
       mutate((p2) => p2.main.push({ q: h.q, r: h.r }));
       teach({ type: "main", target: { q: h.q, r: h.r } });
@@ -573,10 +598,12 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   function shipClick(s, event) {
     event.stopPropagation();
     if (inspectCell(E.xyToHex(s.xy), true)) return;
+    if (phase.value === "deploy" && swapMode.value) { clickHex(E.xyToHex(s.xy), event, true); return; }
     if (phase.value === "plan" && mode.value !== "move") clickHex(E.xyToHex(s.xy), event);
     else choose(s);
   }
   function begin() {
+    swapMode.value=false;
     E.updateExploration(game.value);
     game.value.phase = "plan";
     say("\u89C4\u5212\u4E0D\u9650\u65F6\u3002\u7ED9\u5404\u8230\u4E0B\u4EE4\u540E\uFF0C\u6309\u201C\u6267\u884C\u56DE\u5408\u201D");
@@ -593,15 +620,11 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
       try {
         const state = E.clone(toRaw(game.value)), orders = E.clone(toRaw(plans.value)), ai = tutorial.value ? tutorialFixture.value.opponentPlansByRound?.[state.round] || tutorialFixture.value.opponentPlans || {} : E.planAI(state, 1), result = E.resolveRound(state, { ...ai, ...orders });
         finished.value = result;
-        let i = 0;
-        const show = () => {
-          if (i < result.frames.length) {
-            playFrame.value = result.frames[i++];
-            progress.value = i / result.frames.length;
-            animationTimer = setTimeout(show, 110 / playSpeed.value);
-          } else complete();
-        };
-        show();
+        stopPlayback = playFrames(result.frames, {
+          speed: () => playSpeed.value,
+          render: (frame, fraction) => { playFrame.value = frame; progress.value = fraction; },
+          complete,
+        });
       } catch (e) {
         busy.value = false;
         say("\u7ED3\u7B97\u51FA\u73B0\u5F02\u5E38\uFF1A" + e.message);
@@ -611,13 +634,15 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   }
   function complete() {
     if (!finished.value) return;
-    clearTimeout(animationTimer);
+    stopPlayback?.();
+    const outcomes = P.movementOutcomes(toRaw(game.value), toRaw(plans.value), toRaw(finished.value));
     game.value = finished.value.game;
     finished.value = null;
     playFrame.value = null;
     busy.value = false;
     progress.value = 0;
     plans.value = {};
+    lastMovement.value = {};
     history.value = {};
     replan.value = false;
     if (!E.alive(ship.value || { hp: 0 })) selected.value = own.value.find(E.alive)?.id || "";
@@ -625,6 +650,9 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
     torpWindow.value = 0;
     pendingTurn.value = 0;
     autosave();
+    lastMovement.value = outcomes;
+    const blocked = Object.entries(outcomes).filter(([,o])=>o.blocked);
+    if (blocked.length) say(blocked.map(([id,o])=>`${game.value.ships.find(s=>s.id===id)?.label}：${o.reason}`).join('；'));
     teach({ type: "roundComplete" });
   }
   function resetPlan() {
@@ -690,20 +718,14 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
   onMounted(() => window.addEventListener("keydown", keydown));
   onUnmounted(() => {
     window.removeEventListener("keydown", keydown);
-    clearTimeout(animationTimer);
+    stopPlayback?.();
   });
-  return { finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
+  return { routeConflicts, lastMovement, planeAngle, mapView, mapZoom, ordersOpen, rangeToolsOpen, portraitHint, swapMode, coachOpen, modeLabel, locateShip, finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
 }, template: `
-<div class="shell">
+<div class="shell" :class="{'battle-active':screen==='battle','orders-closed':!ordersOpen}">
 <header class="topbar">
-<div class="brand">
-<span class="brand-mark">\u516D</span>
-<div>
-<strong>\u78A7\u84DD\u6D77\u6218\u68CB</strong>
-<span>AZURLANE CHESS <b>v0.1</b>
-</span>
-</div>
-</div>
+<div class="brand"><strong>碧蓝海战棋</strong></div>
+<span class="release-tag">v0.3.1</span>
 <div class="top-actions">
 <span class="version-note">{{saveStatus||'PvAI \xB7 \u89C4\u5219\u6D4B\u8BD5\u7248'}}</span>
 <button v-if="screen!=='home'" class="quiet" :disabled="busy" @click="goHome">\u4E3B\u83DC\u5355</button>
@@ -713,6 +735,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <button v-if="screen==='battle'&&!tutorial" class="quiet" :disabled="busy" @click="newGame">\u91CD\u65B0\u7F16\u961F</button>
 </div>
 </header>
+<div v-if="showLog&&screen==='battle'" class="mobile-log modal-backdrop" @click.self="showLog=false">
+<section role="dialog" aria-modal="true" aria-label="战报" class="rules-modal"><div class="panel-title"><h2>战报</h2><button @click="showLog=false">关闭战报</button></div><p v-if="!safeLogs.length">尚未交战</p><p v-for="(l,i) in safeLogs" :key="i">R{{l.round}} · {{l.text}}</p></section></div>
 <HomeScreen v-if="screen==='home'" :can-resume="!!game" :save-count="saveRecords.filter(r=>r.save).length" @new="newGame" @load="openSaves" @book="screen='book'" @tutorial="lessonMenu" @resume="screen='battle'"/>
 <TutorialBook v-if="screen==='book'" :chapters="T.TEXT_TUTORIAL" :figures="T.SVG_FIGURES" @home="goHome" @practice="lessonMenu"/>
 <TutorialMenu v-if="screen==='lessons'" :lessons="T.TUTORIAL_LESSONS" @home="goHome" @start="startLesson"/>
@@ -772,13 +796,13 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <p v-if="t.contactSweep">\u9AD8\u901F\u673A\u52A8 \xB7 \u5F3A\u5316\u9632\u7A7A \xB7 \u63A5\u89E6\u6392\u96F7</p>
 <p v-else-if="t.torpedo">9 \u679A\u5907\u5F39 \xB7 \u9C7C\u96F7\u4E0E\u526F\u70AE\u517C\u987E</p>
 <p v-else-if="t.secondary?.multi">\u591A\u76EE\u6807\u526F\u70AE \xB7 \u6BCF\u654C\u8230\u6BCF\u56DE\u5408\u4E00\u70AE</p>
-<p v-else-if="t.main">\u4E09\u53D1\u4E3B\u70AE \xB7 12 \u683C\u76F2\u5C04 \xB7 \u9694\u8F6E\u88C5\u5F39</p>
+<p v-else-if="t.main">{{t.main.shots}} 发主炮 · {{t.main.range}} 格盲射 · 隔轮装弹</p>
 <p v-else>6 \u67B6\u98DE\u673A \xB7 \u6BCF\u56DE\u5408\u6700\u591A\u653E\u98DE 2 \u67B6</p>
 <div class="loadout-line">
 <span v-if="t.secondary">\u526F\u70AE {{t.secondary.damage}} / {{t.secondary.range}} \u683C</span>
 <span v-if="t.torpedo">\u9C7C\u96F7 {{t.torpedo.reserve}} \u679A</span>
 <span v-if="t.aa">\u9632\u7A7A {{t.aa.range}} \u683C</span>
-<span v-if="t.carrier">\u98DE\u673A 2 HP \xB7 \u5355\u7A0B 18 \u683C</span>
+<span v-if="t.carrier">飞机 {{t.carrier.plane.hp}} HP · 单程 {{t.carrier.plane.range}} 格 · 整备回血 {{t.carrier.heal ?? 1}}</span>
 </div>
 </button>
 </div>
@@ -797,7 +821,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
  <p class="footnote">\u89C4\u5212\u4E0D\u9650\u65F6 \xB7 \u53CC\u65B9\u540C\u6B65\u6267\u884C \xB7 AI \u9075\u5B88\u76F8\u540C\u89C6\u91CE\u89C4\u5219 \xB7 \u65E0\u8054\u7F51\u5BF9\u6218</p>
 </main>
 <main v-if="screen==='battle'" class="battle-screen">
- <section v-if="tutorial" class="tutorial-coach">
+<div v-if="portraitHint" class="portrait-hint"><span>横屏海图更宽，竖屏也可完整操作</span><button aria-label="关闭横屏提示" @click="portraitHint=false">关闭</button></div>
+ <section v-if="tutorial" class="tutorial-coach" :class="{expanded:coachOpen}">
 <div>
 <span class="eyebrow">\u72EC\u7ACB\u6F14\u7EC3 \xB7 {{tutorialIndex+1}} / {{T.TUTORIAL_LESSONS.length}}</span>
 <h2>{{lesson.title}}</h2>
@@ -813,6 +838,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 </div>
 </section>
  <section class="battle-strip">
+<button v-if="tutorial" class="mobile-only" @click="coachOpen=!coachOpen" :aria-expanded="coachOpen">教学提示</button>
 <div class="round">
 <small>ROUND</small>
 <strong>{{String(game.round).padStart(2,'0')}}<span>/ 30</span>
@@ -830,6 +856,11 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <b>{{visibleEnemies}} \u8258</b>
 <small>\u5F53\u524D\u53EF\u89C1\u654C\u8230</small>
 </div>
+<nav class="mobile-fleet" aria-label="选择舰船">
+<button v-for="s in own" :key="s.id" :class="['mobile-ship',{active:selected===s.id,sunk:s.hp<=0}]" :disabled="s.hp<=0||busy" @click="choose(s)" :aria-pressed="selected===s.id">{{s.label}}</button>
+</nav>
+<button class="mobile-only orders-toggle" :aria-label="ordersOpen?'收起指令':'展开指令'" @click="ordersOpen=!ordersOpen" :aria-expanded="ordersOpen">指令</button>
+<button class="mobile-only" @click="showLog=!showLog">战报</button>
 <div class="execute-controls">
 <template v-if="busy">
 <select v-model.number="playSpeed" aria-label="\u6267\u884C\u901F\u5EA6">
@@ -884,9 +915,17 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 </div>
 <div class="seed-caption">\u6D77\u56FE #{{game.seed}}</div>
 </aside>
- <section class="ocean-panel">
+ <section class="ocean-panel" :class="{'tools-open':rangeToolsOpen}">
+<div class="camera-tools">
+<button aria-label="放大海图" @click="mapView?.zoomBy(1.25)" :disabled="mapZoom>=3">＋</button>
+<button aria-label="缩小海图" @click="mapView?.zoomBy(.8)" :disabled="mapZoom<=1">−</button>
+<button @click="mapView?.reset()">全图</button>
+<button @click="locateShip">定位当前舰</button>
+<button v-if="phase==='plan'" class="mobile-only" @click="rangeToolsOpen=!rangeToolsOpen" :aria-expanded="rangeToolsOpen">图层</button>
+<span class="camera-help">单指拖动 · 双指缩放 · 点选下令</span>
+</div>
 <div class="map-caption">
-<span>{{phase==='deploy'?'\u5728\u84DD\u8272\u533A\u57DF\u70B9\u51FB\u90E8\u7F72\uFF1B\u70B9\u8230\u8239\u5207\u6362\u9009\u62E9':phase==='plan'?'\u5DE6\u952E\u9009\u8230 \xB7 \u53F3\u952E\u8FFD\u52A0\u822A\u6BB5 \xB7 \u4E5F\u53EF\u7528\u9762\u677F\u6309\u94AE\u4E0B\u4EE4':'\u6240\u6709\u8230\u8239\u3001\u98DE\u673A\u4E0E\u9C7C\u96F7\u5171\u7528\u65F6\u95F4\u8F74'}}</span>
+<span>{{phase==='deploy'?'\u5728\u84DD\u8272\u533A\u57DF\u70B9\u51FB\u90E8\u7F72\uFF1B\u70B9\u8230\u8239\u5207\u6362\u9009\u62E9':phase==='plan'?'点友舰选中 · 航线模式点格子追加航段 · 面板切换武器':'\u6240\u6709\u8230\u8239\u3001\u98DE\u673A\u4E0E\u9C7C\u96F7\u5171\u7528\u65F6\u95F4\u8F74'}}</span>
 <span>{{hover?coord(hover):'19 \xD7 15'}}</span>
 </div>
 <div v-if="phase==='plan'" class="map-tools">
@@ -902,7 +941,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <button :class="{active:showPlans}" @click="showPlans=!showPlans">{{showPlans?'\u9690\u85CF\u5168\u90E8\u8BA1\u5212':'\u663E\u793A\u5168\u90E8\u8BA1\u5212'}}</button>
 <span>{{showRanges?rangeHint:'\u8303\u56F4\u63D0\u793A\u5DF2\u9690\u85CF'}}</span>
 </div>
-<div class="map-scroll">
+<MapViewport ref="mapView" @zoom="mapZoom=$event">
 <svg class="sea-map" viewBox="0 0 900 615" role="img" aria-label="\u516D\u89D2\u6D77\u6218\u5730\u56FE" @contextmenu.prevent>
  <defs>
 <pattern id="sea-grid" width="12" height="12" patternUnits="userSpaceOnUse">
@@ -927,7 +966,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
  <template v-if="phase==='plan'&&showPlans">
 <g v-for="v in previews" :key="'plan-'+v.ship.id" :class="['friendly-plan',{emphasized:v.selected}]" :data-ship-id="v.ship.id" :opacity="v.selected?1:.56">
 <polyline :points="plannedPolyline(v.ship)" fill="none" stroke="#6ee6dc" :stroke-width="v.selected?2.6:1.3" stroke-dasharray="5 4" marker-end="url(#route-tip)"/>
-<g v-for="(n,i) in v.nodes.slice(1)" :key="'n'+i" class="editable-node" pointer-events="all" @click.stop="truncateNode(i+1,v.ship.id)">
+<g v-for="(n,i) in v.nodes.slice(1)" :key="'n'+i" class="editable-node" :pointer-events="v.selected&&mode==='move'?'all':'none'" @click.stop="truncateNode(i+1,v.ship.id)">
 <circle :cx="point(n.pos).x" :cy="point(n.pos).y" :r="v.selected?7:5.5" fill="#122d3b" stroke="#70dfd5"/>
 <text :x="point(n.pos).x" :y="point(n.pos).y+3.5" class="node-label">{{i+1}}</text>
 </g>
@@ -940,8 +979,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <text :x="point(t.origin).x+10" :y="point(t.origin).y+17" class="torp-window-label">\u9C7C{{t.window}}</text>
 </g>
 <g v-for="(p,i) in v.planes" :key="'p'+i" class="planned-aircraft">
-<line :x1="point(v.ship.pos).x" :y1="point(v.ship.pos).y" :x2="point(p.target).x" :y2="point(p.target).y" stroke="#b8a7f2" stroke-width="1.5" stroke-dasharray="4 4"/>
-<circle :cx="point(p.target).x" :cy="point(p.target).y" r="13" fill="none" stroke="#b8a7f2"/>
+<line :x1="point(v.ship.pos).x" :y1="point(v.ship.pos).y" :x2="point(p.target).x" :y2="point(p.target).y" stroke="#78e8d7" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle :cx="point(p.target).x" :cy="point(p.target).y" r="13" fill="none" stroke="#78e8d7"/>
 </g>
 <circle v-if="v.plan.sweep" class="planned-sweep" :cx="point(v.plan.sweep).x" :cy="point(v.plan.sweep).y" r="16" fill="none" stroke="#edc27c"/>
 </g>
@@ -970,9 +1009,10 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
  <g v-for="p in displayTorps" :key="p.id" :transform="'translate('+xy(p.xy).x+' '+xy(p.xy).y+') rotate('+p.heading*60+')'" pointer-events="none">
 <path d="M-5 -2L5 0 -5 2Z" :fill="p.team===0?'#f2d18d':'#fa8c6d'"/>
 </g>
-<g v-for="p in displayPlanes" :key="p.id" pointer-events="none">
-<circle :cx="xy(p.xy).x" :cy="xy(p.xy).y" r="7" :fill="p.team===0?'#292245':'#572e3b'" :stroke="p.team===0?'#baabff':'#ff8e99'"/>
-<text :x="xy(p.xy).x" :y="xy(p.xy).y+3" class="plane-letter">{{p.state==='return'?'\u8FD4':'\u673A'}}</text>
+<g v-for="p in displayPlanes" :key="p.id" class="plane-marker" :class="{returning:p.state==='return'}" :transform="'translate('+xy(p.xy).x+' '+xy(p.xy).y+')'" pointer-events="none">
+<title>{{p.team===0?'友方':'敌方'}}飞机 · {{p.state==='return'?'返航':'出击'}}</title>
+<path :transform="'rotate('+planeAngle(p)+')'" d="M11 0 L3 -2 L-2 -9 L-5 -9 L-3 -2 L-8 -2 L-10 -5 L-12 -5 L-10 0 L-12 5 L-10 5 L-8 2 L-3 2 L-5 9 L-2 9 L3 2 Z" :fill="p.team===0?'#78e8d7':'#ef957e'" stroke="#111d32" stroke-width="1.2" stroke-linejoin="round"/>
+<text v-if="p.state==='return'" x="0" y="16" class="plane-letter" :style="{fill:p.team===0?'#78e8d7':'#ef957e'}">返</text>
 </g>
  <g v-for="(e,i) in (playFrame?.effects||[]).filter(e=>visible.has(E.key(e.at)))" :key="i" pointer-events="none">
 <line v-if="e.from&&visible.has(E.key(e.from))" :x1="point(e.from).x" :y1="point(e.from).y" :x2="point(e.at).x" :y2="point(e.at).y" :stroke="e.kind==='aa'?'#cdb4ff':'#f6d292'" stroke-width="1.5"/>
@@ -980,7 +1020,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <text v-if="e.text" :x="point(e.at).x" :y="point(e.at).y-17" class="damage-label">{{e.text}}</text>
 </g>
  </svg>
-</div>
+</MapViewport>
 <div class="map-footer">
 <span>
 <i class="legend-dot cyan">
@@ -990,14 +1030,28 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <div v-if="busy" class="execution-progress" :style="{width:progress*100+'%'}">
 </div>
 </section>
- <aside class="orders-sidebar" v-if="ship">
+ <aside class="orders-sidebar" v-if="ship" :class="{collapsed:!ordersOpen}" aria-label="舰船指令">
+
 <div class="selected-heading">
 <div>
-<span class="eyebrow">SELECTED UNIT</span>
+
 <h2>{{ship.label}}</h2>
 </div>
 <span class="heading-label">{{directionNames[ship.heading]}}</span>
 </div>
+<details v-if="phase==='plan'" class="mobile-range-tools"><summary>范围与计划图层</summary>
+<button :class="{active:showRanges}" @click="toggleRanges" :data-tutorial-highlight="isControl('ranges')?'true':null">{{showRanges?'\u9690\u85CF\u8303\u56F4':'\u663E\u793A\u8303\u56F4'}}</button>
+<select v-model="rangeMode" @change="rangeChanged" aria-label="\u8303\u56F4\u63D0\u793A\u7C7B\u578B">
+<option value="auto">\u5F53\u524D\u64CD\u4F5C</option>
+<option value="reach">\u53EF\u8FBE\u4F4D\u7F6E</option>
+<option v-if="ship?.cfg.secondary" value="secondary">\u526F\u70AE \xB7 \u7EC8\u70B9</option>
+<option v-if="ship?.cfg.aa" value="aa">\u9632\u7A7A \xB7 \u7EC8\u70B9</option>
+<option v-if="ship?.cfg.main" value="main">\u4E3B\u70AE \xB7 \u56DE\u5408\u521D</option>
+<option v-if="ship?.cfg.carrier" value="air">\u98DE\u673A\u5355\u7A0B\u6781\u9650</option>
+</select>
+<button :class="{active:showPlans}" @click="showPlans=!showPlans">{{showPlans?'\u9690\u85CF\u5168\u90E8\u8BA1\u5212':'\u663E\u793A\u5168\u90E8\u8BA1\u5212'}}</button>
+<span>{{showRanges?rangeHint:'\u8303\u56F4\u63D0\u793A\u5DF2\u9690\u85CF'}}</span>
+</details>
 <div class="selected-stats">
 <span>
 <b>{{ship.hp}}</b> HP</span>
@@ -1007,9 +1061,11 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <b>{{ship.torps}}</b> \u9C7C\u96F7</span>
 </div>
  <div v-if="phase==='deploy'" class="deployment-help">
+<button :class="{active:swapMode}" @click="swapMode=!swapMode">{{swapMode?'取消交换':'交换位置'}}</button>
+<p v-if="swapMode">已选 {{ship.label}}，点击另一艘友舰交换。</p>
 <h3>\u90E8\u7F72\u5230\u5DE6\u4E0B\u89D2</h3>
-<p>\u70B9\u51FB\u6211\u65B9\u8230\u8239\uFF0C\u518D\u70B9\u51FB\u84DD\u8272\u90E8\u7F72\u683C\u3002\u53F3\u952E\u5DF2\u88AB\u5360\u636E\u7684\u683C\u5B50\u53EF\u4EA4\u6362\u4F4D\u7F6E</p>
-<p>\u521D\u59CB\u8230\u9996\u671D\u4E1C\uFF0C\u654C\u65B9\u5728\u53F3\u4E0B\u89D2\u671D\u897F</p>
+<p>\u70B9\u51FB\u6211\u65B9\u8230\u8239\uFF0C\u518D\u70B9\u51FB\u84DD\u8272\u90E8\u7F72\u683C\u3002点“交换位置”后点另一艘友舰，可交换位置</p>
+<p>\u521D\u59CB\u8230\u9996\u671D\u4E1C\uFF0C\u654C\u65B9\u5728右上角\u671D\u897F</p>
 <button class="primary full" @click="begin" :data-tutorial-highlight="isControl('begin')?'true':null">\u5B8C\u6210\u90E8\u7F72</button>
 </div>
  <template v-else-if="phase==='plan'&&ship.hp>0">
@@ -1041,7 +1097,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <button @click="addMove(pendingTurn,false)" :data-tutorial-highlight="isControl('wait')?'true':null">{{pendingTurn?'\u539F\u5730\u8F6C\u5411':'\u539F\u5730\u7B49\u5F85'}} <small>Space</small>
 </button>
 </div>
-<p class="tool-hint">{{replan?'\u91CD\u65B0\u89C4\u5212\u4E2D\uFF1A\u70B9\u51FB\u65B0\u822A\u70B9':'\u53F3\u952E\u6D77\u56FE\u8FFD\u52A0\u822A\u6BB5\uFF0C\u4E5F\u53EF\u70B9\u51FB\u53EF\u8FBE\u683C'}}\u3002\u5148\u9009\u8F6C\u5411\uFF0C\u518D\u70B9\u524D\u8FDB\u6216\u539F\u5730\u786E\u8BA4\u4E00\u6B65</p>
+<p class="tool-hint">{{replan?'\u91CD\u65B0\u89C4\u5212\u4E2D\uFF1A\u70B9\u51FB\u65B0\u822A\u70B9':'点击可达格追加航段（鼠标也可右键）'}}\u3002\u5148\u9009\u8F6C\u5411\uFF0C\u518D\u70B9\u524D\u8FDB\u6216\u539F\u5730\u786E\u8BA4\u4E00\u6B65</p>
 </section>
  <section v-if="mode==='torp'" class="order-tool">
 <label>\u53D1\u5C04\u7A97\u53E3 <select v-model.number="torpWindow">
@@ -1053,7 +1109,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
  <section v-if="mode==='main'" class="order-tool">
 <div class="tool-title">\u4E3B\u70AE\u843D\u70B9 <span>{{plan.main.length}} / 3</span>
 </div>
-<p class="tool-hint">\u70B9\u51FB 12 \u683C\u5185\u4EFB\u610F\u4F4D\u7F6E\uFF0C\u53EF\u91CD\u590D\u70B9\u540C\u4E00\u683C\u3002\u6BCF\u53D1 60 \u4F24\u5BB3\uFF0C\u56DE\u5408\u672B\u547D\u4E2D\uFF1B\u4E0B\u56DE\u5408\u88C5\u5F39</p>
+<p class="tool-hint">点击 {{ship.cfg.main.range}} 格内任意位置\uFF0C\u53EF\u91CD\u590D\u70B9\u540C\u4E00\u683C\u3002\u6BCF\u53D1 60 \u4F24\u5BB3\uFF0C\u56DE\u5408\u672B\u547D\u4E2D\uFF1B\u4E0B\u56DE\u5408\u88C5\u5F39</p>
 </section>
  <section v-if="mode==='plane'" class="order-tool">
 <div class="turn-buttons">
@@ -1081,6 +1137,8 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <button @click="removeWaypoint(i)" :aria-label="'\u5220\u9664\u822A\u70B9'+(i+1)+'\u53CA\u540E\u7EED\u8DEF\u7EBF'">\xD7</button>
 </div>
 </section>
+ <p v-if="routeConflicts.length" class="route-warning" role="status">当前计划可能与 {{routeConflicts.join('、')}} 碰撞，移动会截停并可能退回起点。可调整航路或先移开友舰。</p>
+<p v-if="lastMovement[selected]" class="movement-receipt" role="status">上回合：{{lastMovement[selected].steps}} 步指令已接收 · {{lastMovement[selected].reason}}</p>
  <section class="action-list">
 <div class="tool-title">\u672C\u8230\u6307\u4EE4 <button class="text-button" @click="resetPlan">\u6E05\u7A7A\u5168\u90E8</button>
 </div>
@@ -1130,7 +1188,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <p v-if="ship.cfg.secondary">\u526F\u70AE {{ship.cfg.secondary.damage}} \u4F24\u5BB3 / {{ship.cfg.secondary.range}} \u683C \xB7 {{ship.cfg.secondary.multi?'\u6BCF\u654C\u8230\u4E00\u6B21':'\u5168\u56DE\u5408\u4E00\u6B21'}}</p>
 <p v-if="ship.cfg.aa">\u9632\u7A7A {{ship.cfg.aa.range}} \u683C / \u6BCF\u654C\u673A\u6BCF\u56DE\u5408 1 \u4F24\u5BB3</p>
 <p v-if="ship.cfg.contactSweep">\u63A5\u89E6\u6C34\u96F7\u81EA\u52A8\u6E05\u9664</p>
-<p v-if="ship.cfg.carrier">\u98DE\u673A 2 HP \xB7 6 \u683C / \u56DE\u5408 \xB7 \u5355\u7A0B 18 \u683C \xB7 \u70B8\u5F39 25</p>
+<p v-if="ship.cfg.carrier">飞机 {{ship.cfg.carrier.plane.hp}} HP · {{ship.cfg.carrier.plane.speed}} 格 / 回合 · 单程 {{ship.cfg.carrier.plane.range}} 格 · 炸弹 {{ship.cfg.carrier.plane.damage}} · 整备回血 {{ship.cfg.carrier.heal ?? 1}}</p>
 </div>
 </aside>
 </div>
@@ -1145,7 +1203,7 @@ const app = createApp({ components: { HomeScreen, SaveManager, TutorialBook, Tut
 <div v-if="showRules" class="modal-backdrop" @click.self="showRules=false">
 <section class="rules-modal" role="dialog" aria-modal="true" aria-label="\u89C4\u5219\u4E0E\u64CD\u4F5C">
 <div class="panel-title">
-<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.1</h2>
+<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.3.1</h2>
 <button @click="showRules=false" aria-label="\u5173\u95ED\u89C4\u5219">\u5173\u95ED</button>
 </div>
 <div class="rules-columns">

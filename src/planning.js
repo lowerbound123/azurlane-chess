@@ -90,3 +90,38 @@ export {
   torpedoRays,
   trimMovement
 };
+
+// Predict only friendly planned motion on the player's known map. Hidden enemy
+// orders and terrain must never influence this UI warning.
+export function friendlyRouteConflicts(ship, plan, friends, plans, map) {
+  const position = (unit, nodes, time) => {
+    const step = Math.min(time * unit.cfg.speed, nodes.length - 1), i = Math.floor(step);
+    const a = E.hexToXY(nodes[i].pos), b = E.hexToXY(nodes[Math.min(i + 1, nodes.length - 1)].pos), f = step - i;
+    return { x:a.x+(b.x-a.x)*f, y:a.y+(b.y-a.y)*f };
+  };
+  const ours = E.route(ship, plan, map), conflicts = [];
+  for (const other of friends.filter(s => s.id !== ship.id && s.team === ship.team && E.alive(s))) {
+    const theirs = E.route(other, plans[other.id] || E.emptyPlan(), map);
+    const times = [...new Set([0, 1, ...ours.map((_,i)=>i/ship.cfg.speed), ...theirs.map((_,i)=>i/other.cfg.speed)])].sort((a,b)=>a-b);
+    for (let i=1;i<times.length;i++) {
+      const a=position(ship,ours,times[i-1]), b=position(ship,ours,times[i]), c=position(other,theirs,times[i-1]), d=position(other,theirs,times[i]);
+      const x=a.x-c.x,y=a.y-c.y,vx=b.x-a.x-d.x+c.x,vy=b.y-a.y-d.y+c.y;
+      const vv=vx*vx+vy*vy,t=vv?Math.max(0,Math.min(1,-(x*vx+y*vy)/vv)):0;
+      if(Math.hypot(x+vx*t,y+vy*t)<=E.collisionRadius(ship)+E.collisionRadius(other)+1e-9){conflicts.push(other.label);break;}
+    }
+  }
+  return conflicts;
+}
+
+export function movementOutcomes(before, submitted, result) {
+  const map=knowledgeMap(before.map,new Set(before.explored?.[0]||[])), outcomes={};
+  for(const ship of before.ships.filter(s=>s.team===0&&E.alive(s))) {
+    const plan=submitted[ship.id];if(!plan?.moves?.length)continue;
+    const target=E.route(ship,plan,map).at(-1).pos, actual=result.game.ships.find(s=>s.id===ship.id);
+    const collision=result.events.some(e=>e.team===0&&e.text.startsWith(ship.label+' ')&&/碰撞|沿原路回退/.test(e.text));
+    const received=E.validPlan(before,ship,plan).moves.length;
+    const reason=!E.alive(actual)?'执行中沉没':collision?'碰撞截停并回退':received<plan.moves.length?'航路被地形截停':!E.same(actual.pos,target)?'未到达计划终点':'已执行并到达';
+    outcomes[ship.id]={steps:plan.moves.length,received,reason,blocked:reason!=='已执行并到达'};
+  }
+  return outcomes;
+}

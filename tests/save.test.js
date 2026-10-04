@@ -23,7 +23,8 @@ test('roundtrips airborne aircraft, Infinity readiness, explored fog, orders and
  assert.ok(launched.planes.length);assert.ok(launched.ships.find(s=>s.id===carrier.id).airReady.includes(Infinity));
  const input=state(launched);input.selected=carrier.id;input.plans['0-0']={...E.emptyPlan(),moves:[{turn:1,forward:false},{turn:0,forward:true}],segments:[{start:0,end:2,target:E.fromCR(1,11),label:'waypoint'}],routeMetadata:{waypoints:[E.fromCR(1,11)],editing:0}};
  input.game.metadata={balance:'prototype',nested:[{value:null}]};input.game.explored[0]=[...new Set([...input.game.explored[0],'0,0'])];
- const loaded=S.deserializeSave(S.serializeSave(save(input)));assert.deepEqual(loaded.state,input);assert.equal(loaded.state.game.ships.find(s=>s.id===carrier.id).airReady[0],Infinity);
+ const normalizeZero=value=>typeof value==='number'&&Object.is(value,-0)?0:Array.isArray(value)?value.map(normalizeZero):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,normalizeZero(v)])):value;
+ const loaded=S.deserializeSave(S.serializeSave(save(input)));assert.deepEqual(loaded.state,normalizeZero(input));assert.equal(loaded.state.game.ships.find(s=>s.id===carrier.id).airReady[0],Infinity);
  const next=E.resolveRound(loaded.state.game,loaded.state.plans).game,original=E.resolveRound(input.game,input.plans).game;assert.deepEqual(next,original);
 });
 test('every stable state of a full game, including ended, can be saved and continued',()=>{
@@ -91,4 +92,15 @@ test('JSON numeric overflow cannot smuggle Infinity into an aircraft readiness s
 });
 test('in-memory metadata has a cumulative size bound before JSON stringification',()=>{
  const input=state();input.metadata={pieces:new Array(200).fill('x'.repeat(20000))};throwsCode(()=>save(input),'INVALID_STATE');
+});
+test('carrier healing config and stored aircraft HP roundtrip and reject invalid values',()=>{
+ const input=state(),cv=input.game.ships.find(s=>s.cfg.carrier);
+ cv.airHP[0]=1;cv.cfg.carrier.heal=0;
+ assert.deepEqual(S.deserializeSave(S.serializeSave(save(input))).state,input);
+ const invalidHP=clone(input);invalidHP.game.ships.find(s=>s.cfg.carrier).airHP[0]=3;
+ assert.throws(()=>save(invalidHP));
+ const invalidHeal=clone(input);invalidHeal.game.ships.find(s=>s.cfg.carrier).cfg.carrier.heal=-1;
+ assert.throws(()=>save(invalidHeal));
+ delete cv.airHP;delete cv.cfg.carrier.heal;
+ assert.doesNotThrow(()=>S.deserializeSave(S.serializeSave(save(input))));
 });

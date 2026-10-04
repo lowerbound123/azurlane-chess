@@ -136,6 +136,7 @@ function config(value, path, code) {
     integer(v.stock, 0, 100, `${path}.carrier.stock`, code);
     integer(v.launch, 0, 100, `${path}.carrier.launch`, code);
     integer(v.rearm, 0, 100, `${path}.carrier.rearm`, code);
+    if (own(v, "heal")) finite(v.heal, 0, 1e4, `${path}.carrier.heal`, code);
     planeConfig(v.plane, `${path}.carrier.plane`, code);
   }
 }
@@ -200,6 +201,11 @@ function validateState(state, code) {
     integer(ship.destroyedPlanes, 0, ship.cfg.carrier?.stock || 0, `${p}.destroyedPlanes`, code);
     array(ship.airReady, 100, `${p}.airReady`, code);
     expect(ship.airReady.length === (ship.cfg.carrier?.stock || 0), `${p}.airReady`, code);
+    if (own(ship, "airHP")) {
+      array(ship.airHP, 100, `${p}.airHP`, code);
+      expect(ship.airHP.length === ship.airReady.length, `${p}.airHP`, code);
+      ship.airHP.forEach((hp, j) => finite(hp, 0, ship.cfg.carrier?.plane.hp || 0, `${p}.airHP.${j}`, code));
+    }
     ship.airReady.forEach((n, j) => {
       if (n !== Infinity) integer(n, 0, 1e3, `${p}.airReady.${j}`, code);
     });
