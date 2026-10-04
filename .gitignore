@@ -1,0 +1,11 @@
+node_modules
+dist
+.sites-runtime
+
+# Local task state and machine-specific files
+.codex/
+docs/superpowers/.task-state.md
+.DS_Store
+.env
+.env.*
+!.env.example

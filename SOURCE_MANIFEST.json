@@ -1,0 +1,176 @@
+{
+  "project": "azurlane-chess",
+  "version": "0.1.0",
+  "export_date_utc": "2026-10-04",
+  "source_git_commit": "4627ef173e2427974209eeec2fa44ed6556fd830",
+  "published_runtime_git_commit": "76fd6e1d4aff307eadd55c92277dc944865050ce",
+  "source_changes_after_published_runtime": [
+    "tests/ui-torpedo-route.test.js"
+  ],
+  "documentation_adjustments": [
+    "README.md: portable introductory text, npm ci and current test count; removed historical deployment QA notes",
+    "交付说明.md: added Chinese delivery instructions"
+  ],
+  "excluded": [
+    ".git/",
+    ".openai/",
+    "node_modules/",
+    "dist/",
+    "runtime/browser saves",
+    "parent workspace"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 33,
+      "sha256": "fd086a6e29a031f64d10fa2ff4f8eeacdc8cf559339771c5b200ef94c1bb6e1b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7114,
+      "sha256": "66dc570426a7b2a3af964dbc1deffb2fe4ee6b08b6c5d4c24821a98612253537"
+    },
+    {
+      "path": "index.html",
+      "bytes": 667,
+      "sha256": "2523b591287ec7167b1624d3ea58b59f8b5edfa18c4d72c858b5ab480a262460"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 46434,
+      "sha256": "a6c69e04d9160019e6e77554db6e085f6d01da906f1d0de3860dc027fd7017a0"
+    },
+    {
+      "path": "package.json",
+      "bytes": 261,
+      "sha256": "1f19ab7db2bb44b4be4e9c8e510e1871c6c4aaaae299b5a6fd77c194a14d46b9"
+    },
+    {
+      "path": "public/favicon.svg",
+      "bytes": 259,
+      "sha256": "15393aa606b37c9f34c2658f03be5441f6f239daa7ecc9212a4f1a24fc3c945f"
+    },
+    {
+      "path": "src/engine.js",
+      "bytes": 23682,
+      "sha256": "f87c62b814b6a4c9ab1b317b35ef4f52c9b39f6b5600f92219cc707b229bf876"
+    },
+    {
+      "path": "src/main.js",
+      "bytes": 72299,
+      "sha256": "949815b3c62f1e6e80c0bec718ca7f04b417b62b81c8f061c34d6622f543b794"
+    },
+    {
+      "path": "src/planning.js",
+      "bytes": 4680,
+      "sha256": "7862d37bac53710284d313dfe7da5549eb35d033787a57e511043cf884fe1d78"
+    },
+    {
+      "path": "src/save.js",
+      "bytes": 22927,
+      "sha256": "5cf6577471f0f26e7dad300734dfe1f2a031c5fcd6d5856444b20700f9bec8bd"
+    },
+    {
+      "path": "src/screens.js",
+      "bytes": 8264,
+      "sha256": "c7e1c3d0b958804acd50af294425b693ab1bcc76a792ba15ab1c7ff151178ab9"
+    },
+    {
+      "path": "src/style.css",
+      "bytes": 26232,
+      "sha256": "f1f66103e61d786fe55776d7e18c9bf77d58f76b3e32cd7774e0c19bc67ae732"
+    },
+    {
+      "path": "src/tutorial-content.js",
+      "bytes": 71329,
+      "sha256": "66d4797c6b2cd6145158c38a25ccf4a41b4360b1f21f686131b4a5b7657e6e10"
+    },
+    {
+      "path": "tests/capabilities.test.js",
+      "bytes": 4191,
+      "sha256": "44e39bbf288212872e1ae47feb17f2429344943a5eb022522688128cb09a15c8"
+    },
+    {
+      "path": "tests/engine.test.js",
+      "bytes": 9777,
+      "sha256": "69b528391bd3e861b8d4511034d7f5161f6d6d62ee936e8f20a106d91e1d5292"
+    },
+    {
+      "path": "tests/fog-planning.test.js",
+      "bytes": 6698,
+      "sha256": "913e63c9c541661de6a7263d74e1d0f16a7dabdbe4a245d107e5dc9ef9d758ed"
+    },
+    {
+      "path": "tests/full-games.test.js",
+      "bytes": 1319,
+      "sha256": "22c160554e9592018969a8e1bd8834acba8e51383a3b90f102e0c0e02de90b1b"
+    },
+    {
+      "path": "tests/regressions.test.js",
+      "bytes": 1253,
+      "sha256": "9c41745f4e47a11d497699827906b64326385ddd717386c751712ceabeca0597"
+    },
+    {
+      "path": "tests/save.test.js",
+      "bytes": 10393,
+      "sha256": "3e03e8123184f593944c53d498d328c5475fc733537f2a80e100fb15a3007778"
+    },
+    {
+      "path": "tests/tutorial.test.js",
+      "bytes": 5991,
+      "sha256": "d2f6c7e0b8247e175056fd41e22b6ca017d6474c01c8565a931bdd8c91fa547f"
+    },
+    {
+      "path": "tests/ui-fog.test.js",
+      "bytes": 4613,
+      "sha256": "548d5834914ece81ba3b930e9b9432d3f90828e661fa9b10b6bbde3a6b409e1b"
+    },
+    {
+      "path": "tests/ui-home-save.test.js",
+      "bytes": 4693,
+      "sha256": "cbcd2645d03720be7c025d5a9352b118c2377a0b65fc6757be97f1465cc34f40"
+    },
+    {
+      "path": "tests/ui-new-reset.test.js",
+      "bytes": 2186,
+      "sha256": "7acd91532677ab87135a8c319d080f1578c6481cde347dcd3e6f3352cd40fd23"
+    },
+    {
+      "path": "tests/ui-torpedo-route.test.js",
+      "bytes": 3097,
+      "sha256": "96cc4dbbe542945a8930f09d53a8cf29ebcebc39ef6ecd5e7d75707642cb8daa"
+    },
+    {
+      "path": "tests/ui-tutorial.test.js",
+      "bytes": 5836,
+      "sha256": "a1fa7cd9dbeedf10bd5d56bf0b9b10800413d838cbbccfe23b10242d87e575d2"
+    },
+    {
+      "path": "tests/ui.test.js",
+      "bytes": 4962,
+      "sha256": "cbe861fde0239753db3b290ed9176c54033fffc30ef2a4689b25716e63cd744b"
+    },
+    {
+      "path": "交付说明.md",
+      "bytes": 1827,
+      "sha256": "813808feccad480db5e6490b1421f565a0b58f7b926ead7a9d943caeeb2fcf49"
+    }
+  ],
+  "validation": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "dependency_source": "existing installed project dependencies; runtime verified against lockfile",
+    "npm_test": {
+      "passed": 73,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "npm_run_build": {
+      "exit_code": 0
+    },
+    "source_checkout_clean": true,
+    "local_imports_and_assets_complete": true,
+    "secret_scan": "no matches",
+    "fresh_npm_ci_installation_tested": false
+  }
+}

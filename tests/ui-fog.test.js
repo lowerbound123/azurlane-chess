@@ -1,0 +1,27 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {Window} from 'happy-dom';
+const window=new Window({url:'http://localhost/'});
+for(const k of ['window','document','navigator','HTMLElement','Element','SVGElement','Node','Event','MouseEvent','KeyboardEvent','MutationObserver','getComputedStyle','localStorage'])Object.defineProperty(globalThis,k,{value:k==='window'?window:typeof window[k]==='function'&&k==='getComputedStyle'?window[k].bind(window):window[k],configurable:true});
+window.document.body.innerHTML='<div id="app"></div>';
+const errors=[];const oldError=console.error;console.error=(...x)=>errors.push(x.join(' '));
+let source=await fs.readFile(new URL('../src/main.js',import.meta.url),'utf8');
+source=source.replace(/import\s+['"]\.\/style\.css['"];?\s*/,'').replace(/from\s+(['"])([^'"]+)\1/g,(_,quote,spec)=>'from '+JSON.stringify(spec.startsWith('./')?new URL('../src/'+spec.slice(2),import.meta.url).href:import.meta.resolve(spec)));
+await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const wait=ms=>new Promise(r=>setTimeout(r,ms));const flush=async()=>{await Promise.resolve();await wait(0)};
+const buttons=()=>[...document.querySelectorAll('button')];const button=(text)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async el=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c,r)=>document.querySelectorAll('polygon.hex')[r*19+c];
+test('double fog overlays and segmented per-ship route edits',async()=>{
+ await click(button('新游戏'));await click(button('进入部署'));await click(button('完成部署'));
+ assert(document.querySelectorAll('.hex.unexplored').length>0,'unknown fog layer renders');assert.equal(document.querySelectorAll('.hex.unexplored.island').length,0,'unknown island geometry is hidden');assert.equal(document.querySelectorAll('.ship-marker').length,5,'enemy markers are absent');assert.equal(document.querySelectorAll('.public-mine').length,8,'mines remain public');assert(document.querySelectorAll('.hex.overlay-reach').length>0,'known movement cells are highlighted');
+ const context=async(c,r)=>{hex(c,r).dispatchEvent(new window.MouseEvent('contextmenu',{bubbles:true,cancelable:true,button:2}));await flush();};
+ await context(1,12);await context(2,12);assert.equal(document.querySelectorAll('.waypoint-item').length,2);assert.equal(document.querySelectorAll('.action-item.movement').length,2);
+ await click(button('撤销航点'));assert.equal(document.querySelectorAll('.waypoint-item').length,1);assert.equal(document.querySelectorAll('.action-item.movement').length,1);
+ await click(button('重做修改'));assert.equal(document.querySelectorAll('.waypoint-item').length,2);await click(button('撤销修改'));assert.equal(document.querySelectorAll('.waypoint-item').length,1);
+ await click(button('鱼雷 T'));const select=document.querySelector('.order-tool select');select.value='1';select.dispatchEvent(new window.Event('change',{bubbles:true}));await flush();await click(hex(1,13));assert.equal(document.querySelectorAll('.action-item.torp').length,1);
+ await click(button('清除航线'));assert.equal(document.querySelectorAll('.action-item.movement').length,0);assert.equal(document.querySelectorAll('.action-item.torp').length,0);assert.match(document.querySelector('.toast').textContent,/失效鱼雷/);
+ await click(document.querySelectorAll('.ship-row')[3]);await click(button('主炮 G'));await click(document.querySelectorAll('.ship-marker')[3]);assert.equal(document.querySelectorAll('.action-item.artillery').length,1);assert(document.querySelectorAll('.hex.overlay-main').length>0);await context(1,14);await click(button('重新规划'));assert.equal(document.querySelectorAll('.action-item.movement').length,0);assert.equal(document.querySelectorAll('.action-item.artillery').length,1,'movement-only redraw preserves main order');
+ await click(document.querySelectorAll('.ship-row')[0]);assert.equal(document.querySelectorAll('.action-item.artillery').length,0,'selected ship is isolated');await click(document.querySelectorAll('.ship-row')[3]);assert.equal(document.querySelectorAll('.action-item.artillery').length,1);
+ await click(button('主炮 G'));await click(button('隐藏范围'));assert.equal(document.querySelectorAll('.hex.overlay-main').length,0);await click(button('显示范围'));assert(document.querySelectorAll('.hex.overlay-main').length>0);
+ assert.equal(errors.length,0,errors.join('\n'));
+});
