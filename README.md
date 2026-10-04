@@ -1,6 +1,6 @@
-# 碧蓝推演棋 / azurlane chess v0.4.0
+# 碧蓝推演棋 / azurlane chess v0.3.2
 
-Vue 3 + Vite + Three.js，纯静态 3D 战棋网页游戏。 A playable PvAI prototype with home menu, fleet selection, deployment, untimed planning, simultaneous resolution, two-layer RTS fog, contextual ranges, all-friendly plan visibility, local persistence, and illustrated/action-gated tutorials.
+Vue 3 + Vite，纯静态网页游戏。 A playable PvAI prototype with home menu, fleet selection, deployment, untimed planning, simultaneous resolution, two-layer RTS fog, contextual ranges, all-friendly plan visibility, local persistence, and illustrated/action-gated tutorials.
 
 ## Local development
 
@@ -17,7 +17,7 @@ Left click selects a ship; right click appends a reachable route. Sidebar suppor
 
 ## Mobile play
 
-Landscape places the 3D sea beside a collapsible orders panel; portrait uses an expandable bottom panel. Tap to select or issue orders, drag to pan, and pinch or use the mouse wheel to zoom. Toggle “旋转视角” to orbit the camera; “全图” restores the default view and “定位当前舰” centers the selected ship. Ship name standees always face the camera, while their base arrows show world heading. Gestures never issue orders. Camera state is not part of saves.
+Landscape places the map beside a collapsible orders panel; portrait uses an expandable bottom panel. Drag the map with one finger and pinch with two fingers (1–3×); taps select or issue orders without a confirmation step. Use the zoom, full-map, and locate-current-ship buttons when hexes are small. Gestures never issue orders. Deployment has an explicit swap-position mode. Menus, tutorials, battle logs and save import/export remain available on touch screens. Camera and panel state are not part of saves.
 
 ## Explicit prototype edge conventions
 
@@ -68,12 +68,3 @@ Verification additions: `fog-planning.test.js` (12), `save.test.js` (14), `tutor
 - 构建使用 `npm ci` 和 `npm run build:pages`，为资源设置 `/azurlane-chess/` 前缀。更新网站需将新 `dist/` 内容提交并推送到 `gh-pages`。
 - 原站点存档可先导出 JSON，再在新站点导入；浏览器本地存档不会跨域自动共享。
 - `SOURCE_MANIFEST.json` 是初始 v0.1.0 导出记录，当前版本以 package.json 与 Git 提交为准。
-
-
-## v0.4.0 3D 海战场景
-
-海战地图由 Three.js 渲染，包含立体岛屿、水雷、带姓名与血条的朝向镜头立牌、简易飞机与鱼雷模型，以及主炮抛物线、副炮和防空轨迹。Vue 保留指令、菜单与存档界面。所有模型由程序生成，不依赖外部模型资源。
-
-3D 高度只用于显示，六角坐标、碰撞、伤害与存档规则沿用原有引擎。未知地形和视野外敌方单位不进入场景；弹道按当前视野裁切。若设备不能建立 WebGL 画布，页面会显示重试与返回主菜单入口。
-
-测试分为引擎/弹道/场景数学与 Vue 语义交互测试，以及真实浏览器中的 WebGL 点选、镜头与动画验证。Happy DOM 使用显式测试适配器，不承担 GPU 渲染验证。

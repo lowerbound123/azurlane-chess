@@ -1,17 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {rewriteUiSource} from './helpers/load-ui-source.js';
 import {Window} from 'happy-dom';
 const window=new Window({url:'http://localhost/'});
 for(const k of ['window','document','navigator','HTMLElement','Element','SVGElement','Node','Event','MouseEvent','KeyboardEvent','MutationObserver','getComputedStyle','localStorage'])Object.defineProperty(globalThis,k,{value:k==='window'?window:typeof window[k]==='function'&&k==='getComputedStyle'?window[k].bind(window):window[k],configurable:true});
 window.document.body.innerHTML='<div id="app"></div>';
 const errors=[];const oldError=console.error;console.error=(...x)=>errors.push(x.join(' '));
 let source=await fs.readFile(new URL('../src/main.js',import.meta.url),'utf8');
-source = rewriteUiSource(source);
+source=source.replace(/import\s+['"]\.\/style\.css['"];?\s*/,'').replace(/from\s+(['"])([^'"]+)\1/g,(_,quote,spec)=>'from '+JSON.stringify(spec.startsWith('./')?new URL('../src/'+spec.slice(2),import.meta.url).href:import.meta.resolve(spec)));
 await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const wait=ms=>new Promise(r=>setTimeout(r,ms));const flush=async()=>{await Promise.resolve();await wait(0)};
-const buttons=()=>[...document.querySelectorAll('button')];const button=(text)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async el=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c,r)=>document.querySelector(`[data-map-cell="${c-Math.floor(r/2)},${r}"]`);
+const buttons=()=>[...document.querySelectorAll('button')];const button=(text)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async el=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c,r)=>document.querySelectorAll('polygon.hex')[r*19+c];
 const contextClick=async(c,r)=>{hex(c,r).dispatchEvent(new window.MouseEvent('contextmenu',{bubbles:true,cancelable:true,button:2}));await flush();};
 const coach=()=>document.querySelector('.tutorial-coach').textContent;
 const next=async()=>{assert.equal(button('下一课').disabled,false,coach());await click(button('下一课'));};
@@ -20,7 +19,7 @@ test('action-gated tutorial controls teach real mechanics without touching norma
  const auto=localStorage.getItem('azurlane-chess:v1:auto');assert.equal(button('下一课').disabled,true);await click(document.querySelectorAll('.ship-row')[0]);assert.match(coach(),/调整部署/);await click(hex(1,12));await click(button('完成部署'));assert.match(coach(),/本课完成/);await next();
  await contextClick(7,10);await contextClick(8,10);assert.match(coach(),/本课完成/);await next();
  await click(button('左转60'));await click(button('前进 W'));await click(button('右转60'));await click(button('原地转向'));await click(button('直行 Z'));await click(button('前进 W'));assert.match(coach(),/本课完成/);await next();
- await click(button('撤销航点'));assert.match(coach(),/重做/);assert.equal(button('重做修改').disabled,false,'segment undo enables redo');await click(button('重做修改'));assert.match(coach(),/从节点改道/);await click(document.querySelector('[data-map-plan="0-0"] [data-map-node][data-editable="true"]'));await click(button('重新规划'));assert.match(coach(),/本课完成/);
+ await click(button('撤销航点'));assert.match(coach(),/重做/);assert.equal(button('重做修改').disabled,false,'segment undo enables redo');await click(button('重做修改'));assert.match(coach(),/从节点改道/);await click(document.querySelector('.friendly-plan[data-ship-id="0-0"] .editable-node'));await click(button('重新规划'));assert.match(coach(),/本课完成/);
  await next();await click(document.querySelectorAll('.ship-row')[0]);await click(document.querySelectorAll('.ship-row')[1]);
  const executeLesson=async()=>{button('执行回合').dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await Promise.resolve();await Promise.resolve();assert.equal(button('跳过动画').disabled,true,'skip waits for simulation result');const deadline=Date.now()+6000;while((!button('跳过动画')||button('跳过动画').disabled)&&Date.now()<deadline){await wait(30);await flush();}assert.ok(button('跳过动画'),'real engine resolves practice round');await click(button('跳过动画'));};
  await executeLesson();assert.match(coach(),/本课完成/);assert.match(document.querySelectorAll('.ship-row')[0].textContent,/65/);await next();

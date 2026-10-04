@@ -1,17 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {rewriteUiSource} from './helpers/load-ui-source.js';
 import {Window} from 'happy-dom';
 const window=new Window({url:'http://localhost/'});
 for(const k of ['window','document','navigator','HTMLElement','Element','SVGElement','Node','Event','MouseEvent','KeyboardEvent','MutationObserver','getComputedStyle','localStorage'])Object.defineProperty(globalThis,k,{value:k==='window'?window:typeof window[k]==='function'&&k==='getComputedStyle'?window[k].bind(window):window[k],configurable:true});
 window.document.body.innerHTML='<div id="app"></div>';
 const errors=[];const oldError=console.error;console.error=(...x)=>errors.push(x.join(' '));
 let source=await fs.readFile(new URL('../src/main.js',import.meta.url),'utf8');
-source = rewriteUiSource(source);
+source=source.replace(/import\s+['"]\.\/style\.css['"];?\s*/,'').replace(/from\s+(['"])([^'"]+)\1/g,(_,quote,spec)=>'from '+JSON.stringify(spec.startsWith('./')?new URL('../src/'+spec.slice(2),import.meta.url).href:import.meta.resolve(spec)));
 await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const wait=ms=>new Promise(r=>setTimeout(r,ms));const flush=async()=>{await Promise.resolve();await wait(0)};
-const buttons=()=>[...document.querySelectorAll('button')];const button=(text)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async el=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c,r)=>document.querySelector(`[data-map-cell="${c-Math.floor(r/2)},${r}"]`);
+const buttons=()=>[...document.querySelectorAll('button')];const button=(text)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async el=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c,r)=>document.querySelectorAll('polygon.hex')[r*19+c];
 test('home local saves restore stable plans and malformed import does not overwrite',async()=>{
  assert.ok(button('新游戏'));assert.ok(button('读取游戏'));assert.ok(button('图文教程'));assert.ok(button('交互教学'));
  await click(button('新游戏'));const seedInput=document.querySelector('input[aria-label=地图种子]');seedInput.value='42.5';seedInput.dispatchEvent(new window.Event('input',{bubbles:true}));await flush();await click(button('进入部署'));const initialAuto=JSON.parse(localStorage.getItem('azurlane-chess:v1:auto'));assert.ok(initialAuto,'map seed is normalized before autosave');assert.equal(initialAuto.state.game.seed,42);await click(button('完成部署'));await click(button('前进 W'));assert.equal(document.querySelectorAll('.action-item.movement').length,1);

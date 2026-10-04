@@ -4,16 +4,15 @@ import * as P from "./planning.js";
 import * as S from "./save.js";
 import * as T from "./tutorial-content.js";
 import { HomeScreen, SaveManager, TutorialBook, TutorialMenu } from "./screens.js";
-import { BattleMap3D } from "./battle-map-3d.js";
-import { sampleBattleVisuals } from "./battle-visuals.js";
+import { MapViewport } from "./map-viewport.js";
 import { playFrames } from "./playback.js";
 import "./style.css";
-const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
+const app = createApp({ components: { MapViewport, HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
   const screen = ref("home"), roster = ref([...E.DEFAULT_ROSTER]), slot = ref(0), seed = ref(20261004), game = ref(null), plans = ref({}), selected = ref("0-0"), mode = ref("move"), pendingTurn = ref(0), torpWindow = ref(0), planeMode = ref("point"), showRules = ref(false), toast = ref(""), busy = ref(false), playFrame = ref(null), playSpeed = ref(1), progress = ref(0), showLog = ref(false), hover = ref(null), finished = ref(null), history = ref({}), showRanges = ref(true), rangeMode = ref("auto"), replan = ref(false), showPlans = ref(true), saveOpen = ref(false), saveRecords = ref([]), saveNotice = ref(""), pendingSave = ref(null), saveStatus = ref(""), tutorial = ref(null), tutorialFixture = ref(null), tutorialFeedback = ref(""), practiceSave = ref(null);
   const lastMovement = ref({});
-  const mapView = ref(null), mapZoom = ref(1), cameraRotate = ref(false), ordersOpen = ref(true), rangeToolsOpen = ref(false), portraitHint = ref(true), swapMode = ref(false), coachOpen = ref(false);
+  const mapView = ref(null), mapZoom = ref(1), ordersOpen = ref(true), rangeToolsOpen = ref(false), portraitHint = ref(true), swapMode = ref(false), coachOpen = ref(false);
   const modeLabel = computed(() => phase.value === 'deploy' ? (swapMode.value ? '交换位置：点另一艘友舰' : '部署') : ({move:'航线',torp:'鱼雷',main:'主炮',plane:'飞机',mine:'排雷'}[mode.value] || '查看'));
-  function locateShip() { if(ship.value) mapView.value?.focus(E.hexToXY(ship.value.pos)); }
+  function locateShip() { if(ship.value) mapView.value?.focus(point(ship.value.pos)); }
   function planeAngle(p) {
     const units = playFrame.value?.ships || game.value?.ships || [];
     const destination = p.state === 'return'
@@ -23,7 +22,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
   }
   const saves = S.createSaveStorage();
   let normalSession = null;
-  let toastTimer, stopPlayback, resolveTimer;
+  let toastTimer, stopPlayback;
   const shapes = E.allHexes().map((h) => {
     const p = E.hexToXY(h);
     return { ...h, k: E.key(h), x: p.x * 25 + 35, y: p.y * 25 + 35 };
@@ -93,32 +92,6 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
   const lesson = computed(() => tutorial.value ? T.TUTORIAL_LESSONS.find((l) => l.id === tutorial.value.lessonId) : null);
   const tutorialStep = computed(() => lesson.value?.steps[tutorial.value?.stepIndex] || null);
   const tutorialIndex = computed(() => lesson.value ? T.TUTORIAL_LESSONS.findIndex((l) => l.id === lesson.value.id) : -1);
-  const deploymentCells = new Set(E.deployment(0).map(E.key));
-  const mapCells = computed(() => shapes.map(h => ({q:h.q,r:h.r,k:h.k,
-    known:explored.value.has(h.k), visible:visible.value.has(h.k),
-    island:explored.value.has(h.k)&&island.value.has(h.k),
-    deploy:phase.value==='deploy'&&deploymentCells.has(h.k),
-    overlay:overlayCells.value.has(h.k)?overlayType.value:null,
-    tutorial:isTutorialCell(h), hovered:!!hover.value&&E.same(hover.value,h),
-  })));
-  const mapModel = computed(() => ({
-    cells:mapCells.value,
-    ships:displayShips.value.map(s=>({...s,tutorial:isTutorialShip(s.id)})),
-    planes:displayPlanes.value.map(p=>({...p,angle:planeAngle(p)})),
-    torpedoes:displayTorps.value,mines:mines.value,selected:selected.value,
-    phase:phase.value,mode:mode.value,previews:previews.value,mainTargets:mainTargets.value,
-    rays:rays.value,showPlans:showPlans.value,showRanges:showRanges.value,
-    overlayType:overlayType.value,busy:busy.value,
-    airRange:phase.value==='plan'&&showRanges.value&&overlayType.value==='air'&&ship.value?.cfg.carrier
-      ?{origin:ship.value.pos,radius:ship.value.cfg.carrier.plane.range*Math.sqrt(3)}:null,
-    visuals:playFrame.value&&finished.value
-      ?sampleBattleVisuals(finished.value.presentation||[],playFrame.value.t||0,visible.value)
-      :{projectiles:[],effects:[]},
-  }));
-  function mapHex({hex,event,forceMove}) { clickHex(hex,event,forceMove); }
-  function mapShip({ship:unit,event}) { shipClick(unit,event); }
-  function mapNode({index,shipId}) { truncateNode(index,shipId); }
-  function mapHover(hex) { if(hex) inspectCell(hex,false); else hover.value=null; }
   function snapshot() {
     return { game: E.clone(toRaw(game.value)), plans: E.clone(toRaw(plans.value)), selected: selected.value, roster: [...roster.value], seed: Number(seed.value), metadata: { showPlans: showPlans.value, showRanges: showRanges.value, rangeMode: rangeMode.value } };
   }
@@ -240,17 +213,6 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     } catch (error) {
       saveNotice.value = error.message;
     }
-  }
-  function mapExit() {
-    if (finished.value) complete();
-    else {
-      clearTimeout(resolveTimer);
-      stopPlayback?.();
-      busy.value = false;
-      playFrame.value = null;
-      progress.value = 0;
-    }
-    goHome();
   }
   function goHome() {
     if (busy.value) return;
@@ -654,7 +616,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     mode.value = "move";
     progress.value = 0;
     teach({ type: "execute" });
-    resolveTimer = setTimeout(() => {
+    setTimeout(() => {
       try {
         const state = E.clone(toRaw(game.value)), orders = E.clone(toRaw(plans.value)), ai = tutorial.value ? tutorialFixture.value.opponentPlansByRound?.[state.round] || tutorialFixture.value.opponentPlans || {} : E.planAI(state, 1), result = E.resolveRound(state, { ...ai, ...orders });
         finished.value = result;
@@ -756,15 +718,14 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
   onMounted(() => window.addEventListener("keydown", keydown));
   onUnmounted(() => {
     window.removeEventListener("keydown", keydown);
-    clearTimeout(resolveTimer);
     stopPlayback?.();
   });
-  return { mapExit, mapModel, mapHex, mapShip, mapNode, mapHover, cameraRotate, routeConflicts, lastMovement, planeAngle, mapView, mapZoom, ordersOpen, rangeToolsOpen, portraitHint, swapMode, coachOpen, modeLabel, locateShip, finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
+  return { routeConflicts, lastMovement, planeAngle, mapView, mapZoom, ordersOpen, rangeToolsOpen, portraitHint, swapMode, coachOpen, modeLabel, locateShip, finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
 }, template: `
 <div class="shell" :class="{'battle-active':screen==='battle','orders-closed':!ordersOpen}">
 <header class="topbar">
 <div class="brand"><strong>碧蓝推演棋</strong></div>
-<span class="release-tag">v0.4.0</span>
+<span class="release-tag">v0.3.2</span>
 <div class="top-actions">
 <span class="version-note">{{saveStatus||'PvAI \xB7 \u89C4\u5219\u6D4B\u8BD5\u7248'}}</span>
 <button v-if="screen!=='home'" class="quiet" :disabled="busy" @click="goHome">\u4E3B\u83DC\u5355</button>
@@ -960,9 +921,8 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <button aria-label="缩小海图" @click="mapView?.zoomBy(.8)" :disabled="mapZoom<=1">−</button>
 <button @click="mapView?.reset()">全图</button>
 <button @click="locateShip">定位当前舰</button>
-<button @click="mapView?.toggleRotate()" :class="{active:cameraRotate}" :aria-pressed="cameraRotate">{{cameraRotate?'旋转中':'旋转视角'}}</button>
 <button v-if="phase==='plan'" class="mobile-only" @click="rangeToolsOpen=!rangeToolsOpen" :aria-expanded="rangeToolsOpen">图层</button>
-<span class="camera-help">拖动平移 · 双指／滚轮缩放 · 点选下令</span>
+<span class="camera-help">单指拖动 · 双指缩放 · 点选下令</span>
 </div>
 <div class="map-caption">
 <span>{{phase==='deploy'?'\u5728\u84DD\u8272\u533A\u57DF\u70B9\u51FB\u90E8\u7F72\uFF1B\u70B9\u8230\u8239\u5207\u6362\u9009\u62E9':phase==='plan'?'点友舰选中 · 航线模式点格子追加航段 · 面板切换武器':'\u6240\u6709\u8230\u8239\u3001\u98DE\u673A\u4E0E\u9C7C\u96F7\u5171\u7528\u65F6\u95F4\u8F74'}}</span>
@@ -981,8 +941,86 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <button :class="{active:showPlans}" @click="showPlans=!showPlans">{{showPlans?'\u9690\u85CF\u5168\u90E8\u8BA1\u5212':'\u663E\u793A\u5168\u90E8\u8BA1\u5212'}}</button>
 <span>{{showRanges?rangeHint:'\u8303\u56F4\u63D0\u793A\u5DF2\u9690\u85CF'}}</span>
 </div>
-<BattleMap3D ref="mapView" :model="mapModel" @zoom="mapZoom=$event" @rotate="cameraRotate=$event"
- @hex="mapHex" @ship="mapShip" @node="mapNode" @hover="mapHover" @home="mapExit" />
+<MapViewport ref="mapView" @zoom="mapZoom=$event">
+<svg class="sea-map" viewBox="0 0 900 615" role="img" aria-label="\u516D\u89D2\u6D77\u6218\u5730\u56FE" @contextmenu.prevent>
+ <defs>
+<pattern id="sea-grid" width="12" height="12" patternUnits="userSpaceOnUse">
+<circle cx="1" cy="1" r=".65" fill="#1d3447"/>
+</pattern>
+<marker id="route-tip" markerWidth="5" markerHeight="5" refX="3" refY="2" orient="auto">
+<path d="M0 0L4 2 0 4" fill="none" stroke="#63dfd5"/>
+</marker>
+</defs>
+<rect width="900" height="615" fill="url(#sea-grid)"/>
+ <g v-for="h in shapes" :key="h.k" @click="clickHex(h,$event)" @contextmenu.prevent="clickHex(h,$event,true)" @mouseenter="inspectCell(h,false)">
+<polygon :points="polygon(h)" :class="['hex',{unexplored:!explored.has(h.k),remembered:explored.has(h.k)&&!visible.has(h.k),island:island.has(h.k)&&explored.has(h.k),deploy:phase==='deploy'&&E.deployment(0).some(x=>E.same(x,h)),['overlay-'+overlayType]:overlayCells.has(h.k),'tutorial-focus':isTutorialCell(h),hovered:hover&&E.same(hover,h)}]"/>
+<text v-if="island.has(h.k)&&explored.has(h.k)" :x="h.x" :y="h.y+4" class="island-label">\u5C9B</text>
+<text v-if="h.r===0" :x="h.x" :y="h.y-25" class="coordinate">{{String.fromCharCode(65+E.toCR(h).c)}}</text>
+<text v-if="E.toCR(h).c===0" :x="h.x-28" :y="h.y+4" class="coordinate">{{h.r+1}}</text>
+</g>
+ <g pointer-events="none">
+<g class="public-mine" v-for="m in mines" :key="'m'+E.key(m)">
+<path :d="'M'+point(m).x+' '+(point(m).y-8)+' l8 8 -8 8 -8 -8Z'" fill="#cda96522" stroke="#d9b471" stroke-width="1.7"/>
+<circle :cx="point(m).x" :cy="point(m).y" r="2" fill="#edc27c"/>
+</g>
+ <template v-if="phase==='plan'&&showPlans">
+<g v-for="v in previews" :key="'plan-'+v.ship.id" :class="['friendly-plan',{emphasized:v.selected}]" :data-ship-id="v.ship.id" :opacity="v.selected?1:.56">
+<polyline :points="plannedPolyline(v.ship)" fill="none" stroke="#6ee6dc" :stroke-width="v.selected?2.6:1.3" stroke-dasharray="5 4" marker-end="url(#route-tip)"/>
+<g v-for="(n,i) in v.nodes.slice(1)" :key="'n'+i" class="editable-node" :pointer-events="v.selected&&mode==='move'?'all':'none'" @click.stop="truncateNode(i+1,v.ship.id)">
+<circle :cx="point(n.pos).x" :cy="point(n.pos).y" :r="v.selected?7:5.5" fill="#122d3b" stroke="#70dfd5"/>
+<text :x="point(n.pos).x" :y="point(n.pos).y+3.5" class="node-label">{{i+1}}</text>
+</g>
+<g v-if="v.plan.moves.length" class="planning-endpoint">
+<text :x="point(v.nodes.at(-1).pos).x" :y="point(v.nodes.at(-1).pos).y-15" class="endpoint-label">{{v.ship.label}} \xB7 {{v.plan.moves.length}}/{{v.ship.cfg.speed}}</text>
+</g>
+<g v-for="(t,i) in v.torps" :key="'t'+i" class="planned-torpedo">
+<line :x1="point(t.origin).x" :y1="point(t.origin).y" :x2="point(t.fullEnd).x" :y2="point(t.fullEnd).y" stroke="#d4b576" stroke-width="1.2" stroke-dasharray="3 5"/>
+<line :x1="point(t.origin).x" :y1="point(t.origin).y" :x2="point(t.end).x" :y2="point(t.end).y" stroke="#f0c672" stroke-width="2.5"/>
+<text :x="point(t.origin).x+10" :y="point(t.origin).y+17" class="torp-window-label">\u9C7C{{t.window}}</text>
+</g>
+<g v-for="(p,i) in v.planes" :key="'p'+i" class="planned-aircraft">
+<line :x1="point(v.ship.pos).x" :y1="point(v.ship.pos).y" :x2="point(p.target).x" :y2="point(p.target).y" stroke="#78e8d7" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle :cx="point(p.target).x" :cy="point(p.target).y" r="13" fill="none" stroke="#78e8d7"/>
+</g>
+<circle v-if="v.plan.sweep" class="planned-sweep" :cx="point(v.plan.sweep).x" :cy="point(v.plan.sweep).y" r="16" fill="none" stroke="#edc27c"/>
+</g>
+<g v-for="t in mainTargets" :key="'a'+E.key(t.at)" class="planned-artillery" :opacity="t.selected?1:.5">
+<circle :cx="point(t.at).x" :cy="point(t.at).y" r="15" fill="#f3916a22" stroke="#f3916a" :stroke-width="t.selected?2.5:1.3"/>
+<text :x="point(t.at).x" :y="point(t.at).y+4" class="target-number">\xD7{{t.count}}</text>
+</g>
+</template>
+ <g v-if="phase==='plan'&&showRanges&&overlayType==='torp'" class="torpedo-directions">
+<g v-for="r in rays" :key="r.dir">
+<line :x1="point(r.origin).x" :y1="point(r.origin).y" :x2="point(r.fullEnd).x" :y2="point(r.fullEnd).y" stroke="#baa06a" stroke-dasharray="2 6" opacity=".65"/>
+<line :x1="point(r.origin).x" :y1="point(r.origin).y" :x2="point(r.roundEnd).x" :y2="point(r.roundEnd).y" stroke="#edc274" stroke-width="1.8"/>
+</g>
+</g>
+ <circle v-if="phase==='plan'&&showRanges&&overlayType==='air'&&ship.cfg.carrier" class="plane-range-limit" :cx="point(ship.pos).x" :cy="point(ship.pos).y" :r="ship.cfg.carrier.plane.range*Math.sqrt(3)*25" fill="none" stroke="#b7a3f1" stroke-width="2" stroke-dasharray="7 5"/>
+ </g>
+ <g v-for="s in displayShips" :key="s.id" @click="shipClick(s,$event)" @contextmenu.prevent="clickHex(E.xyToHex(s.xy),$event,true)" class="ship-marker" @mouseenter="inspectCell(E.xyToHex(s.xy),false)" :data-tutorial-highlight="isTutorialShip(s.id)?'true':null">
+<circle :cx="xy(s.xy).x" :cy="xy(s.xy).y" :r="s.cfg.radius*25" :class="['ship-circle',s.team===0?'friendly':'hostile',{selected:selected===s.id}]"/>
+<g :transform="'translate('+xy(s.xy).x+' '+xy(s.xy).y+') rotate('+s.heading*60+')'">
+<path d="M21 0L14 -5L14 5Z" :fill="s.team===0?'#93fff0':'#ff9b87'"/>
+</g>
+<text :x="xy(s.xy).x" :y="xy(s.xy).y+3" class="unit-label">{{s.label}}</text>
+<line :x1="xy(s.xy).x-13" :y1="xy(s.xy).y+10" :x2="xy(s.xy).x+13" :y2="xy(s.xy).y+10" stroke="#071421" stroke-width="3"/>
+<line :x1="xy(s.xy).x-13" :y1="xy(s.xy).y+10" :x2="xy(s.xy).x-13+26*s.hp/s.cfg.hp" :y2="xy(s.xy).y+10" :stroke="s.team===0?'#78e8d7':'#ef957e'" stroke-width="3"/>
+</g>
+ <g v-for="p in displayTorps" :key="p.id" :transform="'translate('+xy(p.xy).x+' '+xy(p.xy).y+') rotate('+p.heading*60+')'" pointer-events="none">
+<path d="M-5 -2L5 0 -5 2Z" :fill="p.team===0?'#f2d18d':'#fa8c6d'"/>
+</g>
+<g v-for="p in displayPlanes" :key="p.id" class="plane-marker" :class="{returning:p.state==='return'}" :transform="'translate('+xy(p.xy).x+' '+xy(p.xy).y+')'" pointer-events="none">
+<title>{{p.team===0?'友方':'敌方'}}飞机 · {{p.state==='return'?'返航':'出击'}}</title>
+<path :transform="'rotate('+planeAngle(p)+')'" d="M11 0 L3 -2 L-2 -9 L-5 -9 L-3 -2 L-8 -2 L-10 -5 L-12 -5 L-10 0 L-12 5 L-10 5 L-8 2 L-3 2 L-5 9 L-2 9 L3 2 Z" :fill="p.team===0?'#78e8d7':'#ef957e'" stroke="#111d32" stroke-width="1.2" stroke-linejoin="round"/>
+<text v-if="p.state==='return'" x="0" y="16" class="plane-letter" :style="{fill:p.team===0?'#78e8d7':'#ef957e'}">返</text>
+</g>
+ <g v-for="(e,i) in (playFrame?.effects||[]).filter(e=>visible.has(E.key(e.at)))" :key="i" pointer-events="none">
+<line v-if="e.from&&visible.has(E.key(e.from))" :x1="point(e.from).x" :y1="point(e.from).y" :x2="point(e.at).x" :y2="point(e.at).y" :stroke="e.kind==='aa'?'#cdb4ff':'#f6d292'" stroke-width="1.5"/>
+<circle v-if="e.kind==='main'" :cx="point(e.at).x" :cy="point(e.at).y" r="23" fill="#ff986633" stroke="#ffab75"/>
+<text v-if="e.text" :x="point(e.at).x" :y="point(e.at).y-17" class="damage-label">{{e.text}}</text>
+</g>
+ </svg>
+</MapViewport>
 <div class="map-footer">
 <span>
 <i class="legend-dot cyan">
@@ -1165,7 +1203,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <div v-if="showRules" class="modal-backdrop" @click.self="showRules=false">
 <section class="rules-modal" role="dialog" aria-modal="true" aria-label="\u89C4\u5219\u4E0E\u64CD\u4F5C">
 <div class="panel-title">
-<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.0</h2>
+<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.3.2</h2>
 <button @click="showRules=false" aria-label="\u5173\u95ED\u89C4\u5219">\u5173\u95ED</button>
 </div>
 <div class="rules-columns">

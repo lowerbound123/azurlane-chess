@@ -28,19 +28,3 @@ test('1x playback renders every 60 Hz frame with distinct interpolated positions
  assert.equal(new Set(positions).size,61);
  assert.ok(Math.abs(positions.at(-1)-1000/110*10)<1e-8);
 });
-test('interpolated frame time drives projectiles at the same continuous clock as ships',()=>{
- const a={...frame(0),t:.1},b={...frame(10),t:.2};
- assert.equal(interpolateFrame(a,b,.5).t,.15000000000000002);
- assert.equal(interpolateFrame(a,null,.5).t,.1);
- assert.equal(a.t,.1);
-});
-test('final impact frame continues its visual clock during the existing hold without delaying completion',()=>{
- let callback,last,done=0;
- playFrames([{...frame(0),t:1},{...frame(10),t:1.1}],{speed:()=>1,render:f=>last=f,complete:()=>done++,request:cb=>(callback=cb,1),cancel:()=>{},now:()=>0});
- callback(110);assert.equal(last.t,1.1);
- callback(165);assert(Math.abs(last.t-1.15)<1e-12);assert.equal(last.ships[0].xy.x,10);assert.equal(done,0);
- callback(220);assert.equal(done,1);
-});
-test('position-only legacy frames do not acquire an invalid clock',()=>{
- assert.equal('t' in interpolateFrame(frame(0),frame(10),.5),false);
-});
