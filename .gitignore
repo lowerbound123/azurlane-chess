@@ -9,3 +9,4 @@ docs/superpowers/.task-state.md
 .env
 .env.*
 !.env.example
+config/ai-models.json

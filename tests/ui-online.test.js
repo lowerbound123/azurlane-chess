@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {Window} from 'happy-dom';
+import {rewriteUiSource} from './helpers/load-ui-source.js';
+import * as E from '../src/engine.js';
+const window=new Window({url:'http://localhost/'});
+for(const k of ['window','document','navigator','HTMLElement','Element','SVGElement','Node','Event','MouseEvent','KeyboardEvent','MutationObserver','getComputedStyle','localStorage','location'])Object.defineProperty(globalThis,k,{value:k==='window'?window:k==='getComputedStyle'?window[k].bind(window):window[k],configurable:true});
+window.document.body.innerHTML='<div id="app"></div>';
+const errors=[];console.error=(...args)=>errors.push(args.join(' '));
+class Socket {constructor(){this.readyState=1;Socket.current=this;queueMicrotask(()=>this.onopen());}send(text){const message=JSON.parse(text);this.last=message;queueMicrotask(()=>this.onmessage({data:JSON.stringify({type:'ack',id:message.id,ok:true})}));}push(message){this.onmessage({data:JSON.stringify(message)});}close(){this.onclose?.();}}
+globalThis.WebSocket=Socket;
+globalThis.fetch=async url=>({ok:true,json:async()=>url==='/api/config'?{serverId:'test',models:[],roomLimits:[0,60]}:{token:'secret',playerId:'me',nickname:'指挥官',serverId:'test'}});
+await import('data:text/javascript;base64,'+Buffer.from(rewriteUiSource(await fs.readFile(new URL('../src/main.js',import.meta.url),'utf8'))).toString('base64'));
+const flush=()=>new Promise(resolve=>setTimeout(resolve,0));
+const button=text=>[...document.querySelectorAll('button')].find(el=>el.textContent.includes(text));
+const click=async el=>{assert.ok(el);el.click();await flush();};
+test('online entry and team-one authoritative battle submission preserve offline storage',async()=>{
+ await click(button('联机 / AI'));assert.match(document.body.textContent,/联机大厅/);await click(button('连接服务器'));assert.match(document.body.textContent,/服务器尚未配置 AI/);
+ const game=E.createGame(E.DEFAULT_ROSTER,42);game.ships=game.ships.filter(s=>s.team===1);game.visible=game.ships.map(s=>E.key(s.pos));game.explored=[[],game.visible];game.phase='plan';
+ const match={id:'m',kind:'pvp',myTeam:1,stage:'plan',round:1,game,submitted:[false,false],disconnects:[],deadline:null};
+ Socket.current.push({type:'state',player:{id:'me',nickname:'指挥官'},room:null,queue:null,match:{...match,stage:'deploy'}});await flush();
+ assert.match(document.querySelector('.deployment-help').textContent,/部署到右上角/);
+ const free=E.deployment(1).find(h=>!game.ships.some(s=>E.same(s.pos,h)));await click(document.querySelector(`[data-map-cell="${E.key(free)}"]`));assert.equal(Socket.current.last.type,'deploy.update');assert.equal(Socket.current.last.payload.ready,false);assert.ok(Socket.current.last.payload.positions.every(s=>s.id.startsWith('1-')));
+ await click(button('完成部署'));assert.equal(Socket.current.last.payload.ready,true);
+ Socket.current.push({type:'state',player:{id:'me',nickname:'指挥官'},room:null,queue:null,match});await flush();
+ assert.equal(document.querySelectorAll('.ship-row').length,5);assert.match(document.querySelector('.online-battle-status').textContent,/我方 2 队/);
+ await click(button('前进 W'));await click(button('执行回合'));assert.equal(Socket.current.last.type,'orders.submit');assert.equal(Socket.current.last.matchId,'m');assert.ok(Object.keys(Socket.current.last.payload.plans).every(id=>id.startsWith('1-')));assert.equal(game.round,1);
+ Socket.current.push({type:'state',player:{id:'me'},room:null,queue:null,match:{...match,submitted:[false,true]}});await flush();assert.ok(button('执行回合').disabled);await click(button('撤回命令'));assert.equal(Socket.current.last.type,'orders.withdraw');
+ assert.equal(localStorage.length,1,'only separate guest identity written');assert.equal(errors.length,0,errors.join('\n'));
+});

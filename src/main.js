@@ -7,9 +7,49 @@ import { HomeScreen, SaveManager, TutorialBook, TutorialMenu } from "./screens.j
 import { BattleMap3D } from "./battle-map-3d.js";
 import { sampleBattleVisuals } from "./battle-visuals.js";
 import { playFrames } from "./playback.js";
+import { OnlineClient } from "./online.js";
+import { OnlinePanel } from "./online-panel.js";
 import "./style.css";
-const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
+const app = createApp({ components: { OnlinePanel, BattleMap3D, HomeScreen, SaveManager, TutorialBook, TutorialMenu }, setup() {
   const screen = ref("home"), roster = ref([...E.DEFAULT_ROSTER]), slot = ref(0), seed = ref(20261004), game = ref(null), plans = ref({}), selected = ref("0-0"), mode = ref("move"), pendingTurn = ref(0), torpWindow = ref(0), planeMode = ref("point"), showRules = ref(false), toast = ref(""), busy = ref(false), playFrame = ref(null), playSpeed = ref(1), progress = ref(0), showLog = ref(false), hover = ref(null), finished = ref(null), history = ref({}), showRanges = ref(true), rangeMode = ref("auto"), replan = ref(false), showPlans = ref(true), saveOpen = ref(false), saveRecords = ref([]), saveNotice = ref(""), pendingSave = ref(null), saveStatus = ref(""), tutorial = ref(null), tutorialFixture = ref(null), tutorialFeedback = ref(""), practiceSave = ref(null);
+  const onlineState = ref(null), onlineStatus = ref('disconnected'), onlineError = ref(''), onlineConfig = ref(null), onlinePending = ref(false), onlineActive = ref(false), onlineClock = ref(Date.now());
+  const myTeam = computed(() => onlineActive.value ? onlineState.value?.match?.myTeam ?? 0 : 0);
+  const onlineLocked = computed(() => onlineActive.value && (onlineStatus.value !== 'connected' || onlinePending.value || onlineState.value?.match?.paused || onlineState.value?.match?.submitted?.[myTeam.value] || !['plan','deploy'].includes(onlineState.value?.match?.stage)));
+  let offlineSession = null;
+  const onlineClient = new OnlineClient({onState: receiveOnlineState, onRound: receiveOnlineRound, onStatus: status => onlineStatus.value = status, onError: error => onlineError.value = error.message});
+  const onlineTicker = setInterval(() => onlineClock.value = Date.now(), 1000);
+  onlineTicker.unref?.();
+  function openOnline() { if (tutorial.value) exitTutorial(); screen.value = 'online'; }
+  async function connectOnline(nickname) { onlinePending.value = true; onlineError.value = ''; try { onlineConfig.value = await onlineClient.connect(nickname); } catch(error) { onlineError.value = '联机服务不可用：' + error.message; onlineStatus.value = 'disconnected'; } finally { onlinePending.value = false; } }
+  async function onlineCommand(type, payload = {}) {
+    if (onlinePending.value) return false;
+    onlinePending.value = true; onlineError.value = '';
+    try { const match = onlineState.value?.match; await onlineClient.send(type, payload, match ? {matchId:match.id,round:match.round} : {}); return true; }
+    catch(error) { onlineError.value = error.message; say(error.message); return false; }
+    finally { onlinePending.value = false; }
+  }
+  async function onlineRoster(next) { if (!onlineState.value?.room || await onlineCommand('room.update',{roster:next})) roster.value = next; }
+  function receiveOnlineState(state) {
+    const previous = onlineState.value?.match; onlineState.value = state;
+    if (!state.match) {
+      if (onlineActive.value) { stopPlayback?.(); onlineActive.value = false; busy.value = false; playFrame.value = null; finished.value = null; game.value = offlineSession?.game || null; plans.value = offlineSession?.plans || {}; selected.value = offlineSession?.selected || '0-0'; offlineSession = null; screen.value = 'online'; }
+      return;
+    }
+    if (!onlineActive.value) { autosave(); offlineSession = {game:game.value,plans:plans.value,selected:selected.value}; tutorial.value = null; onlineActive.value = true; screen.value = 'battle'; }
+    if (finished.value && state.match.stage === 'playback') return;
+    if (finished.value) { stopPlayback?.(); finished.value = null; playFrame.value = null; }
+    game.value = E.clone(state.match.game); busy.value = ['resolving','playback'].includes(state.match.stage);
+    if (previous?.round !== state.match.round || previous?.id !== state.match.id) { plans.value = {}; history.value = {}; lastMovement.value = {}; }
+    if (state.match.submitted?.[myTeam.value] && state.match.plans) plans.value = E.clone(state.match.plans);
+    if (!game.value.ships.some(s => s.id === selected.value && s.team === myTeam.value)) selected.value = game.value.ships.find(s => s.team === myTeam.value && E.alive(s))?.id || '';
+  }
+  function receiveOnlineRound(message) {
+    if (!onlineActive.value || message.matchId !== onlineState.value?.match?.id) return;
+    stopPlayback?.(); finished.value = message.result; busy.value = true;
+    // Server snapshots are already clipped to visibility. Never interpolate into fog.
+    const frames = message.result.frames || []; const started = performance.now(); const duration = Math.max(1, (message.playbackUntil || Date.now()+frames.length*110) - Date.now());
+    const tick = () => { if (!finished.value) return; const fraction = Math.min(1, (performance.now()-started) / duration); const index = Math.min(frames.length-1,Math.floor(fraction*frames.length)); playFrame.value = frames[index] || null; progress.value = fraction; if (fraction >= 1) complete(); else { const handle = window.requestAnimationFrame(tick); stopPlayback = () => window.cancelAnimationFrame(handle); } }; tick();
+  }
   const lastMovement = ref({});
   const mapView = ref(null), mapZoom = ref(1), cameraRotate = ref(false), ordersOpen = ref(true), rangeToolsOpen = ref(false), portraitHint = ref(true), swapMode = ref(false), coachOpen = ref(false);
   const modeLabel = computed(() => phase.value === 'deploy' ? (swapMode.value ? '交换位置：点另一艘友舰' : '部署') : ({move:'航线',torp:'鱼雷',main:'主炮',plane:'飞机',mine:'排雷'}[mode.value] || '查看'));
@@ -18,7 +58,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     const units = playFrame.value?.ships || game.value?.ships || [];
     const destination = p.state === 'return'
       ? units.find(s => s.id === p.mother)?.xy
-      : (p.tracking ? units.find(s => s.id === p.targetId)?.xy : null) || E.hexToXY(p.target);
+      : (p.tracking ? units.find(s => s.id === p.targetId)?.xy : null) || (p.target ? E.hexToXY(p.target) : null);
     return destination ? Math.atan2(destination.y-p.xy.y, destination.x-p.xy.x)*180/Math.PI : 0;
   }
   const saves = S.createSaveStorage();
@@ -38,8 +78,8 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
       return `${p.x + 24.3 * Math.cos(a)},${p.y + 24.3 * Math.sin(a)}`;
     }).join(" ");
   }, island = computed(() => new Set(game.value?.map.islands || [])), currentTemplate = computed(() => E.TEMPLATES[roster.value[slot.value]]), role = computed(() => slot.value < 3 ? "front" : "back");
-  const ship = computed(() => game.value?.ships.find((s) => s.id === selected.value)), plan = computed(() => plans.value[selected.value] || E.emptyPlan()), nodes = computed(() => ship.value ? E.route(ship.value, plan.value, knowledge.value) : []), own = computed(() => game.value?.ships.filter((s) => s.team === 0) || []), visible = computed(() => new Set(playFrame.value?.visible || (game.value ? [...E.visibleCells(game.value, 0)] : []))), displayShips = computed(() => (playFrame.value?.ships || game.value?.ships.filter(E.alive) || []).filter((s) => s.team === 0 || visible.value.has(E.key(E.xyToHex(s.xy))))), displayTorps = computed(() => (playFrame.value?.torpedoes || game.value?.torpedoes || []).filter((p) => p.team === 0 || visible.value.has(E.key(E.xyToHex(p.xy))))), displayPlanes = computed(() => (playFrame.value?.planes || game.value?.planes || []).filter((p) => p.team === 0 || visible.value.has(E.key(E.xyToHex(p.xy))))), mines = computed(() => playFrame.value?.mines || game.value?.map.mines || []), ourHP = computed(() => own.value.reduce((n, s) => n + s.hp, 0)), ourCount = computed(() => own.value.filter(E.alive).length), visibleEnemies = computed(() => displayShips.value.filter((s) => s.team === 1).length), phase = computed(() => busy.value ? "execute" : game.value?.phase), readyAircraft = computed(() => ship.value?.airReady.filter((n) => n <= game.value.round).length || 0), safeLogs = computed(() => (game.value?.log || []).filter((e) => e.team === 0 || e.team === null).slice(-35).reverse());
-  const explored = computed(() => new Set(playFrame.value?.explored || game.value?.explored?.[0] || []));
+  const ship = computed(() => game.value?.ships.find((s) => s.id === selected.value)), plan = computed(() => plans.value[selected.value] || E.emptyPlan()), nodes = computed(() => ship.value ? E.route(ship.value, plan.value, knowledge.value) : []), own = computed(() => game.value?.ships.filter((s) => s.team === myTeam.value) || []), visible = computed(() => new Set(playFrame.value?.visible || (game.value ? (onlineActive.value ? game.value.visible || [] : [...E.visibleCells(game.value, 0)]) : []))), displayShips = computed(() => (playFrame.value?.ships || game.value?.ships.filter(E.alive) || []).filter((s) => s.team === myTeam.value || visible.value.has(E.key(E.xyToHex(s.xy))))), displayTorps = computed(() => (playFrame.value?.torpedoes || game.value?.torpedoes || []).filter((p) => p.team === myTeam.value || visible.value.has(E.key(E.xyToHex(p.xy))))), displayPlanes = computed(() => (playFrame.value?.planes || game.value?.planes || []).filter((p) => p.team === myTeam.value || visible.value.has(E.key(E.xyToHex(p.xy))))), mines = computed(() => playFrame.value?.mines || game.value?.map.mines || []), ourHP = computed(() => own.value.reduce((n, s) => n + s.hp, 0)), ourCount = computed(() => own.value.filter(E.alive).length), visibleEnemies = computed(() => displayShips.value.filter((s) => s.team !== myTeam.value).length), phase = computed(() => busy.value ? "execute" : onlineActive.value ? onlineState.value?.match?.stage : game.value?.phase), readyAircraft = computed(() => ship.value?.airReady.filter((n) => n <= game.value.round).length || 0), safeLogs = computed(() => (game.value?.log || []).filter((e) => e.team === myTeam.value || e.team === null).slice(-35).reverse());
+  const explored = computed(() => new Set(playFrame.value?.explored || game.value?.explored?.[myTeam.value] || []));
   const knowledge = computed(() => game.value ? P.knowledgeMap(game.value.map, explored.value) : { islands: [], mines: [] });
   const reachable = computed(() => ship.value && phase.value === "plan" ? P.reachable(ship.value, plan.value, knowledge.value) : /* @__PURE__ */ new Map());
   const certain = computed(() => ship.value && phase.value === "plan" ? P.knownReachable(ship.value, plan.value, knowledge.value, explored.value) : /* @__PURE__ */ new Map());
@@ -66,7 +106,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     return hint;
   });
   const rangeHint = computed(() => overlayType.value === "reach" ? `\u822A\u7EBF\u672B\u7AEF\u5269\u4F59 ${Math.max(0, (ship.value?.cfg.speed || 0) - plan.value.moves.length)} \u6B65 \xB7 \u7EFF\u8272\u4E3A\u5DF2\u77E5\u53EF\u8FBE` : overlayType.value === "secondary" ? "\u526F\u70AE\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF1B\u6CBF\u9014\u4ECD\u53EF\u81EA\u52A8\u5F00\u706B" : overlayType.value === "aa" ? "\u9632\u7A7A\uFF1A\u89C4\u5212\u7EC8\u70B9\u8303\u56F4\uFF0C\u4E0D\u53D7\u5C9B\u5C7F\u906E\u6321" : overlayType.value === "main" ? "\u4E3B\u70AE\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u5C04\u7A0B\uFF0C\u53EF\u9694\u5C9B\u76F2\u5C04" : overlayType.value === "sweep" ? "\u6392\u96F7\uFF1A\u56DE\u5408\u521D\u8230\u4F4D\u4E0E\u5DF2\u77E5\u76F4\u89C6\u8303\u56F4" : overlayType.value === "air" ? `飞机：母舰起飞位置的单程 ${ship.value?.cfg.carrier?.plane.range ?? E.RULES.plane.range} 格极限` : overlayType.value === "torp" ? "\u9C7C\u96F7\uFF1A\u5F53\u524D\u7A97\u53E3\u7684\u56DB\u4E2A\u5408\u6CD5\u4FA7\u5411\uFF1B\u5C9B\u5C7F\u5916\u7684\u672A\u77E5\u8DEF\u5F84\u4E0D\u4FDD\u8BC1\u7545\u901A" : "");
-  const airborne = computed(() => displayPlanes.value.filter((p) => p.team === 0 && p.mother === selected.value));
+  const airborne = computed(() => displayPlanes.value.filter((p) => p.team === myTeam.value && p.mother === selected.value));
   const previews = computed(() => own.value.filter(E.alive).map((s) => {
     const p = plans.value[s.id] || E.emptyPlan(), ns = E.route(s, p, knowledge.value);
     return { ship: s, plan: p, nodes: ns, selected: s.id === selected.value, torps: p.torps.map((t) => {
@@ -89,20 +129,20 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     }
     return [...targets.values()];
   });
-  const canSave = computed(() => !!game.value && !busy.value && !tutorial.value);
+  const canSave = computed(() => !!game.value && !busy.value && !tutorial.value && !onlineActive.value);
   const lesson = computed(() => tutorial.value ? T.TUTORIAL_LESSONS.find((l) => l.id === tutorial.value.lessonId) : null);
   const tutorialStep = computed(() => lesson.value?.steps[tutorial.value?.stepIndex] || null);
   const tutorialIndex = computed(() => lesson.value ? T.TUTORIAL_LESSONS.findIndex((l) => l.id === lesson.value.id) : -1);
-  const deploymentCells = new Set(E.deployment(0).map(E.key));
+  const deploymentCells = computed(() => new Set(E.deployment(myTeam.value).map(E.key)));
   const mapCells = computed(() => shapes.map(h => ({q:h.q,r:h.r,k:h.k,
     known:explored.value.has(h.k), visible:visible.value.has(h.k),
     island:explored.value.has(h.k)&&island.value.has(h.k),
-    deploy:phase.value==='deploy'&&deploymentCells.has(h.k),
+    deploy:phase.value==='deploy'&&deploymentCells.value.has(h.k),
     overlay:overlayCells.value.has(h.k)?overlayType.value:null,
     tutorial:isTutorialCell(h), hovered:!!hover.value&&E.same(hover.value,h),
   })));
   const mapModel = computed(() => ({
-    cells:mapCells.value,
+    cells:mapCells.value, myTeam:myTeam.value,
     ships:displayShips.value.map(s=>({...s,tutorial:isTutorialShip(s.id)})),
     planes:displayPlanes.value.map(p=>({...p,angle:planeAngle(p)})),
     torpedoes:displayTorps.value,mines:mines.value,selected:selected.value,
@@ -112,7 +152,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     airRange:phase.value==='plan'&&showRanges.value&&overlayType.value==='air'&&ship.value?.cfg.carrier
       ?{origin:ship.value.pos,radius:ship.value.cfg.carrier.plane.range*Math.sqrt(3)}:null,
     visuals:playFrame.value&&finished.value
-      ?sampleBattleVisuals(finished.value.presentation||[],playFrame.value.t||0,visible.value)
+      ? onlineActive.value ? (playFrame.value.visuals || {projectiles:[],effects:[]}) : sampleBattleVisuals(finished.value.presentation||[],playFrame.value.t||0,visible.value)
       :{projectiles:[],effects:[]},
   }));
   function mapHex({hex,event,forceMove}) { clickHex(hex,event,forceMove); }
@@ -137,6 +177,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     refreshSaves();
   }
   function openSaves() {
+    if (onlineActive.value) return say("联机对局由服务器保存，不能载入离线存档");
     if (tutorial.value) return savePractice();
     if (busy.value) return say("\u8BF7\u5148\u5B8C\u6210\u56DE\u5408\u7ED3\u7B97\uFF0C\u518D\u4FDD\u5B58\u6216\u8BFB\u53D6");
     saveNotice.value = "";
@@ -253,6 +294,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     goHome();
   }
   function goHome() {
+    if (onlineActive.value) { screen.value = "online"; return; }
     if (busy.value) return;
     if (tutorial.value) {
       exitTutorial();
@@ -263,6 +305,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     refreshSaves();
   }
   function newGame() {
+    if (onlineActive.value) return openOnline();
     if (game.value) {
       autosave();
       saveOpen.value = true;
@@ -431,7 +474,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     autosave();
   }
   function choose(s) {
-    if (s.team !== 0 || !E.alive(s) || busy.value) return;
+    if (s.team !== myTeam.value || !E.alive(s) || busy.value) return;
     swapMode.value=false;
     selected.value = s.id;
     pendingTurn.value = 0;
@@ -443,6 +486,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     teach({ type: "select", shipId: s.id });
   }
   function edit() {
+    if (onlineLocked.value) return null;
     if (!ship.value || !E.alive(ship.value) || phase.value !== "plan") return null;
     if (!plans.value[ship.value.id]) plans.value[ship.value.id] = E.emptyPlan();
     return plans.value[ship.value.id];
@@ -565,14 +609,14 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
   function clickHex(h, event, forceMove = false) {
     if (inspectCell(h, true)) return;
     hover.value = h;
-    if (busy.value || !ship.value) return;
-    const here = game.value.ships.find((s) => E.alive(s) && E.same(s.pos, h) && (s.team === 0 || visible.value.has(E.key(h))));
+    if (busy.value || !ship.value || onlineLocked.value) return;
+    const here = game.value.ships.find((s) => E.alive(s) && E.same(s.pos, h) && (s.team === myTeam.value || visible.value.has(E.key(h))));
     if (phase.value === "deploy") {
-      if (here?.team === 0 && !forceMove && !swapMode.value) {
+      if (here?.team === myTeam.value && !forceMove && !swapMode.value) {
         choose(here);
         return;
       }
-      if (!E.deployment(0).some((x) => E.same(x, h))) return say("\u8BF7\u9009\u62E9\u5DE6\u4E0B\u89D2\u84DD\u8272 3\xD73 \u90E8\u7F72\u533A");
+      if (!E.deployment(myTeam.value).some((x) => E.same(x, h))) return say(myTeam.value === 1 ? "请选择右上角我方高亮的 3×3 部署区" : "请选择左下角我方高亮的 3×3 部署区");
       if (here && here.id !== ship.value.id) {
         here.pos = { ...ship.value.pos };
         here.xy = E.hexToXY(here.pos);
@@ -581,14 +625,15 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
       swapMode.value=false;
       ship.value.pos = { q: h.q, r: h.r };
       ship.value.xy = E.hexToXY(h);
-      E.updateExploration(game.value);
+      if (onlineActive.value) onlineCommand("deploy.update", {positions:own.value.map(s => ({id:s.id,pos:s.pos})),ready:false}).then(ok => { if (!ok) game.value = E.clone(toRaw(onlineState.value.match.game)); });
+      else E.updateExploration(game.value);
       autosave();
       teach({ type: "deploy", target: { q: h.q, r: h.r } });
       return;
     }
     if (phase.value !== "plan") return;
     if (forceMove || mode.value === "move") {
-      if (here?.team === 0 && !forceMove) {
+      if (here?.team === myTeam.value && !forceMove) {
         choose(here);
         return;
       }
@@ -617,7 +662,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     if (mode.value === "plane") {
       if (p.planes.length >= Math.min(ship.value.cfg.carrier.launch, readyAircraft.value)) return say("\u6BCF\u56DE\u5408\u6700\u591A\u653E\u98DE 2 \u67B6\uFF0C\u4E14\u9700\u8981\u5DF2\u6574\u5907\u98DE\u673A");
       if (planeMode.value === "target") {
-        if (!here || here.team === 0 || !visible.value.has(E.key(h))) return say("\u8BF7\u9009\u62E9\u5F53\u524D\u53EF\u89C1\u7684\u654C\u8230");
+        if (!here || here.team === myTeam.value || !visible.value.has(E.key(h))) return say("\u8BF7\u9009\u62E9\u5F53\u524D\u53EF\u89C1\u7684\u654C\u8230");
         mutate((p2) => p2.planes.push({ mode: "target", targetId: here.id }));
         teach({ type: "plane", target: here.pos });
       } else {
@@ -641,6 +686,8 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     else choose(s);
   }
   function begin() {
+    if (onlineActive.value && onlineLocked.value) return;
+    if (onlineActive.value) return onlineCommand("deploy.update", {positions:own.value.map(s => ({id:s.id,pos:s.pos})),ready:true});
     swapMode.value=false;
     E.updateExploration(game.value);
     game.value.phase = "plan";
@@ -649,6 +696,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     teach({ type: "begin" });
   }
   function execute() {
+    if (onlineActive.value) { if (onlineLocked.value) return; return onlineCommand("orders.submit", {plans:toRaw(plans.value)}); }
     if (busy.value || phase.value !== "plan") return;
     busy.value = true;
     mode.value = "move";
@@ -671,6 +719,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     }, 35);
   }
   function complete() {
+    if (onlineActive.value) { stopPlayback?.(); finished.value = null; playFrame.value = null; progress.value = 0; plans.value = {}; history.value = {}; game.value = E.clone(toRaw(onlineState.value.match.game)); busy.value = ["playback","resolving"].includes(onlineState.value.match.stage); return; }
     if (!finished.value) return;
     stopPlayback?.();
     const outcomes = P.movementOutcomes(toRaw(game.value), toRaw(plans.value), toRaw(finished.value));
@@ -755,27 +804,31 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
   }
   onMounted(() => window.addEventListener("keydown", keydown));
   onUnmounted(() => {
+    onlineClient.close(); clearInterval(onlineTicker);
     window.removeEventListener("keydown", keydown);
     clearTimeout(resolveTimer);
     stopPlayback?.();
   });
-  return { mapExit, mapModel, mapHex, mapShip, mapNode, mapHover, cameraRotate, routeConflicts, lastMovement, planeAngle, mapView, mapZoom, ordersOpen, rangeToolsOpen, portraitHint, swapMode, coachOpen, modeLabel, locateShip, finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
+  return { onlineState, onlineStatus, onlineError, onlineConfig, onlinePending, onlineActive, onlineClock, onlineLocked, myTeam, openOnline, connectOnline, onlineCommand, onlineRoster, mapExit, mapModel, mapHex, mapShip, mapNode, mapHover, cameraRotate, routeConflicts, lastMovement, planeAngle, mapView, mapZoom, ordersOpen, rangeToolsOpen, portraitHint, swapMode, coachOpen, modeLabel, locateShip, finished, S, T, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, canSave, tutorial, tutorialFixture, tutorialFeedback, lesson, tutorialStep, tutorialIndex, practiceSave, refreshSaves, autosave, openSaves, closeSaves, writeSave, loadSave, confirmSaveAction, importSave, exportSave, goHome, newGame, startLesson, exitTutorial, lessonMenu, nextLesson, savePractice, inspectCell, isControl, isTutorialCell, isTutorialShip, rangeChanged, toggleRanges, chooseTurn, truncateNode, showPlans, previews, mainTargets, P, history, showRanges, rangeMode, replan, explored, knowledge, reachable, certain, ranges, rays, overlayType, overlayCells, canUndo, canRedo, hoverHint, rangeHint, airborne, applyEdit, mutate, trimRoute, undoWaypoint, removeWaypoint, clearMovement, startReplan, historyChange, removeOrder, E, screen, roster, slot, seed, game, plans, selected, mode, pendingTurn, torpWindow, planeMode, showRules, toast, busy, playFrame, playSpeed, progress, showLog, hover, shapes, point, xy, polygon, island, currentTemplate, role, ship, plan, nodes, own, visible, displayShips, displayTorps, displayPlanes, mines, ourHP, ourCount, visibleEnemies, phase, readyAircraft, safeLogs, coord, pickType, start, choose, addMove, undo, pathTo, setMode, clickHex, shipClick, begin, execute, complete, resetPlan, directionNames, mainCounts, plannedPolyline, torpEnd };
 }, template: `
 <div class="shell" :class="{'battle-active':screen==='battle','orders-closed':!ordersOpen}">
 <header class="topbar">
 <div class="brand"><strong>碧蓝推演棋</strong></div>
-<span class="release-tag">v0.4.1</span>
+<span class="release-tag">v0.4.2</span>
 <div class="top-actions">
+<button class="quiet" @click="openOnline">联机 / AI 对战</button>
 <span class="version-note">{{saveStatus||'PvAI \xB7 \u89C4\u5219\u6D4B\u8BD5\u7248'}}</span>
 <button v-if="screen!=='home'" class="quiet" :disabled="busy" @click="goHome">\u4E3B\u83DC\u5355</button>
-<button v-if="screen==='battle'" class="quiet" :disabled="busy" @click="openSaves">{{tutorial?'\u7EC3\u4E60\u4FDD\u5B58':'\u4FDD\u5B58/\u8BFB\u53D6'}}</button>
+<button v-if="screen==='battle'&&!onlineActive" class="quiet" :disabled="busy" @click="openSaves">{{tutorial?'\u7EC3\u4E60\u4FDD\u5B58':'\u4FDD\u5B58/\u8BFB\u53D6'}}</button>
 <button class="quiet" @click="showRules=true">\u89C4\u5219\u4E0E\u64CD\u4F5C <span class="key">?</span>
 </button>
-<button v-if="screen==='battle'&&!tutorial" class="quiet" :disabled="busy" @click="newGame">\u91CD\u65B0\u7F16\u961F</button>
+<button v-if="screen==='battle'&&!tutorial&&!onlineActive" class="quiet" :disabled="busy" @click="newGame">\u91CD\u65B0\u7F16\u961F</button>
 </div>
 </header>
 <div v-if="showLog&&screen==='battle'" class="mobile-log modal-backdrop" @click.self="showLog=false">
 <section role="dialog" aria-modal="true" aria-label="战报" class="rules-modal"><div class="panel-title"><h2>战报</h2><button @click="showLog=false">关闭战报</button></div><p v-if="!safeLogs.length">尚未交战</p><p v-for="(l,i) in safeLogs" :key="i">R{{l.round}} · {{l.text}}</p></section></div>
+<OnlinePanel v-if="screen==='online'" :state="onlineState" :status="onlineStatus" :error="onlineError" :config="onlineConfig" :pending="onlinePending" :roster="roster" :templates="E.TEMPLATES" @connect="connectOnline" @command="onlineCommand" @roster="onlineRoster" @battle="screen='battle'" @home="goHome"/>
+<div v-if="onlineActive&&screen==='battle'" class="online-battle-status" role="status"><span>联机 · {{onlineStatus}} · 我方 {{myTeam+1}} 队 · {{onlineState.match.stage}}</span><span v-if="onlineState.match.deadline">剩余 {{Math.max(0,Math.ceil((onlineState.match.deadline-onlineClock)/1000))}} 秒</span><span v-if="onlineState.match.paused">对局暂停，等待重连</span><span v-for="d in onlineState.match.disconnects" :key="d.team">{{d.team===myTeam?'我方':'对方'}}断线 · 剩余 {{Math.ceil(d.remainingMs/1000)}} 秒</span><span v-if="onlineState.match.result">{{onlineState.match.result.reason}}</span><span v-if="onlineState.match.aiStatus">AI：{{onlineState.match.aiStatus}}</span><span v-if="onlineState.match.aiError">{{onlineState.match.aiError}}</span><span v-if="onlineError" role="alert">{{onlineError}}</span><button v-if="onlineState.match.aiStatus==='error'" :disabled="onlinePending" @click="onlineCommand('ai.retry')">重试 AI</button><button v-if="onlineState.match.submitted?.[myTeam]&&phase==='plan'" :disabled="onlinePending" @click="onlineCommand('orders.withdraw')">撤回命令</button><span v-if="onlineState.match.submitted?.[myTeam]">已提交，等待对方</span><button v-if="phase!=='ended'" :disabled="onlinePending" @click="onlineCommand('match.resign')">认输</button><button v-else :disabled="onlinePending" @click="onlineCommand('match.leave')">返回大厅</button></div>
 <HomeScreen v-if="screen==='home'" :can-resume="!!game" :save-count="saveRecords.filter(r=>r.save).length" @new="newGame" @load="openSaves" @book="screen='book'" @tutorial="lessonMenu" @resume="screen='battle'"/>
 <TutorialBook v-if="screen==='book'" :chapters="T.TEXT_TUTORIAL" :figures="T.SVG_FIGURES" @home="goHome" @practice="lessonMenu"/>
 <TutorialMenu v-if="screen==='lessons'" :lessons="T.TUTORIAL_LESSONS" @home="goHome" @start="startLesson"/>
@@ -885,7 +938,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 </div>
 <div class="phase-heading">
 <span class="eyebrow">{{phase==='deploy'?'02 / DEPLOYMENT':phase==='execute'?'04 / SIMULTANEOUS EXECUTION':'03 / ORDERS'}}</span>
-<h1>{{phase==='deploy'?'\u8230\u961F\u90E8\u7F72':phase==='execute'?'\u540C\u6B65\u6267\u884C\u4E2D':phase==='ended'?(game.winner==='draw'?'\u6218\u5C40\u7ED3\u675F \xB7 \u5E73\u5C40':game.winner===0?'\u6218\u5C40\u7ED3\u675F \xB7 \u80DC\u5229':'\u6218\u5C40\u7ED3\u675F \xB7 \u8D25\u5317'):'\u6218\u672F\u89C4\u5212'}}</h1>
+<h1>{{phase==='deploy'?'\u8230\u961F\u90E8\u7F72':phase==='execute'?'\u540C\u6B65\u6267\u884C\u4E2D':phase==='ended'?(game.winner==='draw'?'\u6218\u5C40\u7ED3\u675F \xB7 \u5E73\u5C40':game.winner===myTeam?'\u6218\u5C40\u7ED3\u675F \xB7 \u80DC\u5229':'\u6218\u5C40\u7ED3\u675F \xB7 \u8D25\u5317'):'\u6218\u672F\u89C4\u5212'}}</h1>
 </div>
 <div class="fleet-metric">
 <b>{{ourCount}} \u8258</b>
@@ -909,9 +962,9 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 </select>
 <button :disabled="!finished" @click="complete">\u8DF3\u8FC7\u52A8\u753B</button>
 </template>
-<button v-else-if="phase==='deploy'" class="primary" @click="begin" :data-tutorial-highlight="isControl('begin')?'true':null">\u5B8C\u6210\u90E8\u7F72</button>
-<button v-else-if="phase==='ended'" class="primary" @click="screen='fleet'">\u518D\u6218\u4E00\u5C40</button>
-<button v-else class="primary" @click="execute" :data-tutorial-highlight="isControl('execute')?'true':null">\u6267\u884C\u56DE\u5408 <span class="key">Enter</span>
+<button v-else-if="phase==='deploy'" :disabled="onlineLocked" class="primary" @click="begin" :data-tutorial-highlight="isControl('begin')?'true':null">\u5B8C\u6210\u90E8\u7F72</button>
+<button v-else-if="phase==='ended'" class="primary" @click="onlineActive?onlineCommand('match.leave'):screen='fleet'">\u518D\u6218\u4E00\u5C40</button>
+<button v-else class="primary" :disabled="onlineLocked" @click="execute" :data-tutorial-highlight="isControl('execute')?'true':null">\u6267\u884C\u56DE\u5408 <span class="key">Enter</span>
 </button>
 </div>
 </section>
@@ -1025,10 +1078,10 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
  <div v-if="phase==='deploy'" class="deployment-help">
 <button :class="{active:swapMode}" @click="swapMode=!swapMode">{{swapMode?'取消交换':'交换位置'}}</button>
 <p v-if="swapMode">已选 {{ship.label}}，点击另一艘友舰交换。</p>
-<h3>\u90E8\u7F72\u5230\u5DE6\u4E0B\u89D2</h3>
+<h3>{{myTeam===1?'部署到右上角':'部署到左下角'}}</h3>
 <p>\u70B9\u51FB\u6211\u65B9\u8230\u8239\uFF0C\u518D\u70B9\u51FB\u84DD\u8272\u90E8\u7F72\u683C\u3002点“交换位置”后点另一艘友舰，可交换位置</p>
-<p>\u521D\u59CB\u8230\u9996\u671D\u4E1C\uFF0C\u654C\u65B9\u5728右上角\u671D\u897F</p>
-<button class="primary full" @click="begin" :data-tutorial-highlight="isControl('begin')?'true':null">\u5B8C\u6210\u90E8\u7F72</button>
+<p>{{myTeam===1?'初始舰首朝西，敌方在左下角朝东':'初始舰首朝东，敌方在右上角朝西'}}</p>
+<button class="primary full" :disabled="onlineLocked" @click="begin" :data-tutorial-highlight="isControl('begin')?'true':null">\u5B8C\u6210\u90E8\u7F72</button>
 </div>
  <template v-else-if="phase==='plan'&&ship.hp>0">
 <div class="mode-buttons">
@@ -1155,8 +1208,8 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 </aside>
 </div>
  <section v-if="phase==='ended'" class="result-panel">
-<strong>{{game.winner==='draw'?'\u53CC\u65B9\u52BF\u5747\u529B\u654C':game.winner===0?'\u6D77\u57DF\u63A7\u5236\u5B8C\u6210':'\u8230\u961F\u4F5C\u6218\u7ED3\u675F'}}</strong>
-<p>\u6211\u65B9 {{ourCount}} \u8258 / {{ourHP}} HP \xB7 \u654C\u65B9 {{game.ships.filter(s=>s.team===1&&s.hp>0).length}} \u8258 / {{game.ships.filter(s=>s.team===1).reduce((n,s)=>n+s.hp,0)}} HP</p>
+<strong>{{game.winner==='draw'?'\u53CC\u65B9\u52BF\u5747\u529B\u654C':game.winner===myTeam?'\u6D77\u57DF\u63A7\u5236\u5B8C\u6210':'\u8230\u961F\u4F5C\u6218\u7ED3\u675F'}}</strong>
+<p>\u6211\u65B9 {{ourCount}} \u8258 / {{ourHP}} HP \xB7 \u654C\u65B9 {{game.ships.filter(s=>s.team!==myTeam&&s.hp>0).length}} \u8258 / {{game.ships.filter(s=>s.team!==myTeam).reduce((n,s)=>n+s.hp,0)}} HP</p>
 <span>\u5148\u6BD4\u8F83\u5B58\u6D3B\u8230\u8239\u6570\uFF0C\u6570\u91CF\u76F8\u540C\u518D\u6BD4\u8F83\u603B\u8010\u4E45</span>
 </section>
 </main>
@@ -1165,7 +1218,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <div v-if="showRules" class="modal-backdrop" @click.self="showRules=false">
 <section class="rules-modal" role="dialog" aria-modal="true" aria-label="\u89C4\u5219\u4E0E\u64CD\u4F5C">
 <div class="panel-title">
-<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.1</h2>
+<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.2</h2>
 <button @click="showRules=false" aria-label="\u5173\u95ED\u89C4\u5219">\u5173\u95ED</button>
 </div>
 <div class="rules-columns">

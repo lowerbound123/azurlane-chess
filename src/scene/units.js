@@ -6,7 +6,7 @@ export class Units {
     const seen = new Set(); this.picks = [];
     for (const [kind, list] of [['ship', model.ships], ['plane', model.planes], ['torpedo', model.torpedoes]]) for (const item of list || []) {
       const key = `${kind}:${item.id}`; seen.add(key); let g = this.cache.get(key);
-      const color = item.team === 0 ? colors.friendly : colors.enemy;
+      const color = item.team === (model.myTeam ?? 0) ? colors.friendly : colors.enemy;
       if (!g) {
         g = new THREE.Group(); this.root.add(g); this.cache.set(key, g);
         const mat = new THREE.MeshStandardMaterial({ color, roughness: .4, metalness: .3, flatShading: true });
@@ -33,7 +33,7 @@ export class Units {
         const signature = `${item.label}:${item.hp}:${item.cfg.hp}:${selected}`;
         if (signature !== g.userData.signature) {
           if (g.userData.card) { disposeTree(g.userData.card); g.userData.card.removeFromParent(); }
-          const card = label(item.label, { color: item.team === 0 ? '#8eefe3' : '#ffa18c', hp: item.hp / item.cfg.hp, selected, width: selected ? 3 : 2.6, height: selected ? 1.2 : 1.05 }); card.center.set(.5, 0); card.position.y = .93; g.add(card); g.userData.card = card; g.userData.signature = signature;
+          const card = label(item.label, { color: item.team === (model.myTeam ?? 0) ? '#8eefe3' : '#ffa18c', hp: item.hp / item.cfg.hp, selected, width: selected ? 3 : 2.6, height: selected ? 1.2 : 1.05 }); card.center.set(.5, 0); card.position.y = .93; g.add(card); g.userData.card = card; g.userData.signature = signature;
         }
         g.userData.card.userData = { type: 'ship', ship: item }; this.picks.push(g.userData.card);
         for (const child of g.userData.body.children) { child.userData = { type: 'ship', ship: item }; this.picks.push(child); }
