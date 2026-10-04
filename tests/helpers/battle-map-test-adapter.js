@@ -28,6 +28,7 @@ export const BattleMap3D = defineComponent({
         h('div', {'data-map-ships': ''}, model.ships.map(ship => h('button', {
           key: ship.id, type: 'button', 'data-map-ship': ship.id,
           onClick: event => emit('ship', {ship, event}),
+          onPointerup: event => emit('ship', {ship, event}),
         }, ship.label))),
         h('ul', {'data-map-mines': ''}, model.mines.map((mine, index) => h('li', {
           key: index, 'data-map-mine': `${mine.q},${mine.r}`,

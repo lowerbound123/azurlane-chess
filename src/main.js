@@ -634,7 +634,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
     }
   }
   function shipClick(s, event) {
-    event.stopPropagation();
+    // OrbitControls ends its gesture on document pointerup; do not stop this native event.
     if (inspectCell(E.xyToHex(s.xy), true)) return;
     if (phase.value === "deploy" && swapMode.value) { clickHex(E.xyToHex(s.xy), event, true); return; }
     if (phase.value === "plan" && mode.value !== "move") clickHex(E.xyToHex(s.xy), event);
@@ -764,7 +764,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <div class="shell" :class="{'battle-active':screen==='battle','orders-closed':!ordersOpen}">
 <header class="topbar">
 <div class="brand"><strong>碧蓝推演棋</strong></div>
-<span class="release-tag">v0.4.0</span>
+<span class="release-tag">v0.4.1</span>
 <div class="top-actions">
 <span class="version-note">{{saveStatus||'PvAI \xB7 \u89C4\u5219\u6D4B\u8BD5\u7248'}}</span>
 <button v-if="screen!=='home'" class="quiet" :disabled="busy" @click="goHome">\u4E3B\u83DC\u5355</button>
@@ -1165,7 +1165,7 @@ const app = createApp({ components: { BattleMap3D, HomeScreen, SaveManager, Tuto
 <div v-if="showRules" class="modal-backdrop" @click.self="showRules=false">
 <section class="rules-modal" role="dialog" aria-modal="true" aria-label="\u89C4\u5219\u4E0E\u64CD\u4F5C">
 <div class="panel-title">
-<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.0</h2>
+<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.1</h2>
 <button @click="showRules=false" aria-label="\u5173\u95ED\u89C4\u5219">\u5173\u95ED</button>
 </div>
 <div class="rules-columns">
