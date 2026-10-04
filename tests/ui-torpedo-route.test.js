@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {rewriteUiSource} from './helpers/load-ui-source.js';
 import {Window} from 'happy-dom';
 import {deserializeSave} from '../src/save.js';
 
@@ -12,7 +13,7 @@ document.body.innerHTML = '<div id="app"></div>';
 const errors = [];
 console.error = (...args) => errors.push(...args);
 let source = await fs.readFile(new URL('../src/main.js', import.meta.url), 'utf8');
-source = source.replace(/import\s+['"]\.\/style\.css['"];?\s*/, '').replace(/from\s+(['"])([^'"]+)\1/g, (_, quote, spec) => 'from ' + JSON.stringify(spec.startsWith('./') ? new URL('../src/' + spec.slice(2), import.meta.url).href : import.meta.resolve(spec)));
+source = rewriteUiSource(source);
 await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -22,7 +23,7 @@ const click = async el => {
   el.dispatchEvent(new window.MouseEvent('click', {bubbles: true}));
   await wait(0);
 };
-const hex = (c, r) => document.querySelectorAll('polygon.hex')[r * 19 + c];
+const hex = (c, r) => document.querySelector(`[data-map-cell="${c - Math.floor(r / 2)},${r}"]`);
 
 test('torpedo before segmented movement remains saveable and executable after Vue edits', async () => {
   await click(button('新游戏'));
