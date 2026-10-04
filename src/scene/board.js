@@ -8,9 +8,9 @@ export class Board {
   constructor(scene) { this.root = new THREE.Group(); scene.add(this.root); this.cells = new Map(); this.plans = new THREE.Group(); this.root.add(this.plans); this.nodes = []; this.signature = ''; this.clock = {value:0}; this.islands = new THREE.Group(); this.root.add(this.islands); this.islandSignature = '';  }
   update(model) {
     if (!this.cells.size) {
-      const geometry = new THREE.CylinderGeometry(.975, .975, .12, 6);
+      const geometry = new THREE.CylinderGeometry(1, 1, .12, 6);
       const gridPoints = Array.from({ length: 7 }, (_, i) => new THREE.Vector3(Math.cos(Math.PI / 6 + i * Math.PI / 3), .072, Math.sin(Math.PI / 6 + i * Math.PI / 3)));
-      const edgeGeometry = new THREE.BufferGeometry().setFromPoints(gridPoints), edgeMaterial = new THREE.LineBasicMaterial({ color: 0x366477, transparent: true, opacity: .2 });
+      const edgeGeometry = new THREE.BufferGeometry().setFromPoints(gridPoints), edgeMaterial = new THREE.LineBasicMaterial({ color: 0x366477, transparent: true, opacity: .13 });
       for (const cell of model.cells) {
         const g = new THREE.Group(); g.position.copy(vector(cell, 0));
         const mesh = new THREE.Mesh(geometry, oceanMaterial(this.clock)); g.add(mesh); g.add(new THREE.Line(edgeGeometry, edgeMaterial));

@@ -1,4 +1,4 @@
-# 碧蓝推演棋 / azurlane chess v0.4.4
+# 碧蓝推演棋 / azurlane chess v0.4.5
 
 Vue 3 + Vite + Three.js 3D 战棋网页游戏，支持离线游玩和 Node.js 25 联机服务。 A playable PvAI prototype with home menu, fleet selection, deployment, untimed planning, simultaneous resolution, two-layer RTS fog, contextual ranges, all-friendly plan visibility, local persistence, and illustrated/action-gated tutorials.
 
@@ -74,7 +74,7 @@ Verification additions: `fog-planning.test.js` (12), `save.test.js` (14), `tutor
 - `SOURCE_MANIFEST.json` 是初始 v0.1.0 导出记录，当前版本以 package.json 与 Git 提交为准。
 
 
-## v0.4.4 3D 海战场景
+## v0.4.5 3D 海战场景
 
 海战地图由 Three.js 渲染，包含立体岛屿、水雷、带姓名与血条的朝向镜头立牌、简易飞机与鱼雷模型，以及主炮抛物线、副炮和防空轨迹。Vue 保留指令、菜单与存档界面。所有模型由程序生成，不依赖外部模型资源。
 
