@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>海域美术 · 岛屿模型库</title><style>body{margin:0;background:#0e2539;color:#edf7fb;font-family:system-ui}header{padding:24px 36px;display:flex;justify-content:space-between;align-items:center}h1{margin:4px 0;font-size:25px}small{color:#9bcedb;letter-spacing:2px}p{margin:4px 0;color:#afc8d2}#view{height:75vh}footer{padding:10px 36px;color:#c1d6db}canvas{display:block}</style><header><div><small>AZURLANE CHESS / ART STUDY</small><h1>碧蓝海域 · 岛屿模型库</h1><p>沙滩 · 层叠岩岸 · 草地 · 灌木　/　1—5 格，13 种构型</p></div><p>命中只显示数字 · 无爆炸特效</p></header><div id="view"></div><footer>拖动旋转，滚轮缩放。此页面仅用于本地美术验收，使用与游戏相同的模型、海面与数字组件。</footer><script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {ISLAND_FORMS,createIsland} from '../src/scene/islands.js';
+import {oceanMaterial} from '../src/scene/ocean.js';
+import {label,damageNumber} from '../src/scene/resources.js';
+const host=document.querySelector('#view'),renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));host.append(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x163d58);const camera=new THREE.OrthographicCamera(-25,25,17,-17,.1,200);camera.position.set(19,42,40);const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(19,0,13);controls.update();
+scene.add(new THREE.HemisphereLight(0xffffff,0x48616c,2));const sun=new THREE.DirectionalLight(0xfff4d9,2);sun.position.set(-5,30,10);scene.add(sun);
+const clock={value:0},water=new THREE.Mesh(new THREE.PlaneGeometry(52,38),oceanMaterial(clock));water.rotation.x=-Math.PI/2;water.position.set(18,0,12);scene.add(water);
+ISLAND_FORMS.forEach((form,i)=>{const group=createIsland(form.cells);group.position.set((i%4)*11,0,Math.floor(i/4)*8);scene.add(group);const title=label(`${form.cells.length}格 · ${form.name}`,{width:4,height:.6});title.position.set((i%4)*11+2,1,Math.floor(i/4)*8+2.7);scene.add(title);});
+for(const [i,value]of ['18369','40','8'].entries()){const number=damageNumber(value);number.scale.multiplyScalar(1.7);number.position.set(18+i*5,2,27);scene.add(number);}
+function size(){renderer.setSize(host.clientWidth,host.clientHeight);const aspect=host.clientWidth/host.clientHeight;camera.left=-22*aspect;camera.right=22*aspect;camera.top=22;camera.bottom=-22;camera.updateProjectionMatrix();}size();window.addEventListener('resize',size);renderer.setAnimationLoop(t=>{clock.value=t/1000;controls.update();renderer.render(scene,camera);});
+</script></html>

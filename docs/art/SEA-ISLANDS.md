@@ -1,0 +1,26 @@
+# 海面、岛屿与伤害数字（v0.4.4）
+
+参考用户提供的 IMG_1597：蓝色海面、横向高光波纹、浅色沙滩、灰褐色岩岸、黄绿色草地和低矮灌木。所有几何为本项目原创，未提取参考图素材。
+
+- 海面使用世界坐标着色，波纹跨六角格连续；静止规划时以最多30fps刷新海面，系统减少动态效果设置下保持静止。
+- 岛屿依据已知障碍格求相连外轮廓，内缩沙滩、岩壁与草地。相邻格自动合并海岸；地图旧存档的较大岛群和内部水洞继续支持。未知岛屿不参与建模，迷雾内已知岛屿变暗。
+- 模型库含13种1～5格构型：单岛、双岛、长条、弯折、三角、菱形、叉形、钩形、海湾等。游戏运行时由 `src/scene/islands.js` 生成，与库文件使用同一数据源。
+- 命中只显示橙金渐变、白色内描边和深色外描边的数字。数字始终朝向镜头，上浮、缩放、淡出；同格多次命中错开显示。没有爆炸、闪光、水花或命中粒子。原有炮弹轨迹保留。
+- 包括友军误伤、敌军受伤、防空伤害。己方单位致命受击后即使失去视野也保留其自身数字，敌方隐藏信息仍不可见。回合末数字留有短暂只读显示时间，不重复结算。
+
+## 模型库与本地查看
+
+`assets/models/island-library.blend` 包含13个带顶点色的可编辑模型。打开后选择 `Azurlane_Island_Catalog_v044` 场景；实体视图选择顶点颜色或使用材质预览。
+
+`npm run dev` 启动后访问 `/tools/art-review.html` 可查看完整模型库与伤害数字样式。该页只作本地验收，不进入默认生产构建。
+
+重建模型库：
+
+```sh
+node scripts/export-island-catalog.mjs
+blender --background --python scripts/build-island-library.py
+```
+
+## Blender导出问题记录
+
+Blender 5.2.2 中，`bpy.data.libraries.write(path, {scene})` 在本机触发原生段错误。崩溃栈为 `bpy_lib_write → PartialWriteContext → scene_copy_data → BKE_view_layer_copy_data`，Python定位为导出行。相同模型数据改用 `bpy.ops.wm.save_as_mainfile(filepath=path, copy=True)` 后正常保存、正常退出。导出脚本使用独立场景并保存副本；原场景不删除。

@@ -26,3 +26,17 @@ export function label(text, { color = '#70dfd5', hp = null, selected = false, wi
   const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, transparent: true }));
   sprite.scale.set(width, height, 1); sprite.renderOrder = 8; return sprite;
 }
+
+// A true camera-facing sprite: no rectangular label plate and no impact geometry.
+export function damageNumber(text) {
+  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=224;
+  const ctx=canvas.getContext('2d');ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='900 152px "Arial Black", Impact, system-ui, sans-serif';ctx.lineJoin='round';
+  const value=String(text).replace(/^[−-]/,'');
+  ctx.strokeStyle='#392b29';ctx.lineWidth=21;ctx.strokeText(value,256,118,460);
+  ctx.strokeStyle='#fff5d7';ctx.lineWidth=11;ctx.strokeText(value,256,118,460);
+  const fill=ctx.createLinearGradient(0,40,0,180);fill.addColorStop(0,'#fff28b');fill.addColorStop(.45,'#ffb22e');fill.addColorStop(1,'#ed531c');ctx.fillStyle=fill;ctx.fillText(value,256,118,460);
+  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+  const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true,depthTest:false,depthWrite:false}));
+  sprite.scale.set(1.8,.79,1);sprite.renderOrder=20;return sprite;
+}

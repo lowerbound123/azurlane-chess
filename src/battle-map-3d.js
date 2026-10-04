@@ -96,9 +96,10 @@ export const BattleMap3D = defineComponent({
       Object.assign(renderer.domElement.dataset, { rendererStatus: 'ready', cellCount: String(props.model.cells.length), shipCount: String(props.model.ships.length), planeCount: String(props.model.planes?.length || 0), projectileCount: String(props.model.visuals?.projectiles?.length || 0), effectCount: String(props.model.visuals?.effects?.length || 0) });
       syncNeeded = false; dirty = true;
     }
-    function animate() {
+    let lastSeaFrame = 0;
+    function animate(now = 0) {
       frame = 0; if (!renderer || error.value || document.hidden) return;
-      try { if (syncNeeded) update(); const changed = controls.update(); if (dirty || changed) { renderer.render(scene, camera); dirty = false; } }
+      try { if (syncNeeded) update(); const changed = controls.update(); const seaChanged = now-lastSeaFrame >= 1000/30 && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; if(seaChanged){board.tick(now/1000);lastSeaFrame=now;} if (dirty || changed || seaChanged) { renderer.render(scene, camera); dirty = false; } }
       catch (e) { fail(e); return; }
       frame = requestAnimationFrame(animate);
     }

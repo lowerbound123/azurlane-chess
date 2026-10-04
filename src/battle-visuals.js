@@ -35,14 +35,14 @@ function position(event,u) {
 }
 
 /** Pure time sampling. The renderer receives only visible fragments and no source metadata. */
-export function sampleBattleVisuals(events=[],time=0,visible=new Set()) {
+export function sampleBattleVisuals(events=[],time=0,visible=new Set(),viewerTeam=null) {
   const cells=visible instanceof Set?visible:new Set(visible);
   const centers=[...cells].map(k=>{const [q,r]=k.split(',').map(Number);return hexToXY({q,r});});
   const projectiles=[],effects=[];
   for(const event of events){
     if(event.type==='effect'){
       const age=(time-event.time)/event.duration;
-      if(age>=0&&age<=1&&cells.has(key(event.at)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age,text:event.text??''});
+      if(age>=0&&age<=1&&(cells.has(key(event.at))||(viewerTeam!==null&&event.kind==='hit'&&event.team===viewerTeam)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age,text:event.text??''});
       continue;
     }
     if(event.type!=='projectile'||time<event.start||time>event.end)continue;

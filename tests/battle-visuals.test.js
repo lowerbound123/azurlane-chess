@@ -54,3 +54,23 @@ test('effect ages and secondary traces follow continuous time without mutating e
  assert.deepEqual(await sample(events,.41,visible),{projectiles:[],effects:[]});
  assert.deepEqual(await sample(events,.35,new Set()),{projectiles:[],effects:[]});assert.deepEqual(events,copy);
 });
+test('friendly fire and enemy ship hits both emit damage numbers',()=>{
+ const a=quiet(E.createShip('bb',0,0,h(0,5))),friendly=quiet(E.createShip('ca',0,1,h(2,5))),enemy=quiet(E.createShip('ca',1,0,h(3,5)));
+ const out=E.resolveRound(game([a,friendly,enemy]),{[a.id]:{...E.emptyPlan(),main:[friendly.pos,enemy.pos]}});
+ const hits=out.presentation.filter(e=>e.kind==='hit');
+ assert(hits.some(e=>E.same(e.at,friendly.pos)&&e.text==='−60'));
+ assert(hits.some(e=>E.same(e.at,enemy.pos)&&e.text==='−60'));
+});
+test('anti-air damage to aircraft emits numbers as well as the existing trajectory',()=>{
+ const carrier=quiet(E.createShip('cv',0,0,h(0,5))),a=E.createShip('dd',1,0,h(3,5)),b=E.createShip('cl',1,1,h(3,7));
+ const out=E.resolveRound(game([carrier,a,b]),{[carrier.id]:{...E.emptyPlan(),planes:[{mode:'point',target:a.pos}]}});
+ assert.equal(out.presentation.filter(e=>e.kind==='hit'&&e.team===0&&e.text==='−1').length,2);
+});
+test('own lethal hit remains readable after vision disappears, without exposing enemy hits',async()=>{
+ const events=[{id:'own',type:'effect',kind:'hit',team:1,at:h(5,5),time:1.1,duration:.65,text:'−60'},{id:'enemy',type:'effect',kind:'hit',team:0,at:h(9,5),time:1.1,duration:.65,text:'−60'}];
+ const visuals=(await import('../src/battle-visuals.js')).sampleBattleVisuals(events,1.4,new Set(),1);
+ assert.deepEqual(visuals.effects.map(e=>e.id),['own']);
+ const a=quiet(E.createShip('bb',0,0,h(1,5))),b=quiet(E.createShip('ca',1,0,h(3,5)));
+ const out=E.resolveRound(game([a,b]),{[a.id]:{...E.emptyPlan(),main:[b.pos]}});
+ assert(out.frames.at(-1).t>=1.75);assert.deepEqual(out.frames.at(-1).ships,out.frames.find(f=>f.t===1.1).ships);
+});

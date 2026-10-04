@@ -1,29 +1,33 @@
 import * as THREE from 'three';
+import { oceanMaterial } from './ocean.js';
+import { islandGroups, createIsland } from './islands.js';
 import { toCR } from '../engine.js';
 import { colors, vector, line, label, ring, disposeTree } from './resources.js';
 const overlayColors = { reach: 0x235951, main: 0x6a4038, secondary: 0x4b5361, aa: 0x514069, air: 0x434166, sweep: 0x66563b, torp: 0x60543a };
 export class Board {
-  constructor(scene) { this.root = new THREE.Group(); scene.add(this.root); this.cells = new Map(); this.plans = new THREE.Group(); this.root.add(this.plans); this.nodes = []; this.signature = ''; }
+  constructor(scene) { this.root = new THREE.Group(); scene.add(this.root); this.cells = new Map(); this.plans = new THREE.Group(); this.root.add(this.plans); this.nodes = []; this.signature = ''; this.clock = {value:0}; this.islands = new THREE.Group(); this.root.add(this.islands); this.islandSignature = '';  }
   update(model) {
     if (!this.cells.size) {
       const geometry = new THREE.CylinderGeometry(.975, .975, .12, 6);
       const gridPoints = Array.from({ length: 7 }, (_, i) => new THREE.Vector3(Math.cos(Math.PI / 6 + i * Math.PI / 3), .072, Math.sin(Math.PI / 6 + i * Math.PI / 3)));
-      const edgeGeometry = new THREE.BufferGeometry().setFromPoints(gridPoints), edgeMaterial = new THREE.LineBasicMaterial({ color: 0x366477, transparent: true, opacity: .6 });
+      const edgeGeometry = new THREE.BufferGeometry().setFromPoints(gridPoints), edgeMaterial = new THREE.LineBasicMaterial({ color: 0x366477, transparent: true, opacity: .2 });
       for (const cell of model.cells) {
         const g = new THREE.Group(); g.position.copy(vector(cell, 0));
-        const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x102434, roughness: .84 })); g.add(mesh); g.add(new THREE.Line(edgeGeometry, edgeMaterial));
-        const rock = new THREE.Mesh(new THREE.ConeGeometry(.82, 1.4, 5), new THREE.MeshStandardMaterial({ color: 0x738573, flatShading: true })); rock.position.y = .7; rock.rotation.y = cell.q * .71; g.add(rock);
-        this.root.add(g); this.cells.set(cell.k || `${cell.q},${cell.r}`, { g, mesh, rock });
+        const mesh = new THREE.Mesh(geometry, oceanMaterial(this.clock)); g.add(mesh); g.add(new THREE.Line(edgeGeometry, edgeMaterial));
+        this.root.add(g); this.cells.set(cell.k || `${cell.q},${cell.r}`, { g, mesh });
         const cr = toCR(cell);
         if (cell.r === 0 || cr.c === 0) { const text = label(cell.r === 0 ? String.fromCharCode(65 + cr.c) : String(cell.r + 1), { width: .65, height: .34, color: '#a6c3cc' }); text.position.copy(vector(cell, .05)); if (cell.r === 0) text.position.z -= 1.3; else text.position.x -= 1.3; this.root.add(text); }
       }
-      const sea = new THREE.Mesh(new THREE.BoxGeometry(35.5, .55, 24), new THREE.MeshStandardMaterial({ color: 0x0b2638, roughness: .6, metalness: .2 })); sea.position.set(16, -.37, 10.5); this.root.add(sea);
+      const sea = new THREE.Mesh(new THREE.BoxGeometry(35.5, .55, 24), oceanMaterial(this.clock, 0x287ead)); sea.position.set(16, -.37, 10.5); this.root.add(sea);
     }
     for (const c of model.cells) {
       const entry = this.cells.get(c.k || `${c.q},${c.r}`); if (!entry) continue;
-      const color = c.tutorial ? 0x8a743a : c.hovered ? 0x527681 : c.deploy ? 0x245d58 : c.overlay ? overlayColors[model.overlayType] || 0x235951 : !c.known ? 0x091723 : c.visible ? 0x245970 : 0x23333f;
-      entry.mesh.material.color.setHex(color); entry.rock.visible = !!(c.known && c.island); entry.rock.material.color.setHex(c.visible ? 0x9aab8d : 0x48524e);
+      const color = c.tutorial ? 0x8a743a : c.hovered ? 0x527681 : c.deploy ? 0x245d58 : c.overlay ? overlayColors[model.overlayType] || 0x235951 : !c.known ? 0x091723 : c.visible ? 0x2986b4 : 0x233c50;
+      entry.mesh.material.color.setHex(color); entry.mesh.material.uniforms.strength.value = c.visible ? 1 : 0;
     }
+    const islands = model.cells.filter(c=>c.known&&c.island);
+    const islandSignature = islands.map(c=>`${c.q},${c.r}:${+!!c.visible}`).join(';');
+    if (islandSignature !== this.islandSignature) { this.islandSignature = islandSignature; disposeTree(this.islands); for (const cells of islandGroups(islands)) this.islands.add(createIsland(cells)); }
     const signature = JSON.stringify([model.phase, model.mode, model.showPlans, model.previews, model.mainTargets, model.showRanges, model.overlayType, model.rays, model.airRange, model.mines]);
     if (signature === this.signature) return; this.signature = signature; disposeTree(this.plans); this.nodes = [];
     for (const mine of model.mines || []) {
@@ -49,5 +53,6 @@ export class Board {
     if (model.showRanges && model.overlayType === 'torp') for (const r of model.rays || []) { trace(r.origin, r.fullEnd, 0x796a4c); trace(r.origin, r.roundEnd, colors.gold); }
     if (model.showRanges && model.overlayType === 'air' && model.airRange) this.plans.add(ring(vector(model.airRange.origin), model.airRange.radius, colors.purple));
   }
+  tick(seconds) { this.clock.value = seconds; }
   dispose() { disposeTree(this.root); this.root.removeFromParent(); }
 }

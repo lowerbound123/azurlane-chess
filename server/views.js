@@ -66,7 +66,7 @@ export function playerResult(before, result, team) {
   const frames = result.frames.slice(0, 64).map(frame => {
     const visible = new Set(frame.visibleByTeam?.[team] || (team === 0 ? frame.visible : []) || []);
     const units = (name, kind) => frame[name].filter(u => u.team === team || seen(u, visible)).map(u => kind === 'ship' ? shipView({ ...u, template: sourceShips.get(u.id)?.template }, team) : flyingView(u, kind, team));
-    const visuals = sampleBattleVisuals(result.presentation || [], frame.t, visible);
+    const visuals = sampleBattleVisuals(result.presentation || [], frame.t, visible, team);
     // Presentation IDs can contain a hidden source ID. Replace with opaque frame-local IDs.
     visuals.projectiles = visuals.projectiles.map((p, i) => ({ ...p, id: `v${i}` }));
     visuals.effects = visuals.effects.map((p, i) => ({ ...p, id: `e${i}`, text: /^−?\d+$/.test(p.text) ? p.text : '' }));
