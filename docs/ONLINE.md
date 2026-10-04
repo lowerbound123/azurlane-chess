@@ -1,4 +1,4 @@
-# 联机服务部署（v0.4.2）
+# 联机服务部署（v0.4.3）
 
 使用 Node.js 25。一个进程、一个端口同时提供网页、HTTP API 与 WebSocket；无需 Docker、数据库或 Redis。
 
@@ -16,11 +16,31 @@ npm start
 
 ## 模型配置
 
-复制 `config/ai-models.example.json` 为 `config/ai-models.json`，设置 `AI_MODELS_FILE=config/ai-models.json`。该本地配置和 `.env` 已忽略，不应提交。
+默认模型为 DeepSeek 官方 API 的 `deepseek-flash`，显示名称“小肥鱼”。只需在根目录 `.env` 填写 `DEEPSEEK_FLASH_API_KEY=你的密钥`，重启服务即可启用。未填写密钥的模型不会出现在选择列表中。
 
-每个模型的 `id` 唯一，`name` 是大厅显示名称，`model` 是供应商模型标识。`baseURL` 包含 `/v1`；`protocol` 为 `chat` 或 `responses`，分别追加 `/chat/completions` 或 `/responses`。`secretEnvName` 指定读取密钥的环境变量，例如 `.env` 中的 `AI_CHAT_API_KEY` 和 `AI_RESPONSES_API_KEY`。浏览器只能获取模型 ID 和名称。
+添加多个 AI 时，复制 `config/ai-models.example.json` 为 `config/ai-models.json`，按下面格式扩展 `models` 列表。也可通过 `AI_MODELS_FILE` 指向其他配置文件。
 
-支持 JSON Schema 的模型设 `structuredOutput:true`，否则设 false，仍会校验 JSON 与游戏规则。默认超时 60 秒、并发 2。非法输出最多纠正一次；失败暂停等待玩家手动重试或结束，不会切换成规则 AI。未配置模型不影响好友房和匹配。示例中的模型名需替换为供应商实际支持的模型。本地模拟接口已覆盖两种协议；真实供应商验收需要有效配置与密钥。
+```json
+{
+  "models": [
+    {"url":"https://api.deepseek.com","model_id":"deepseek-flash","name":"小肥鱼"},
+    {"url":"https://your-provider.example/v1","model_id":"your-model","name":"另一位对手","protocol":"responses"}
+  ]
+}
+```
+
+每项的 `url` 是接口基础地址（不含 `/chat/completions` 或 `/responses`），`model_id` 同时用于请求供应商模型和选择模型，`name` 在大厅选择列表和 AI 对局中显示。`protocol` 默认 `chat`，另支持 `responses`。
+
+密钥变量名由 `model_id` 转成大写、将非字母数字下划线字符替换为 `_`，再加 `_API_KEY` 自动生成。例如 `deepseek-flash` → `DEEPSEEK_FLASH_API_KEY`，`your-model` → `YOUR_MODEL_API_KEY`。变量名冲突的列表会被拒绝。旧格式的 `id/model/baseURL/secretEnvName` 应迁移为上述三个字段；配置文件不接受明文密钥。
+
+```dotenv
+DEEPSEEK_FLASH_API_KEY=你的DeepSeek密钥
+YOUR_MODEL_API_KEY=另一个模型的密钥
+```
+
+`.env` 与本地 `config/ai-models.json` 已被 Git 忽略。浏览器只能取得模型 ID 和显示名称，不能读取密钥或接口地址。
+
+`structuredOutput` 默认 false，使用 JSON 文本并进行规则校验；支持 JSON Schema 的供应商可显式设 true。默认超时 60 秒、并发 2，非法输出最多纠正一次，失败后由玩家重试或结束。本地模拟接口覆盖两种协议；真实供应商验收需要有效密钥。DeepSeek 接口和模型参考 [官方文档](https://api-docs.deepseek.com)。
 
 ## 游玩与生命周期
 

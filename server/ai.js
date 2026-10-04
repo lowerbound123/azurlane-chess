@@ -7,25 +7,27 @@ export function loadModels({ env = process.env, configPath } = {}) {
   let parsed;
   try { parsed = JSON.parse(readFileSync(path, 'utf8')); }
   catch (error) {
-    if (error.code === 'ENOENT' && !configPath && !env.AI_MODELS_FILE) return [];
-    throw failure('AI_CONFIG', '无法读取 AI 模型配置文件');
+    if (error.code === 'ENOENT' && !configPath && !env.AI_MODELS_FILE) parsed = JSON.parse(readFileSync(new URL('../config/ai-models.example.json', import.meta.url), 'utf8'));
+    else throw failure('AI_CONFIG', '无法读取 AI 模型配置文件');
   }
-  const entries = Array.isArray(parsed) ? parsed : parsed.models;
+  const entries = Array.isArray(parsed) ? parsed : parsed?.models;
   if (!Array.isArray(entries)) throw failure('AI_CONFIG', 'AI 模型配置必须是数组');
   const ids = new Set();
   return entries.map(entry => {
-    const { id, name, model, baseURL, protocol = 'chat', secretEnvName, structuredOutput = true, timeoutMs = 60000, maxOutputTokens = 4096 } = entry || {};
+    const { model_id: id, name, url: baseURL, protocol = 'chat', structuredOutput = false, timeoutMs = 60000, maxOutputTokens = 4096 } = entry || {};
+    const model = id;
+    const secretEnvName = typeof id === 'string' ? id.toUpperCase().replace(/[^A-Z0-9_]/g, '_') + '_API_KEY' : '';
     let url;
     try { url = new URL(baseURL); } catch { throw failure('AI_CONFIG', 'AI 服务地址无效'); }
     if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash ||
         ![id, name, model, secretEnvName].every(x => typeof x === 'string' && x.trim()) ||
-        !/^[A-Za-z_][A-Za-z0-9_]*$/.test(secretEnvName) || ids.has(id) || !['chat', 'responses'].includes(protocol) ||
+        !/^[A-Za-z_][A-Za-z0-9_]*$/.test(secretEnvName) || ids.has(secretEnvName) || !['chat', 'responses'].includes(protocol) ||
         typeof structuredOutput !== 'boolean' || !Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60000 ||
         !Number.isInteger(maxOutputTokens) || maxOutputTokens < 1 || maxOutputTokens > 32768 ||
-        Object.keys(entry).some(k => !['id','name','model','baseURL','protocol','secretEnvName','structuredOutput','timeoutMs','maxOutputTokens'].includes(k))) {
+        Object.keys(entry).some(k => !['model_id','name','url','protocol','structuredOutput','timeoutMs','maxOutputTokens'].includes(k))) {
       throw failure('AI_CONFIG', 'AI 模型配置字段无效或重复');
     }
-    ids.add(id);
+    ids.add(secretEnvName);
     return { id, name, model, baseURL: baseURL.replace(/\/$/, ''), protocol, structuredOutput, timeoutMs, maxOutputTokens, apiKey: env[secretEnvName] };
   }).filter(model => typeof model.apiKey === 'string' && model.apiKey.trim());
 }

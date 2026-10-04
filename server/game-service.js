@@ -41,7 +41,7 @@ export class GameService {
     const room=this.rooms.get(p.room),m=this.matches.get(p.match),myTeam=m?.seats.findIndex(s=>s.playerId===p.id);
     return {serverId:this.serverId,player:{id:p.id,nickname:p.nickname},room:room?{code:room.code,hostId:room.hostId,turnSeconds:room.turnSeconds,players:room.players.map(id=>{const x=this.players.get(id);return{id:x.id,nickname:x.nickname,ready:room.ready[id]||false,roster:room.rosters[id]};})}:null,
       queue:p.queued?{position:this.queue.indexOf(p.id)+1}:null,
-      match:m?{id:m.id,kind:m.kind,myTeam,stage:m.stage,round:m.game.round,game:playerView(m.game,myTeam),plans:E.clone(m.orders[myTeam]||{}),submitted:[...m.submitted],deadline:m.deadline,playbackUntil:m.playbackUntil,paused:m.pauseSince!=null,disconnects:m.seats.flatMap((s,team)=>s.disconnectedAt==null?[]:[{team,remainingMs:Math.max(0,s.remainingMs-(this.now()-s.disconnectedAt))}]),aiStatus:m.aiStatus,aiError:m.aiError,result:m.result}:null};
+      match:m?{id:m.id,kind:m.kind,aiName:this.models.find(x=>x.id===m.modelId)?.name||null,myTeam,stage:m.stage,round:m.game.round,game:playerView(m.game,myTeam),plans:E.clone(m.orders[myTeam]||{}),submitted:[...m.submitted],deadline:m.deadline,playbackUntil:m.playbackUntil,paused:m.pauseSince!=null,disconnects:m.seats.flatMap((s,team)=>s.disconnectedAt==null?[]:[{team,remainingMs:Math.max(0,s.remainingMs-(this.now()-s.disconnectedAt))}]),aiStatus:m.aiStatus,aiError:m.aiError,result:m.result}:null};
   }
   sendState(p){this.push(p,{type:'state',...this.view(p)});}
   broadcastRoom(r){for(const id of r.players)this.sendState(this.players.get(id));}

@@ -84,3 +84,15 @@ test('reconnect during playback returns current stage and terminal result appear
   h.advance(1001); h.service.tick(); assert.equal(m.stage, 'ended'); assert.equal(m.result.winner, 0);
   assert.equal(h.matchCmd(a, 'match.leave').ok, true); assert.equal(a.p.match, null);
 });
+
+test('selected AI display name follows model selection into match snapshot without private config', () => {
+  const h=setup(),a=h.player('a');
+  h.service.models=[{id:'deepseek-flash',name:'小肥鱼',apiKey:'secret',baseURL:'private'},{id:'second',name:'另一个AI'}];
+  for(const selected of h.service.models){
+    assert.equal(h.cmd(a,'ai.start',{roster:E.DEFAULT_ROSTER,modelId:selected.id}).ok,true);
+    const view=h.service.view(a.p);
+    assert.equal(view.match.aiName,selected.name);
+    assert.ok(!JSON.stringify(view).includes('secret'));
+    h.matchCmd(a,'match.resign');h.matchCmd(a,'match.leave');
+  }
+});

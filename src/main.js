@@ -814,7 +814,7 @@ const app = createApp({ components: { OnlinePanel, BattleMap3D, HomeScreen, Save
 <div class="shell" :class="{'battle-active':screen==='battle','orders-closed':!ordersOpen}">
 <header class="topbar">
 <div class="brand"><strong>碧蓝推演棋</strong></div>
-<span class="release-tag">v0.4.2</span>
+<span class="release-tag">v0.4.3</span>
 <div class="top-actions">
 <button class="quiet" @click="openOnline">联机 / AI 对战</button>
 <span class="version-note">{{saveStatus||'PvAI \xB7 \u89C4\u5219\u6D4B\u8BD5\u7248'}}</span>
@@ -828,7 +828,7 @@ const app = createApp({ components: { OnlinePanel, BattleMap3D, HomeScreen, Save
 <div v-if="showLog&&screen==='battle'" class="mobile-log modal-backdrop" @click.self="showLog=false">
 <section role="dialog" aria-modal="true" aria-label="战报" class="rules-modal"><div class="panel-title"><h2>战报</h2><button @click="showLog=false">关闭战报</button></div><p v-if="!safeLogs.length">尚未交战</p><p v-for="(l,i) in safeLogs" :key="i">R{{l.round}} · {{l.text}}</p></section></div>
 <OnlinePanel v-if="screen==='online'" :state="onlineState" :status="onlineStatus" :error="onlineError" :config="onlineConfig" :pending="onlinePending" :roster="roster" :templates="E.TEMPLATES" @connect="connectOnline" @command="onlineCommand" @roster="onlineRoster" @battle="screen='battle'" @home="goHome"/>
-<div v-if="onlineActive&&screen==='battle'" class="online-battle-status" role="status"><span>联机 · {{onlineStatus}} · 我方 {{myTeam+1}} 队 · {{onlineState.match.stage}}</span><span v-if="onlineState.match.deadline">剩余 {{Math.max(0,Math.ceil((onlineState.match.deadline-onlineClock)/1000))}} 秒</span><span v-if="onlineState.match.paused">对局暂停，等待重连</span><span v-for="d in onlineState.match.disconnects" :key="d.team">{{d.team===myTeam?'我方':'对方'}}断线 · 剩余 {{Math.ceil(d.remainingMs/1000)}} 秒</span><span v-if="onlineState.match.result">{{onlineState.match.result.reason}}</span><span v-if="onlineState.match.aiStatus">AI：{{onlineState.match.aiStatus}}</span><span v-if="onlineState.match.aiError">{{onlineState.match.aiError}}</span><span v-if="onlineError" role="alert">{{onlineError}}</span><button v-if="onlineState.match.aiStatus==='error'" :disabled="onlinePending" @click="onlineCommand('ai.retry')">重试 AI</button><button v-if="onlineState.match.submitted?.[myTeam]&&phase==='plan'" :disabled="onlinePending" @click="onlineCommand('orders.withdraw')">撤回命令</button><span v-if="onlineState.match.submitted?.[myTeam]">已提交，等待对方</span><button v-if="phase!=='ended'" :disabled="onlinePending" @click="onlineCommand('match.resign')">认输</button><button v-else :disabled="onlinePending" @click="onlineCommand('match.leave')">返回大厅</button></div>
+<div v-if="onlineActive&&screen==='battle'" class="online-battle-status" role="status"><span>联机 · {{onlineStatus}} · 我方 {{myTeam+1}} 队 · {{onlineState.match.stage}}</span><span v-if="onlineState.match.deadline">剩余 {{Math.max(0,Math.ceil((onlineState.match.deadline-onlineClock)/1000))}} 秒</span><span v-if="onlineState.match.paused">对局暂停，等待重连</span><span v-for="d in onlineState.match.disconnects" :key="d.team">{{d.team===myTeam?'我方':'对方'}}断线 · 剩余 {{Math.ceil(d.remainingMs/1000)}} 秒</span><span v-if="onlineState.match.result">{{onlineState.match.result.reason}}</span><span v-if="onlineState.match.aiName">对手：{{onlineState.match.aiName}}</span><span v-if="onlineState.match.aiStatus">AI：{{onlineState.match.aiStatus}}</span><span v-if="onlineState.match.aiError">{{onlineState.match.aiError}}</span><span v-if="onlineError" role="alert">{{onlineError}}</span><button v-if="onlineState.match.aiStatus==='error'" :disabled="onlinePending" @click="onlineCommand('ai.retry')">重试 AI</button><button v-if="onlineState.match.submitted?.[myTeam]&&phase==='plan'" :disabled="onlinePending" @click="onlineCommand('orders.withdraw')">撤回命令</button><span v-if="onlineState.match.submitted?.[myTeam]">已提交，等待对方</span><button v-if="phase!=='ended'" :disabled="onlinePending" @click="onlineCommand('match.resign')">认输</button><button v-else :disabled="onlinePending" @click="onlineCommand('match.leave')">返回大厅</button></div>
 <HomeScreen v-if="screen==='home'" :can-resume="!!game" :save-count="saveRecords.filter(r=>r.save).length" @new="newGame" @load="openSaves" @book="screen='book'" @tutorial="lessonMenu" @resume="screen='battle'"/>
 <TutorialBook v-if="screen==='book'" :chapters="T.TEXT_TUTORIAL" :figures="T.SVG_FIGURES" @home="goHome" @practice="lessonMenu"/>
 <TutorialMenu v-if="screen==='lessons'" :lessons="T.TUTORIAL_LESSONS" @home="goHome" @start="startLesson"/>
@@ -1218,7 +1218,7 @@ const app = createApp({ components: { OnlinePanel, BattleMap3D, HomeScreen, Save
 <div v-if="showRules" class="modal-backdrop" @click.self="showRules=false">
 <section class="rules-modal" role="dialog" aria-modal="true" aria-label="\u89C4\u5219\u4E0E\u64CD\u4F5C">
 <div class="panel-title">
-<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.2</h2>
+<h2>\u4F5C\u6218\u624B\u518C \xB7 v0.4.3</h2>
 <button @click="showRules=false" aria-label="\u5173\u95ED\u89C4\u5219">\u5173\u95ED</button>
 </div>
 <div class="rules-columns">

@@ -17,13 +17,13 @@ test('model configuration reads secrets only from environment and exposes only i
   const dir = mkdtempSync(join(tmpdir(), 'fleet-ai-'));
   const path = join(dir, 'models.json');
   try {
-    const entry = { id: 'a', name: 'A', model: 'm', baseURL: 'https://example.test/v1', secretEnvName: 'MODEL_KEY' };
+    const entry = { model_id: 'a', name: 'A', url: 'https://example.test/v1' };
     writeFileSync(path, JSON.stringify([entry]));
     assert.deepEqual(loadModels({ configPath: path, env: {} }), []);
-    const models = loadModels({ configPath: path, env: { MODEL_KEY: 'private' } });
+    const models = loadModels({ configPath: path, env: { A_API_KEY: 'private' } });
     assert.equal(models[0].apiKey, 'private');
     assert.deepEqual(publicModels(models), [{ id: 'a', name: 'A' }]);
-    for (const bad of [{ ...entry, apiKey: 'inline' }, { ...entry, protocol: 'other' }, { ...entry, baseURL: 'https://name:pass@example.test' }, { ...entry, timeoutMs: 60001 }]) {
+    for (const bad of [{ ...entry, apiKey: 'inline' }, { ...entry, protocol: 'other' }, { ...entry, url: 'https://name:pass@example.test' }, { ...entry, timeoutMs: 60001 }]) {
       writeFileSync(path, JSON.stringify([bad]));
       assert.throws(() => loadModels({ configPath: path, env: {} }), { code: 'AI_CONFIG' });
     }
@@ -165,4 +165,24 @@ test('response body cap cancels oversized streams, with and without content-leng
     await assert.rejects(generate(service), { code: 'AI_RESPONSE_SIZE' });
     assert.equal(service.active, 0);
   }
+});
+
+test('multiple model entries derive distinct environment keys and preserve display names', () => {
+  const dir=mkdtempSync(join(tmpdir(),'fleet-model-list-')),path=join(dir,'models.json');
+  try {
+    const entries=[{url:'https://api.deepseek.com',model_id:'deepseek-flash',name:'小肥鱼'},{url:'https://example.test/v1',model_id:'second.model',name:'第二位对手',protocol:'responses'}];
+    writeFileSync(path,JSON.stringify({models:entries}));
+    const models=loadModels({configPath:path,env:{DEEPSEEK_FLASH_API_KEY:'first-secret',SECOND_MODEL_API_KEY:'second-secret'}});
+    assert.deepEqual(publicModels(models),[{id:'deepseek-flash',name:'小肥鱼'},{id:'second.model',name:'第二位对手'}]);
+    assert.equal(models[0].apiKey,'first-secret');assert.equal(models[1].apiKey,'second-secret');assert.equal(models[1].protocol,'responses');
+    assert.equal(models[0].model,'deepseek-flash');assert.equal(models[0].structuredOutput,false);
+    writeFileSync(path,JSON.stringify([...entries,{...entries[0],model_id:'deepseek_flash'}]));
+    assert.throws(()=>loadModels({configPath:path,env:{}}),{code:'AI_CONFIG'});
+  } finally {rmSync(dir,{recursive:true});}
+});
+
+test('shipped default list enables Little Fat Fish with only its environment key', () => {
+  const models=loadModels({configPath:new URL('../config/ai-models.example.json',import.meta.url),env:{DEEPSEEK_FLASH_API_KEY:'test-key'}});
+  assert.deepEqual(publicModels(models),[{id:'deepseek-flash',name:'小肥鱼'}]);
+  assert.equal(models[0].baseURL,'https://api.deepseek.com');
 });

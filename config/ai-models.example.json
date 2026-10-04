@@ -1,24 +1,11 @@
 {
   "models": [
     {
-      "id": "chat-model",
-      "name": "Chat Completions 模型",
-      "model": "YOUR_MODEL_ID",
-      "baseURL": "https://api.openai.com/v1",
+      "url": "https://api.deepseek.com",
+      "model_id": "deepseek-flash",
+      "name": "小肥鱼",
       "protocol": "chat",
-      "secretEnvName": "AI_CHAT_API_KEY",
-      "structuredOutput": true,
-      "timeoutMs": 60000,
-      "maxOutputTokens": 4096
-    },
-    {
-      "id": "responses-model",
-      "name": "Responses 模型",
-      "model": "YOUR_MODEL_ID",
-      "baseURL": "https://api.openai.com/v1",
-      "protocol": "responses",
-      "secretEnvName": "AI_RESPONSES_API_KEY",
-      "structuredOutput": true
+      "structuredOutput": false
     }
   ]
 }
