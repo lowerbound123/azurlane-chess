@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "sailor": {
+      "image": "characters/previews/sailor.webp",
+      "fingerprint": "c8fae35742b1e075478e94d2da2eff2446cf636050244cc076038e5686badeaa"
+    }
+  }
+}

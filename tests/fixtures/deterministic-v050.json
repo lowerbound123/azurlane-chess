@@ -1,0 +1,20 @@
+[
+  {
+    "seed": 20261004,
+    "hash": "daac81cbd685256fe4cecf0be5b27877eeda5f547f0d636d163b9c6943531915",
+    "durationMs": 69.59316700000001,
+    "frames": 33
+  },
+  {
+    "seed": 42,
+    "hash": "a3fe0b535541ed56d15162567d1fbce6e4e3bc9767b4d6b882dd354d0bd14ade",
+    "durationMs": 50.844375000000014,
+    "frames": 33
+  },
+  {
+    "seed": 777,
+    "hash": "9484dd4425dd1f9d5f208e38bd481e437c8e81e4859320b40e281bb0b5638fb7",
+    "durationMs": 34.119999999999976,
+    "frames": 33
+  }
+]

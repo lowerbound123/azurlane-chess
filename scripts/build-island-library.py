@@ -5,7 +5,7 @@ from mathutils import Quaternion, Vector
 from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 catalog = json.loads(Path('/tmp/azurlane-island-catalog.json').read_text())
-scene = bpy.data.scenes.new('Azurlane_Island_Catalog_v044')
+scene = bpy.data.scenes.new('Azurlane_Island_Catalog_v047')
 collection = bpy.data.collections.new('Azurlane_13_Island_Forms')
 scene.collection.children.link(collection)
 material = bpy.data.materials.new('Azurlane_Sand_Rock_Grass')
@@ -41,6 +41,7 @@ scene.render.resolution_x=1600;scene.render.resolution_y=1100;scene.render.resol
 # Blender 5.2.2 crashes copying Scene via libraries.write (BKE_view_layer_copy_data).
 # Save a copy through the regular file writer instead; keep the live file path unchanged.
 if bpy.context.window: bpy.context.window.scene=scene
+bpy.context.preferences.filepaths.save_version = 0
 bpy.ops.wm.save_as_mainfile(filepath=str(root/'assets/models/island-library.blend'), copy=True)
 if bpy.context.window:
     bpy.context.window.scene=scene

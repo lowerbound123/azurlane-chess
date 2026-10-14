@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * 海图室 Chart Room — design tokens.
+ * Team colors match the Three.js scene (src/scene/resources.ts) so HUD legends
+ * and 3D markers read as one system.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink-0: var(--ink-0);
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-brass: var(--brass);
+  --color-brass-hi: var(--brass-hi);
+  --color-signal: var(--signal);
+  --color-hostile: var(--hostile);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-code);
+  --font-hud: var(--font-display);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Depths of the sea, from the outer frame to the most raised surface. */
+  --abyss: #030a11;
+  --ink-0: #06111b;
+  --ink-1: #0a1826;
+  --ink-2: #0e2032;
+  --ink-3: #142a40;
+  --ink-4: #1c3650;
+
+  --line-1: rgb(150 190 222 / .1);
+  --line-2: rgb(150 190 222 / .18);
+  --line-3: rgb(150 190 222 / .32);
+
+  --text-1: #eaf1f6;
+  --text-2: #a5b6c6;
+  --text-3: #6e8398;
+
+  /* Brass is the command color: primary actions, focus and selection. */
+  --brass: #e6b965;
+  --brass-hi: #f4d18f;
+  --brass-lo: #a57f3c;
+  --brass-ink: #1f1606;
+  --brass-wash: rgb(230 185 101 / .12);
+
+  /* Tactical signals — identical to the 3D scene palette. */
+  --signal: #70dfd5;
+  --signal-wash: rgb(112 223 213 / .12);
+  --hostile: #f39179;
+  --hostile-wash: rgb(243 145 121 / .12);
+  --air: #b7a3f1;
+  --torpedo: #f5b84b;
+  --gun: #f2a07c;
+  --mine: #e2cf8a;
+  --guard: #9fc6ff;
+
+  --ok: #86dcb0;
+  --warn: #f2c66d;
+  --danger: #ff7c69;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", system-ui, sans-serif;
+  --font-display: "Saira Variable", var(--font-ui);
+  --font-code: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius: 6px;
+  --shadow-1: 0 1px 0 rgb(255 255 255 / .03) inset, 0 12px 32px -18px rgb(0 0 0 / .8);
+  --shadow-2: 0 1px 0 rgb(255 255 255 / .04) inset, 0 24px 60px -24px rgb(0 0 0 / .9);
+  --header-h: 56px;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+
+  /* shadcn-vue semantic tokens */
+  --background: var(--ink-0);
+  --foreground: var(--text-1);
+  --card: var(--ink-1);
+  --card-foreground: var(--text-1);
+  --popover: #0c1d2e;
+  --popover-foreground: var(--text-1);
+  --primary: var(--brass);
+  --primary-foreground: var(--brass-ink);
+  --secondary: var(--ink-3);
+  --secondary-foreground: var(--text-1);
+  --muted: var(--ink-2);
+  --muted-foreground: var(--text-2);
+  --accent: var(--ink-3);
+  --accent-foreground: var(--text-1);
+  --destructive: #d9574a;
+  --border: var(--line-2);
+  --input: var(--line-2);
+  --ring: var(--brass);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/60; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background:
+      radial-gradient(1100px 700px at 78% -12%, rgb(41 134 180 / .16), transparent 62%),
+      radial-gradient(900px 620px at -8% 108%, rgb(112 223 213 / .07), transparent 60%),
+      var(--abyss);
+    background-attachment: fixed;
+    color: var(--text-1);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.6;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4, p { margin: 0; }
+  h1, h2, h3 { font-weight: 650; letter-spacing: .02em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  a { color: inherit; }
+  ::selection { background: rgb(230 185 101 / .32); color: var(--text-1); }
+  :focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  * { scrollbar-width: thin; scrollbar-color: var(--line-3) transparent; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--line-3); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
+}

@@ -10,12 +10,12 @@ if(args.length && (args.length!==2||args[0]!=='--set'||!/^\d+\.\d+\.\d+$/.test(a
 const next=args[1]||`${major}.${minor}.${patch+1}`;
 const oldLabels=[`v${pkg.version}`,...(patch===0?[`v${major}.${minor}`]:[])];
 const updates=new Map();
-for(const name of ['src/main.js','src/screens.js','index.html','README.md']){
+for(const name of ['src/version.ts','index.html','README.md','docs/ONLINE.md']){
  let text=read(name);
  for(const label of oldLabels)text=text.replace(new RegExp(label.replaceAll('.','\\.')+'(?![\\d.])','g'),`v${next}`);
  updates.set(name,text);
 }
-pkg.version=next;updates.set('package.json',JSON.stringify(pkg)+'\n');
+pkg.version=next;updates.set('package.json',JSON.stringify(pkg,null,2)+'\n');
 const lock=JSON.parse(read('package-lock.json'));lock.version=next;lock.packages[''].version=next;
 updates.set('package-lock.json',JSON.stringify(lock,null,2)+'\n');
 for(const [name,text]of updates)fs.writeFileSync(path.join(root,name),text);

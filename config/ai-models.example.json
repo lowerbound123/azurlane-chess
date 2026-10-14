@@ -5,6 +5,8 @@
       "model_id": "deepseek-flash",
       "name": "小肥鱼",
       "protocol": "chat",
+      "reasoning_effort": "medium",
+      "fast": "none",
       "structuredOutput": false
     }
   ]

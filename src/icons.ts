@@ -1,0 +1,38 @@
+import {
+  faShieldHalved, faQuestion, faPlug, faLinkSlash, faSpinner, faCircle, faRobot, faShip,
+  faUsers, faPlus, faMinus, faDoorOpen, faShuffle, faArrowRight,
+  faArrowLeft, faXmark, faHouse, faBookOpen, faGraduationCap, faFolderOpen,
+  faFloppyDisk, faPlay, faPause, faForward, faRotateLeft, faRotateRight,
+  faCrosshairs, faEye, faEyeSlash, faPlane, faBomb, faDiamond,
+  faFlag, faTriangleExclamation, faCheck, faUser, faRightFromBracket,
+  faArrowUp, faArrowDown, faExpand, faCompress, faClock,
+  faBars, faLayerGroup, faLocationCrosshairs, faArrowsRotate, faCompass, faAnchor,
+  faCopy, faListUl, faCircleInfo, faChevronDown, faChevronUp, faChevronRight,
+  faTrophy, faHourglassHalf, faFileImport, faFileExport, faRoute, faUserPlus,
+  faSatelliteDish, faHandshake, faLock, faBan, faCoins, faCircleDot, faServer,
+  faChessKnight, faWater, faBinoculars, faMagnifyingGlassPlus, faMagnifyingGlassMinus,
+  faScroll, faSkull, faMedal, faKeyboard,
+} from '@fortawesome/free-solid-svg-icons';
+
+export const icons = {
+  shield:faShieldHalved, question:faQuestion, plug:faPlug, disconnected:faLinkSlash, spinner:faSpinner,
+  circle:faCircle, robot:faRobot, ship:faShip, users:faUsers, plus:faPlus,
+  minus:faMinus, join:faDoorOpen, shuffle:faShuffle, next:faArrowRight,
+  back:faArrowLeft, close:faXmark, home:faHouse, book:faBookOpen,
+  tutorial:faGraduationCap, folder:faFolderOpen, save:faFloppyDisk,
+  play:faPlay, pause:faPause, skip:faForward, undo:faRotateLeft,
+  redo:faRotateRight, target:faCrosshairs, eye:faEye, hidden:faEyeSlash,
+  plane:faPlane, bomb:faBomb, diamond:faDiamond, flag:faFlag,
+  warning:faTriangleExclamation, check:faCheck, user:faUser,
+  logout:faRightFromBracket, up:faArrowUp, down:faArrowDown,
+  expand:faExpand, compress:faCompress, clock:faClock,
+  menu:faBars, layers:faLayerGroup, locate:faLocationCrosshairs, rotate:faArrowsRotate,
+  compass:faCompass, anchor:faAnchor, copy:faCopy, log:faListUl, info:faCircleInfo,
+  chevronDown:faChevronDown, chevronUp:faChevronUp, chevronRight:faChevronRight,
+  trophy:faTrophy, hourglass:faHourglassHalf, import:faFileImport, export:faFileExport,
+  route:faRoute, userPlus:faUserPlus, online:faSatelliteDish, draw:faHandshake,
+  lock:faLock, ban:faBan, coin:faCoins, mine:faCircleDot, server:faServer,
+  chess:faChessKnight, sea:faWater, scout:faBinoculars, zoomIn:faMagnifyingGlassPlus,
+  zoomOut:faMagnifyingGlassMinus, scroll:faScroll, defeat:faSkull, medal:faMedal, keyboard:faKeyboard,
+};
+export type IconName = keyof typeof icons;

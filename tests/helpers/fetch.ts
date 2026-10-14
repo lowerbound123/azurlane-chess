@@ -1,0 +1,2 @@
+interface FixtureResponse {ok:boolean;status?:number;json?:()=>Promise<unknown>}
+export function mockFetch(handler:(url:string,options:RequestInit)=>Promise<FixtureResponse>):typeof fetch{return async(input,options={})=>{const fixture=await handler(String(input),options);return new Response(JSON.stringify(await fixture.json?.()??null),{status:fixture.status??(fixture.ok?200:503),headers:{'Content-Type':'application/json'}});};}

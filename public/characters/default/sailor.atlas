@@ -1,0 +1,16 @@
+sailor.svg
+size: 256,128
+filter: Linear,Linear
+pma: false
+head
+bounds: 0,0,64,64
+hat
+bounds: 64,0,64,64
+body
+bounds: 128,0,64,64
+arm
+bounds: 192,0,64,64
+boot
+bounds: 0,64,64,64
+weapon
+bounds: 64,64,64,64

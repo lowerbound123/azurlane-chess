@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Spine thumbnail exporter</title></head><body><script type="module">
+import {SHIPS} from '/src/ship-catalog.ts';
+import {profileIdFor} from '/src/characters/config.ts';
+import {SpinePreviews} from '/src/characters/previews.ts';
+const profiles=new Map(SHIPS.map(ship=>[profileIdFor(ship.template),ship.template]));
+const previews=new SpinePreviews();
+window.spineSnapshots=(async()=>{
+  const images={};
+  try {
+    for(const [id,template] of profiles) {
+      const url=await previews.load(template);
+      if(!url)throw new Error('Spine snapshot cancelled');
+      const blob=await(await fetch(url)).blob();
+      images[id]=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(blob);});
+    }
+    return images;
+  }finally{previews.dispose();}
+})();
+</script></body></html>

@@ -10,3 +10,12 @@ docs/superpowers/.task-state.md
 .env.*
 !.env.example
 config/ai-models.json
+
+# Private account database (including SQLite WAL/SHM files)
+data/
+
+# Compiled Node service
+dist-server/
+
+# Optimized public assets and generated image manifest
+.generated/

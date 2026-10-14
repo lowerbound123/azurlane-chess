@@ -1,0 +1,19 @@
+
+> azurlane-chess@0.5.11 test
+> npm run assets:prepare && vitest run
+
+
+> azurlane-chess@0.5.11 assets:prepare
+> node scripts/prepare-assets.mjs
+
+Prepared 1 raster images as lossy WebP with previews and responsive sizes
+
+ RUN  v4.1.11 /Volumes/Coding/projects/azurlane-chess
+
+Spine thumbnail sailor is stale; run npm run assets:spine to refresh it
+
+ Test Files  73 passed (73)
+      Tests  388 passed (388)
+   Start at  18:46:53
+   Duration  57.28s (transform 1.58s, setup 5.64s, import 11.91s, tests 31.63s, environment 2.69s)
+

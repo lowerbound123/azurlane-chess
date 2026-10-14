@@ -1,0 +1,14 @@
+import {createApp} from 'vue';
+import {createPinia} from 'pinia';
+import App from './App.vue';
+import {createGameRouter} from './router.ts';
+import '@fontsource-variable/saira/wdth.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import './theme.css';
+import './styles/primitives.css';
+import './style.css';
+import './navigation.css';
+import './fleet-selection.css';
+import './account.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+createApp(App).use(createPinia()).use(createGameRouter()).mount('#app');

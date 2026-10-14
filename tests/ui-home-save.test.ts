@@ -1,0 +1,23 @@
+import {vi} from 'vitest';
+import {mockFetch} from './helpers/fetch.ts';
+import {TestSocket} from './helpers/socket.ts';
+import type {OnlineState,User} from '../shared/network.ts';
+import {flushPromises} from '@vue/test-utils';
+// @vitest-environment happy-dom
+import {mountGame,settleGame,chooseSelect} from './helpers/mount-game.ts';
+import {test,afterAll,afterEach} from 'vitest';
+import assert from 'node:assert/strict';
+window.document.body.innerHTML='<div id="app"></div>';
+const errors:string[]=[];const oldError=console.error;console.error=(...x)=>errors.push(x.join(' '));
+const {session:vm,router,wrapper}=await mountGame();
+const wait=(ms:number)=>new Promise(r=>setTimeout(r,ms));const flush=async()=>{await settleGame();await settleGame();await wait(0)};
+const buttons=()=>[...document.querySelectorAll<HTMLButtonElement>('button')];const button=(text: string)=>buttons().find(b=>b.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,'')));const click=async (el:HTMLElement|null|undefined)=>{assert.ok(el,'control exists');el.dispatchEvent(new window.MouseEvent('click',{bubbles:true}));await flush()};const hex=(c:number,r:number)=>document.querySelector<HTMLElement>(`[data-map-cell="${c-Math.floor(r/2)},${r}"]`);
+test('home local saves restore stable plans and malformed import does not overwrite',async()=>{
+ assert.ok(button('新游戏'));assert.ok(button('读取游戏'));assert.ok(button('图文教程'));assert.ok(button('交互教学'));
+ await click(button('新游戏'));await click(button('本地游玩'));const seedInput=document.querySelector<HTMLInputElement>('input[aria-label=地图种子]');seedInput!.value='42.5';seedInput!.dispatchEvent(new window.Event('input',{bubbles:true}));await flush();await click(button('进入部署'));const initialAuto=JSON.parse(localStorage.getItem('azurlane-chess:v1:auto')!);assert.ok(initialAuto,'map seed is normalized before autosave');assert.equal(initialAuto.state.game.seed,42);await click(button('完成部署'));await click(button('前进 W'));assert.equal(document.querySelectorAll<HTMLElement>('.action-item.movement').length,1);
+ await click(button('保存/读取'));document.body.dispatchEvent(new window.KeyboardEvent('keydown',{key:'w',bubbles:true}));await flush();assert.equal(document.querySelectorAll<HTMLElement>('.action-item.movement').length,1,'save modal blocks battle movement shortcut');document.body.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));await flush();assert.equal(button('跳过动画'),undefined,'save modal blocks battle execute shortcut');await click(document.querySelector<HTMLButtonElement>('[data-save-slot="slot-1"] .write-slot'));assert.match(document!.querySelector<HTMLElement>('[data-save-slot="slot-1"]')!.textContent,/R01/);await click(button('返回战局'));
+ await click(button('清除航线'));assert.equal(document.querySelectorAll<HTMLElement>('.action-item.movement').length,0);await click(button('保存/读取'));await click(document.querySelector<HTMLButtonElement>('[data-save-slot="slot-1"] .load-slot'));await click(button('确认读取'));assert.equal(document.querySelectorAll<HTMLElement>('.action-item.movement').length,1);
+ await click(button('保存/读取'));const beforeImport=localStorage.getItem('azurlane-chess:v1:slot-1');const fileInput=document.querySelector<HTMLInputElement>('input[type=file]');Object.defineProperty(fileInput,'files',{value:[new window.File(['{bad'], 'bad.json',{type:'application/json'})],configurable:true});fileInput!.dispatchEvent(new window.Event('change',{bubbles:true}));await wait(30);await flush();assert.match(document!.querySelector<HTMLElement>('.save-notice')!.textContent,/JSON/);assert.equal(localStorage.getItem('azurlane-chess:v1:slot-1'),beforeImport);assert.equal(document.querySelectorAll<HTMLElement>('.action-item.movement').length,1,'bad import preserves active battle');await click(button('返回战局'));await click(button('主菜单'));assert.ok(button('继续当前战局'));await click(button('读取游戏'));assert.match(document!.querySelector<HTMLElement>('[data-save-slot="auto"]')!.textContent,/R01/);await click(button('返回主菜单'));await click(button('图文教程'));assert(document.querySelectorAll<HTMLElement>('.tutorial-book svg').length>=6,'illustrated tutorial has original SVG diagrams');const ids=[...document.querySelectorAll<HTMLElement>('.tutorial-book svg [id]')].map(e=>e.id);assert.equal(new Set(ids).size,ids.length,'diagram IDs are scoped per figure');await click(button('返回主菜单'));assert.equal(errors.length,0,errors.join('\n'));
+});
+
+afterAll(()=>wrapper.unmount());

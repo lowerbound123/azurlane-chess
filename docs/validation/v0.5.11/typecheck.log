@@ -1,0 +1,9 @@
+
+> azurlane-chess@0.5.11 typecheck
+> npm run assets:prepare && vue-tsc --noEmit && tsc -p tsconfig.server.json --noEmit
+
+
+> azurlane-chess@0.5.11 assets:prepare
+> node scripts/prepare-assets.mjs
+
+Prepared 1 raster images as lossy WebP with previews and responsive sizes
