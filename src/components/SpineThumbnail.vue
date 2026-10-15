@@ -2,12 +2,14 @@
 import AppIcon from './AppIcon.vue';
 import {ref,watch} from 'vue';
 const props=defineProps<{template:string;name:string;src?:string;error?:string}>();
+const emit=defineEmits<{error:[]}>();
 const loaded=ref(false),failed=ref(false);
+function onError(){failed.value=true;emit('error');}
 watch(()=>props.src,()=>{loaded.value=false;failed.value=false;},{flush:'sync'});
 </script>
 <template>
   <span class="spine-thumbnail" :data-spine-template="template" :data-spine-status="failed||error?'error':loaded?'ready':'loading'" :title="error">
-    <img v-if="src&&!failed" :src="src" :alt="name+' · Spine 待机角色'" width="256" height="320" decoding="async" fetchpriority="high" @load="loaded=true" @error="failed=true"/>
+    <img v-if="src&&!failed" :src="src" :alt="name+' · Spine 待机角色'" width="256" height="320" decoding="async" fetchpriority="high" @load="loaded=true" @error="onError"/>
     <span v-if="!loaded" class="spine-placeholder"><AppIcon name="ship"/><small>{{error||failed?'素材失败':'加载中'}}</small></span>
   </span>
 </template>

@@ -1,8 +1,11 @@
 // @vitest-environment happy-dom
 import {test,vi,beforeAll,afterAll} from 'vitest';
+vi.mock('../src/characters/ships.generated.json',()=>({default:{profiles:{},catalog:{},historical:{},templates:{},identities:{}}}));
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import * as spine from '@esotericsoftware/spine-threejs';
+import {parseSkeleton} from '../src/vendor/parse.mjs';
+import renderer from '../src/vendor/spine38/renderer.mjs';
+import core from '../src/vendor/spine38/core.mjs';
 import {SpinePreviews} from '../src/characters/previews.ts';
 import {characterConfig,type CharacterProfile} from '../src/characters/config.ts';
 import type {CharacterAsset} from '../src/characters/spine.ts';
@@ -10,11 +13,10 @@ import type {CharacterAsset} from '../src/characters/spine.ts';
 beforeAll(()=>vi.stubGlobal('WebGLRenderingContext',{DYNAMIC_DRAW:0x88E8,STATIC_DRAW:0x88E4}));
 afterAll(()=>vi.unstubAllGlobals());
 
-class StubTexture extends spine.Texture {setFilters(){}setWraps(){}dispose(){}}
 function asset():CharacterAsset {
-  const atlas=new spine.TextureAtlas(fs.readFileSync('public/characters/default/sailor.atlas','utf8'));
-  for(const page of atlas.pages)page.setTexture(new StubTexture(Object.assign(document.createElement('img'),{width:256,height:128})));
-  return {spine,manager:new spine.AssetManager(),data:new spine.SkeletonJson(new spine.AtlasAttachmentLoader(atlas)).readSkeletonData(fs.readFileSync('public/characters/default/sailor.json','utf8'))};
+ const data=parseSkeleton(fs.readFileSync('public/characters/default/sailor.json'),fs.readFileSync('public/characters/default/sailor.atlas','utf8'),undefined,'json').data;
+ class SkeletonMesh extends renderer.SkeletonMesh {constructor(options:any){super(options.skeletonData);this.skeleton.getBoundsRect=()=>{const offset=new core.Vector2(),size=new core.Vector2();this.skeleton.getBounds(offset,size,[]);return{x:offset.x,y:offset.y,width:size.x,height:size.y};};}}
+ return {spine:{SkeletonMesh:SkeletonMesh as any},manager:{dispose(){}},data};
 }
 test('shared profile generates one complete Spine WebP, frees GPU and revokes URLs on exit',async()=>{
   const data=asset(),requests:CharacterProfile[]=[],create=vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:spine-test'),revoke=vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
@@ -49,4 +51,13 @@ test('a late Spine asset does not create a renderer or object URL after leaving 
     const image=library.load('dd');await Promise.resolve();library.dispose();complete(asset());
     assert.equal(await image,null);assert.equal(factory.mock.calls.length,0);assert.equal(create.mock.calls.length,0);
   }finally{library.dispose();create.mockRestore();}
+});
+
+test('explicit exporter supports configured profiles that no ship template currently uses',async()=>{
+ const profile={...characterConfig.profiles.sailor},data=asset(),requests:CharacterProfile[]=[];
+ const canvas=document.createElement('canvas');canvas.toBlob=done=>done(new Blob(['fixed-profile']));
+ const create=vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:export-only'),revoke=vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
+ const library=new SpinePreviews({load:async p=>{requests.push(p);return data;},dispose:()=>{}},()=>({domElement:canvas,setSize:()=>{},setClearColor:()=>{},render:()=>{},dispose:()=>{},forceContextLoss:()=>{}}));
+ try{assert.equal(await library.loadProfile(profile),'blob:export-only');assert.deepEqual(requests,[profile]);}
+ finally{library.dispose();create.mockRestore();revoke.mockRestore();}
 });

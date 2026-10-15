@@ -2,7 +2,171 @@
   "profiles": {
     "sailor": {
       "image": "characters/previews/sailor.webp",
-      "fingerprint": "c8fae35742b1e075478e94d2da2eff2446cf636050244cc076038e5686badeaa"
+      "fingerprint": "0e08f1c0a11a71c1ed958d25f073e080c926ac2794d15fce869841348667f5ae"
+    },
+    "aikesaite": {
+      "image": "characters/previews/aikesaite.webp",
+      "fingerprint": "bb2c05e8735f1455c34dfd8230ec235383d30e5ef6ad0258918a3bf08c8341e9"
+    },
+    "aisaikesi": {
+      "image": "characters/previews/aisaikesi.webp",
+      "fingerprint": "524c75e1eddb9e7cb21b2dbcf716dc0a288b73cefc52e9244509544ec3bec25a"
+    },
+    "aisijimo": {
+      "image": "characters/previews/aisijimo.webp",
+      "fingerprint": "1be47f2e3510bb740cfaf584c00fb0a5b54928ca05957c9108a26ad0eb419b6f"
+    },
+    "ajiakesi": {
+      "image": "characters/previews/ajiakesi.webp",
+      "fingerprint": "a3863fe9577b9a4dadb2189718aabd8c2f3f3e9c7030452aed2419a548a48caa"
+    },
+    "ajilisi": {
+      "image": "characters/previews/ajilisi.webp",
+      "fingerprint": "80f6a0604b822a8d2dfa27d11b90edc9aefc6f74cc906e03b4e7da1d5d6734d7"
+    },
+    "akasita": {
+      "image": "characters/previews/akasita.webp",
+      "fingerprint": "b068227826da0765cbcb4ea69bbe6c6f4253c94e9b59e801d9c764e0fa27ff7a"
+    },
+    "baerdimo": {
+      "image": "characters/previews/baerdimo.webp",
+      "fingerprint": "38b6931dac33c2ae2cb149613b871f81faa5dd1bbe63fb64f5013e7324a20d4c"
+    },
+    "beikaluolaina": {
+      "image": "characters/previews/beikaluolaina.webp",
+      "fingerprint": "019c3840d555562c9a24055dc029fcf2cb289242b5ea4ec0141f5f3dbeaf3f4f"
+    },
+    "bisimai": {
+      "image": "characters/previews/bisimai.webp",
+      "fingerprint": "a76e8d379b90f3dcd06d2ee404f1bb67eb1c11c9fa960954827c2f4bf0e72380"
+    },
+    "boge": {
+      "image": "characters/previews/boge.webp",
+      "fingerprint": "692526fb4bebb11921c5607bf51d6fecae8c2d1958b5c4677b601e340a7aebcf"
+    },
+    "canglong": {
+      "image": "characters/previews/canglong.webp",
+      "fingerprint": "548dc27a7933c8eb28066958c7b9f645142c60d16d667933fefb6cf9fd33ab9b"
+    },
+    "changdao": {
+      "image": "characters/previews/changdao.webp",
+      "fingerprint": "f4ef28cd178b5edbc033ded32bbfa0a341ed92a863ecfd389316103dcb0724a9"
+    },
+    "chicheng": {
+      "image": "characters/previews/chicheng.webp",
+      "fingerprint": "c46bb216a2aafc65e74acd12ee867bd53eef870a432b8886e167e17a270f7044"
+    },
+    "dahuangfeng": {
+      "image": "characters/previews/dahuangfeng.webp",
+      "fingerprint": "89f0c8b7d7b5aa0fbcb9046816dfc7e40973c4590244f509fca9a3245499c801"
+    },
+    "daofeng": {
+      "image": "characters/previews/daofeng.webp",
+      "fingerprint": "8638812983fc1cecd02cd6f84aaa24a22e53a2d8cf565ddc98c7a9d6961406e2"
+    },
+    "feilong": {
+      "image": "characters/previews/feilong.webp",
+      "fingerprint": "1302555a32a4d23eb510da05753dbda5f1b94f66fa1572c4042ceec8a893c364"
+    },
+    "hailunna": {
+      "image": "characters/previews/hailunna.webp",
+      "fingerprint": "6fd3ee097d5205593f8bc39efb3e393920dbaaa400e7e538240e2ddcadd6de2a"
+    },
+    "hude": {
+      "image": "characters/previews/hude.webp",
+      "fingerprint": "b4bf4eb26e558dde7fcfbe47ec96a20c49b8b7e193672215ddbd02c75a629839"
+    },
+    "jiahe": {
+      "image": "characters/previews/jiahe.webp",
+      "fingerprint": "1171a01b1f2055dcb579b4f60aedbd18b0def4e38ff876cb1702d6f8ed27a749"
+    },
+    "jingang": {
+      "image": "characters/previews/jingang.webp",
+      "fingerprint": "d35c6374370e82890cf0b5e1bc4ebe8dfda5f9d3c0cb4d1bcb1f56def197520e"
+    },
+    "jiujinshan": {
+      "image": "characters/previews/jiujinshan.webp",
+      "fingerprint": "6c5c42ff80c45dca8ad2793e9b1aabc1509eaa52eb9e6ad52ce0de7c26a2ae0d"
+    },
+    "kasabulanka": {
+      "image": "characters/previews/kasabulanka.webp",
+      "fingerprint": "bf6235b6d30feaf44ec5f02e38b7131966ecf85f4d0e19b230e5d45a35cc83c7"
+    },
+    "kelifulan": {
+      "image": "characters/previews/kelifulan.webp",
+      "fingerprint": "013a701ec522c35779aa04611aaa210ea07c6077ee7dbb598ad5ba7f932a3ffe"
+    },
+    "lisailiu": {
+      "image": "characters/previews/lisailiu.webp",
+      "fingerprint": "90a35d1eec62db396df447526a5eed5928ea3f7749e05a6903f3ec86ce8126e4"
+    },
+    "moli": {
+      "image": "characters/previews/moli.webp",
+      "fingerprint": "fc48a240ce38f00054ba79e691acb4ba7a14128c7cc49e1070a1831b4fd1824b"
+    },
+    "ougen": {
+      "image": "characters/previews/ougen.webp",
+      "fingerprint": "18dd3349177db49b9d1500161ecbbf80abb874a15a86960ffb5a6aff4b2bcd3b"
+    },
+    "qiye": {
+      "image": "characters/previews/qiye.webp",
+      "fingerprint": "775fca25d95ee90795fdbcb2c4c17942d050e078ea5ae2439e5502dda961d3fe"
+    },
+    "shengdiyage": {
+      "image": "characters/previews/shengdiyage.webp",
+      "fingerprint": "e8ed94df282be0419c49981b6cebe8524ed8f193708dada106fb76dfe07d3fdc"
+    },
+    "sipeibojue": {
+      "image": "characters/previews/sipeibojue.webp",
+      "fingerprint": "6d59a16f75b68af0e8014152aef520e5b26711f0dca2c574220aa6116d19356b"
+    },
+    "weiershiqinwang": {
+      "image": "characters/previews/weiershiqinwang.webp",
+      "fingerprint": "7e7c3d9f1769575ebe36b7dab633867205b3b8ab8a96e13da6a4b65a97e883b0"
+    },
+    "wuzang": {
+      "image": "characters/previews/wuzang.webp",
+      "fingerprint": "5286807cbae32746e0b9d316af58e6082d0f40644a1d3563ba1af727a906ba57"
+    },
+    "xianggelila": {
+      "image": "characters/previews/xianggelila.webp",
+      "fingerprint": "ff39bb1276a2a26b6f0b47dbf1173ca193a98528c11e584e0da38761dc853c13"
+    },
+    "xiongye": {
+      "image": "characters/previews/xiongye.webp",
+      "fingerprint": "fe6fd7da56a855bc911aac5dc1b352330ae16ded600e173492315d68b3aeab28"
+    },
+    "yanzhan": {
+      "image": "characters/previews/yanzhan.webp",
+      "fingerprint": "a33bf49af01204ccb7680f2485028267e1d699863c69e1f48590935c3405ce1d"
+    },
+    "yuekecheng": {
+      "image": "characters/previews/yuekecheng.webp",
+      "fingerprint": "b7680e2a3cc71a5a9dabe1555c53d5aa5abecec19df95b5c65b336ba95850139"
+    },
+    "z13": {
+      "image": "characters/previews/z13.webp",
+      "fingerprint": "1ff9b520c37d5eb912a9c899f8704383169e23f33b208e9598394ed87aa89ef6"
+    },
+    "z18": {
+      "image": "characters/previews/z18.webp",
+      "fingerprint": "b0b1aaff8608a0e5b7eda13fdf018e6fc6808dd196250a9eed9fa1ef1183918b"
+    },
+    "z2": {
+      "image": "characters/previews/z2.webp",
+      "fingerprint": "0b2da9f0677aac9d8d95fdb12fb32355858bdf3ebf6f47e2db2ab6187e15cc5b"
+    },
+    "z35": {
+      "image": "characters/previews/z35.webp",
+      "fingerprint": "28500e94900c332e05351fa1476fd7f3eb3ad1244adbc22e218196305c4c6256"
+    },
+    "z9": {
+      "image": "characters/previews/z9.webp",
+      "fingerprint": "daf65e477842d5f823e3bbe0a18fbf2a0a186671644396df4a1484610466f044"
+    },
+    "zhumo": {
+      "image": "characters/previews/zhumo.webp",
+      "fingerprint": "e0982708809b2dbb288f39c3cdac533471e3a6e09b70b5dfc9044e0e81869803"
     }
   }
 }

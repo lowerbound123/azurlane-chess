@@ -14,7 +14,7 @@ import {restoreFleet} from "../ship-catalog.ts";
 import type {SessionCore} from './session-core.ts';
 import type {SessionActions} from './session-actions.ts';
 export function useSaves(core:SessionCore,actions:SessionActions){
-const {localGame, mode, pendingTurn, torpWindow, planeMode, toast, showRanges, rangeMode, replan, showPlans, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, ordersOpen, swapMode, battleMode, roster, seed, selectedFleet, tutorial, campaign, onlineActive, game, plans, selected, busy, playFrame, finished, progress, history, hover, screen, mapView, saves, ship, canSave, router, runtime}=core;
+const {localGame, mode, pendingTurn, torpWindow, planeMode, toast, showRanges, rangeMode, replan, showPlans, saveOpen, saveRecords, saveNotice, pendingSave, saveStatus, ordersOpen, swapMode, battleMode, roster, seed, selectedFleet, tutorial, campaign, historical, onlineActive, game, plans, selected, busy, playFrame, finished, progress, history, hover, screen, mapView, saves, ship, canSave, router, runtime}=core;
 function snapshot():SaveState {
     if(!game.value)throw new Error('没有可保存的战局');
     return { game: E.clone(toRaw(game.value)), plans: E.clone(toRaw(plans.value)), selected: selected.value, roster: [...roster.value], seed: Number(seed.value), metadata: { showPlans: showPlans.value, showRanges: showRanges.value, rangeMode: rangeMode.value } };
@@ -23,6 +23,7 @@ function refreshSaves() {
     saveRecords.value = saves.list();
   }
 function autosave() {
+    if(historical.value){actions.saveHistorical();return;}
     if(campaign.value){actions.saveCampaign();return;}
     if (!canSave.value) return;
     const result = saves.write("auto", snapshot(), { label: `\u81EA\u52A8 \xB7 R${String(game.value!.round).padStart(2, "0")}` });
@@ -35,6 +36,7 @@ function autosave() {
     refreshSaves();
   }
 function openSaves() {
+    if(historical.value){actions.saveHistorical();actions.say(core.historicalNotice.value);return;}
     if(campaign.value){actions.saveCampaign();actions.say(core.campaignNotice.value);return;}
     if (onlineActive.value) return actions.say("联机对局由服务器保存，不能载入离线存档");
     if (tutorial.value) return actions.savePractice();
@@ -146,6 +148,7 @@ function exportSave(envelope: SaveEnvelope|null = null) {
 function goHome() {
     if (onlineActive.value) { actions.restoreOfflineBattle(); screen.value = "home"; refreshSaves(); return; }
     if (busy.value) return;
+    if(historical.value){actions.exitHistorical();return;}
     if(campaign.value){actions.exitCampaign();return;}
     if (tutorial.value) {
       actions.exitTutorial();

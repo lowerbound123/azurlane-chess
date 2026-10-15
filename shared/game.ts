@@ -17,6 +17,7 @@ export interface ShipConfig {
  minelayer?:{reserve:number;max:number;damage:number}; smoke?:{charges:number;radius:number;duration:number}; radar?:{charges:number;range:number;radius:number;duration:number}; escort?:{range:number;reduction:number;steps:number};
 }
 export interface Ship {
+ statuses?:import('./status.ts').StatusInstance[];
  id: string; kind: 'ship'; team: Team; label: string; template: ShipType; cfg: ShipConfig;
  hp: number; pos: Hex; xy: XY; heading: number; torps: number; mainReady: number;
  airReady: number[]; airHP: number[]; destroyedPlanes: number; catalogId?: string; name?: string; avatar?: string; portrait?: string;
@@ -27,6 +28,7 @@ export interface Torpedo {
  birth: number; armed: boolean; cfg: TorpedoConfig;
 }
 export interface Plane {
+ statuses?:import('./status.ts').StatusInstance[];
  id: string; kind: 'plane'; team: Team; mother: string; slot: number; hp: number; cfg: PlaneConfig; xy: XY;
  mode: 'point' | 'target' | 'patrol'; patrolRemaining?:number; attackRound?:number; target: Hex; targetId: string | null; tracking: boolean;
  state: 'outbound' | 'return'; traveled: number; waypoints: Hex[]; recovered?: boolean; accounted?: boolean;
@@ -50,23 +52,25 @@ export type Plans = Record<string, Plan>;
 export interface RouteNode { pos: Hex; heading: number }
 export interface Effect {kind:string;at:Hex;from?:Hex;text?:string}
 interface PresentationBase {id:string;team:Team|null;at:Hex;sourceId?:string}
-export interface EffectPresentation extends PresentationBase {type:'effect';kind:string;time:number;duration:number;text?:string;from?:never;to?:never;start?:never;end?:never;shipId?:never;action?:never}
+export interface EffectPresentation extends PresentationBase {type:'effect';kind:string;time:number;duration:number;text?:string;targetId?:string;position?:XY;from?:never;to?:never;start?:never;end?:never;shipId?:never;action?:never}
 export interface ProjectilePresentation extends PresentationBase {type:'projectile';kind:string;from:XY;to:XY;start:number;end:number;time?:never;duration?:never;text?:never;shipId?:never;action?:never}
 export interface ActionPresentation extends PresentationBase {type:'action';shipId:string;action:string;time:number;duration:number;kind?:never;text?:never;from?:never;to?:never;start?:never;end?:never}
 export type Presentation = EffectPresentation | ProjectilePresentation | ActionPresentation;
-export interface FrameShip extends Pick<Ship,'id'|'team'|'label'|'template'|'hp'|'cfg'|'pos'|'xy'|'heading'|'guarding'|'escorting'|'catalogId'> {}
+export interface FrameShip extends Pick<Ship,'id'|'team'|'label'|'template'|'hp'|'cfg'|'pos'|'xy'|'heading'|'guarding'|'escorting'|'catalogId'|'statuses'> {}
 export interface BattleFrame {
+ round?:number;
  domination?:import('./domination.ts').DominationState;
  t: number; ships: FrameShip[]; torpedoes: Torpedo[]; planes: Plane[]; mines: Mine[]; zones?:Zone[]; visibleShipIdsByTeam?:string[][];
  visibleByTeam?: string[][]; exploredByTeam?: string[][]; visible: string[]; explored: string[]; effects: Effect[];
 }
-export type DamageType = 'main'|'secondary'|'torpedo'|'air'|'collision'|'environment'|'grounding'|'mine';
+export type DamageType = 'main'|'secondary'|'torpedo'|'air'|'collision'|'environment'|'grounding'|'mine'|'status';
 export interface Contribution {sourceId:string|null;amount:number}
 export interface CombatStats {
  damageDealt:number;friendlyDamage:number;damageTaken:{enemy:number;friendly:number;environment:number};
  shipsSunk:number;planesShotDown:number;damageBySource:Record<string,{dealt:number;friendly:number;taken:number}>;
 }
 export interface RoundResult {
+ historical?:import('./history.ts').HistoricalState;
  game: Game; frames: BattleFrame[]; events: BattleLog[]; counts:{count:number;hp:number}[];
  presentation: Presentation[]; combatStats:Record<string,CombatStats>;
 }

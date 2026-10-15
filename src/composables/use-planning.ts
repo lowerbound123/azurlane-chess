@@ -1,3 +1,5 @@
+import {effectiveSpeed} from '../../shared/status.ts';
+import {columnLabel} from '../map-coordinates.ts';
 import type {Ship, ShipType, Hex, FrameShip, Plan, TorpedoOrder,AirRole} from '../../shared/game.ts';
 
 import type {OrderMode} from '../stores/ui.ts';
@@ -34,7 +36,7 @@ const say = (t: string) => {
   };
 const coord = (h: Hex) => {
     const p = E.toCR(h);
-    return `${String.fromCharCode(65 + p.c)}${p.r + 1}`;
+    return `${columnLabel(p.c)}${p.r + 1}`;
   };
 function pickType(t: ShipType) {
     if (E.TEMPLATES[t].role === role.value) roster.value[slot.value] = t;
@@ -91,6 +93,7 @@ function choose(s: FrameShip) {
     actions.teach({ type: "select", shipId: s.id });
   }
 function edit() {
+    if(core.historical.value&&(!core.historicalControlled(selected.value)||core.historical.value.status!=='playing'))return null;
     if(core.campaign.value&&(core.campaign.value.status!=='playing'||core.campaignTransit.value))return null;
     if (onlineLocked.value) return null;
     if (!ship.value || !E.alive(ship.value) || phase.value !== "plan") return null;
@@ -118,20 +121,20 @@ function toggleGuard() {
     say(plan.value.guard?"海域封锁已规划：当回合封锁邻格，牺牲全部移动力，鱼雷减伤60%":"已取消海域封锁，可重新规划移动");
   }
 function toggleSmoke(){if(!ship.value?.cfg.smoke||!edit())return;if(!plan.value.smoke&&(ship.value.smokeLeft??0)<=0)return say('烟幕次数已用完');mutate(p=>{if(p.smoke)delete p.smoke;else{p.smoke=true;p.torps=[];}});}
-function toggleEscort(){if(!ship.value?.cfg.escort||!edit())return;mutate(p=>{if(p.escort)delete p.escort;else{p.escort=true;Object.assign(p,P.trimMovement(ship.value!,p,knowledge.value,ship.value!.cfg.escort!.steps).plan);}});}
+function toggleEscort(){if(!ship.value?.cfg.escort||!edit())return;mutate(p=>{if(p.escort)delete p.escort;else{p.escort=true;Object.assign(p,P.trimMovement(ship.value!,p,knowledge.value,ship.value!.cfg.escort!.steps,game.value!.round).plan);}});}
 function toggleMineStep(k:number){if(!ship.value?.cfg.minelayer||!edit())return;if(!nodes.value[k]||E.same(nodes.value[k].pos,nodes.value[k-1].pos))return say('仅可绑定前进步骤');const selected=plan.value.mineSteps??[];if(!selected.includes(k)&&selected.length>=Math.min(ship.value.minesLeft??0,ship.value.cfg.minelayer.max))return say('本回合布雷数量或库存已用完');mutate(p=>{p.mineSteps=selected.includes(k)?selected.filter(x=>x!==k):[...selected,k];});}
 function selectAirRole(role:AirRole){airRole.value=role;if(role==='fighter'||role==='scout')planeMode.value='point';}
 function nextAirSlot(){const s=ship.value!;return s.airReady.map((ready,slot)=>({ready,slot})).filter(x=>x.ready<=game.value!.round&&!plan.value.planes.some(p=>p.slot===x.slot)&&(!s.cfg.carrier!.slots||planeForSlot(s.cfg,x.slot).role===airRole.value)).sort((a,b)=>s.airHP[b.slot]-s.airHP[a.slot]||a.slot-b.slot)[0]?.slot;}
 function trimRoute(length: number) {
     if(!ship.value)return;
-    const result = P.trimMovement(ship.value, toRaw(plan.value), knowledge.value, length);
+    const result = P.trimMovement(ship.value, toRaw(plan.value), knowledge.value, length,game.value!.round);
     if (applyEdit(result.plan) && (result.removedTorps||result.removedMines)) say(`航线改变，取消 ${result.removedTorps} 个失效鱼雷指令、${result.removedMines} 个布雷步骤`);
     torpWindow.value = Math.min(torpWindow.value, length);
   }
 function addMove(turn: number, forward: boolean) {
     if(plan.value.guard)return say("海域封锁已牺牲本回合全部移动力，请先取消技能");
     if (!edit()) return;
-    if (plan.value.moves.length >= (plan.value.escort?ship.value!.cfg.escort!.steps:ship.value!.cfg.speed)) return say("\u8BE5\u8230\u7684\u79FB\u52A8\u6B65\u9AA4\u5DF2\u7528\u5B8C");
+    if (plan.value.moves.length >= (plan.value.escort?Math.min(ship.value!.cfg.escort!.steps,effectiveSpeed(ship.value!,game.value!.round)):effectiveSpeed(ship.value!,game.value!.round))) return say("\u8BE5\u8230\u7684\u79FB\u52A8\u6B65\u9AA4\u5DF2\u7528\u5B8C");
     const end = nodes.value.at(-1)!, next = forward ? E.add(end.pos, E.mod(end.heading + turn)) : end.pos;
     if (!E.legal(knowledge.value, next)) return say("\u8FD9\u4E00\u6B65\u4F1A\u9A76\u5165\u5DF2\u77E5\u5C9B\u5C7F\u6216\u6D77\u56FE\u5916");
     mutate((p) => {
@@ -152,7 +155,7 @@ function undoWaypoint() {
     if(!ship.value)return;
     const segments = plan.value.segments || [];
     if (!segments.length) return undo();
-    const target = P.trimMovement(ship.value, toRaw(plan.value), knowledge.value, segments.at(-1)!.start).plan, last = history.value[selected.value]?.undo.at(-1);
+    const target = P.trimMovement(ship.value, toRaw(plan.value), knowledge.value, segments.at(-1)!.start,game.value!.round).plan, last = history.value[selected.value]?.undo.at(-1);
     if (last && JSON.stringify(last) === JSON.stringify(target)) historyChange("undo");
     else {
       trimRoute(segments.at(-1)!.start);
@@ -329,6 +332,7 @@ function begin() {
     actions.teach({ type: "begin" });
   }
 function resetPlan() {
+    if(core.historical.value&&!core.historicalControlled(selected.value))return;
     if (edit()) applyEdit(E.emptyPlan());
     torpWindow.value = 0;
     pendingTurn.value = 0;
@@ -338,7 +342,7 @@ function mainCounts(s: FrameShip) {
     return p.moves.length + p.torps.length + p.main.length + p.planes.length + (p.sweep ? 1 : 0) + (p.guard ? 1 : 0)+(p.smoke?1:0)+(p.escort?1:0)+(p.radar?1:0)+(p.mineSteps?.length??0);
   }
 function plannedPolyline(s: Ship) {
-    const ns = E.route(s, plans.value[s.id] || E.emptyPlan(), knowledge.value);
+    const ns = E.route(s, plans.value[s.id] || E.emptyPlan(), knowledge.value,game.value!.round);
     return ns.map((n) => {
       const p = actions.point(n.pos);
       return `${p.x},${p.y}`;

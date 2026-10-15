@@ -9,7 +9,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {xyToHex, inBounds, same} from '../engine.ts';
 import {TacticalModels} from '../scene/tactical-models.ts';
 import {Board,mapViewBounds,mapCameraDistance} from '../scene/board.ts';
-import {Units} from '../scene/units.ts';
+import {Units,type StatusAnchor} from '../scene/units.ts';
 import {Effects} from '../scene/effects.ts';
 
 // Interaction state is independent of camera controls: a gesture can never become an order.
@@ -49,22 +49,26 @@ export function applyDesktopMouseButtons(controls:Pick<OrbitControls,'mouseButto
 }
 type MapEvents=HTMLElementEventMap&DocumentEventMap&{webglcontextlost:Event};
 type MapEmits={ (event:'zoom',value:number):void;(event:'rotate',value:boolean):void;(event:'hex',value:{hex:Hex;event:PointerEvent;forceMove:boolean}):void;(event:'ship',value:{ship:RenderShip;event:PointerEvent}):void;(event:'node',value:{index:number;shipId:string}):void;(event:'hover',value:Hex|null):void;(event:'home'):void;(event:'undo'):void};
-export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},emit:MapEmits){
+export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},emit:MapEmits,onStatusPositions?:(anchors:StatusAnchor[])=>void){
     const error=ref(''),loading=ref(false);let generation=0,models:TacticalModels|null=null;
     let renderer:THREE.WebGLRenderer|null=null,scene:THREE.Scene|null=null,camera:THREE.OrthographicCamera|null=null,controls:OrbitControls|null=null,board:Board|null=null,units:Units|null=null,effects:Effects|null=null,observer:ResizeObserver|null=null,frame=0;
     let dirty = true, syncNeeded = true, rotating = false, listeners:(()=>void)[] = [], width = 1, height = 1;
     const center = new THREE.Vector3(15.9, 0, 10.5), raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
     const seaPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hit = new THREE.Vector3();
     const pointers=new Map<number,XY&{button:number}>(); let gestureSuppressed = false;
-    let viewSignature='';
+    let viewSignature='',mapSignature='',traveling=false;
     function listen<K extends keyof MapEvents>(target:EventTarget,name:K,fn:(event:MapEvents[K])=>void,options?:boolean){listeners.push(useEventListener(target,name,fn as EventListener,options));}
 
+    function viewBounds(){
+      const travel=props.model.travelFocus,region=props.model.focusRegion;
+      return mapViewBounds(props.model.map,travel&&region?{...region,radius:travel.radius??region.radius}:region,travel);
+    }
     function fit() {
       if (!camera) return;
       camera!.updateMatrixWorld();
       // Fit the complete board plus the standees in the current camera orientation.
       const corners = [];
-      const bounds=mapViewBounds(props.model.map,props.model.focusRegion);
+      const bounds=viewBounds();
       for (const x of [bounds.minX, bounds.maxX]) for (const y of [0, 3]) for (const z of [bounds.minZ, bounds.maxZ]) corners.push(new THREE.Vector3(x, y, z).sub(center).applyQuaternion(camera!.quaternion.clone().invert()));
       const halfX = Math.max(...corners.map(p => Math.abs(p.x))) * 1.05, halfY = Math.max(...corners.map(p => Math.abs(p.y))) * 1.05;
       const aspect = width / height, half = Math.max(halfY, halfX / aspect);
@@ -73,8 +77,8 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
     function reset() {
       setRotate(false);
       if (!camera) return;
-      const bounds=mapViewBounds(props.model.map,props.model.focusRegion);center.set(bounds.center.x,0,bounds.center.y);
-      const distance=mapCameraDistance(mapViewBounds(props.model.map,props.model.focusRegion));
+      const bounds=viewBounds();center.set(bounds.center.x,0,bounds.center.y);
+      const distance=mapCameraDistance(bounds);
       camera!.far=Math.max(250,distance*3);
       camera!.position.copy(center).add(new THREE.Vector3(0, 32, 24).multiplyScalar(distance/40)); camera!.up.set(0, 1, 0); camera!.lookAt(center);
       controls!.target.copy(center); camera!.zoom = 1; controls!.update(); fit(); emit('zoom', 1); dirty = true;
@@ -119,21 +123,40 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
     function update() {
       if (!renderer || error.value) return;
       const nextViewSignature=JSON.stringify([props.model.map,props.model.focusRegion]);
-      if(nextViewSignature!==viewSignature){viewSignature=nextViewSignature;reset();}
-      board!.update(props.model); units!.update(props.model); effects!.update(props.model.visuals);
-      Object.assign(renderer!.domElement.dataset, { rendererStatus: 'ready', cellCount: String(props.model.cells.length), shipCount: String(props.model.ships.length), planeCount: String(props.model.planes?.length || 0), projectileCount: String(props.model.visuals?.projectiles?.length || 0), effectCount: String(props.model.visuals?.effects?.length || 0) });
+      const nextMapSignature=JSON.stringify(props.model.map);
+      if(nextViewSignature!==viewSignature){
+        const resetView=nextMapSignature!==mapSignature||(!traveling&&!props.model.travelFocus);
+        viewSignature=nextViewSignature;mapSignature=nextMapSignature;if(resetView)reset();
+      }
+      if(props.model.travelFocus&&camera&&controls){
+        const target=new THREE.Vector3(props.model.travelFocus.x,0,props.model.travelFocus.y),delta=target.clone().sub(controls.target);
+        camera.position.add(delta);controls.target.copy(target);center.copy(target);controls.update();fit();
+      }
+      else if(traveling)fit();
+      traveling=!!props.model.travelFocus;
+      board!.update(props.model); units!.update(props.model); effects!.update(props.model.visuals,[...props.model.ships,...props.model.planes]); effects!.abilities.update(props.model);
+      Object.assign(renderer!.domElement.dataset, { rendererStatus: 'ready', cellCount: String(props.model.cells.length), shipCount: String(props.model.ships.length), planeCount: String(props.model.planes?.length || 0),torpedoCount:String(props.model.torpedoes.length),mineCount:String(board!.plans.children.filter(o=>o.userData.mine).length),anchoredEffectCount:String(props.model.visuals?.effects?.filter(e=>e.targetId).length??0),abilityCount:String(effects!.abilities.cache.size), projectileCount: String(props.model.visuals?.projectiles?.length || 0),projectileHeadCount:String(props.model.visuals?.projectiles?.filter(p=>p.position).length??0), effectCount: String(props.model.visuals?.effects?.length || 0) });
       syncNeeded = false; dirty = true;
     }
     let lastSeaFrame = 0, lastCharacterFrame=0;
     function animate(now = 0) {
       frame = 0; if (!renderer || error.value || document.hidden) return;
-      try { if (syncNeeded) update(); const changed = controls!.update(); const characterChanged=now-lastCharacterFrame>=1000/30; if(characterChanged){units!.tick((now-lastCharacterFrame)/1000,camera!);lastCharacterFrame=now;} const seaChanged = now-lastSeaFrame >= 1000/30 && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; if(seaChanged){board!.tick(now/1000);lastSeaFrame=now;} if (dirty || changed || seaChanged || characterChanged) { renderer!.render(scene!,camera!); dirty = false; } }
+      try {
+        if (syncNeeded) update();
+        const changed = controls!.update();
+        const characterChanged=now-lastCharacterFrame>=1000/30;
+        if(characterChanged){units!.tick((now-lastCharacterFrame)/1000,camera!,props.model.visualTime);effects!.abilities.seek((props.model.round??0)*8+(props.model.visualTime??now/1000));lastCharacterFrame=now;}
+        const seaChanged = now-lastSeaFrame >= 1000/30 && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        // Ambient water keeps its own clock across round resets and replay speeds.
+        if(seaChanged){board!.tick(now/1000);lastSeaFrame=now;}
+        if (dirty || changed || seaChanged || characterChanged) { renderer!.render(scene!,camera!);onStatusPositions?.(units!.statusAnchors(camera!,width,height)); dirty = false; }
+      }
       catch (e) { fail(e); return; }
       frame = requestAnimationFrame(animate);
     }
-    function fail(e:unknown) { error.value = errorMessage(e); if (renderer) renderer!.domElement.dataset.rendererStatus = 'error'; cancelAnimationFrame(frame); frame = 0; }
+    function fail(e:unknown) { onStatusPositions?.([]);error.value = errorMessage(e); if (renderer) renderer!.domElement.dataset.rendererStatus = 'error'; cancelAnimationFrame(frame); frame = 0; }
     function cleanup() {
-      generation++;loading.value=false;
+      onStatusPositions?.([]);generation++;loading.value=false;
       cancelAnimationFrame(frame); frame = 0; observer?.disconnect(); observer = null; listeners.forEach(fn => fn()); listeners = [];
       controls?.dispose(); board?.dispose(); units?.dispose(); effects?.dispose();models?.dispose();models=null;
       if (renderer) { renderer!.dispose(); renderer!.forceContextLoss(); renderer!.domElement.remove(); }

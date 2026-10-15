@@ -5,7 +5,7 @@ it('hides smoke ships on visible terrain, private charges and mine source',()=>{
  const g=E.createFleetGame();g.map.islands=[];g.ships.forEach((s,i)=>{s.pos={q:s.team?7:3,r:7};s.xy=E.hexToXY(s.pos)});
  g.zones=[{kind:'smoke',team:1,center:{q:7,r:7},radius:1,expires:3}];
  g.map.mines=[{q:5,r:7,armedRound:2,sourceId:'1-0',team:1,damage:40}];
- const v=playerView(g,0);expect(v.ships.every(s=>s.team===0)).toBe(true);expect(v.map.mines[0]).toEqual({q:5,r:7,armedRound:2});
+ E.updateExploration(g);const v=playerView(g,0);expect(v.ships.every(s=>s.team===0)).toBe(true);expect(v.map.mines[0]).toEqual({q:5,r:7,armedRound:2});
  expect(v.zones?.some(z=>z.kind==='smoke')).toBe(true);
 });
 it('accepts new skills and rejects forged and duplicate slots',()=>{

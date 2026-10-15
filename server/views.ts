@@ -1,3 +1,4 @@
+import {effectiveSpeed,projectStatuses} from '../shared/status.ts';
 import type {Game,Hex,XY,Ship,FrameShip,Plane,Torpedo,RoundResult,Plans} from '../shared/game.ts';
 import type {ClientShip,ClientFlying,ClientGame,ClientResult} from '../shared/network.ts';
 import {Value} from 'typebox/value';
@@ -19,18 +20,20 @@ function publicCfg(ship:FrameShip):ClientShip['cfg'] {
   if (cfg.torpedo) delete cfg.torpedo.reserve;
   return cfg;
 }
-function shipView(ship:FrameShip|Ship, team:number):ClientShip {
+function shipView(ship:FrameShip|Ship, team:number,knownIds:Set<string>):ClientShip {
   const out:ClientShip = { id: ship.id, kind: 'ship', team: ship.team, label: ship.label, template: ship.template,
     cfg: ship.team === team ? copy(ship.cfg) : publicCfg(ship), hp: ship.hp,
     pos: point(ship.pos || E.xyToHex(ship.xy)), xy: xy(ship.xy), heading: ship.heading,...(ship.guarding?{guarding:true}:{}),...(ship.escorting?{escorting:true}:{}),...(ship.catalogId?{catalogId:ship.catalogId}:{}) };
+  if(ship.statuses?.length)out.statuses=projectStatuses(ship.statuses,knownIds);
   if (ship.team === team) {
     if('torps' in ship){for(const k of ['minesLeft','smokeLeft','radarLeft'] as const)if(ship[k]!==undefined)out[k]=ship[k];out.torps=ship.torps;out.mainReady=ship.mainReady;out.airHP=copy(ship.airHP);out.destroyedPlanes=ship.destroyedPlanes;out.airReady=ship.airReady.map(n=>n===Infinity?null:n);}
   }
   return out;
 }
-function flyingView(unit:Plane|Torpedo, kind:'plane'|'torpedo', team:number):ClientFlying {
+function flyingView(unit:Plane|Torpedo, kind:'plane'|'torpedo', team:number,knownIds:Set<string>):ClientFlying {
   // Enemy ownership and all flight targets/waypoints remain private.
   const out:ClientFlying = {cfg:{}, id: unit.id, kind, team: unit.team, xy: xy(unit.xy) };
+  if(unit.kind==='plane'&&unit.statuses?.length)out.statuses=projectStatuses(unit.statuses,knownIds);
   if('hp' in unit){out.hp=unit.hp;out.state=unit.state;}if('heading' in unit)out.heading=unit.heading;
   if ('mother' in unit && unit.team === team) {
     if (Number.isFinite(unit.traveled)) out.traveled = unit.traveled;
@@ -44,13 +47,15 @@ const mineView=(m:Game['map']['mines'][number])=>({...point(m),...(m.armedRound!
 function zoneView(zones:NonNullable<Game['zones']>,team:number,visible:Set<string>,map:Game['map']){return zones.flatMap(z=>z.team===team?[copy(z)]:z.kind==='smoke'?E.allHexes(map).filter(h=>visible.has(E.key(h))&&E.hexDist(h,z.center)<=z.radius).map(h=>({...z,center:h,radius:0})):[]);}
 export function playerView(game:Game, team:number):ClientGame {
   const visible = E.visibleCells(game, team), explored = new Set(game.explored?.[team] || visible);
+  const visibleShips=game.ships.filter(s=>game.phase==='ended'||s.team===team||E.alive(s)&&E.shipVisible(game,s,team,visible)),visiblePlanes=game.planes.filter(p=>p.team===team||seen(p,visible));
+  const knownIds=new Set([...visibleShips,...visiblePlanes].map(u=>u.id));
   const ownExplored:string[][] = [[], []]; ownExplored[team] = [...explored];
   return { ...(game.battleMode?{battleMode:game.battleMode}:{}),...(game.domination?{domination:copy(game.domination)}:{}),...(game.ruleset?{ruleset:game.ruleset,zones:zoneView(E.activeZones(game),team,visible,game.map)}:{}),round: game.round, phase: game.phase, nextId: 0, winner: game.winner, log: [],
     visible: [...visible], explored: ownExplored,
-    map: { width: game.map.width, height: game.map.height, islands: game.map.islands.filter(k => explored.has(k)), mines: game.map.mines.map(mineView) },
-    ships: game.ships.filter(s => s.team === team || E.alive(s) && E.shipVisible(game,s,team,visible)).map(s => shipView(s, team)),
-    planes: game.planes.filter(p => p.team === team || seen(p, visible)).map(p => flyingView(p, 'plane', team)),
-    torpedoes: game.torpedoes.filter(p => E.torpedoVisible(p, team, visible, explored)).map(p => flyingView(p, 'torpedo', team)) };
+    map: { width: game.map.width, height: game.map.height, islands: game.map.islands.filter(k => explored.has(k)), mines: game.map.mines.filter(m=>explored.has(E.key(m))).map(mineView) },
+    ships: visibleShips.map(s => shipView(s, team,knownIds)),
+    planes: visiblePlanes.map(p => flyingView(p, 'plane', team,knownIds)),
+    torpedoes: game.torpedoes.filter(p => E.torpedoVisible(p, team, visible, explored)).map(p => flyingView(p, 'torpedo', team,knownIds)) };
 }
 
 // Exact interval union of segment intersections with visible hex footprints.
@@ -72,25 +77,27 @@ function safeSegment(a:XY, b:XY, visible:Iterable<string>) {
 }
 export function playerResult(before:Game, result:RoundResult, team:number):ClientResult {
   const sourceShips = new Map([...before.ships, ...result.game.ships].map(s => [s.id, s]));
-  const actionIds=new Map<string,string>();
-  const frames:ClientResult['frames'] = result.frames.slice(0, 64).map(frame => {
+  const actionIds=new Map<string,string>(),projectileIds=new Map<string,string>(),effectIds=new Map<string,string>();
+  const opaque=(map:Map<string,string>,id:string,prefix:string)=>{if(!map.has(id))map.set(id,`${prefix}${map.size}`);return map.get(id)!;};
+  const frames:ClientResult['frames'] = result.frames.slice(0, 96).map(frame => {
     const visible = new Set(frame.visibleByTeam?.[team] || (team === 0 ? frame.visible : []) || []);
     const explored = new Set(frame.exploredByTeam?.[team] || (team === 0 ? frame.explored : []) || []);
-    const ships=frame.ships.filter(u=>u.team===team||(frame.visibleShipIdsByTeam?frame.visibleShipIdsByTeam[team].includes(u.id):seen(u,visible))).map(u=>shipView(u,team));
-    const planes=frame.planes.filter(u=>u.team===team||seen(u,visible)).map(u=>flyingView(u,'plane',team));
-    const torpedoes=frame.torpedoes.filter(u=>E.torpedoVisible(u,team,visible,explored)).map(u=>flyingView(u,'torpedo',team));
-    const visuals = sampleBattleVisuals(result.presentation || [], frame.t, E.presentationCells(visible,frame.zones), team);
+    const knownIds=new Set([...frame.ships.filter(u=>u.team===team||(frame.visibleShipIdsByTeam?frame.visibleShipIdsByTeam[team].includes(u.id):seen(u,visible))),...frame.planes.filter(u=>u.team===team||seen(u,visible))].map(u=>u.id));
+    const ships=frame.ships.filter(u=>u.team===team||(frame.visibleShipIdsByTeam?frame.visibleShipIdsByTeam[team].includes(u.id):seen(u,visible))).map(u=>shipView(u,team,knownIds));
+    const planes=frame.planes.filter(u=>u.team===team||seen(u,visible)).map(u=>flyingView(u,'plane',team,knownIds));
+    const torpedoes=frame.torpedoes.filter(u=>E.torpedoVisible(u,team,visible,explored)).map(u=>flyingView(u,'torpedo',team,knownIds));
+    const visuals = sampleBattleVisuals(result.presentation || [], frame.t, E.presentationCells(visible,frame.zones), team,[...ships,...planes]);
     const visibleIds=new Set(ships.map(s=>s.id));
     visuals.actions=(visuals.actions||[]).filter(a=>visibleIds.has(a.shipId)).map(a=>{
       if(!actionIds.has(a.id))actionIds.set(a.id,`a${actionIds.size}`);
       return {...a,id:actionIds.get(a.id)!};
     });
-    // Presentation IDs can contain a hidden source ID. Replace with opaque frame-local IDs.
-    visuals.projectiles = visuals.projectiles.map((p, i) => ({ ...p, id: `v${i}` }));
-    visuals.effects = visuals.effects.map((p, i) => ({ ...p, id: `e${i}`, text: /^−?\d+$/.test(p.text) ? p.text : '' }));
-    return { ...(frame.domination?{domination:copy(frame.domination)}:{}),...(frame.zones?{zones:zoneView(frame.zones,team,visible,result.game.map)}:{}),t: frame.t, visible: [...visible], explored: [...explored],
+    // Presentation IDs may contain hidden source IDs. Opaque IDs remain stable across frames.
+    visuals.projectiles = visuals.projectiles.map(p => ({ ...p, id: opaque(projectileIds,p.id,'v') }));
+    visuals.effects = visuals.effects.map(p => ({ ...p, id: opaque(effectIds,p.id,'e'), text: /^−?\d+$/.test(p.text) ? p.text : '' }));
+    return { ...(frame.round!==undefined?{round:frame.round}:{}),...(frame.domination?{domination:copy(frame.domination)}:{}),...(frame.zones?{zones:zoneView(frame.zones,team,visible,result.game.map)}:{}),t: frame.t, visible: [...visible], explored: [...explored],
       ships, planes, torpedoes,
-      mines: frame.mines.map(mineView), effects: [] as [], visuals };
+      mines: frame.mines.filter(m=>explored.has(E.key(m))).map(mineView), effects: [] as [], visuals };
   });
   for (let i = frames.length - 2; i >= 0; i--) for (const name of (['ships', 'planes', 'torpedoes'] as const)) {
     const next = new Map(frames[i + 1][name].map(u => [u.id, u]));
@@ -124,8 +131,8 @@ export function validateOrders(game:Game, team:number, value:unknown):Plans {
     p.sweep = input.sweep ?? null;
     if(input.guard!==undefined){if(typeof input.guard!=='boolean'||input.guard&&(!ship.cfg.guard||p.moves.length))invalid();if(input.guard)p.guard=true;}
     for(const k of ['smoke','radar','escort','mineSteps'] as const)if(input[k]!==undefined&&input[k]!==null)Object.assign(p,{[k]:copy(input[k])});
-    if (p.moves.length > ship.cfg.speed || p.moves.some(m => !fields(m, ['turn', 'forward']) || ![-1, 0, 1].includes(m.turn) || typeof m.forward !== 'boolean')) invalid();
-    const nodes = E.route(ship, p, view.map);
+    if (p.moves.length > effectiveSpeed(ship,game.round) || p.moves.some(m => !fields(m, ['turn', 'forward']) || ![-1, 0, 1].includes(m.turn) || typeof m.forward !== 'boolean')) invalid();
+    const nodes = E.route(ship, p, view.map,game.round);
     if (nodes.length !== p.moves.length + 1) invalid();
     if (p.torps.length > Math.min(ship.torps, ship.cfg.torpedo?.max || 0)) invalid();
     const windows = new Set();
@@ -143,7 +150,7 @@ export function validateOrders(game:Game, team:number, value:unknown):Plans {
       else invalid();
     }
     if (p.sweep !== null && (!hex(p.sweep,game.map) || !ship.cfg.secondary || E.hexDist(ship.pos, p.sweep) > ship.cfg.secondary.range || !view.map.mines.some(h => E.same(h, p.sweep!)) || !E.hasLOS(view.map, ship.pos, p.sweep))) invalid();
-    if (input.segments !== undefined && (!Array.isArray(input.segments) || input.segments.length > ship.cfg.speed || input.segments.some(s => !fields(s, ['start', 'end', 'target']) || !Number.isInteger(s.start) || !Number.isInteger(s.end) || s.start < 0 || s.end <= s.start || s.end > p.moves.length || !hex(s.target,game.map)))) invalid();
+    if (input.segments !== undefined && (!Array.isArray(input.segments) || input.segments.length > effectiveSpeed(ship,game.round) || input.segments.some(s => !fields(s, ['start', 'end', 'target']) || !Number.isInteger(s.start) || !Number.isInteger(s.end) || s.start < 0 || s.end <= s.start || s.end > p.moves.length || !hex(s.target,game.map)))) invalid();
     const checked=E.validPlan({...game,map:view.map},ship,p);
     for(const k of ['smoke','radar','escort','mineSteps','torps','planes'] as const){
       const requested=p[k];if((requested===false||Array.isArray(requested)&&!requested.length)&&checked[k]===undefined)continue;

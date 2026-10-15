@@ -14,6 +14,7 @@ export function accumulateRoundStats(match:Match, result:RoundResult) {
     for (const key of ['damageDealt', 'friendlyDamage', 'shipsSunk', 'planesShotDown'] as const) total[key] += stats[key];
     for (const key of ['enemy', 'friendly', 'environment'] as const) total.damageTaken[key] += stats.damageTaken[key];
     for (const [source, damage] of Object.entries(stats.damageBySource || {})) {
+      total.damageBySource[source]??={dealt:0,friendly:0,taken:0};
       for (const key of ['dealt', 'friendly', 'taken'] as const) total.damageBySource[source][key] += damage[key];
     }
   }

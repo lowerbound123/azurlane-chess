@@ -1,0 +1,14 @@
+{
+  "browser": "Chrome / ANGLE SwiftShader WebGL",
+  "checks": [
+    "pause freezes particles and water",
+    "rewind reproduces identical rendered pixels",
+    "quarter-speed playback advances",
+    "non-loop playback ends and all effects clear",
+    "loop restarts",
+    "mobile stacked layout without horizontal overflow",
+    "reduced motion starts paused",
+    "no runtime or shader errors"
+  ],
+  "errors": []
+}

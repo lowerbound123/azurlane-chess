@@ -1,3 +1,4 @@
+import {effectiveSpeed,validateStatuses,MAX_SNAPSHOT_DAMAGE} from '../shared/status.ts';
 import type {Hex,XY,ShipConfig,TorpedoConfig,PlaneConfig} from "../shared/game.ts";
 import type {SaveState,SaveEnvelope,SaveOptions,SaveFailure,SaveResult,StorageLike} from "../shared/save.ts";
 import {planeForSlot} from './ship-definitions.ts';
@@ -159,10 +160,10 @@ function config(value: ShipConfig, path: string, code: string) {
     if(v.slots){array(v.slots,100,`${path}.carrier.slots`,code);expect(v.slots.length===v.stock,`${path}.carrier.slots`,code);v.slots.forEach((p,i)=>planeConfig(p,`${path}.carrier.slots.${i}`,code));}
   }
 }
-function projectileConfig(value: TorpedoConfig, path: string, code: string) {
+function projectileConfig(value: TorpedoConfig, path: string, code: string,maxDamage=1e5) {
   object(value, path, code);
   finite(value.speed, 1e-3, 100, `${path}.speed`, code);
-  finite(value.damage, 0, 1e5, `${path}.damage`, code);
+  finite(value.damage, 0, maxDamage, `${path}.damage`, code);
   finite(value.life, 1e-3, 100, `${path}.life`, code);
 }
 function planeConfig(value: PlaneConfig, path: string, code: string) {
@@ -243,6 +244,7 @@ function validateState(state: SaveState, code: string) {
     integer(ship.team, 0, 1, `${p}.team`, code);
     text(ship.label, 100, `${p}.label`, code, false);
     expect(TYPES.includes(ship.template), `${p}.template`, code);
+    expect(validateStatuses(ship.statuses),`${p}.statuses`,code);
     config(ship.cfg, `${p}.cfg`, code);
     for(const [field,max]of [['minesLeft',ship.cfg.minelayer?.reserve],['smokeLeft',ship.cfg.smoke?.charges],['radarLeft',ship.cfg.radar?.charges]] as const)if(max!==undefined||ship[field]!==undefined)integer(ship[field],0,max??0,`${p}.${field}`,code);
     finite(ship.hp, 0, ship.cfg.hp, `${p}.hp`, code);
@@ -265,7 +267,7 @@ function validateState(state: SaveState, code: string) {
   });
   expect([0, 1].every((team) => game.ships.filter((s) => s.team === team).length === 5), "game.ships teams", code);
   const ships = new Map(game.ships.map((s) => [s.id, s]));
-  for(const m of game.map.mines)if(m.armedRound!==undefined){integer(m.armedRound,1,31,'mine.armedRound',code);expect(!!m.sourceId&&ships.has(m.sourceId),'mine.sourceId',code);expect(m.team===ships.get(m.sourceId!)!.team,'mine.team',code);finite(m.damage,0,1e5,'mine.damage',code);}
+  for(const m of game.map.mines)if(m.armedRound!==undefined){integer(m.armedRound,1,31,'mine.armedRound',code);expect(!!m.sourceId&&ships.has(m.sourceId),'mine.sourceId',code);expect(m.team===ships.get(m.sourceId!)!.team,'mine.team',code);finite(m.damage,0,MAX_SNAPSHOT_DAMAGE,'mine.damage',code);}
   array(game.torpedoes, 300, "game.torpedoes", code);
   unique(game.torpedoes, "game.torpedoes ids", code, (p) => p?.id);
   game.torpedoes.forEach((torpedo, i) => {
@@ -277,7 +279,7 @@ function validateState(state: SaveState, code: string) {
     expect(ships.has(torpedo.owner) && ships.get(torpedo.owner)!.team === torpedo.team, `${p}.owner`, code);
     xy(torpedo.xy, `${p}.xy`, code);
     integer(torpedo.heading, 0, 5, `${p}.heading`, code);
-    projectileConfig(torpedo.cfg, `${p}.cfg`, code);
+    projectileConfig(torpedo.cfg, `${p}.cfg`, code,MAX_SNAPSHOT_DAMAGE);
     finite(torpedo.age, 0, torpedo.cfg.life, `${p}.age`, code);
     integer(torpedo.launched, 1, game.round, `${p}.launched`, code);
     finite(torpedo.birth, 0, 1, `${p}.birth`, code);
@@ -299,6 +301,7 @@ function validateState(state: SaveState, code: string) {
     const slot = `${plane.mother}:${plane.slot}`;
     expect(!occupiedSlots.has(slot), `${p}.slot duplicate`, code);
     occupiedSlots.add(slot);
+    expect(validateStatuses(plane.statuses),`${p}.statuses`,code);
     planeConfig(plane.cfg, `${p}.cfg`, code);
     if(game.ruleset){expect(JSON.stringify(plane.cfg)===JSON.stringify(planeForSlot(mother.cfg,plane.slot)),`${p}.cfg slot`,code);if(plane.mode==='patrol')finite(plane.patrolRemaining,0,1,`${p}.patrolRemaining`,code);if(plane.attackRound!==undefined)integer(plane.attackRound,1,game.round,`${p}.attackRound`,code);}
     finite(plane.hp, 1e-3, plane.cfg.hp, `${p}.hp`, code);
@@ -335,7 +338,7 @@ function validateState(state: SaveState, code: string) {
     const p = `plans.${id}`, ship = ships.get(id);
     expect(!!ship, p, code);
     object(plan, p, code);
-    array(plan.moves, ship.cfg.speed, `${p}.moves`, code);
+    array(plan.moves, effectiveSpeed(ship,game.round), `${p}.moves`, code);
     plan.moves.forEach((move, i) => {
       object(move, `${p}.moves.${i}`, code);
       integer(move.turn, -1, 1, `${p}.moves.${i}.turn`, code);
@@ -368,7 +371,7 @@ function validateState(state: SaveState, code: string) {
       hex(plan.sweep, `${p}.sweep`, code);
     }
     if (own(plan, "segments")) {
-      array(plan.segments, ship.cfg.speed, `${p}.segments`, code);
+      array(plan.segments, effectiveSpeed(ship,game.round), `${p}.segments`, code);
       plan.segments!.forEach((segment, i) => {
         const sp = `${p}.segments.${i}`;
         object(segment, sp, code);

@@ -11,12 +11,14 @@ import App from '../../src/App.vue';
 import {BattleMap3D} from './battle-map-test-adapter.ts';
 import {vi} from 'vitest';
 import {resolveRound,planAI} from '../../src/engine.ts';
+import {resolveHistoricalRound} from '../../src/history/index.ts';
+import type {LocalRoundRequest} from '../../src/workers/battle-api.ts';
 vi.mock('../../src/BattleMap3D.vue',async()=>({default:(await import('./battle-map-test-adapter.ts')).BattleMap3D}));
 // DOM runner has no browser Worker. The public calculator boundary is replaced,
 // while worker transport/timeout/disposal have independent tests and browser QA.
 vi.mock('../../src/composables/battle-computer.ts',()=>({BattleComputer:class {
  private reject:((error:Error)=>void)|null=null;private timer:ReturnType<typeof setTimeout>|undefined;
- resolve({game,plans,opponentPlans,resolution}:{resolution?:import('../../src/engine.ts').RoundResolutionOptions;game:import('../../shared/game.ts').Game;plans:import('../../shared/game.ts').Plans;opponentPlans?:import('../../shared/game.ts').Plans}){return new Promise<import('../../shared/game.ts').RoundResult>((resolve,reject)=>{this.reject=reject;this.timer=setTimeout(()=>{this.reject=null;resolve(resolveRound(game,{...plans,...(opponentPlans??planAI(game,1))},resolution));},60);});}
+ resolve({game,plans,opponentPlans,resolution,historical}:LocalRoundRequest){return new Promise<import('../../shared/game.ts').RoundResult>((resolve,reject)=>{this.reject=reject;this.timer=setTimeout(()=>{this.reject=null;try{resolve(historical?resolveHistoricalRound(game,historical,plans):resolveRound(game,{...plans,...(opponentPlans??planAI(game,1))},resolution));}catch(error){reject(error);}},60);});}
  dispose(){clearTimeout(this.timer);this.reject?.(new Error('取消'));this.reject=null;}
 }}));
 

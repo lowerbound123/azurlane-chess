@@ -1,0 +1,5090 @@
+{
+  "id": "cv-3",
+  "initial": {
+    "seed": 20261015,
+    "round": 1,
+    "ruleset": "fleet-v1",
+    "zones": [],
+    "map": {
+      "width": 13,
+      "height": 11,
+      "islands": [],
+      "mines": []
+    },
+    "ships": [
+      {
+        "id": "0-0",
+        "kind": "ship",
+        "team": 0,
+        "label": "香格里拉",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "香格里拉",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 6,
+            "launch": 2,
+            "rearm": 1,
+            "heal": 1,
+            "plane": {
+              "role": "scout",
+              "hp": 1,
+              "speed": 8,
+              "vision": 5,
+              "range": 16,
+              "damage": 0,
+              "rearm": 1
+            },
+            "slots": [
+              {
+                "role": "scout",
+                "hp": 1,
+                "speed": 8,
+                "vision": 5,
+                "range": 16,
+                "damage": 0,
+                "rearm": 1
+              },
+              {
+                "role": "scout",
+                "hp": 1,
+                "speed": 8,
+                "vision": 5,
+                "range": 16,
+                "damage": 0,
+                "rearm": 1
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 1,
+          "r": 5
+        },
+        "xy": {
+          "x": 6.06217782649107,
+          "y": 7.5
+        },
+        "heading": 0,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-3"
+      },
+      {
+        "id": "1-0",
+        "kind": "ship",
+        "team": 1,
+        "label": "北卡罗来纳",
+        "template": "bb",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "北卡罗来纳",
+          "role": "back",
+          "hp": 270,
+          "speed": 2,
+          "vision": 5,
+          "collision": 35,
+          "secondary": {
+            "damage": 10,
+            "range": 3,
+            "multi": false
+          },
+          "main": {
+            "range": 9,
+            "shots": 3,
+            "damage": 60,
+            "reload": 1
+          }
+        },
+        "hp": 270,
+        "pos": {
+          "q": 9,
+          "r": 5
+        },
+        "xy": {
+          "x": 19.918584287042087,
+          "y": 7.5
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "bb-1"
+      }
+    ],
+    "planes": [],
+    "torpedoes": [],
+    "nextId": 0,
+    "log": [],
+    "winner": null,
+    "phase": "plan",
+    "explored": [
+      [
+        "1,0",
+        "2,0",
+        "3,0",
+        "4,0",
+        "5,0",
+        "6,0",
+        "0,1",
+        "1,1",
+        "2,1",
+        "3,1",
+        "4,1",
+        "5,1",
+        "6,1",
+        "-1,2",
+        "0,2",
+        "1,2",
+        "2,2",
+        "3,2",
+        "4,2",
+        "5,2",
+        "6,2",
+        "-1,3",
+        "0,3",
+        "1,3",
+        "2,3",
+        "3,3",
+        "4,3",
+        "5,3",
+        "6,3",
+        "-2,4",
+        "-1,4",
+        "0,4",
+        "1,4",
+        "2,4",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "-2,5",
+        "-1,5",
+        "0,5",
+        "1,5",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "-3,6",
+        "-2,6",
+        "-1,6",
+        "0,6",
+        "1,6",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "-3,7",
+        "-2,7",
+        "-1,7",
+        "0,7",
+        "1,7",
+        "2,7",
+        "3,7",
+        "4,7",
+        "-4,8",
+        "-3,8",
+        "-2,8",
+        "-1,8",
+        "0,8",
+        "1,8",
+        "2,8",
+        "3,8",
+        "-4,9",
+        "-3,9",
+        "-2,9",
+        "-1,9",
+        "0,9",
+        "1,9",
+        "2,9",
+        "-4,10",
+        "-3,10",
+        "-2,10",
+        "-1,10",
+        "0,10",
+        "1,10"
+      ],
+      [
+        "9,0",
+        "10,0",
+        "11,0",
+        "12,0",
+        "8,1",
+        "9,1",
+        "10,1",
+        "11,1",
+        "12,1",
+        "7,2",
+        "8,2",
+        "9,2",
+        "10,2",
+        "11,2",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "10,3",
+        "11,3",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "10,4",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "10,5",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "9,6",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "8,7",
+        "9,7",
+        "4,8",
+        "5,8",
+        "6,8",
+        "7,8",
+        "8,8",
+        "4,9",
+        "5,9",
+        "6,9",
+        "7,9",
+        "8,9",
+        "4,10",
+        "5,10",
+        "6,10",
+        "7,10"
+      ]
+    ]
+  },
+  "rounds": [
+    {
+      "events": [
+        {
+          "round": 1,
+          "t": 0,
+          "text": "香格里拉 放飞",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "team": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "action:1:0",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "aircraft",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 2,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "香格里拉",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "香格里拉",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "slots": [
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 5
+            },
+            "xy": {
+              "x": 6.06217782649107,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              null,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-3"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "北卡罗来纳",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "北卡罗来纳",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 9,
+                "shots": 3,
+                "damage": 60,
+                "reload": 1
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-1"
+          }
+        ],
+        "planes": [
+          {
+            "id": "p0",
+            "kind": "plane",
+            "team": 0,
+            "mother": "0-0",
+            "slot": 0,
+            "hp": 1,
+            "cfg": {
+              "role": "scout",
+              "hp": 1,
+              "speed": 8,
+              "vision": 5,
+              "range": 16,
+              "damage": 0,
+              "rearm": 1
+            },
+            "xy": {
+              "x": 19.91858428704203,
+              "y": 7.5
+            },
+            "mode": "point",
+            "target": {
+              "q": 9,
+              "r": 5
+            },
+            "targetId": null,
+            "tracking": false,
+            "state": "return",
+            "traveled": 7.999999999999977,
+            "waypoints": []
+          }
+        ],
+        "torpedoes": [],
+        "nextId": 1,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "7,0",
+            "7,1",
+            "7,2",
+            "7,3",
+            "7,4",
+            "7,5",
+            "6,6",
+            "5,7",
+            "4,8",
+            "3,9",
+            "2,10",
+            "8,0",
+            "8,1",
+            "8,2",
+            "8,3",
+            "8,4",
+            "8,5",
+            "7,6",
+            "6,7",
+            "5,8",
+            "4,9",
+            "3,10",
+            "9,0",
+            "9,1",
+            "9,2",
+            "9,3",
+            "9,4",
+            "9,5",
+            "8,6",
+            "7,7",
+            "6,8",
+            "5,9",
+            "4,10",
+            "10,0",
+            "10,1",
+            "10,2",
+            "10,3",
+            "10,4",
+            "10,5",
+            "9,6",
+            "8,7",
+            "7,8",
+            "6,9",
+            "5,10",
+            "11,0",
+            "11,1",
+            "11,2",
+            "11,3",
+            "9,7",
+            "8,8",
+            "7,9",
+            "6,10",
+            "12,0",
+            "12,1",
+            "8,9",
+            "7,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [
+        {
+          "round": 2,
+          "t": 0,
+          "text": "香格里拉 放飞",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "team": 0
+        },
+        {
+          "round": 2,
+          "t": 0.992,
+          "text": "香格里拉 回收飞机",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "team": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "action:2:0",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "aircraft",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 3,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "香格里拉",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "香格里拉",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "slots": [
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 5
+            },
+            "xy": {
+              "x": 6.06217782649107,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              4,
+              1,
+              null,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-3"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "北卡罗来纳",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "北卡罗来纳",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 9,
+                "shots": 3,
+                "damage": 60,
+                "reload": 1
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-1"
+          }
+        ],
+        "planes": [
+          {
+            "id": "p1",
+            "kind": "plane",
+            "team": 0,
+            "mother": "0-0",
+            "slot": 2,
+            "hp": 2,
+            "cfg": {
+              "role": "bomber",
+              "hp": 2,
+              "speed": 6,
+              "vision": 3,
+              "range": 12,
+              "damage": 25,
+              "rearm": 1
+            },
+            "xy": {
+              "x": 16.454482671904305,
+              "y": 7.5
+            },
+            "mode": "target",
+            "target": {
+              "q": 9,
+              "r": 5
+            },
+            "targetId": "1-0",
+            "tracking": false,
+            "state": "outbound",
+            "traveled": 5.9999999999999645,
+            "waypoints": []
+          }
+        ],
+        "torpedoes": [],
+        "nextId": 2,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0.992,
+            "text": "香格里拉 回收飞机",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "7,0",
+            "7,1",
+            "7,2",
+            "7,3",
+            "7,4",
+            "7,5",
+            "6,6",
+            "5,7",
+            "4,8",
+            "3,9",
+            "2,10",
+            "8,0",
+            "8,1",
+            "8,2",
+            "8,3",
+            "8,4",
+            "8,5",
+            "7,6",
+            "6,7",
+            "5,8",
+            "4,9",
+            "3,10",
+            "9,0",
+            "9,1",
+            "9,2",
+            "9,3",
+            "9,4",
+            "9,5",
+            "8,6",
+            "7,7",
+            "6,8",
+            "5,9",
+            "4,10",
+            "10,0",
+            "10,1",
+            "10,2",
+            "10,3",
+            "10,4",
+            "10,5",
+            "9,6",
+            "8,7",
+            "7,8",
+            "6,9",
+            "5,10",
+            "11,0",
+            "11,1",
+            "11,2",
+            "11,3",
+            "9,7",
+            "8,8",
+            "7,9",
+            "6,10",
+            "12,0",
+            "12,1",
+            "8,9",
+            "7,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [
+        {
+          "round": 3,
+          "t": 0.254,
+          "text": "北卡罗来纳 遭航空炸弹命中 −25",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "team": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "effect:3:0",
+          "type": "effect",
+          "kind": "bomb",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "team": 0,
+          "time": 0.37416666666666665,
+          "duration": 0.8,
+          "targetId": "1-0",
+          "position": {
+            "x": 19.918584287042087,
+            "y": 7.5
+          }
+        },
+        {
+          "id": "effect:3:0:trace",
+          "type": "projectile",
+          "kind": "bomb",
+          "team": 0,
+          "from": {
+            "x": 19.09586015344683,
+            "y": 7.5
+          },
+          "to": {
+            "x": 19.918584287042087,
+            "y": 7.5
+          },
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "start": 0.25416666666666665,
+          "end": 0.37416666666666665
+        },
+        {
+          "id": "action:3:2",
+          "type": "action",
+          "shipId": "1-0",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "time": 0.25416666666666665,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:3:3",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "team": 1,
+          "time": 0.25416666666666665,
+          "duration": 0.65,
+          "text": "−25",
+          "targetId": "1-0",
+          "position": {
+            "x": 19.918584287042087,
+            "y": 7.5
+          }
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 4,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "香格里拉",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "香格里拉",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "slots": [
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 5
+            },
+            "xy": {
+              "x": 6.06217782649107,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              4,
+              1,
+              null,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-3"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "北卡罗来纳",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "北卡罗来纳",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 9,
+                "shots": 3,
+                "damage": 60,
+                "reload": 1
+              }
+            },
+            "hp": 245,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-1"
+          }
+        ],
+        "planes": [
+          {
+            "id": "p1",
+            "kind": "plane",
+            "team": 0,
+            "mother": "0-0",
+            "slot": 2,
+            "hp": 2,
+            "cfg": {
+              "role": "bomber",
+              "hp": 2,
+              "speed": 6,
+              "vision": 3,
+              "range": 12,
+              "damage": 25,
+              "rearm": 1
+            },
+            "xy": {
+              "x": 11.34493278957612,
+              "y": 7.5
+            },
+            "mode": "target",
+            "target": {
+              "q": 9,
+              "r": 5
+            },
+            "targetId": "1-0",
+            "tracking": false,
+            "state": "return",
+            "traveled": 7.524999999999932,
+            "waypoints": []
+          }
+        ],
+        "torpedoes": [],
+        "nextId": 2,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0.992,
+            "text": "香格里拉 回收飞机",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 0.254,
+            "text": "北卡罗来纳 遭航空炸弹命中 −25",
+            "at": {
+              "q": 9,
+              "r": 5
+            },
+            "team": 1
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "7,0",
+            "7,1",
+            "7,2",
+            "7,3",
+            "7,4",
+            "7,5",
+            "6,6",
+            "5,7",
+            "4,8",
+            "3,9",
+            "2,10",
+            "8,0",
+            "8,1",
+            "8,2",
+            "8,3",
+            "8,4",
+            "8,5",
+            "7,6",
+            "6,7",
+            "5,8",
+            "4,9",
+            "3,10",
+            "9,0",
+            "9,1",
+            "9,2",
+            "9,3",
+            "9,4",
+            "9,5",
+            "8,6",
+            "7,7",
+            "6,8",
+            "5,9",
+            "4,10",
+            "10,0",
+            "10,1",
+            "10,2",
+            "10,3",
+            "10,4",
+            "10,5",
+            "9,6",
+            "8,7",
+            "7,8",
+            "6,9",
+            "5,10",
+            "11,0",
+            "11,1",
+            "11,2",
+            "11,3",
+            "9,7",
+            "8,8",
+            "7,9",
+            "6,10",
+            "12,0",
+            "12,1",
+            "8,9",
+            "7,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 25,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 25,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 25,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 25
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [
+        {
+          "round": 4,
+          "t": 0.5,
+          "text": "香格里拉 回收飞机",
+          "at": {
+            "q": 1,
+            "r": 5
+          },
+          "team": 0
+        }
+      ],
+      "presentation": [],
+      "game": {
+        "seed": 20261015,
+        "round": 5,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "香格里拉",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "香格里拉",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "slots": [
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 5
+            },
+            "xy": {
+              "x": 6.06217782649107,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              4,
+              1,
+              6,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-3"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "北卡罗来纳",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "北卡罗来纳",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 9,
+                "shots": 3,
+                "damage": 60,
+                "reload": 1
+              }
+            },
+            "hp": 245,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-1"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 2,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "香格里拉 放飞",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 2,
+            "t": 0.992,
+            "text": "香格里拉 回收飞机",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 0.254,
+            "text": "北卡罗来纳 遭航空炸弹命中 −25",
+            "at": {
+              "q": 9,
+              "r": 5
+            },
+            "team": 1
+          },
+          {
+            "round": 4,
+            "t": 0.5,
+            "text": "香格里拉 回收飞机",
+            "at": {
+              "q": 1,
+              "r": 5
+            },
+            "team": 0
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "7,0",
+            "7,1",
+            "7,2",
+            "7,3",
+            "7,4",
+            "7,5",
+            "6,6",
+            "5,7",
+            "4,8",
+            "3,9",
+            "2,10",
+            "8,0",
+            "8,1",
+            "8,2",
+            "8,3",
+            "8,4",
+            "8,5",
+            "7,6",
+            "6,7",
+            "5,8",
+            "4,9",
+            "3,10",
+            "9,0",
+            "9,1",
+            "9,2",
+            "9,3",
+            "9,4",
+            "9,5",
+            "8,6",
+            "7,7",
+            "6,8",
+            "5,9",
+            "4,10",
+            "10,0",
+            "10,1",
+            "10,2",
+            "10,3",
+            "10,4",
+            "10,5",
+            "9,6",
+            "8,7",
+            "7,8",
+            "6,9",
+            "5,10",
+            "11,0",
+            "11,1",
+            "11,2",
+            "11,3",
+            "9,7",
+            "8,8",
+            "7,9",
+            "6,10",
+            "12,0",
+            "12,1",
+            "8,9",
+            "7,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "experiments": {
+    "main": {
+      "label": "",
+      "initial": {
+        "seed": 20261015,
+        "round": 1,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "香格里拉",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "香格里拉",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "slots": [
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "scout",
+                    "hp": 1,
+                    "speed": 8,
+                    "vision": 5,
+                    "range": 16,
+                    "damage": 0,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 5
+            },
+            "xy": {
+              "x": 6.06217782649107,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-3"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "北卡罗来纳",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "北卡罗来纳",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 9,
+                "shots": 3,
+                "damage": 60,
+                "reload": 1
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-1"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "orders": [
+        {
+          "0-0": {
+            "moves": [],
+            "torps": [],
+            "main": [],
+            "planes": [
+              {
+                "slot": 0,
+                "mode": "point",
+                "target": {
+                  "q": 9,
+                  "r": 5
+                }
+              }
+            ],
+            "sweep": null
+          }
+        },
+        {
+          "0-0": {
+            "moves": [],
+            "torps": [],
+            "main": [],
+            "planes": [
+              {
+                "slot": 2,
+                "mode": "target",
+                "targetId": "1-0"
+              }
+            ],
+            "sweep": null
+          }
+        },
+        {},
+        {}
+      ],
+      "rounds": [
+        {
+          "events": [
+            {
+              "round": 1,
+              "t": 0,
+              "text": "香格里拉 放飞",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "team": 0
+            }
+          ],
+          "presentation": [
+            {
+              "id": "action:1:0",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "aircraft",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 2,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "香格里拉",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "香格里拉",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 6,
+                    "launch": 2,
+                    "rearm": 1,
+                    "heal": 1,
+                    "plane": {
+                      "role": "scout",
+                      "hp": 1,
+                      "speed": 8,
+                      "vision": 5,
+                      "range": 16,
+                      "damage": 0,
+                      "rearm": 1
+                    },
+                    "slots": [
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      }
+                    ]
+                  }
+                },
+                "hp": 210,
+                "pos": {
+                  "q": 1,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 6.06217782649107,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  null,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-3"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "北卡罗来纳",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "北卡罗来纳",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 9,
+                    "shots": 3,
+                    "damage": 60,
+                    "reload": 1
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 9,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 19.918584287042087,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-1"
+              }
+            ],
+            "planes": [
+              {
+                "id": "p0",
+                "kind": "plane",
+                "team": 0,
+                "mother": "0-0",
+                "slot": 0,
+                "hp": 1,
+                "cfg": {
+                  "role": "scout",
+                  "hp": 1,
+                  "speed": 8,
+                  "vision": 5,
+                  "range": 16,
+                  "damage": 0,
+                  "rearm": 1
+                },
+                "xy": {
+                  "x": 19.91858428704203,
+                  "y": 7.5
+                },
+                "mode": "point",
+                "target": {
+                  "q": 9,
+                  "r": 5
+                },
+                "targetId": null,
+                "tracking": false,
+                "state": "return",
+                "traveled": 7.999999999999977,
+                "waypoints": []
+              }
+            ],
+            "torpedoes": [],
+            "nextId": 1,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "1,0",
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "-1,2",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "-4,8",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "-4,9",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "-4,10",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "7,0",
+                "7,1",
+                "7,2",
+                "7,3",
+                "7,4",
+                "7,5",
+                "6,6",
+                "5,7",
+                "4,8",
+                "3,9",
+                "2,10",
+                "8,0",
+                "8,1",
+                "8,2",
+                "8,3",
+                "8,4",
+                "8,5",
+                "7,6",
+                "6,7",
+                "5,8",
+                "4,9",
+                "3,10",
+                "9,0",
+                "9,1",
+                "9,2",
+                "9,3",
+                "9,4",
+                "9,5",
+                "8,6",
+                "7,7",
+                "6,8",
+                "5,9",
+                "4,10",
+                "10,0",
+                "10,1",
+                "10,2",
+                "10,3",
+                "10,4",
+                "10,5",
+                "9,6",
+                "8,7",
+                "7,8",
+                "6,9",
+                "5,10",
+                "11,0",
+                "11,1",
+                "11,2",
+                "11,3",
+                "9,7",
+                "8,8",
+                "7,9",
+                "6,10",
+                "12,0",
+                "12,1",
+                "8,9",
+                "7,10"
+              ],
+              [
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [
+            {
+              "round": 2,
+              "t": 0,
+              "text": "香格里拉 放飞",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "team": 0
+            },
+            {
+              "round": 2,
+              "t": 0.992,
+              "text": "香格里拉 回收飞机",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "team": 0
+            }
+          ],
+          "presentation": [
+            {
+              "id": "action:2:0",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "aircraft",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 3,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "香格里拉",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "香格里拉",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 6,
+                    "launch": 2,
+                    "rearm": 1,
+                    "heal": 1,
+                    "plane": {
+                      "role": "scout",
+                      "hp": 1,
+                      "speed": 8,
+                      "vision": 5,
+                      "range": 16,
+                      "damage": 0,
+                      "rearm": 1
+                    },
+                    "slots": [
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      }
+                    ]
+                  }
+                },
+                "hp": 210,
+                "pos": {
+                  "q": 1,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 6.06217782649107,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  4,
+                  1,
+                  null,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-3"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "北卡罗来纳",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "北卡罗来纳",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 9,
+                    "shots": 3,
+                    "damage": 60,
+                    "reload": 1
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 9,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 19.918584287042087,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-1"
+              }
+            ],
+            "planes": [
+              {
+                "id": "p1",
+                "kind": "plane",
+                "team": 0,
+                "mother": "0-0",
+                "slot": 2,
+                "hp": 2,
+                "cfg": {
+                  "role": "bomber",
+                  "hp": 2,
+                  "speed": 6,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 25,
+                  "rearm": 1
+                },
+                "xy": {
+                  "x": 16.454482671904305,
+                  "y": 7.5
+                },
+                "mode": "target",
+                "target": {
+                  "q": 9,
+                  "r": 5
+                },
+                "targetId": "1-0",
+                "tracking": false,
+                "state": "outbound",
+                "traveled": 5.9999999999999645,
+                "waypoints": []
+              }
+            ],
+            "torpedoes": [],
+            "nextId": 2,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0.992,
+                "text": "香格里拉 回收飞机",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "1,0",
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "-1,2",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "-4,8",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "-4,9",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "-4,10",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "7,0",
+                "7,1",
+                "7,2",
+                "7,3",
+                "7,4",
+                "7,5",
+                "6,6",
+                "5,7",
+                "4,8",
+                "3,9",
+                "2,10",
+                "8,0",
+                "8,1",
+                "8,2",
+                "8,3",
+                "8,4",
+                "8,5",
+                "7,6",
+                "6,7",
+                "5,8",
+                "4,9",
+                "3,10",
+                "9,0",
+                "9,1",
+                "9,2",
+                "9,3",
+                "9,4",
+                "9,5",
+                "8,6",
+                "7,7",
+                "6,8",
+                "5,9",
+                "4,10",
+                "10,0",
+                "10,1",
+                "10,2",
+                "10,3",
+                "10,4",
+                "10,5",
+                "9,6",
+                "8,7",
+                "7,8",
+                "6,9",
+                "5,10",
+                "11,0",
+                "11,1",
+                "11,2",
+                "11,3",
+                "9,7",
+                "8,8",
+                "7,9",
+                "6,10",
+                "12,0",
+                "12,1",
+                "8,9",
+                "7,10"
+              ],
+              [
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [
+            {
+              "round": 3,
+              "t": 0.254,
+              "text": "北卡罗来纳 遭航空炸弹命中 −25",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "team": 1
+            }
+          ],
+          "presentation": [
+            {
+              "id": "effect:3:0",
+              "type": "effect",
+              "kind": "bomb",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "team": 0,
+              "time": 0.37416666666666665,
+              "duration": 0.8,
+              "targetId": "1-0",
+              "position": {
+                "x": 19.918584287042087,
+                "y": 7.5
+              }
+            },
+            {
+              "id": "effect:3:0:trace",
+              "type": "projectile",
+              "kind": "bomb",
+              "team": 0,
+              "from": {
+                "x": 19.09586015344683,
+                "y": 7.5
+              },
+              "to": {
+                "x": 19.918584287042087,
+                "y": 7.5
+              },
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "start": 0.25416666666666665,
+              "end": 0.37416666666666665
+            },
+            {
+              "id": "action:3:2",
+              "type": "action",
+              "shipId": "1-0",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "time": 0.25416666666666665,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:3:3",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "team": 1,
+              "time": 0.25416666666666665,
+              "duration": 0.65,
+              "text": "−25",
+              "targetId": "1-0",
+              "position": {
+                "x": 19.918584287042087,
+                "y": 7.5
+              }
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 4,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "香格里拉",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "香格里拉",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 6,
+                    "launch": 2,
+                    "rearm": 1,
+                    "heal": 1,
+                    "plane": {
+                      "role": "scout",
+                      "hp": 1,
+                      "speed": 8,
+                      "vision": 5,
+                      "range": 16,
+                      "damage": 0,
+                      "rearm": 1
+                    },
+                    "slots": [
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      }
+                    ]
+                  }
+                },
+                "hp": 210,
+                "pos": {
+                  "q": 1,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 6.06217782649107,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  4,
+                  1,
+                  null,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-3"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "北卡罗来纳",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "北卡罗来纳",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 9,
+                    "shots": 3,
+                    "damage": 60,
+                    "reload": 1
+                  }
+                },
+                "hp": 245,
+                "pos": {
+                  "q": 9,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 19.918584287042087,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-1"
+              }
+            ],
+            "planes": [
+              {
+                "id": "p1",
+                "kind": "plane",
+                "team": 0,
+                "mother": "0-0",
+                "slot": 2,
+                "hp": 2,
+                "cfg": {
+                  "role": "bomber",
+                  "hp": 2,
+                  "speed": 6,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 25,
+                  "rearm": 1
+                },
+                "xy": {
+                  "x": 11.34493278957612,
+                  "y": 7.5
+                },
+                "mode": "target",
+                "target": {
+                  "q": 9,
+                  "r": 5
+                },
+                "targetId": "1-0",
+                "tracking": false,
+                "state": "return",
+                "traveled": 7.524999999999932,
+                "waypoints": []
+              }
+            ],
+            "torpedoes": [],
+            "nextId": 2,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0.992,
+                "text": "香格里拉 回收飞机",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 0.254,
+                "text": "北卡罗来纳 遭航空炸弹命中 −25",
+                "at": {
+                  "q": 9,
+                  "r": 5
+                },
+                "team": 1
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "1,0",
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "-1,2",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "-4,8",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "-4,9",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "-4,10",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "7,0",
+                "7,1",
+                "7,2",
+                "7,3",
+                "7,4",
+                "7,5",
+                "6,6",
+                "5,7",
+                "4,8",
+                "3,9",
+                "2,10",
+                "8,0",
+                "8,1",
+                "8,2",
+                "8,3",
+                "8,4",
+                "8,5",
+                "7,6",
+                "6,7",
+                "5,8",
+                "4,9",
+                "3,10",
+                "9,0",
+                "9,1",
+                "9,2",
+                "9,3",
+                "9,4",
+                "9,5",
+                "8,6",
+                "7,7",
+                "6,8",
+                "5,9",
+                "4,10",
+                "10,0",
+                "10,1",
+                "10,2",
+                "10,3",
+                "10,4",
+                "10,5",
+                "9,6",
+                "8,7",
+                "7,8",
+                "6,9",
+                "5,10",
+                "11,0",
+                "11,1",
+                "11,2",
+                "11,3",
+                "9,7",
+                "8,8",
+                "7,9",
+                "6,10",
+                "12,0",
+                "12,1",
+                "8,9",
+                "7,10"
+              ],
+              [
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [
+            {
+              "round": 4,
+              "t": 0.5,
+              "text": "香格里拉 回收飞机",
+              "at": {
+                "q": 1,
+                "r": 5
+              },
+              "team": 0
+            }
+          ],
+          "presentation": [],
+          "game": {
+            "seed": 20261015,
+            "round": 5,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "香格里拉",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "香格里拉",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 6,
+                    "launch": 2,
+                    "rearm": 1,
+                    "heal": 1,
+                    "plane": {
+                      "role": "scout",
+                      "hp": 1,
+                      "speed": 8,
+                      "vision": 5,
+                      "range": 16,
+                      "damage": 0,
+                      "rearm": 1
+                    },
+                    "slots": [
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "scout",
+                        "hp": 1,
+                        "speed": 8,
+                        "vision": 5,
+                        "range": 16,
+                        "damage": 0,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      }
+                    ]
+                  }
+                },
+                "hp": 210,
+                "pos": {
+                  "q": 1,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 6.06217782649107,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  4,
+                  1,
+                  6,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-3"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "北卡罗来纳",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "北卡罗来纳",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 9,
+                    "shots": 3,
+                    "damage": 60,
+                    "reload": 1
+                  }
+                },
+                "hp": 245,
+                "pos": {
+                  "q": 9,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 19.918584287042087,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-1"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 2,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "香格里拉 放飞",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 2,
+                "t": 0.992,
+                "text": "香格里拉 回收飞机",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 0.254,
+                "text": "北卡罗来纳 遭航空炸弹命中 −25",
+                "at": {
+                  "q": 9,
+                  "r": 5
+                },
+                "team": 1
+              },
+              {
+                "round": 4,
+                "t": 0.5,
+                "text": "香格里拉 回收飞机",
+                "at": {
+                  "q": 1,
+                  "r": 5
+                },
+                "team": 0
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "1,0",
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "-1,2",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "-4,8",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "-4,9",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "-4,10",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "7,0",
+                "7,1",
+                "7,2",
+                "7,3",
+                "7,4",
+                "7,5",
+                "6,6",
+                "5,7",
+                "4,8",
+                "3,9",
+                "2,10",
+                "8,0",
+                "8,1",
+                "8,2",
+                "8,3",
+                "8,4",
+                "8,5",
+                "7,6",
+                "6,7",
+                "5,8",
+                "4,9",
+                "3,10",
+                "9,0",
+                "9,1",
+                "9,2",
+                "9,3",
+                "9,4",
+                "9,5",
+                "8,6",
+                "7,7",
+                "6,8",
+                "5,9",
+                "4,10",
+                "10,0",
+                "10,1",
+                "10,2",
+                "10,3",
+                "10,4",
+                "10,5",
+                "9,6",
+                "8,7",
+                "7,8",
+                "6,9",
+                "5,10",
+                "11,0",
+                "11,1",
+                "11,2",
+                "11,3",
+                "9,7",
+                "8,8",
+                "7,9",
+                "6,10",
+                "12,0",
+                "12,1",
+                "8,9",
+                "7,10"
+              ],
+              [
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "beats": [
+    {
+      "start": 0,
+      "end": 2,
+      "round": 0,
+      "from": -0.01,
+      "to": -0.01,
+      "viewer": 0,
+      "title": "两架侦察机 · 四架轰炸机",
+      "detail": "先派侦察机发现远处目标，此时敌舰不可见",
+      "preview": true
+    },
+    {
+      "start": 2,
+      "end": 6,
+      "round": 0,
+      "from": 0,
+      "to": 1,
+      "viewer": 0,
+      "title": "侦察机前出 · 展开五格视野",
+      "detail": "1 HP、航速 8、航程 16；侦察机不能投弹"
+    },
+    {
+      "start": 6,
+      "end": 8,
+      "round": 1,
+      "from": -0.01,
+      "to": -0.01,
+      "viewer": 0,
+      "title": "第二回合 · 选择已发现目标",
+      "detail": "发现目标后，下一轮规划才新增锁定攻击指令",
+      "preview": true
+    },
+    {
+      "start": 8,
+      "end": 11,
+      "round": 1,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "轰炸机出击 · 侦察机返航",
+      "detail": "混合机队共享每轮两架的放飞额度"
+    },
+    {
+      "start": 11,
+      "end": 14,
+      "round": 2,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "第三回合 · 轰炸命中 25",
+      "detail": "轰炸机执行打击；侦察机提供发现目标的机会"
+    },
+    {
+      "start": 14,
+      "end": 16,
+      "round": 3,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "返航回收 · 规划下一次侦察",
+      "detail": "情报与火力分工，保持对远处海域的控制"
+    }
+  ],
+  "export": {
+    "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+    "formats": {
+      "webm": {
+        "codec": "vp9",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 480,
+        "duration": 16,
+        "audio": false,
+        "bytes": 984271
+      },
+      "mp4": {
+        "codec": "h264",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 480,
+        "duration": 16,
+        "audio": false,
+        "bytes": 1068442
+      }
+    },
+    "keyframes": [
+      {
+        "frame": 0,
+        "time": 0
+      },
+      {
+        "frame": 144,
+        "time": 4.8
+      },
+      {
+        "frame": 346,
+        "time": 11.533333333333333
+      },
+      {
+        "frame": 479,
+        "time": 15.966666666666667
+      }
+    ]
+  }
+}

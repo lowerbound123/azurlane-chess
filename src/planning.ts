@@ -1,3 +1,4 @@
+import {effectiveSpeed} from '../shared/status.ts';
 import type { Hex, XY, Ship, Game, GameMap, Plan, Plans, RouteNode, RoundResult, PlanHistory } from "../shared/game.ts";
 export interface ReachableState {pos:Hex;heading:number;cost:number;moves:Plan["moves"];path:Hex[]}
 import * as E from "./engine.ts";
@@ -6,8 +7,8 @@ const airDistance = (a: Hex, b: Hex) => {
   return Math.hypot(x.x - y.x, x.y - y.y) / Math.sqrt(3);
 };
 const knowledgeMap = (map: GameMap, explored: Set<string>) => ({ ...map, islands: map.islands.filter((k) => explored.has(k)) });
-function reachable(ship: Ship, plan: Plan, map: GameMap, known: Set<string>|null = null) {
-  const nodes = E.route(ship, plan, map), end = nodes.at(-1)!, budget = plan.guard ? 0 : Math.max(0, (plan.escort?ship.cfg.escort!.steps:ship.cfg.speed) - (plan.moves?.length || 0)), cells = /* @__PURE__ */ new Map<string,ReachableState>(), queue:ReachableState[] = [{ pos: { ...end.pos }, heading: end.heading, cost: 0, moves: [], path: [{ ...end.pos }] }], seen = /* @__PURE__ */ new Set([`${E.key(end.pos)}:${end.heading}`]);
+function reachable(ship: Ship, plan: Plan, map: GameMap, known: Set<string>|null = null, round=1) {
+  const nodes = E.route(ship, plan, map,round), end = nodes.at(-1)!, budget = plan.guard ? 0 : Math.max(0, (plan.escort?Math.min(ship.cfg.escort!.steps,effectiveSpeed(ship,round)):effectiveSpeed(ship,round)) - (plan.moves?.length || 0)), cells = /* @__PURE__ */ new Map<string,ReachableState>(), queue:ReachableState[] = [{ pos: { ...end.pos }, heading: end.heading, cost: 0, moves: [], path: [{ ...end.pos }] }], seen = /* @__PURE__ */ new Set([`${E.key(end.pos)}:${end.heading}`]);
   for (let i = 0; i < queue.length; i++) {
     const state = queue[i], k = E.key(state.pos);
     if (!cells.has(k)) cells.set(k, state);
@@ -21,10 +22,10 @@ function reachable(ship: Ship, plan: Plan, map: GameMap, known: Set<string>|null
   }
   return cells;
 }
-const knownReachable = (ship: Ship, plan: Plan, map: GameMap, explored: Set<string>) => reachable(ship, plan, map, explored);
+const knownReachable = (ship: Ship, plan: Plan, map: GameMap, explored: Set<string>,round=1) => reachable(ship, plan, map, explored,round);
 const certainReachable = (cells: Map<string,ReachableState>, explored: Set<string>) => new Map([...cells].filter(([k, state]) => explored.has(k) && state.path.every((h) => explored.has(E.key(h)))));
-function ranges(ship: Ship, plan: Plan, map: GameMap,aircraft=ship.cfg.carrier?.plane) {
-  const end = E.route(ship, plan, map).at(-1)!.pos, main = /* @__PURE__ */ new Set<string>(), secondary = /* @__PURE__ */ new Set<string>(), aa = /* @__PURE__ */ new Set<string>(), sweep = /* @__PURE__ */ new Set<string>(), air = /* @__PURE__ */ new Set<string>();
+function ranges(ship: Ship, plan: Plan, map: GameMap,aircraft=ship.cfg.carrier?.plane,round=1) {
+  const end = E.route(ship, plan, map,round).at(-1)!.pos, main = /* @__PURE__ */ new Set<string>(), secondary = /* @__PURE__ */ new Set<string>(), aa = /* @__PURE__ */ new Set<string>(), sweep = /* @__PURE__ */ new Set<string>(), air = /* @__PURE__ */ new Set<string>();
   for (const h of E.allHexes(map)) {
     const k = E.key(h);
     if (ship.cfg.main && E.hexDist(ship.pos, h) <= ship.cfg.main.range) main.add(k);
@@ -35,11 +36,11 @@ function ranges(ship: Ship, plan: Plan, map: GameMap,aircraft=ship.cfg.carrier?.
   }
   return { main, secondary, aa, sweep, air, end };
 }
-function torpedoRays(ship: Ship, plan: Plan, map: GameMap, window: number) {
+function torpedoRays(ship: Ship, plan: Plan, map: GameMap, window: number,round=1) {
   if (!ship.cfg.torpedo) return [];
-  const node = E.route(ship, plan, map)[window];
+  const node = E.route(ship, plan, map,round)[window];
   if (!node) return [];
-  const cfg = ship.cfg.torpedo, roundDistance = cfg.speed * (1 - window / ship.cfg.speed), maxDistance = cfg.speed * cfg.life, rays = [];
+  const cfg = ship.cfg.torpedo, roundDistance = cfg.speed * (1 - window / effectiveSpeed(ship,round)), maxDistance = cfg.speed * cfg.life, rays = [];
   for (let dir = 0; dir < 6; dir++) if (![node.heading, E.mod(node.heading + 3)].includes(dir)) {
     const cells = [];
     let at = node.pos;
@@ -53,11 +54,11 @@ function torpedoRays(ship: Ship, plan: Plan, map: GameMap, window: number) {
   }
   return rays;
 }
-function trimMovement(ship: Ship, input: Plan, map: GameMap, length: number) {
+function trimMovement(ship: Ship, input: Plan, map: GameMap, length: number,round=1) {
   const plan = E.clone(input), removed:Plan["torps"] = [];
   plan.moves = plan.moves.slice(0, Math.max(0, length));
   plan.segments = (plan.segments || []).filter((s) => s.end <= plan.moves.length);
-  const nodes = E.route(ship, plan, map);
+  const nodes = E.route(ship, plan, map,round);
   plan.torps = (plan.torps || []).filter((t) => {
     const n = nodes[t.window], valid = !!n && ![n.heading, E.mod(n.heading + 3)].includes(t.dir);
     if (!valid) removed.push(t);
@@ -97,16 +98,16 @@ export {
 
 // Predict only friendly planned motion on the player's known map. Hidden enemy
 // orders and terrain must never influence this UI warning.
-export function friendlyRouteConflicts(ship: Ship, plan: Plan, friends: Ship[], plans: Plans, map: GameMap) {
+export function friendlyRouteConflicts(ship: Ship, plan: Plan, friends: Ship[], plans: Plans, map: GameMap,round=1) {
   const position = (unit: Ship, nodes: RouteNode[], time: number) => {
-    const step = Math.min(time * unit.cfg.speed, nodes.length - 1), i = Math.floor(step);
+    const step = Math.min(time * effectiveSpeed(unit,round), nodes.length - 1), i = Math.floor(step);
     const a = E.hexToXY(nodes[i].pos), b = E.hexToXY(nodes[Math.min(i + 1, nodes.length - 1)].pos), f = step - i;
     return { x:a.x+(b.x-a.x)*f, y:a.y+(b.y-a.y)*f };
   };
-  const ours = E.route(ship, plan, map), conflicts = [];
+  const ours = E.route(ship, plan, map,round), conflicts = [];
   for (const other of friends.filter(s => s.id !== ship.id && s.team === ship.team && E.alive(s))) {
-    const theirs = E.route(other, plans[other.id] || E.emptyPlan(), map);
-    const times = [...new Set([0, 1, ...ours.map((_,i)=>i/ship.cfg.speed), ...theirs.map((_,i)=>i/other.cfg.speed)])].sort((a,b)=>a-b);
+    const theirs = E.route(other, plans[other.id] || E.emptyPlan(), map,round);
+    const times = [...new Set([0, 1, ...ours.map((_,i)=>i/effectiveSpeed(ship,round)), ...theirs.map((_,i)=>i/effectiveSpeed(other,round))])].sort((a,b)=>a-b);
     for (let i=1;i<times.length;i++) {
       const a=position(ship,ours,times[i-1]), b=position(ship,ours,times[i]), c=position(other,theirs,times[i-1]), d=position(other,theirs,times[i]);
       const x=a.x-c.x,y=a.y-c.y,vx=b.x-a.x-d.x+c.x,vy=b.y-a.y-d.y+c.y;
@@ -121,12 +122,12 @@ export function movementOutcomes(before: Game, submitted: Plans, result: RoundRe
   const map=knowledgeMap(before.map,new Set(before.explored?.[0]||[])), outcomes:Record<string,{blocked:boolean;reason:string;steps:number;received:number}>={};
   for(const ship of before.ships.filter(s=>s.team===0&&E.alive(s))) {
     const plan=submitted[ship.id];if(!plan?.moves?.length)continue;
-    const target=E.route(ship,plan,map).at(-1)!.pos, actual=result.game.ships.find(s=>s.id===ship.id)!;
+    const target=E.route(ship,plan,map,before.round).at(-1)!.pos, actual=result.game.ships.find(s=>s.id===ship.id);
     const collision=result.events.some(e=>e.team===0&&e.text.startsWith(ship.label+' ')&&/碰撞|沿原路回退/.test(e.text));
     const received=E.validPlan(before,ship,plan).moves.length;
     const guarded=result.events.some(e=>e.team===0&&e.text.startsWith(ship.label+' ')&&e.text.includes('封锁截停'));
-    const reason=!E.alive(actual)?'执行中沉没':guarded?'被海域封锁截停':collision?'碰撞截停并回退':received<plan.moves.length?'航路被地形截停':!E.same(actual.pos,target)?'未到达计划终点':'已执行并到达';
-    outcomes[ship.id]={steps:plan.moves.length,received,reason,blocked:reason!=='已执行并到达'};
+    const reason=result.historical?.extracted[ship.id]?'已撤离':!actual||!E.alive(actual)?'执行中沉没':guarded?'被海域封锁截停':collision?'碰撞截停并回退':received<plan.moves.length?'航路被地形截停':!E.same(actual.pos,target)?'未到达计划终点':'已执行并到达';
+    outcomes[ship.id]={steps:plan.moves.length,received,reason,blocked:reason!=='已执行并到达'&&reason!=='已撤离'};
   }
   return outcomes;
 }

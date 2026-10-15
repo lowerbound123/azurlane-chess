@@ -1,0 +1,1404 @@
+{
+  "version": 1,
+  "client": "EN",
+  "portraits": {
+    "maxEdge": 1600,
+    "quality": 80,
+    "avatar": 256,
+    "watermark": {
+      "text": "请支持官方碧蓝航线喵～",
+      "revision": 1
+    }
+  },
+  "ships": {
+    "z35": {
+      "name": "Z35",
+      "type": "dd",
+      "assetName": "Z35",
+      "skinId": "401350",
+      "fallbacks": [
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401350/painting.png"
+        }
+      }
+    },
+    "daofeng": {
+      "name": "岛风",
+      "type": "dd",
+      "assetName": "daofeng",
+      "skinId": "301290",
+      "fallbacks": [
+        "xuefeng",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "akasita",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/301290/painting.png"
+        }
+      },
+      "paintingLayers": [
+        "daofeng",
+        "daofeng_rw"
+      ]
+    },
+    "akasita": {
+      "name": "阿卡司塔",
+      "type": "dd",
+      "assetName": "akasita",
+      "skinId": "201020",
+      "fallbacks": [
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "daofeng",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/201020/painting.png"
+        }
+      }
+    },
+    "shengdiyage": {
+      "name": "圣地亚哥",
+      "type": "cl",
+      "assetName": "shengdiyage",
+      "skinId": "102080",
+      "fallbacks": [
+        "mengfeisi",
+        "hailunna",
+        "kelifulan",
+        "ajiakesi",
+        "ajilisi"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/102080/painting.png"
+        }
+      }
+    },
+    "kelifulan": {
+      "name": "克利夫兰",
+      "type": "cl",
+      "assetName": "kelifulan",
+      "skinId": "102090",
+      "fallbacks": [
+        "mengfeisi",
+        "hailunna",
+        "shengdiyage",
+        "ajiakesi",
+        "ajilisi"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/102090/painting.png"
+        }
+      }
+    },
+    "hailunna": {
+      "name": "海伦娜",
+      "type": "cl",
+      "assetName": "hailunna",
+      "skinId": "102050",
+      "fallbacks": [
+        "mengfeisi",
+        "kelifulan",
+        "shengdiyage",
+        "ajiakesi",
+        "ajilisi"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/102050/painting.png"
+        }
+      }
+    },
+    "ougen": {
+      "name": "欧根亲王",
+      "type": "ca",
+      "assetName": "ougen",
+      "skinId": "403030",
+      "fallbacks": [
+        "sipeibojue",
+        "aikesaite",
+        "botelan",
+        "xiongye",
+        "zhumo",
+        "baerdimo",
+        "jiujinshan"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/403030/painting.png"
+        }
+      }
+    },
+    "baerdimo": {
+      "name": "巴尔的摩",
+      "type": "ca",
+      "assetName": "baerdimo",
+      "skinId": "103160",
+      "fallbacks": [
+        "botelan",
+        "jiujinshan",
+        "aikesaite",
+        "sipeibojue",
+        "xiongye",
+        "zhumo",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/103160/painting.png"
+        }
+      }
+    },
+    "jiujinshan": {
+      "name": "旧金山",
+      "type": "ca",
+      "assetName": "jiujinshan",
+      "skinId": "103140",
+      "fallbacks": [
+        "botelan",
+        "baerdimo",
+        "aikesaite",
+        "sipeibojue",
+        "xiongye",
+        "zhumo",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/103140/painting.png"
+        }
+      }
+    },
+    "beikaluolaina": {
+      "name": "北卡罗来纳",
+      "type": "bb",
+      "assetName": "beikaluolaina",
+      "skinId": "105120",
+      "fallbacks": [
+        "huashengdun",
+        "bisimai",
+        "changmen",
+        "hude",
+        "jingang",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/105120/painting.png"
+        }
+      }
+    },
+    "wuzang": {
+      "name": "武藏",
+      "type": "bb",
+      "assetName": "wuzang",
+      "skinId": "305100",
+      "fallbacks": [
+        "changmen",
+        "jingang",
+        "bisimai",
+        "huashengdun",
+        "hude",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "lisailiu"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/305100/painting.png"
+        }
+      },
+      "paintingLayers": [
+        "wuzang",
+        "wuzang_rw",
+        "wuzang_front"
+      ]
+    },
+    "lisailiu": {
+      "name": "黎塞留",
+      "type": "bb",
+      "assetName": "lisailiu",
+      "skinId": "805010",
+      "fallbacks": [
+        "rangbaer",
+        "bisimai",
+        "changmen",
+        "huashengdun",
+        "hude",
+        "jingang",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/805010/painting.png"
+        }
+      }
+    },
+    "qiye": {
+      "name": "企业",
+      "type": "cv",
+      "assetName": "qiye",
+      "skinId": "107060",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107060/painting.png"
+        }
+      },
+      "characterOffset": [
+        0,
+        -0.183074
+      ]
+    },
+    "aisaikesi": {
+      "name": "埃塞克斯",
+      "type": "cv",
+      "assetName": "aisaikesi",
+      "skinId": "107090",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107090/painting.png"
+        }
+      }
+    },
+    "xianggelila": {
+      "name": "香格里拉",
+      "type": "cv",
+      "assetName": "xianggelila",
+      "skinId": "107380",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107380/painting.png"
+        }
+      }
+    },
+    "aikesaite": {
+      "name": "埃克塞特",
+      "type": "ca",
+      "assetName": "aikesaite",
+      "skinId": "203080",
+      "fallbacks": [
+        "botelan",
+        "sipeibojue",
+        "xiongye",
+        "zhumo",
+        "baerdimo",
+        "jiujinshan",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/203080/painting.png"
+        }
+      }
+    },
+    "ajiakesi": {
+      "name": "阿贾克斯",
+      "type": "cl",
+      "assetName": "ajiakesi",
+      "skinId": "202030",
+      "fallbacks": [
+        "ajilisi",
+        "mengfeisi",
+        "hailunna",
+        "kelifulan",
+        "shengdiyage"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/202030/painting.png"
+        }
+      }
+    },
+    "ajilisi": {
+      "name": "阿基里斯",
+      "type": "cl",
+      "assetName": "ajilisi",
+      "skinId": "202020",
+      "fallbacks": [
+        "ajiakesi",
+        "mengfeisi",
+        "hailunna",
+        "kelifulan",
+        "shengdiyage"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/202020/painting.png"
+        }
+      }
+    },
+    "sipeibojue": {
+      "name": "斯佩伯爵",
+      "type": "ca",
+      "assetName": "sipeibojue",
+      "skinId": "403050",
+      "fallbacks": [
+        "ougen",
+        "aikesaite",
+        "botelan",
+        "xiongye",
+        "zhumo",
+        "baerdimo",
+        "jiujinshan"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/403050/painting.png"
+        }
+      }
+    },
+    "yanzhan": {
+      "name": "厌战",
+      "type": "bb",
+      "assetName": "yanzhan",
+      "skinId": "205020",
+      "fallbacks": [
+        "hude",
+        "weiershiqinwang",
+        "bisimai",
+        "changmen",
+        "huashengdun",
+        "jingang",
+        "rangbaer",
+        "beikaluolaina",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/205020/painting.png"
+        }
+      }
+    },
+    "aisijimo": {
+      "name": "爱斯基摩",
+      "type": "dd",
+      "assetName": "aisijimo",
+      "skinId": "201320",
+      "fallbacks": [
+        "biaoqiang",
+        "akasita",
+        "moli",
+        "xuefeng",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "daofeng",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/201320/painting.png"
+        }
+      }
+    },
+    "z13": {
+      "name": "Z13",
+      "type": "dd",
+      "assetName": "z13",
+      "skinId": "401130",
+      "fallbacks": [
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "z35",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401130/painting.png"
+        }
+      },
+      "paintingLayers": [
+        "Z13",
+        "Z13_bj",
+        "Z13_rw",
+        "face"
+      ]
+    },
+    "z9": {
+      "name": "Z9",
+      "type": "dd",
+      "assetName": "z9",
+      "skinId": "401090",
+      "fallbacks": [
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z35",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401090/painting.png"
+        }
+      },
+      "paintingLayers": [
+        "z9",
+        "z9_rw"
+      ]
+    },
+    "z18": {
+      "name": "Z18",
+      "type": "dd",
+      "assetName": "z18",
+      "skinId": "401180",
+      "fallbacks": [
+        "z13",
+        "z2",
+        "z23",
+        "z9",
+        "z35",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401180/painting.png"
+        }
+      }
+    },
+    "z2": {
+      "name": "Z2",
+      "type": "dd",
+      "assetName": "z2",
+      "skinId": "401020",
+      "fallbacks": [
+        "z13",
+        "z18",
+        "z23",
+        "z9",
+        "z35",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401020/painting.png"
+        }
+      }
+    },
+    "bisimai": {
+      "name": "俾斯麦",
+      "type": "bb",
+      "assetName": "bisimai",
+      "skinId": "405010",
+      "fallbacks": [
+        "changmen",
+        "huashengdun",
+        "hude",
+        "jingang",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/405010/painting.png"
+        }
+      }
+    },
+    "hude": {
+      "name": "胡德",
+      "type": "bb",
+      "assetName": "hude",
+      "skinId": "204030",
+      "fallbacks": [
+        "weiershiqinwang",
+        "yanzhan",
+        "bisimai",
+        "changmen",
+        "huashengdun",
+        "jingang",
+        "rangbaer",
+        "beikaluolaina",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/204030/painting.png"
+        }
+      }
+    },
+    "weiershiqinwang": {
+      "name": "威尔士亲王",
+      "type": "bb",
+      "assetName": "weiershiqinwang",
+      "skinId": "205060",
+      "fallbacks": [
+        "hude",
+        "yanzhan",
+        "bisimai",
+        "changmen",
+        "huashengdun",
+        "jingang",
+        "rangbaer",
+        "beikaluolaina",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/205060/painting.png"
+        }
+      }
+    },
+    "dahuangfeng": {
+      "name": "大黄蜂",
+      "type": "cv",
+      "assetName": "dahuangfeng",
+      "skinId": "107070",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107070/painting.png"
+        }
+      }
+    },
+    "yuekecheng": {
+      "name": "约克城",
+      "type": "cv",
+      "assetName": "yuekecheng",
+      "skinId": "107050",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107050/painting.png"
+        }
+      }
+    },
+    "chicheng": {
+      "name": "赤城",
+      "type": "cv",
+      "assetName": "chicheng",
+      "skinId": "307010",
+      "fallbacks": [
+        "canglong",
+        "feilong",
+        "jiahe",
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/307010/painting.png"
+        }
+      }
+    },
+    "jiahe": {
+      "name": "加贺",
+      "type": "cv",
+      "assetName": "jiahe",
+      "skinId": "307020",
+      "fallbacks": [
+        "canglong",
+        "chicheng",
+        "feilong",
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/307020/painting.png"
+        }
+      }
+    },
+    "canglong": {
+      "name": "苍龙",
+      "type": "cv",
+      "assetName": "canglong",
+      "skinId": "307030",
+      "fallbacks": [
+        "chicheng",
+        "feilong",
+        "jiahe",
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/307030/painting.png"
+        }
+      }
+    },
+    "feilong": {
+      "name": "飞龙",
+      "type": "cv",
+      "assetName": "feilong",
+      "skinId": "307040",
+      "fallbacks": [
+        "canglong",
+        "chicheng",
+        "jiahe",
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/307040/painting.png"
+        }
+      }
+    },
+    "moli": {
+      "name": "弗莱彻",
+      "type": "dd",
+      "assetName": "moli",
+      "skinId": "101080",
+      "fallbacks": [
+        "aisijimo",
+        "biaoqiang",
+        "xuefeng",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "akasita",
+        "daofeng",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/101080/painting.png"
+        }
+      }
+    },
+    "changdao": {
+      "name": "长岛",
+      "type": "cv",
+      "assetName": "changdao",
+      "skinId": "106010",
+      "fallbacks": [
+        "boge",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/106010/painting.png"
+        }
+      }
+    },
+    "boge": {
+      "name": "博格",
+      "type": "cv",
+      "assetName": "boge",
+      "skinId": "106020",
+      "fallbacks": [
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/106020/painting.png"
+        }
+      }
+    },
+    "kasabulanka": {
+      "name": "卡萨布兰卡",
+      "type": "cv",
+      "assetName": "kasabulanka",
+      "skinId": "106550",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "lanli",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/106550/painting.png"
+        }
+      }
+    },
+    "jingang": {
+      "name": "金刚",
+      "type": "bb",
+      "assetName": "jingang",
+      "skinId": "304010",
+      "fallbacks": [
+        "changmen",
+        "wuzang",
+        "bisimai",
+        "huashengdun",
+        "hude",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "lisailiu"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/304010/painting.png"
+        }
+      }
+    },
+    "xiongye": {
+      "name": "熊野",
+      "type": "ca",
+      "assetName": "xiongye",
+      "skinId": "303180",
+      "fallbacks": [
+        "zhumo",
+        "aikesaite",
+        "botelan",
+        "sipeibojue",
+        "baerdimo",
+        "jiujinshan",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/303180/painting.png"
+        }
+      }
+    },
+    "zhumo": {
+      "name": "筑摩",
+      "type": "ca",
+      "assetName": "zhumo",
+      "skinId": "303060",
+      "fallbacks": [
+        "xiongye",
+        "aikesaite",
+        "botelan",
+        "sipeibojue",
+        "baerdimo",
+        "jiujinshan",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/303060/painting.png"
+        }
+      }
+    },
+    "changmen": {
+      "name": "长门",
+      "type": "bb",
+      "assetName": "changmen",
+      "skinId": "305050",
+      "fallbacks": [
+        "jingang",
+        "wuzang",
+        "bisimai",
+        "huashengdun",
+        "hude",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "lisailiu"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/305050/painting.png"
+        }
+      }
+    },
+    "lanli": {
+      "name": "兰利",
+      "type": "cv",
+      "assetName": "lanli",
+      "skinId": "107010",
+      "fallbacks": [
+        "boge",
+        "changdao",
+        "dahuangfeng",
+        "kasabulanka",
+        "yuekecheng",
+        "aisaikesi",
+        "qiye",
+        "xianggelila",
+        "canglong",
+        "chicheng",
+        "feilong",
+        "jiahe"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/107010/painting.png"
+        }
+      }
+    },
+    "z23": {
+      "name": "Z23",
+      "type": "dd",
+      "assetName": "z23",
+      "skinId": "401230",
+      "fallbacks": [
+        "z13",
+        "z18",
+        "z2",
+        "z9",
+        "z35",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "xuefeng",
+        "akasita",
+        "daofeng"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/401230/painting.png"
+        }
+      }
+    },
+    "biaoqiang": {
+      "name": "标枪",
+      "type": "dd",
+      "assetName": "biaoqiang",
+      "skinId": "201210",
+      "fallbacks": [
+        "aisijimo",
+        "akasita",
+        "moli",
+        "xuefeng",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "daofeng",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/201210/painting.png"
+        }
+      }
+    },
+    "xuefeng": {
+      "name": "雪风",
+      "type": "dd",
+      "assetName": "xuefeng",
+      "skinId": "301160",
+      "fallbacks": [
+        "daofeng",
+        "aisijimo",
+        "biaoqiang",
+        "moli",
+        "z13",
+        "z18",
+        "z2",
+        "z23",
+        "z9",
+        "akasita",
+        "z35"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/301160/painting.png"
+        }
+      }
+    },
+    "mengfeisi": {
+      "name": "孟菲斯",
+      "type": "cl",
+      "assetName": "mengfeisi",
+      "skinId": "102160",
+      "fallbacks": [
+        "hailunna",
+        "kelifulan",
+        "shengdiyage",
+        "ajiakesi",
+        "ajilisi"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/102160/painting.png"
+        }
+      }
+    },
+    "botelan": {
+      "name": "波特兰",
+      "type": "ca",
+      "assetName": "botelan",
+      "skinId": "103060",
+      "fallbacks": [
+        "baerdimo",
+        "jiujinshan",
+        "aikesaite",
+        "sipeibojue",
+        "xiongye",
+        "zhumo",
+        "ougen"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/103060/painting.png"
+        }
+      }
+    },
+    "huashengdun": {
+      "name": "华盛顿",
+      "type": "bb",
+      "assetName": "huashengdun",
+      "skinId": "105130",
+      "fallbacks": [
+        "beikaluolaina",
+        "bisimai",
+        "changmen",
+        "hude",
+        "jingang",
+        "rangbaer",
+        "weiershiqinwang",
+        "yanzhan",
+        "lisailiu",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/105130/painting.png"
+        }
+      }
+    },
+    "rangbaer": {
+      "name": "让·巴尔",
+      "type": "bb",
+      "assetName": "rangbaer",
+      "skinId": "905010",
+      "fallbacks": [
+        "lisailiu",
+        "bisimai",
+        "changmen",
+        "huashengdun",
+        "hude",
+        "jingang",
+        "weiershiqinwang",
+        "yanzhan",
+        "beikaluolaina",
+        "wuzang"
+      ],
+      "fallbackSources": {
+        "painting": {
+          "repository": "Fernando2603/AzurLane",
+          "revision": "d639f8520ebf88513d7a5b5b1ec45afa96644ecf",
+          "path": "images/skin/905010/painting.png"
+        }
+      }
+    }
+  },
+  "catalog": {
+    "dd-1": "z35",
+    "dd-2": "daofeng",
+    "dd-3": "akasita",
+    "cl-1": "shengdiyage",
+    "cl-2": "kelifulan",
+    "cl-3": "hailunna",
+    "ca-1": "ougen",
+    "ca-2": "baerdimo",
+    "ca-3": "jiujinshan",
+    "bb-1": "beikaluolaina",
+    "bb-2": "wuzang",
+    "bb-3": "lisailiu",
+    "cv-1": "qiye",
+    "cv-2": "aisaikesi",
+    "cv-3": "xianggelila"
+  },
+  "historical": {
+    "river-plate": {
+      "0-0": "aikesaite",
+      "0-1": "ajiakesi",
+      "0-2": "ajilisi",
+      "1-0": "sipeibojue"
+    },
+    "narvik": {
+      "0-0": "yanzhan",
+      "0-1": "akasita",
+      "0-2": "akasita",
+      "0-3": "aisijimo",
+      "1-0": "z13",
+      "1-1": "z35",
+      "1-2": "z35",
+      "1-3": "z9",
+      "1-4": "z18",
+      "1-5": "z2"
+    },
+    "denmark-strait": {
+      "0-0": "bisimai",
+      "0-1": "ougen",
+      "1-0": "hude",
+      "1-1": "weiershiqinwang"
+    },
+    "midway": {
+      "0-0": "qiye",
+      "0-1": "dahuangfeng",
+      "0-2": "yuekecheng",
+      "1-0": "chicheng",
+      "1-1": "jiahe",
+      "1-2": "canglong",
+      "1-3": "feilong"
+    },
+    "samar": {
+      "0-0": "moli",
+      "0-1": "moli",
+      "0-2": "moli",
+      "0-3": "changdao",
+      "0-4": "boge",
+      "0-5": "kasabulanka",
+      "1-0": "wuzang",
+      "1-1": "jingang",
+      "1-2": "xiongye",
+      "1-3": "zhumo"
+    }
+  },
+  "historicalSubstitutions": {
+    "narvik": {
+      "0-1": {
+        "historicalName": "哥萨克 Cossack",
+        "art": "akasita",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-2": {
+        "historicalName": "贝都因 Bedouin",
+        "art": "akasita",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "1-1": {
+        "historicalName": "Z12 Erich Giese",
+        "art": "z35",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "1-2": {
+        "historicalName": "Z17 Diether von Roeder",
+        "art": "z35",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      }
+    },
+    "samar": {
+      "0-0": {
+        "historicalName": "约翰斯顿 Johnston",
+        "art": "moli",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-1": {
+        "historicalName": "霍埃尔 Hoel",
+        "art": "moli",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-2": {
+        "historicalName": "赫尔曼 Heermann",
+        "art": "moli",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-3": {
+        "historicalName": "范肖湾 Fanshaw Bay",
+        "art": "changdao",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-4": {
+        "historicalName": "白平原 White Plains",
+        "art": "boge",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "0-5": {
+        "historicalName": "加里宁湾 Kalinin Bay",
+        "art": "kasabulanka",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      },
+      "1-0": {
+        "historicalName": "大和 Yamato",
+        "art": "wuzang",
+        "reason": "无对应舰娘基础资源，保留史实舰名，使用同舰种外观"
+      }
+    }
+  },
+  "templates": {
+    "dd": "daofeng",
+    "cl": "kelifulan",
+    "ca": "ougen",
+    "bb": "beikaluolaina",
+    "cv": "qiye"
+  }
+}

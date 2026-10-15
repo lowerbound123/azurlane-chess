@@ -114,7 +114,7 @@ test('long map real weapons produce combat damage at distant rows',()=>{
 });
 
 test('board rebuilds cell geometry when switching between normal and long maps',()=>{
- const context={fillRect(){},strokeRect(){},fillText(){}} as unknown as CanvasRenderingContext2D;
+ const context={fillRect(){},strokeRect(){},fillText(){},measureText(text:string){return {width:text.length*90};}} as unknown as CanvasRenderingContext2D;
  const canvas=vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(context);
  const board=new Layout.Board(new THREE.Scene(),{} as TacticalModels);
  const model=(map:GameMap):MapModel=>({map,cells:E.allHexes(map).map(h=>({...h,known:false,visible:false,island:false})),myTeam:0,ships:[],planes:[],torpedoes:[],mines:[],selected:'',phase:'plan',mode:'move',previews:[],mainTargets:[],rays:[],showPlans:false,showRanges:false,overlayType:'',busy:false,airRange:null,visuals:{}});

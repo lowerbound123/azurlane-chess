@@ -4,16 +4,16 @@ import type {DraftState} from './draft.ts';
 export const PROTOCOL_VERSION=2;
 export type ConnectionStatus='connected'|'connecting'|'reconnecting'|'disconnected';
 export interface PublicModel {id:string;name:string}
-export interface PublicConfig {battleModes?:BattleMode[];serverId?:string;models:PublicModel[];roomLimits?:number[];auth?:{enabled:boolean};protocolVersion?:number}
+export interface PublicConfig {assetStorage?:{provider:import('./assets.ts').AssetProvider};battleModes?:BattleMode[];serverId?:string;models:PublicModel[];roomLimits?:number[];auth?:{enabled:boolean};protocolVersion?:number}
 export interface User {id:string;username:string}
 export interface AccountState {enabled:boolean;loaded:boolean;user:User|null}
 export interface Identity {playerId?:string;nickname?:string;id?:string;token:string;serverId:string;identityType?:'guest'|'account';accountId?:string}
 /** Resources and targets of hostile units are intentionally absent from the wire view. */
 export interface ClientShip extends Omit<FrameShip,'cfg'> {cfg:Omit<ShipConfig,'torpedo'>&{torpedo?:Omit<NonNullable<ShipConfig['torpedo']>,'reserve'>&{reserve?:number}};kind:'ship';torps?:number;mainReady?:number;airReady?:(number|null)[];airHP?:number[];destroyedPlanes?:number;minesLeft?:number;smokeLeft?:number;radarLeft?:number;catalogId?:string}
-export interface ClientFlying {id:string;kind:'plane'|'torpedo';team:number;xy:XY;cfg:Partial<Plane['cfg']&Torpedo['cfg']>;hp?:number;heading?:number;state?:Plane['state'];traveled?:number;mother?:string;slot?:number;mode?:Plane['mode'];target?:Hex;targetId?:string|null;patrolRemaining?:number;attackRound?:number}
+export interface ClientFlying {statuses?:import('./status.ts').StatusInstance[];id:string;kind:'plane'|'torpedo';team:number;xy:XY;cfg:Partial<Plane['cfg']&Torpedo['cfg']>;hp?:number;heading?:number;state?:Plane['state'];traveled?:number;mother?:string;slot?:number;mode?:Plane['mode'];target?:Hex;targetId?:string|null;patrolRemaining?:number;attackRound?:number}
 export interface ClientGame {battleMode?:BattleMode;domination?:DominationState;ruleset?:Game['ruleset'];zones?:Game['zones'];round:number;phase:Game['phase'];nextId:number;winner:Game['winner'];log:BattleLog[];visible:string[];explored:string[][];map:Game['map'];ships:ClientShip[];planes:ClientFlying[];torpedoes:ClientFlying[]}
 export type ClientVisuals=import('../src/battle-visuals.ts').SampledVisuals;
-export interface ClientFrame {domination?:DominationState;t:number;visible:string[];explored:string[];ships:ClientShip[];planes:ClientFlying[];torpedoes:ClientFlying[];mines:Game['map']['mines'];zones?:Game['zones'];effects:[];visuals:ClientVisuals}
+export interface ClientFrame {round?:number;domination?:DominationState;t:number;visible:string[];explored:string[];ships:ClientShip[];planes:ClientFlying[];torpedoes:ClientFlying[];mines:Game['map']['mines'];zones?:Game['zones'];effects:[];visuals:ClientVisuals}
 export interface ClientResult {game:ClientGame;frames:ClientFrame[];events:BattleLog[];presentation:[]}
 export interface RoomPlayer {id:string;nickname:string;ready:boolean;roster?:string[]}
 export interface ClientRoom {battleMode?:BattleMode;code:string;hostId:string;turnSeconds:number;players:RoomPlayer[]}

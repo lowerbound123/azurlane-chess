@@ -7,6 +7,7 @@ import * as C from '../campaign/index.ts';
 import * as E from '../engine.ts';
 import {createCampaignStorage} from '../campaign/storage.ts';
 import {fleetError,sortFleet} from '../ship-catalog.ts';
+import {playFrames} from '../playback.ts';
 
 export function useCampaign(core:SessionCore,actions:SessionActions){
  const {tutorialStore,campaign,campaignNotice,campaignTransit,campaignOverview,campaignViewChapter,campaignFleet,tutorial,game,plans,selected,busy,history,mode,pendingTurn,torpWindow,planeMode,airRole,showRanges,showPlans,rangeMode,ordersOpen,swapMode,replan,mapView,router,computer,runtime}=core;
@@ -14,10 +15,11 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
  const initial=repo.read();const savePresent=ref(initial.kind!=='missing');
  const campaignHasSave=computed(()=>campaign.value!==null||savePresent.value);
  if(initial.kind==='error')campaignNotice.value='教学进度读取失败：'+initial.message;
- let checkpointBase:CampaignFixture|null=null,pending:CampaignState|null=null,timer:ReturnType<typeof setTimeout>|undefined;
+ let checkpointBase:CampaignFixture|null=null,pending:{state:CampaignState;transit:C.CampaignTransit;fleet?:string[]}|null=null;
  let previousControls:{showRanges:boolean;showPlans:boolean;rangeMode:string}|null=null;
  const campaignChapter=computed(()=>campaign.value?C.CAMPAIGN_CHAPTERS[campaign.value.chapter]:null);
  const campaignStep=computed(()=>campaign.value?C.campaignCheckpoint(campaign.value):null);
+ const campaignTransitNotice=computed(()=>(core.playFrame.value as C.CampaignTransitFrame|null)?.notice??'舰队正在自动航行。');
  const campaignLearned=computed(()=>{
   const learned=new Set(['move']);if(!campaign.value)return learned;
   for(let c=0;c<=campaign.value.chapter;c++)for(const [i,point]of C.CAMPAIGN_CHAPTERS[c].checkpoints.entries())if(c<campaign.value.chapter||i<=campaign.value.checkpoint)point.unlocks.forEach(s=>learned.add(s));
@@ -29,13 +31,13 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
   tutorialStore.busy=false;tutorialStore.finished=null;tutorialStore.playFrame=null;tutorialStore.progress=0;tutorialStore.history={};tutorialStore.lastMovement={};tutorialStore.hover=null;
   mode.value='move';pendingTurn.value=0;torpWindow.value=0;planeMode.value='point';airRole.value='bomber';swapMode.value=false;replan.value=false;
  }
- function install(state:CampaignState,fixture:CampaignFixture,exploration?:string[][]){
+ function install(state:CampaignState,fixture:CampaignFixture,exploration?:string[][],resetView=true){
   resetTransient();tutorial.value=null;campaign.value=E.clone(state);
   tutorialStore.game=E.clone(fixture.game);tutorialStore.plans=E.clone(fixture.plans);tutorialStore.selected=fixture.selected;
   if(exploration)for(let team=0;team<2;team++)tutorialStore.game.explored[team]=[...new Set([...exploration[team],...tutorialStore.game.explored[team]])];
   E.updateExploration(tutorialStore.game);showRanges.value=true;showPlans.value=true;rangeMode.value='auto';ordersOpen.value=true;
   campaignOverview.value=false;campaignViewChapter.value=null;
-  void nextTick(()=>mapView.value?.reset());
+  if(resetView)void nextTick(()=>mapView.value?.reset());
  }
  function saveCampaign(){
   if(!campaign.value||!game.value||busy.value||campaignTransit.value||runtime.disposed)return;
@@ -66,7 +68,7 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
   if(navigate)void router.push({name:'campaign'});
  }
  function exitCampaign(navigate=true){
-  saveCampaign();clearTimeout(timer);pending=null;campaignTransit.value=false;resetTransient();campaign.value=null;
+  saveCampaign();pending=null;campaignTransit.value=false;resetTransient();campaign.value=null;
   tutorialStore.game=null;tutorialStore.plans={};checkpointBase=null;
   if(previousControls){showRanges.value=previousControls.showRanges;showPlans.value=previousControls.showPlans;rangeMode.value=previousControls.rangeMode;previousControls=null;}
   if(navigate)void router.push('/');
@@ -78,13 +80,26 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
  }
  function nextCampaign(){
   if(!campaign.value||busy.value||campaignTransit.value||campaign.value.status!=='checkpoint-complete')return;
-  pending=C.advanceCampaign(E.clone(toRaw(campaign.value)));campaignTransit.value=true;
-  timer=setTimeout(finishCampaignTransit,window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?0:900);
+  const previous=E.clone(toRaw(campaign.value)),next=C.advanceCampaign(previous);
+  if(next.status==='complete'){campaign.value=next;saveCampaign();return;}
+  startTransit(next,C.createCampaignFixture(next,[...campaignFleet.value]));
+ }
+ function startTransit(next:CampaignState,fixture:CampaignFixture,fleet?:string[]){
+  if(!game.value||!campaign.value)return;
+  saveCampaign();
+  const transit=C.buildCampaignTransit(E.clone(toRaw(game.value)),fixture,{from:C.campaignFocus(campaign.value),to:C.campaignFocus(next),fromRadius:campaign.value.chapter>=8?8:5,toRadius:next.chapter>=8?8:5});
+  pending={state:next,transit,fleet};campaignTransit.value=true;busy.value=true;
+  core.finished.value=null;plans.value={};showPlans.value=false;campaignOverview.value=false;campaignViewChapter.value=null;
+  const generation=++tutorialStore.generation;
+  runtime.stopPlayback=playFrames(transit.frames,{speed:()=>1,render:(frame,fraction)=>{
+   if(runtime.disposed||tutorialStore.generation!==generation)return;
+   core.playFrame.value=frame;core.progress.value=fraction;
+  },complete:()=>{if(!runtime.disposed&&tutorialStore.generation===generation)finishCampaignTransit();},interpolate:!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches});
  }
  function finishCampaignTransit(){
-  if(!pending)return;clearTimeout(timer);const next=pending;pending=null;
-  if(next.status==='complete'){campaignTransit.value=false;campaign.value=next;saveCampaign();return;}
-  const known=game.value?E.clone(toRaw(game.value.explored)):undefined;campaignTransit.value=false;fresh(next,known);
+  if(!pending)return;const {state,transit,fleet}=pending;pending=null;
+  runtime.stopPlayback?.();if(fleet)campaignFleet.value=fleet;campaignTransit.value=false;install(state,transit.fixture,undefined,false);
+  checkpointBase=E.clone(transit.fixture);saveCampaign();
  }
  function recordCampaignRound(before:Game,submitted:Plans,result:RoundResult){
   if(campaign.value)campaign.value=C.evaluateCampaignRound(E.clone(toRaw(campaign.value)),before,submitted,result);
@@ -104,9 +119,13 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
  function overviewCampaign(){campaignOverview.value=true;void nextTick(()=>mapView.value?.reset());}
  function setCampaignFleet(ids:string[]){
   if(!campaign.value||campaign.value.chapter!==9||game.value?.phase!=='deploy'||busy.value)return;
-  const error=fleetError(ids);if(error){actions.say(error);return;}campaignFleet.value=sortFleet(ids);fresh({...E.clone(toRaw(campaign.value)),status:'playing',evidence:{},attempts:0});
+  const error=fleetError(ids);if(error){actions.say(error);return;}const fleet=sortFleet(ids),state={...E.clone(toRaw(campaign.value)),status:'playing' as const,evidence:{},attempts:0};
+  startTransit(state,C.createCampaignFixture(state,fleet),fleet);
  }
  watch([campaign,game,plans,selected],()=>{if(campaign.value)saveCampaign();},{deep:true,flush:'post'});
- onScopeDispose(()=>{clearTimeout(timer);pending=null;});
- return {campaignHasSave,campaignChapter,campaignStep,campaignLearned,campaignAllowed,startCampaign,exitCampaign,retryCampaign,nextCampaign,finishCampaignTransit,recordCampaignRound,campaignHint,campaignSuggest,focusCampaign,overviewCampaign,setCampaignFleet,saveCampaign};
+ watch(()=>[campaign.value?.status,busy.value,campaignTransit.value],()=>{
+  if(campaign.value?.status==='checkpoint-complete'&&!busy.value&&!campaignTransit.value)nextCampaign();
+ },{flush:'post'});
+ onScopeDispose(()=>{pending=null;});
+ return {campaignHasSave,campaignChapter,campaignStep,campaignTransitNotice,campaignLearned,campaignAllowed,startCampaign,exitCampaign,retryCampaign,nextCampaign,finishCampaignTransit,recordCampaignRound,campaignHint,campaignSuggest,focusCampaign,overviewCampaign,setCampaignFleet,saveCampaign};
 }

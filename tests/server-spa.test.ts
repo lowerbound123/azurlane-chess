@@ -11,10 +11,11 @@ test('HTML history routes refresh while API and missing assets keep their errors
   await writeFile(join(root,'index.html'),'<!doctype html><title>SPA history fixture</title><div id="app"></div>');
   await mkdir(join(root,'assets/images'),{recursive:true});
   for(const name of ['assets/app-A1b2_c3-.js','assets/styles-ZX012345.css','assets/images/portrait-full-0123456789abcdef.webp','plain.js']) await writeFile(join(root,name),'static fixture');
+  await writeFile(join(root,'assets/runtime-manifest.json'),JSON.stringify({version:1,files:{},images:{},spine:{},spinePreviews:{},models:{},sources:{},spineFingerprints:{}}));
   const service=new GameService({autoTick:false,models:[],pool:{close:async()=>{},resolve:async()=>{throw new Error('unused calculation');}}});
   const app=await createApp({service,models:[],staticRoot:root,authEnabled:false,allowedOrigins:['http://frontend.test']});
   try{
-    for(const url of ['/new','/new/ai/model','/rooms/ABC','/battle/online/m','/tutorial/movement','/saves']){
+    for(const url of ['/new','/new/ai/model','/rooms/ABC','/battle/online/m','/tutorial/movement','/saves','/history','/history/midway']){
       const response=await app.inject({url,headers:{accept:'text/html'}});
       assert.equal(response.statusCode,200,url);assert.match(response.body,/SPA history fixture/);
     }

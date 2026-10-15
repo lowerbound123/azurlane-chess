@@ -1,0 +1,11 @@
+{
+  "provider": "local",
+  "bucket": "your-private-bucket",
+  "region": "us-east-1",
+  "endpoint": "https://s3.example.com",
+  "prefix": "azurlane-chess",
+  "urlTtlSeconds": 3600,
+  "forcePathStyle": true,
+  "accessKeyId": "",
+  "secretAccessKey": ""
+}

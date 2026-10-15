@@ -1,0 +1,21 @@
+import {test,expect,vi} from 'vitest';
+vi.mock('../src/characters/ships.generated.json',()=>({default:{profiles:{},templates:{},historical:{},catalog:{'dd-2':'replacement','cl-2':'replacement-cl','bb-1':'replacement-bb','ca-1':'replacement-ca'},identities:{'replacement-bb':{name:'新战列',avatar:'x',portrait:'x'},'replacement-ca':{name:'岛风护卫',avatar:'x',portrait:'x'},replacement:{name:'新驱逐',avatar:'portraits/new.webp',portrait:'portraits/new.webp'},'replacement-cl':{name:'新轻巡',avatar:'portraits/cl.webp',portrait:'portraits/cl.webp'}}}}));
+import {displayCatalogText,getShip} from '../src/ship-catalog.ts';
+import {SHIP_DEFINITIONS} from '../src/ship-definitions.ts';
+import {CAMPAIGN_CHAPTERS} from '../src/campaign/content.ts';
+import {createCatalogShip} from '../src/engine.ts';
+test('ordinary teaching prose follows imported catalog names without changing stable identity or canonical combat configuration',()=>{
+ expect(displayCatalogText('北卡与欧根及欧根亲王')).toBe('新战列与岛风护卫及岛风护卫');
+ expect(CAMPAIGN_CHAPTERS[5].checkpoints[0].instruction).toContain('新战列');
+ expect(CAMPAIGN_CHAPTERS[7].checkpoints[0].title).toContain('岛风护卫');
+ expect(displayCatalogText('岛风与克利夫兰会合，岛风前进。')).toBe('新驱逐与新轻巡会合，新驱逐前进。');
+ expect(CAMPAIGN_CHAPTERS[0].description).toContain('新驱逐');
+ expect(CAMPAIGN_CHAPTERS[0].checkpoints[0].instruction).toContain('新驱逐');
+ expect(CAMPAIGN_CHAPTERS[0].checkpoints[0].hints.join(' ')).toContain('新驱逐');
+ expect(CAMPAIGN_CHAPTERS[2].description).toContain('新轻巡');
+ expect(CAMPAIGN_CHAPTERS[0].checkpoints[0].unlocks).toContain('dd-2');
+ expect(getShip('dd-2')!.id).toBe('dd-2');expect(SHIP_DEFINITIONS['dd-2'].name).toBe('岛风');
+ const ship=createCatalogShip('dd-2',0,0,{q:0,r:0});
+ expect(ship.label).toBe('新驱逐');expect(ship.catalogId).toBe('dd-2');
+ expect(ship.cfg).toEqual(SHIP_DEFINITIONS['dd-2']);expect(ship.hp).toBe(90);
+});

@@ -14,7 +14,7 @@ import {playFrames} from "../playback.ts";
 import type {SessionCore} from './session-core.ts';
 import type {SessionActions} from './session-actions.ts';
 export function useReplay(core:SessionCore,actions:SessionActions){
-const {mode, pendingTurn, torpWindow, playSpeed, replan, onlineState, tutorial, campaign, campaignTransit, tutorialFixture, onlineActive, activeBattle, game, plans, selected, busy, playFrame, finished, progress, history, lastMovement, onlineLocked, ship, plan, own, phase, computer, runtime}=core;
+const {mode, pendingTurn, torpWindow, playSpeed, replan, onlineState, tutorial, historical, campaign, campaignTransit, tutorialFixture, onlineActive, activeBattle, game, plans, selected, busy, playFrame, finished, progress, history, lastMovement, onlineLocked, ship, plan, own, phase, computer, runtime}=core;
 function mapExit() {
     if (finished.value) complete();
     else {
@@ -29,6 +29,7 @@ function mapExit() {
   }
 async function execute() {
     if (onlineActive.value) { if (onlineLocked.value) return; return actions.onlineCommand("orders.submit", {plans:toRaw(plans.value)}); }
+    if (historical.value&&historical.value.status!=='playing')return;
     if (busy.value || phase.value !== 'plan'||campaignTransit.value||campaign.value&&campaign.value.status!=='playing') return;
     busy.value = true;
     mode.value = "move";
@@ -37,7 +38,7 @@ async function execute() {
     const session=activeBattle.value, generation=++session.generation;
     try {
       const state=E.clone(toRaw(session.game!)),orders=E.clone(toRaw(session.plans));
-      const result=await computer.resolve({game:state,plans:orders,...(campaign.value?{opponentPlans:campaignOrders(toRaw(campaign.value),state),resolution:{termination:campaign.value.chapter===9?'fleet' as const:'mission' as const}}:tutorial.value?{opponentPlans:toRaw(tutorialFixture.value!.opponentPlans)}:{})});
+      const result=await computer.resolve({game:state,plans:orders,...(historical.value?{historical:E.clone(toRaw(historical.value))}:campaign.value?{opponentPlans:campaignOrders(toRaw(campaign.value),state),resolution:{termination:campaign.value.chapter===9?'fleet' as const:'mission' as const}}:tutorial.value?{opponentPlans:toRaw(tutorialFixture.value!.opponentPlans)}:{})});
       if(runtime.disposed||session.generation!==generation)return;
       session.finished=result;
       runtime.stopPlayback=playFrames(result.frames,{speed:()=>playSpeed.value,render:(frame,fraction)=>{session.playFrame=frame;session.progress=fraction;},complete});
@@ -50,6 +51,7 @@ function complete() {
     if (!finished.value) return;
     runtime.stopPlayback?.();
     const outcomes = P.movementOutcomes(toRaw(game.value!), toRaw(plans.value), toRaw(finished.value));
+    if(historical.value)actions.recordHistoricalRound(toRaw(finished.value));
     if(campaign.value)actions.recordCampaignRound(toRaw(game.value!),toRaw(plans.value),toRaw(finished.value));
     game.value = finished.value.game;
     finished.value = null;
@@ -60,7 +62,7 @@ function complete() {
     lastMovement.value = {};
     history.value = {};
     replan.value = false;
-    if (!E.alive(ship.value || { hp: 0 })) selected.value = own.value.find(E.alive)?.id || "";
+    if (!E.alive(ship.value || { hp: 0 })) selected.value = own.value.find(s=>E.alive(s)&&core.historicalControlled(s.id))?.id || "";
     mode.value = "move";
     torpWindow.value = 0;
     pendingTurn.value = 0;

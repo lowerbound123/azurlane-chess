@@ -1,3 +1,4 @@
+import {effectiveSpeed,validateStatuses,MAX_SNAPSHOT_DAMAGE} from '../../shared/status.ts';
 import type {CampaignSave} from '../../shared/campaign.ts';
 import {SHIP_DEFINITIONS} from '../ship-definitions.ts';
 import {hexToXY} from '../engine.ts';
@@ -33,6 +34,7 @@ function validate(value:unknown):asserts value is CampaignSave {
  for(const ship of g.ships){
   requireValue(record(ship)&&typeof ship.id==='string'&&ship.id.length<100&&[0,1].includes(ship.team)&&ship.kind==='ship'&&typeof ship.label==='string');
   requireValue(ship.catalogId&&Object.hasOwn(SHIP_DEFINITIONS,ship.catalogId)&&ship.template===ship.catalogId.split('-')[0]);
+  requireValue(validateStatuses(ship.statuses));
   requireValue(hex(ship.pos)&&record(ship.xy)&&!g.map.islands.includes(`${ship.pos.q},${ship.pos.r}`));
   requireValue(finite(ship.xy.x,-2,25)&&finite(ship.xy.y,-2,110));
   const xy=hexToXY(ship.pos);if(ship.hp>0)requireValue(Math.abs(ship.xy.x-xy.x)<1e-5&&Math.abs(ship.xy.y-xy.y)<1e-5);
@@ -46,17 +48,18 @@ function validate(value:unknown):asserts value is CampaignSave {
   if(c.carrier){requireValue(integer(c.carrier.stock,1,8)&&integer(c.carrier.launch,1,2)&&Array.isArray(c.carrier.slots)&&c.carrier.slots.length===c.carrier.stock);c.carrier.slots.forEach(plane=>requireValue(validPlaneConfig(plane)));}
  }
  requireValue(Array.isArray(g.planes)&&g.planes.length<=80&&Array.isArray(g.torpedoes)&&g.torpedoes.length<=100);
- for(const p of g.planes){requireValue(record(p)&&validPlaneConfig(p.cfg)&&finite(p.hp,0,p.cfg.hp)&&finite(p.xy?.x,-100,300)&&finite(p.xy?.y,-100,300));requireValue(g.ships.some(s=>s.id===p.mother)&&integer(p.slot,0,7)&&['outbound','return'].includes(p.state)&&['point','target','patrol'].includes(p.mode)&&hex(p.target)&&finite(p.traveled,0,100));}
- for(const t of g.torpedoes)requireValue(record(t)&&integer(t.heading,0,5)&&finite(t.xy?.x,-100,300)&&finite(t.xy?.y,-100,300)&&finite(t.age,0,5)&&finite(t.cfg?.speed,.1,8)&&finite(t.cfg?.damage,0,200)&&finite(t.cfg?.life,.1,4));
+ for(const p of g.planes){requireValue(record(p)&&validateStatuses(p.statuses)&&validPlaneConfig(p.cfg)&&finite(p.hp,0,p.cfg.hp)&&finite(p.xy?.x,-100,300)&&finite(p.xy?.y,-100,300));requireValue(g.ships.some(s=>s.id===p.mother)&&integer(p.slot,0,7)&&['outbound','return'].includes(p.state)&&['point','target','patrol'].includes(p.mode)&&hex(p.target)&&finite(p.traveled,0,100));}
+ for(const t of g.torpedoes)requireValue(record(t)&&integer(t.heading,0,5)&&finite(t.xy?.x,-100,300)&&finite(t.xy?.y,-100,300)&&finite(t.age,0,5)&&finite(t.cfg?.speed,.1,8)&&finite(t.cfg?.damage,0,MAX_SNAPSHOT_DAMAGE)&&finite(t.cfg?.life,.1,4));
  requireValue(Array.isArray(g.log)&&g.log.length<=300);
  if(g.zones)requireValue(Array.isArray(g.zones)&&g.zones.length<=30&&g.zones.every(z=>['smoke','radar'].includes(z.kind)&&[0,1].includes(z.team)&&hex(z.center)&&integer(z.radius,0,3)&&integer(z.expires,1,10010)));
  requireValue(record(save.plans)&&Object.keys(save.plans).every(id=>g.ships.some(s=>s.id===id&&s.team===0)));
- for(const p of Object.values(save.plans)){
-  requireValue(record(p)&&Array.isArray(p.moves)&&p.moves.length<=8&&p.moves.every(m=>record(m)&&[-1,0,1].includes(m.turn)&&typeof m.forward==='boolean'));
-  requireValue(Array.isArray(p.torps)&&p.torps.length<=6&&p.torps.every(t=>record(t)&&integer(t.window,0,8)&&integer(t.dir,0,5)));
+ for(const [id,p] of Object.entries(save.plans)){
+  const speed=effectiveSpeed(g.ships.find(s=>s.id===id)!,g.round);
+  requireValue(record(p)&&Array.isArray(p.moves)&&p.moves.length<=speed&&p.moves.every(m=>record(m)&&[-1,0,1].includes(m.turn)&&typeof m.forward==='boolean'));
+  requireValue(Array.isArray(p.torps)&&p.torps.length<=6&&p.torps.every(t=>record(t)&&integer(t.window,0,speed)&&integer(t.dir,0,5)));
   requireValue(Array.isArray(p.main)&&p.main.length<=4&&p.main.every(hex)&&Array.isArray(p.planes)&&p.planes.length<=2);
   requireValue(p.planes.every(o=>record(o)&&['point','target','patrol'].includes(o.mode)&&integer(o.slot,0,7)&&(o.mode==='target'?typeof o.targetId==='string':hex(o.target))));
-  requireValue(p.sweep===null||hex(p.sweep));if(p.radar)requireValue(hex(p.radar));if(p.mineSteps)requireValue(Array.isArray(p.mineSteps)&&p.mineSteps.every(n=>integer(n,1,8)));
+  requireValue(p.sweep===null||hex(p.sweep));if(p.radar)requireValue(hex(p.radar));if(p.mineSteps)requireValue(Array.isArray(p.mineSteps)&&p.mineSteps.every(n=>integer(n,1,speed)));
  }
  requireValue(typeof save.selected==='string'&&(save.selected===''||g.ships.some(s=>s.id===save.selected&&s.team===0)));
  if(save.fleet)requireValue(strings(save.fleet,5)&&save.fleet.every(id=>Object.hasOwn(SHIP_DEFINITIONS,id)));

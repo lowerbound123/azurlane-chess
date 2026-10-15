@@ -19,3 +19,8 @@ dist-server/
 
 # Optimized public assets and generated image manifest
 .generated/
+
+# Private object storage credentials (keep the example public)
+config/asset-storage.json
+config/asset-storage.*.json
+!config/asset-storage.example.json

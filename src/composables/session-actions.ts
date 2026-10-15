@@ -30,6 +30,12 @@ import { AccountClient } from "../account-client.ts";
 import { catalogFleet, getShip, fleetError, sortFleet, nameFleet, restoreFleet } from "../ship-catalog.ts";
 import { createServerPreferences, normalizePublicModels } from "../server-preferences.ts";
 export interface SessionActions {
+startHistorical(id:import('../../shared/history.ts').HistoricalId,resume?:boolean,navigate?:boolean):void;
+exitHistorical(navigate?:boolean):void;
+saveHistorical():void;
+recordHistoricalRound(result:import('../../shared/game.ts').RoundResult):void;
+setHistoricalConvoy(route:'central'|'east',wait:boolean):void;
+historicalMenu():void;
 startCampaign(resume?:boolean,navigate?:boolean):void;
 exitCampaign(navigate?:boolean):void;
 retryCampaign():void;

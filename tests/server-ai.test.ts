@@ -10,6 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { AIService, loadModels, publicModels } from '../server/ai.ts';
 import { createGame, emptyPlan } from '../src/engine.ts';
+import {applyBattleStatus} from '../shared/status.ts';
 
 
 const model:ModelConfig={ id: 'test', name: 'Test', model: 'provider-model', baseURL: 'https://example.test/v1', apiKey: 'secret-test', protocol: 'chat', timeoutMs: 1000 };
@@ -18,6 +19,14 @@ const orders = (g:Game) => ({ plans: Object.fromEntries(g.ships.filter((s) => s.
 const chat = (content:unknown) => ({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(content) } }] });
 const response = (data:unknown) => new Response(JSON.stringify(data), { status: 200 });
 const generate = (service: AIService, g = game(), signal:AbortSignal|undefined=undefined) => service.generate({ game: g, team: 1, modelId: 'test', signal });
+
+test('AI movement guide and submitted schema use the effective speed at the current round',async()=>{
+ const g=game();g.round=5;const ship=g.ships.find(s=>s.team===1&&s.template==='dd')!;
+ applyBattleStatus(g,ship.id,{id:'test-speed',name:'航速测试',kind:'buff',icon:'up',description:'测试',effects:[{kind:'speed',value:1}]},{duration:1});
+ let body!:RequestFixture;const service=new AIService({models:[model],logger:null,fetchImpl:async(_,init)=>{body=requestFixture(init);return response(chat(orders(g)));}});
+ await generate(service,g);const context=JSON.parse(body.messages[1].content) as ContextFixture;
+ assert.equal(context.commandGuide[ship.id].maxMoves,5);assert.equal(body.response_format.json_schema.schema.properties.plans.properties[ship.id].properties.moves.maxItems,5);assert.equal(ship.cfg.speed,4);
+});
 
 test('model configuration reads secrets only from environment and exposes only id/name', () => {
   const dir = mkdtempSync(join(tmpdir(), 'fleet-ai-'));

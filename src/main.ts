@@ -10,5 +10,6 @@ import './style.css';
 import './navigation.css';
 import './fleet-selection.css';
 import './account.css';
+import './desktop-layout.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 createApp(App).use(createPinia()).use(createGameRouter()).mount('#app');

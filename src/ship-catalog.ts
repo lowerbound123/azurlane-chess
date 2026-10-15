@@ -1,9 +1,10 @@
 import type {Ship,ShipType} from "../shared/game.ts";
 export interface CatalogShip {id:string;template:ShipType;name:string;avatar:string;portrait:string}
+import {catalogArt} from './ship-art.ts';
 import { SHIP_DEFINITIONS, DEFAULT_FLEET } from './ship-definitions.ts';
 
 // A catalog identity is independent of its combat template and future artwork.
-export const SHIPS = Object.freeze(Object.entries(SHIP_DEFINITIONS).map(([id,cfg])=>Object.freeze({id,template:id.split('-')[0] as ShipType,name:cfg.name,avatar:'portraits/default-ship.png',portrait:'portraits/default-ship.png'})));
+export const SHIPS = Object.freeze(Object.entries(SHIP_DEFINITIONS).map(([id,cfg])=>Object.freeze({id,template:id.split('-')[0] as ShipType,name:cfg.name,avatar:'portraits/default-ship.webp',portrait:'portraits/default-ship.webp',...catalogArt(id)})));
 export const SHIP_BY_ID = Object.freeze(Object.fromEntries(SHIPS.map(ship => [ship.id, ship])));
 export const getShip = (id: string) => Object.hasOwn(SHIP_BY_ID, id) ? SHIP_BY_ID[id] : null;
 export const shipStats = (id: string) => SHIP_DEFINITIONS[id];
@@ -33,4 +34,12 @@ export function restoreFleet(ships:Pick<Ship,'team'|'template'|'catalogId'>[], r
   const ids = own.map(ship => ship.catalogId ?? "");
   return !fleetError(ids) && own.every((ship, index) => getShip(ids[index])!.template === ship.template && ship.template === roster[index])
     ? ids : catalogFleet(roster);
+}
+
+/** Replace canonical catalog names only at ordinary-mode text presentation boundaries. */
+export function displayCatalogText(text:string):string {
+ const names=new Map(Object.entries(SHIP_DEFINITIONS).map(([id,cfg])=>[cfg.name,getShip(id)!.name]));
+ for(const [alias,id]of Object.entries({北卡:'bb-1',欧根:'ca-1'})){const name=getShip(id)!.name;names.set(alias,name===SHIP_DEFINITIONS[id].name?alias:name);}
+ const pattern=[...names.keys()].sort((a,b)=>b.length-a.length).map(name=>name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
+ return text.replace(new RegExp(pattern,'g'),name=>names.get(name)!);
 }

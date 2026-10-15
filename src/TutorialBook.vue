@@ -14,7 +14,7 @@ function scopedFigure(svg:string,index:number){
 </script>
 <template>
 <main class="tutorial-book page">
-<PageHead eyebrow="FIELD GUIDE" title="图文作战指南" lede="先理解规则，再决定本回合的航线与火力。"><template #actions><Button variant="outline" @click="$emit('home')"><AppIcon name="back"/> 返回主菜单</Button><Button @click="$emit('practice')"><AppIcon name="tutorial"/> 交互教学</Button></template></PageHead>
+<PageHead title="图文作战指南" lede="先理解规则，再决定本回合的航线与火力。"><template #actions><Button variant="outline" @click="$emit('home')"><AppIcon name="back"/> 返回主菜单</Button><Button @click="$emit('practice')"><AppIcon name="tutorial"/> 交互教学</Button></template></PageHead>
 <p class="faint">以下图解对应基础专项练习的标准训练配置。归航行动与正式新局使用 15 艘独立舰船，具体能力与数值请查看舰船详情及作战手册。</p>
 <nav class="book-contents">
 <a v-for="(chapter,i) in chapters" :href="'#guide-'+i">{{chapter.title}}</a>

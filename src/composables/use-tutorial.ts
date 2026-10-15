@@ -51,7 +51,7 @@ function startLesson(id: string, navigate: boolean = true) {
     history.value = {};
     for (const [id2, p] of Object.entries(fixture.plans)) {
       const s = fixture.game.ships.find((x) => x.id === id2);
-      if (s && p.segments?.length) history.value[id2] = { undo: p.segments.map((segment) => P.trimMovement(s, p, knowledge.value, segment.start).plan), redo: [] };
+      if (s && p.segments?.length) history.value[id2] = { undo: p.segments.map((segment) => P.trimMovement(s, p, knowledge.value, segment.start,game.value!.round).plan), redo: [] };
     }
     pendingTurn.value = 0;
     torpWindow.value = 0;
@@ -97,13 +97,15 @@ function inspectCell(h: Hex, clicked: boolean = false) {
     return false;
   }
 function isControl(id: string) {
+    if(core.campaign.value)return !core.campaignTransit.value&&core.campaign.value.status==='playing'&&C.campaignCheckpoint(core.campaign.value).controls.includes(id);
     return !!tutorialStep.value?.highlights.some((h) => h.kind === "control" && h.id === id);
   }
 function isTutorialCell(h: Hex) {
-    if(core.campaign.value)return !!C.campaignCheckpoint(core.campaign.value).targets?.some(target=>E.same(target,h));
+    if(core.campaign.value)return !core.campaignTransit.value&&core.campaign.value.status==='playing'&&!!C.campaignCheckpoint(core.campaign.value).targets?.some(target=>E.same(target,h));
     return !!tutorialStep.value?.highlights.some((x) => x.kind === "cell" && E.same(x.cell, h));
   }
 function isTutorialShip(id: string) {
+    if(core.campaign.value){const s=game.value?.ships.find(s=>s.id===id);return !core.campaignTransit.value&&core.campaign.value.status==='playing'&&!!(s?.catalogId&&C.campaignCheckpoint(core.campaign.value).emphasis[s.catalogId]);}
     return !!tutorialStep.value?.highlights.some((x) => x.kind === "ship" && x.shipId === id);
   }
 function rangeChanged() {

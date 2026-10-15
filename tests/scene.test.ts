@@ -5,6 +5,15 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { movedPointer, pickAction, applyCameraMode } from '../src/composables/use-battle-map.ts';
 import { hexToXY, xyToHex, allHexes } from '../src/engine.ts';
+import {mapViewBounds} from '../src/scene/board.ts';
+
+test('sailing view bounds follow a fractional camera center without snapping to hexes',()=>{
+ const map={width:13,height:72},region={center:{q:-12,r:30},radius:6.5},focus={x:11.37,y:45.23};
+ const bounds=mapViewBounds(map,region,focus);
+ assert.deepEqual(bounds.center,focus);
+ assert.equal(bounds.minZ,focus.y-1.5*region.radius-2);
+ assert.equal(bounds.maxZ,focus.y+1.5*region.radius+2);
+});
 
 test('drag threshold and right click preserve semantic map operations', () => {
   assert.equal(movedPointer({ x: 0, y: 0 }, { clientX: 3, clientY: 4 }), false);

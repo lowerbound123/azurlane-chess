@@ -1,4 +1,6 @@
-"""Run via Blender MCP. Builds an isolated scene; never clears the user's scene."""
+"""Legacy source study + mine builder. Does not overwrite the four-role aircraft
+bundle: use build-aircraft-models.py for current aircraft. Keeps existing scenes.
+"""
 import bpy
 import math
 import io_scene_gltf2
@@ -168,7 +170,7 @@ def consolidate(parent):
 consolidate(aircraft)
 consolidate(propeller)
 consolidate(mine)
-for parent,filename in [(aircraft,'aircraft.glb'),(mine,'naval-mine.glb')]:
+for parent,filename in [(mine,'naval-mine.glb')]:
     bpy.ops.object.select_all(action='DESELECT')
     parent.select_set(True)
     for child in parent.children_recursive: child.select_set(True)

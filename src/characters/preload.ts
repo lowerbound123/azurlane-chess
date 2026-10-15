@@ -13,7 +13,13 @@ async function preloadSpineCode() {
     files.add(chunk.file);
     chunk.imports?.forEach(collect);
   };
-  collect('node_modules/@esotericsoftware/spine-threejs/dist/index.js');
+  let entry='src/vendor/spine38/adapter.ts';
+  if(!manifest[entry]){
+    // Vite can give a shared dynamic entry a generated key while retaining its module name.
+    const adapters=Object.entries(manifest).filter(([,chunk])=>chunk.isDynamicEntry&&chunk.name==='adapter');
+    if(adapters.length===1)entry=adapters[0][0];
+  }
+  collect(entry);
   await Promise.all([...files].map(async file=>{
     const asset=await fetch(import.meta.env.BASE_URL+file,{priority:'low',cache:'force-cache'});
     if(!asset.ok)throw new Error(`Spine 代码预加载失败：${asset.status}`);

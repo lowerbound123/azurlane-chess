@@ -21,7 +21,7 @@ test('committed shells have stable distinct IDs and survive the firing ship sink
  assert.equal(shells.length,3);assert.equal(new Set(shells.map(e=>e.id)).size,3);
  assert.equal(out.game.ships[0].hp,0);assert.equal(out.game.ships[1].hp,50);assert.equal(out.game.nextId,0);
  assert.deepEqual(shells,E.resolveRound(g,plans).presentation.filter(e=>e.type==='projectile'&&e.kind==='main'));
- for(const s of shells){assert.deepEqual(s.from,a.xy);assert.deepEqual(s.to,b.xy);assert.equal(s.start,0);assert.equal(s.end,1.1);}
+ for(const [i,s] of shells.entries()){assert.deepEqual(s.from,a.xy);assert.deepEqual(s.to,b.xy);assert.equal(s.start,i*.08);assert.equal(s.end,1.1);}
  const impacts=out.presentation.filter(e=>e.type==='effect'&&e.kind==='main');
  assert.equal(impacts.length,3);assert(impacts.every(e=>e.time===1.1));
  assert(out.presentation.filter(e=>e.kind==='hit').some(e=>e.time===1.1));

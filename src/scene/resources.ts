@@ -1,4 +1,5 @@
-import type {Hex} from '../../shared/game.ts';
+import type {Hex,ShipType} from '../../shared/game.ts';
+import {SHIP_SYMBOLS} from '../ship-symbols.ts';
 import * as THREE from 'three';
 import { hexToXY } from '../engine.ts';
 export const colors = { friendly: 0x70dfd5, enemy: 0xf39179, gold: 0xedc274, purple: 0xb7a3f1, torpedoPlanned: 0xf5b84b, torpedoCandidate: 0x55d9ff };
@@ -16,16 +17,23 @@ export function ring(at: THREE.Vector3, radius: number, color: THREE.ColorRepres
   const points = Array.from({ length: 49 }, (_, i) => new THREE.Vector3(at.x + Math.cos(i / 48 * Math.PI * 2) * radius, height, at.z + Math.sin(i / 48 * Math.PI * 2) * radius));
   return line(points, color);
 }
-export function label(text: string, { color = '#70dfd5', hp = null, selected = false, width = 2.6, height = 1.05 }: {color?:string;hp?:number|null;selected?:boolean;width?:number;height?:number} = {}) {
-  const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 160;
+export function label(text: string, { color = '#70dfd5', hp = null, selected = false, width = 2.6, height = 1.05,shipType }: {color?:string;hp?:number|null;selected?:boolean;width?:number;height?:number;shipType?:ShipType} = {}) {
+  const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');if(!ctx)throw new Error('Canvas 2D 不可用');
-  ctx.fillStyle = 'rgba(7, 24, 36, .94)'; ctx.fillRect(3, 3, 506, 154);
-  ctx.strokeStyle = selected ? '#ffe29a' : color; ctx.lineWidth = selected ? 9 : 4; ctx.strokeRect(7, 7, 498, 146);
-  ctx.fillStyle = color; ctx.font = 'bold 90px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 256, hp === null ? 80 : 65, 476);
-  if (hp !== null) { ctx.fillStyle = '#253b49'; ctx.fillRect(30, 117, 452, 13); ctx.fillStyle = color; ctx.fillRect(30, 117, 452 * Math.max(0, Math.min(1, hp)), 13); }
+  const font='bold 90px system-ui, sans-serif',badge=shipType?106:0;
+  ctx.font=font;
+  // Keep a minimum plate, then add pixels and world width together. Never use
+  // fillText's maxWidth: that condenses long names instead of resizing the frame.
+  canvas.width=Math.max(512,Math.ceil(ctx.measureText(text).width+60+badge));canvas.height=160;
+  const w=canvas.width;
+  ctx.fillStyle = 'rgba(7, 24, 36, .94)'; ctx.fillRect(3, 3, w-6, 154);
+  ctx.strokeStyle = selected ? '#ffe29a' : color; ctx.lineWidth = selected ? 9 : 4; ctx.strokeRect(7, 7, w-14, 146);
+  if(shipType){ctx.save();ctx.translate(30,hp===null?40:25);ctx.scale(80/24,80/24);ctx.strokeStyle=color;ctx.lineWidth=1.7;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke(new Path2D(SHIP_SYMBOLS[shipType].path));ctx.restore();}
+  ctx.fillStyle = color; ctx.font = font; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, (w+badge)/2, hp === null ? 80 : 65);
+  if (hp !== null) { const barWidth=w-60;ctx.fillStyle = '#253b49'; ctx.fillRect(30, 117, barWidth, 13); ctx.fillStyle = color; ctx.fillRect(30, 117, barWidth * Math.max(0, Math.min(1, hp)), 13); }
   const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
   const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, transparent: true }));
-  sprite.scale.set(width, height, 1); sprite.renderOrder = 8; return sprite;
+  sprite.scale.set(width*w/512, height, 1); sprite.renderOrder = 8; return sprite;
 }
 
 // A true camera-facing sprite: no rectangular label plate and no impact geometry.

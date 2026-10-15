@@ -116,7 +116,7 @@ function toggleDamage(matchId:string,shipId:string){
       damageExpanded.value[matchId][shipId] = !damageExpanded.value[matchId][shipId];
     }
 function damageSources(ship:import('../shared/network.ts').RecordShip){
-      const labels = {main:'主炮', secondary:'副炮', torpedo:'鱼雷', air:'航空攻击', collision:'碰撞', environment:'环境', grounding:'搁浅'};
+      const labels = {main:'主炮', secondary:'副炮', torpedo:'鱼雷', air:'航空攻击', collision:'碰撞', environment:'环境', grounding:'搁浅', status:'状态伤害'};
       return Object.entries(labels).flatMap(([key, label]) => {
         const damage = ship.damageBySource?.[key];
         return damage && [damage.dealt, damage.friendly, damage.taken].some(value => value > 0) ? [{label, ...damage}] : [];

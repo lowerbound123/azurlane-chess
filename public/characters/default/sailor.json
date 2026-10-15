@@ -1,17 +1,51 @@
 {
   "skeleton": {
-    "spine": "4.2.00",
-    "width": 90,
-    "height": 110
+    "hash": "original-harbor-sailor",
+    "spine": "3.8.99",
+    "x": -40,
+    "y": 0,
+    "width": 83,
+    "height": 106,
+    "images": "./",
+    "audio": ""
   },
   "bones": [
     {
       "name": "root"
     },
     {
-      "name": "body",
+      "name": "hip",
       "parent": "root",
-      "y": 37
+      "y": 30
+    },
+    {
+      "name": "leftLeg",
+      "parent": "hip",
+      "x": -10,
+      "y": -13
+    },
+    {
+      "name": "rightLeg",
+      "parent": "hip",
+      "x": 10,
+      "y": -13
+    },
+    {
+      "name": "body",
+      "parent": "hip",
+      "y": 14
+    },
+    {
+      "name": "leftArm",
+      "parent": "body",
+      "x": -22,
+      "y": 0
+    },
+    {
+      "name": "rightArm",
+      "parent": "body",
+      "x": 22,
+      "y": 0
     },
     {
       "name": "head",
@@ -19,40 +53,33 @@
       "y": 31
     },
     {
-      "name": "left",
-      "parent": "body",
-      "x": -21,
-      "y": 5
+      "name": "cap",
+      "parent": "head",
+      "y": 21
     },
     {
-      "name": "right",
-      "parent": "body",
-      "x": 21,
-      "y": 5
+      "name": "cannon",
+      "parent": "hip",
+      "x": 31,
+      "y": 2
     },
     {
-      "name": "legL",
-      "parent": "root",
-      "x": -11,
-      "y": 12
-    },
-    {
-      "name": "legR",
-      "parent": "root",
-      "x": 11,
-      "y": 12
+      "name": "plane",
+      "parent": "rightArm",
+      "x": 0,
+      "y": 23
     }
   ],
   "slots": [
     {
-      "name": "legL",
-      "bone": "legL",
-      "attachment": "legL"
+      "name": "leftLeg",
+      "bone": "leftLeg",
+      "attachment": "boot"
     },
     {
-      "name": "legR",
-      "bone": "legR",
-      "attachment": "legR"
+      "name": "rightLeg",
+      "bone": "rightLeg",
+      "attachment": "boot"
     },
     {
       "name": "body",
@@ -60,105 +87,110 @@
       "attachment": "body"
     },
     {
-      "name": "left",
-      "bone": "left",
-      "attachment": "left"
+      "name": "leftArm",
+      "bone": "leftArm",
+      "attachment": "arm"
     },
     {
-      "name": "right",
-      "bone": "right",
-      "attachment": "right"
-    },
-    {
-      "name": "weapon",
-      "bone": "right",
-      "attachment": "weapon"
+      "name": "rightArm",
+      "bone": "rightArm",
+      "attachment": "arm"
     },
     {
       "name": "head",
       "bone": "head",
-      "attachment": "head"
+      "attachment": "face"
     },
     {
-      "name": "hat",
-      "bone": "head",
-      "attachment": "hat"
+      "name": "cap",
+      "bone": "cap",
+      "attachment": "cap"
+    },
+    {
+      "name": "cannon",
+      "bone": "cannon",
+      "attachment": "cannon"
+    },
+    {
+      "name": "plane",
+      "bone": "plane",
+      "attachment": "plane"
     }
   ],
   "skins": [
     {
       "name": "default",
       "attachments": {
-        "legL": {
-          "legL": {
+        "leftLeg": {
+          "boot": {
             "type": "region",
             "path": "boot",
-            "width": 27,
-            "height": 32,
-            "y": 0
+            "width": 20,
+            "height": 33
           }
         },
-        "legR": {
-          "legR": {
+        "rightLeg": {
+          "boot": {
             "type": "region",
             "path": "boot",
-            "width": 27,
-            "height": 32,
-            "y": 0
+            "width": 20,
+            "height": 33
           }
         },
         "body": {
           "body": {
             "type": "region",
             "path": "body",
-            "width": 49,
-            "height": 50,
-            "y": 0
+            "width": 48,
+            "height": 49
           }
         },
-        "left": {
-          "left": {
+        "leftArm": {
+          "arm": {
             "type": "region",
             "path": "arm",
-            "width": 28,
-            "height": 42,
-            "y": -9
+            "width": 24,
+            "height": 39
           }
         },
-        "right": {
-          "right": {
+        "rightArm": {
+          "arm": {
             "type": "region",
             "path": "arm",
-            "width": 28,
-            "height": 42,
-            "y": -9
-          }
-        },
-        "weapon": {
-          "weapon": {
-            "type": "region",
-            "path": "weapon",
-            "width": 41,
-            "height": 30,
-            "y": -9
+            "width": 24,
+            "height": 39
           }
         },
         "head": {
-          "head": {
+          "face": {
             "type": "region",
-            "path": "head",
-            "width": 62,
-            "height": 62,
-            "y": 0
+            "path": "face",
+            "width": 56,
+            "height": 53
           }
         },
-        "hat": {
-          "hat": {
+        "cap": {
+          "cap": {
             "type": "region",
-            "path": "hat",
-            "width": 65,
-            "height": 42,
-            "y": 24
+            "path": "cap",
+            "width": 59,
+            "height": 38
+          }
+        },
+        "cannon": {
+          "cannon": {
+            "type": "region",
+            "path": "cannon",
+            "width": 32,
+            "height": 33
+          }
+        },
+        "plane": {
+          "plane": {
+            "type": "region",
+            "path": "plane",
+            "width": 26,
+            "height": 26
           }
         }
       }
@@ -167,7 +199,7 @@
   "animations": {
     "idle": {
       "bones": {
-        "body": {
+        "hip": {
           "translate": [
             {
               "time": 0,
@@ -175,12 +207,22 @@
               "y": 0
             },
             {
-              "time": 0.8,
+              "time": 0.2,
               "x": 0,
-              "y": 2
+              "y": 1.8
             },
             {
-              "time": 1.6,
+              "time": 0.4,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": -0.6
+            },
+            {
+              "time": 0.8,
               "x": 0,
               "y": 0
             }
@@ -190,15 +232,47 @@
           "rotate": [
             {
               "time": 0,
-              "value": -2
+              "angle": -2
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": 2
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
             },
             {
               "time": 0.8,
-              "value": 2
+              "angle": -2
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -4
             },
             {
-              "time": 1.6,
-              "value": -2
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": -4
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -4
             }
           ]
         }
@@ -206,7 +280,7 @@
     },
     "move": {
       "bones": {
-        "body": {
+        "hip": {
           "translate": [
             {
               "time": 0,
@@ -216,44 +290,118 @@
             {
               "time": 0.2,
               "x": 0,
-              "y": 3
+              "y": 4
             },
             {
               "time": 0.4,
               "x": 0,
               "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 4
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
             }
           ]
         },
-        "legL": {
+        "leftLeg": {
           "rotate": [
             {
               "time": 0,
-              "value": -15
+              "angle": -24
             },
             {
               "time": 0.2,
-              "value": 15
+              "angle": 0
             },
             {
               "time": 0.4,
-              "value": -15
+              "angle": 24
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -24
             }
           ]
         },
-        "legR": {
+        "rightLeg": {
           "rotate": [
             {
               "time": 0,
-              "value": 15
+              "angle": 24
             },
             {
               "time": 0.2,
-              "value": -15
+              "angle": 0
             },
             {
               "time": 0.4,
-              "value": 15
+              "angle": -24
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": 24
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 22
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": -22
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": 22
+            }
+          ]
+        },
+        "rightArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -22
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": 22
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -22
             }
           ]
         }
@@ -261,27 +409,25 @@
     },
     "fire": {
       "bones": {
-        "right": {
+        "cannon": {
           "rotate": [
             {
               "time": 0,
-              "value": 0
+              "angle": 0
             },
             {
-              "time": 0.12,
-              "value": 65
+              "time": 0.2,
+              "angle": -28
             },
             {
-              "time": 0.22,
-              "value": 80
+              "time": 0.4,
+              "angle": -5
             },
             {
-              "time": 0.55,
-              "value": 0
+              "time": 0.6000000000000001,
+              "angle": 0
             }
-          ]
-        },
-        "body": {
+          ],
           "translate": [
             {
               "time": 0,
@@ -289,14 +435,63 @@
               "y": 0
             },
             {
-              "time": 0.18,
+              "time": 0.2,
+              "x": 0,
+              "y": -6
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 1
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "hip": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
               "x": -5,
               "y": 0
             },
             {
-              "time": 0.55,
+              "time": 0.4,
               "x": 0,
               "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "rightArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -55
+            },
+            {
+              "time": 0.4,
+              "angle": -35
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
             }
           ]
         }
@@ -304,39 +499,85 @@
     },
     "torpedo": {
       "bones": {
-        "right": {
-          "rotate": [
-            {
-              "time": 0,
-              "value": 0
-            },
-            {
-              "time": 0.18,
-              "value": -60
-            },
-            {
-              "time": 0.4,
-              "value": -45
-            },
-            {
-              "time": 0.7,
-              "value": 0
-            }
-          ]
-        },
         "body": {
           "rotate": [
             {
               "time": 0,
-              "value": 0
+              "angle": 0
             },
             {
               "time": 0.2,
-              "value": -12
+              "angle": 14
             },
             {
-              "time": 0.7,
-              "value": 0
+              "time": 0.4,
+              "angle": 8
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 70
+            },
+            {
+              "time": 0.4,
+              "angle": 90
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ]
+        },
+        "cannon": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 75
+            },
+            {
+              "time": 0.4,
+              "angle": 85
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ],
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 8,
+              "y": -9
+            },
+            {
+              "time": 0.4,
+              "x": 15,
+              "y": -9
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
             }
           ]
         }
@@ -344,23 +585,54 @@
     },
     "hit": {
       "bones": {
-        "body": {
+        "hip": {
           "rotate": [
             {
               "time": 0,
-              "value": 0
+              "angle": 0
             },
             {
-              "time": 0.08,
-              "value": 15
+              "time": 0.2,
+              "angle": -16
             },
             {
-              "time": 0.18,
-              "value": -9
+              "time": 0.4,
+              "angle": 12
             },
             {
-              "time": 0.5,
-              "value": 0
+              "time": 0.6000000000000001,
+              "angle": -7
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ],
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": -7,
+              "y": -3
+            },
+            {
+              "time": 0.4,
+              "x": 5,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": -2,
+              "y": 0
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
             }
           ]
         },
@@ -368,15 +640,47 @@
           "rotate": [
             {
               "time": 0,
-              "value": 0
+              "angle": 0
             },
             {
-              "time": 0.1,
-              "value": -18
+              "time": 0.2,
+              "angle": 20
             },
             {
-              "time": 0.5,
-              "value": 0
+              "time": 0.4,
+              "angle": -15
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 8
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 45
+            },
+            {
+              "time": 0.4,
+              "angle": -15
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 12
+            },
+            {
+              "time": 0.8,
+              "angle": 0
             }
           ]
         }
@@ -384,23 +688,611 @@
     },
     "aircraft": {
       "bones": {
-        "left": {
+        "rightArm": {
           "rotate": [
             {
               "time": 0,
-              "value": 0
+              "angle": 0
             },
             {
-              "time": 0.15,
-              "value": -140
+              "time": 0.2,
+              "angle": -80
             },
             {
               "time": 0.4,
-              "value": -110
+              "angle": -110
             },
             {
-              "time": 0.7,
-              "value": 0
+              "time": 0.6000000000000001,
+              "angle": -30
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 12
+            },
+            {
+              "time": 0.4,
+              "angle": 15
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 5
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        },
+        "plane": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 0,
+              "y": 8
+            },
+            {
+              "time": 0.4,
+              "x": -15,
+              "y": 22
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": -30,
+              "y": 32
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -20
+            },
+            {
+              "time": 0.4,
+              "angle": -50
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": -70
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        }
+      }
+    },
+    "stand": {
+      "bones": {
+        "hip": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 0,
+              "y": 1.8
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": -0.6
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -2
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": 2
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -2
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -4
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": -4
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -4
+            }
+          ]
+        }
+      }
+    },
+    "attack": {
+      "bones": {
+        "cannon": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -28
+            },
+            {
+              "time": 0.4,
+              "angle": -5
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ],
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 0,
+              "y": -6
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 1
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "hip": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": -5,
+              "y": 0
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "rightArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -55
+            },
+            {
+              "time": 0.4,
+              "angle": -35
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ]
+        }
+      }
+    },
+    "attack_left": {
+      "bones": {
+        "cannon": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -28
+            },
+            {
+              "time": 0.4,
+              "angle": -5
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ],
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 0,
+              "y": -6
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 1
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "hip": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": -5,
+              "y": 0
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "rightArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -55
+            },
+            {
+              "time": 0.4,
+              "angle": -35
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            }
+          ]
+        }
+      }
+    },
+    "yun": {
+      "bones": {
+        "hip": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": -16
+            },
+            {
+              "time": 0.4,
+              "angle": 12
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": -7
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ],
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": -7,
+              "y": -3
+            },
+            {
+              "time": 0.4,
+              "x": 5,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": -2,
+              "y": 0
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 20
+            },
+            {
+              "time": 0.4,
+              "angle": -15
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 8
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.2,
+              "angle": 45
+            },
+            {
+              "time": 0.4,
+              "angle": -15
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 12
+            },
+            {
+              "time": 0.8,
+              "angle": 0
+            }
+          ]
+        }
+      }
+    },
+    "dance": {
+      "bones": {
+        "hip": {
+          "translate": [
+            {
+              "time": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.2,
+              "x": 0,
+              "y": 4
+            },
+            {
+              "time": 0.4,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "time": 0.6000000000000001,
+              "x": 0,
+              "y": 4
+            },
+            {
+              "time": 0.8,
+              "x": 0,
+              "y": 0
+            }
+          ]
+        },
+        "leftLeg": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -24
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": 24
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -24
+            }
+          ]
+        },
+        "rightLeg": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 24
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": -24
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": 24
+            }
+          ]
+        },
+        "leftArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 22
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": -22
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": 22
+            }
+          ]
+        },
+        "rightArm": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": -22
+            },
+            {
+              "time": 0.2,
+              "angle": 0
+            },
+            {
+              "time": 0.4,
+              "angle": 22
+            },
+            {
+              "time": 0.6000000000000001,
+              "angle": 0
+            },
+            {
+              "time": 0.8,
+              "angle": -22
+            }
+          ]
+        }
+      }
+    },
+    "dead": {
+      "bones": {
+        "root": {
+          "rotate": [
+            {
+              "time": 0,
+              "angle": 0
+            },
+            {
+              "time": 0.9,
+              "angle": -90
             }
           ]
         }

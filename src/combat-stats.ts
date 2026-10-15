@@ -24,6 +24,7 @@ export function createCombatStatsTracker(ships: Pick<Ship,"id"|"team"|"hp">[]) {
     if (!total) return;
     // Unknown types retain the existing totals without being mislabeled as a
     // known weapon or environment source. Every engine damage call names its type.
+    if(type==='status')for(const row of Object.values(stats))row.damageBySource.status??={dealt:0,friendly:0,taken:0};
     const knownType = Object.hasOwn(stats[target.id].damageBySource, type);
     if (knownType) stats[target.id].damageBySource[type].taken += actual;
 

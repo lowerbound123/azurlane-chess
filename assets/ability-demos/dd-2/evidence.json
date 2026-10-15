@@ -1,0 +1,3916 @@
+{
+  "id": "dd-2",
+  "initial": {
+    "seed": 20261015,
+    "round": 1,
+    "ruleset": "fleet-v1",
+    "zones": [],
+    "map": {
+      "width": 13,
+      "height": 11,
+      "islands": [],
+      "mines": []
+    },
+    "ships": [
+      {
+        "id": "0-0",
+        "kind": "ship",
+        "team": 0,
+        "label": "岛风",
+        "template": "dd",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "岛风",
+          "role": "front",
+          "hp": 90,
+          "speed": 4,
+          "vision": 5,
+          "collision": 15,
+          "secondary": {
+            "damage": 8,
+            "range": 2,
+            "multi": false
+          },
+          "torpedo": {
+            "speed": 4,
+            "damage": 40,
+            "life": 3,
+            "reserve": 8,
+            "max": 4,
+            "perWindow": 4
+          },
+          "aa": {
+            "range": 3,
+            "damage": 1
+          },
+          "contactSweep": true
+        },
+        "hp": 90,
+        "pos": {
+          "q": 4,
+          "r": 5
+        },
+        "xy": {
+          "x": 11.258330249197702,
+          "y": 7.5
+        },
+        "heading": 0,
+        "torps": 8,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "dd-2"
+      },
+      {
+        "id": "1-0",
+        "kind": "ship",
+        "team": 1,
+        "label": "企业",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "企业",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 4,
+            "launch": 2,
+            "rearm": 2,
+            "heal": 1,
+            "plane": {
+              "role": "heavy",
+              "hp": 3,
+              "speed": 5,
+              "vision": 3,
+              "range": 12,
+              "damage": 35,
+              "rearm": 2
+            },
+            "slots": [
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 4,
+          "r": 8
+        },
+        "xy": {
+          "x": 13.856406460551018,
+          "y": 12
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-1"
+      },
+      {
+        "id": "1-1",
+        "kind": "ship",
+        "team": 1,
+        "label": "企业",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "企业",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 4,
+            "launch": 2,
+            "rearm": 2,
+            "heal": 1,
+            "plane": {
+              "role": "heavy",
+              "hp": 3,
+              "speed": 5,
+              "vision": 3,
+              "range": 12,
+              "damage": 35,
+              "rearm": 2
+            },
+            "slots": [
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 1,
+          "r": 8
+        },
+        "xy": {
+          "x": 8.660254037844386,
+          "y": 12
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-1"
+      },
+      {
+        "id": "1-2",
+        "kind": "ship",
+        "team": 1,
+        "label": "企业",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "企业",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 4,
+            "launch": 2,
+            "rearm": 2,
+            "heal": 1,
+            "plane": {
+              "role": "heavy",
+              "hp": 3,
+              "speed": 5,
+              "vision": 3,
+              "range": 12,
+              "damage": 35,
+              "rearm": 2
+            },
+            "slots": [
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 4,
+          "r": 2
+        },
+        "xy": {
+          "x": 8.660254037844386,
+          "y": 3
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-1"
+      },
+      {
+        "id": "1-3",
+        "kind": "ship",
+        "team": 1,
+        "label": "企业",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "企业",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 4,
+            "launch": 2,
+            "rearm": 2,
+            "heal": 1,
+            "plane": {
+              "role": "heavy",
+              "hp": 3,
+              "speed": 5,
+              "vision": 3,
+              "range": 12,
+              "damage": 35,
+              "rearm": 2
+            },
+            "slots": [
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              },
+              {
+                "role": "heavy",
+                "hp": 3,
+                "speed": 5,
+                "vision": 3,
+                "range": 12,
+                "damage": 35,
+                "rearm": 2
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 7,
+          "r": 2
+        },
+        "xy": {
+          "x": 13.856406460551018,
+          "y": 3
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-1"
+      }
+    ],
+    "planes": [],
+    "torpedoes": [],
+    "nextId": 0,
+    "log": [],
+    "winner": null,
+    "phase": "plan",
+    "explored": [
+      [
+        "4,0",
+        "5,0",
+        "6,0",
+        "7,0",
+        "8,0",
+        "9,0",
+        "3,1",
+        "4,1",
+        "5,1",
+        "6,1",
+        "7,1",
+        "8,1",
+        "9,1",
+        "2,2",
+        "3,2",
+        "4,2",
+        "5,2",
+        "6,2",
+        "7,2",
+        "8,2",
+        "9,2",
+        "1,3",
+        "2,3",
+        "3,3",
+        "4,3",
+        "5,3",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "0,4",
+        "1,4",
+        "2,4",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "-1,5",
+        "0,5",
+        "1,5",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "-1,6",
+        "0,6",
+        "1,6",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "-1,7",
+        "0,7",
+        "1,7",
+        "2,7",
+        "3,7",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "-1,8",
+        "0,8",
+        "1,8",
+        "2,8",
+        "3,8",
+        "4,8",
+        "5,8",
+        "6,8",
+        "-1,9",
+        "0,9",
+        "1,9",
+        "2,9",
+        "3,9",
+        "4,9",
+        "5,9",
+        "-1,10",
+        "0,10",
+        "1,10",
+        "2,10",
+        "3,10",
+        "4,10"
+      ],
+      [
+        "4,3",
+        "5,3",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "1,6",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "9,6",
+        "0,7",
+        "1,7",
+        "2,7",
+        "3,7",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "8,7",
+        "9,7",
+        "-1,8",
+        "0,8",
+        "1,8",
+        "2,8",
+        "3,8",
+        "4,8",
+        "5,8",
+        "6,8",
+        "7,8",
+        "8,8",
+        "-1,9",
+        "0,9",
+        "1,9",
+        "2,9",
+        "3,9",
+        "4,9",
+        "5,9",
+        "6,9",
+        "7,9",
+        "8,9",
+        "-1,10",
+        "0,10",
+        "1,10",
+        "2,10",
+        "3,10",
+        "4,10",
+        "5,10",
+        "6,10",
+        "7,10",
+        "1,3",
+        "2,3",
+        "3,3",
+        "0,4",
+        "1,4",
+        "2,4",
+        "-1,5",
+        "0,5",
+        "1,5",
+        "-2,6",
+        "-1,6",
+        "0,6",
+        "-3,7",
+        "-2,7",
+        "-1,7",
+        "-4,8",
+        "-3,8",
+        "-2,8",
+        "-4,9",
+        "-3,9",
+        "-2,9",
+        "-4,10",
+        "-3,10",
+        "-2,10",
+        "1,0",
+        "2,0",
+        "3,0",
+        "4,0",
+        "5,0",
+        "6,0",
+        "7,0",
+        "8,0",
+        "9,0",
+        "0,1",
+        "1,1",
+        "2,1",
+        "3,1",
+        "4,1",
+        "5,1",
+        "6,1",
+        "7,1",
+        "8,1",
+        "9,1",
+        "-1,2",
+        "0,2",
+        "1,2",
+        "2,2",
+        "3,2",
+        "4,2",
+        "5,2",
+        "6,2",
+        "7,2",
+        "8,2",
+        "9,2",
+        "-1,3",
+        "0,3",
+        "-1,4",
+        "10,0",
+        "11,0",
+        "12,0",
+        "10,1",
+        "11,1",
+        "12,1",
+        "10,2",
+        "11,2",
+        "10,3",
+        "11,3",
+        "10,4"
+      ]
+    ]
+  },
+  "rounds": [
+    {
+      "events": [
+        {
+          "round": 1,
+          "t": 0,
+          "text": "岛风 发射鱼雷",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "team": 0
+        },
+        {
+          "round": 1,
+          "t": 0,
+          "text": "岛风 发射鱼雷",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "team": 0
+        },
+        {
+          "round": 1,
+          "t": 0,
+          "text": "岛风 发射鱼雷",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "team": 0
+        },
+        {
+          "round": 1,
+          "t": 0,
+          "text": "岛风 发射鱼雷",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "team": 0
+        },
+        {
+          "round": 1,
+          "t": 0.625,
+          "text": "企业 遭鱼雷命中 −40",
+          "at": {
+            "q": 4,
+            "r": 2
+          },
+          "team": 1
+        },
+        {
+          "round": 1,
+          "t": 0.625,
+          "text": "企业 遭鱼雷命中 −40",
+          "at": {
+            "q": 7,
+            "r": 2
+          },
+          "team": 1
+        },
+        {
+          "round": 1,
+          "t": 0.629,
+          "text": "企业 遭鱼雷命中 −40",
+          "at": {
+            "q": 4,
+            "r": 8
+          },
+          "team": 1
+        },
+        {
+          "round": 1,
+          "t": 0.629,
+          "text": "企业 遭鱼雷命中 −40",
+          "at": {
+            "q": 1,
+            "r": 8
+          },
+          "team": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "action:1:0",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "action:1:1",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "action:1:2",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "action:1:3",
+          "type": "action",
+          "shipId": "0-0",
+          "team": 0,
+          "action": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:4",
+          "type": "effect",
+          "kind": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 2
+          },
+          "team": 1,
+          "time": 0.625,
+          "duration": 0.75,
+          "targetId": "1-2",
+          "position": {
+            "x": 8.660254037844386,
+            "y": 3
+          }
+        },
+        {
+          "id": "action:1:5",
+          "type": "action",
+          "shipId": "1-2",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 4,
+            "r": 2
+          },
+          "time": 0.625,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:6",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 4,
+            "r": 2
+          },
+          "team": 1,
+          "time": 0.625,
+          "duration": 0.65,
+          "text": "−40",
+          "targetId": "1-2",
+          "position": {
+            "x": 8.660254037844386,
+            "y": 3
+          }
+        },
+        {
+          "id": "effect:1:7",
+          "type": "effect",
+          "kind": "torpedo",
+          "at": {
+            "q": 7,
+            "r": 2
+          },
+          "team": 1,
+          "time": 0.625,
+          "duration": 0.75,
+          "targetId": "1-3",
+          "position": {
+            "x": 13.856406460551018,
+            "y": 3
+          }
+        },
+        {
+          "id": "action:1:8",
+          "type": "action",
+          "shipId": "1-3",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 7,
+            "r": 2
+          },
+          "time": 0.625,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:9",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 7,
+            "r": 2
+          },
+          "team": 1,
+          "time": 0.625,
+          "duration": 0.65,
+          "text": "−40",
+          "targetId": "1-3",
+          "position": {
+            "x": 13.856406460551018,
+            "y": 3
+          }
+        },
+        {
+          "id": "effect:1:10",
+          "type": "effect",
+          "kind": "torpedo",
+          "at": {
+            "q": 4,
+            "r": 8
+          },
+          "team": 1,
+          "time": 0.6291666666666667,
+          "duration": 0.75,
+          "targetId": "1-0",
+          "position": {
+            "x": 13.856406460551018,
+            "y": 12
+          }
+        },
+        {
+          "id": "action:1:11",
+          "type": "action",
+          "shipId": "1-0",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 4,
+            "r": 8
+          },
+          "time": 0.6291666666666667,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:12",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 4,
+            "r": 8
+          },
+          "team": 1,
+          "time": 0.6291666666666667,
+          "duration": 0.65,
+          "text": "−40",
+          "targetId": "1-0",
+          "position": {
+            "x": 13.856406460551018,
+            "y": 12
+          }
+        },
+        {
+          "id": "effect:1:13",
+          "type": "effect",
+          "kind": "torpedo",
+          "at": {
+            "q": 1,
+            "r": 8
+          },
+          "team": 1,
+          "time": 0.6291666666666667,
+          "duration": 0.75,
+          "targetId": "1-1",
+          "position": {
+            "x": 8.660254037844386,
+            "y": 12
+          }
+        },
+        {
+          "id": "action:1:14",
+          "type": "action",
+          "shipId": "1-1",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 1,
+            "r": 8
+          },
+          "time": 0.6291666666666667,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:15",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 1,
+            "r": 8
+          },
+          "team": 1,
+          "time": 0.6291666666666667,
+          "duration": 0.65,
+          "text": "−40",
+          "targetId": "1-1",
+          "position": {
+            "x": 8.660254037844386,
+            "y": 12
+          }
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 2,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "岛风",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "岛风",
+              "role": "front",
+              "hp": 90,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 40,
+                "life": 3,
+                "reserve": 8,
+                "max": 4,
+                "perWindow": 4
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true
+            },
+            "hp": 90,
+            "pos": {
+              "q": 4,
+              "r": 5
+            },
+            "xy": {
+              "x": 11.258330249197702,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 4,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-2"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 170,
+            "pos": {
+              "q": 4,
+              "r": 8
+            },
+            "xy": {
+              "x": 13.856406460551018,
+              "y": 12
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-1",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 170,
+            "pos": {
+              "q": 1,
+              "r": 8
+            },
+            "xy": {
+              "x": 8.660254037844386,
+              "y": 12
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-2",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 170,
+            "pos": {
+              "q": 4,
+              "r": 2
+            },
+            "xy": {
+              "x": 8.660254037844386,
+              "y": 3
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-3",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 170,
+            "pos": {
+              "q": 7,
+              "r": 2
+            },
+            "xy": {
+              "x": 13.856406460551018,
+              "y": 3
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 4,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "岛风 发射鱼雷",
+            "at": {
+              "q": 4,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 1,
+            "t": 0,
+            "text": "岛风 发射鱼雷",
+            "at": {
+              "q": 4,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 1,
+            "t": 0,
+            "text": "岛风 发射鱼雷",
+            "at": {
+              "q": 4,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 1,
+            "t": 0,
+            "text": "岛风 发射鱼雷",
+            "at": {
+              "q": 4,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 1,
+            "t": 0.625,
+            "text": "企业 遭鱼雷命中 −40",
+            "at": {
+              "q": 4,
+              "r": 2
+            },
+            "team": 1
+          },
+          {
+            "round": 1,
+            "t": 0.625,
+            "text": "企业 遭鱼雷命中 −40",
+            "at": {
+              "q": 7,
+              "r": 2
+            },
+            "team": 1
+          },
+          {
+            "round": 1,
+            "t": 0.629,
+            "text": "企业 遭鱼雷命中 −40",
+            "at": {
+              "q": 4,
+              "r": 8
+            },
+            "team": 1
+          },
+          {
+            "round": 1,
+            "t": 0.629,
+            "text": "企业 遭鱼雷命中 −40",
+            "at": {
+              "q": 1,
+              "r": 8
+            },
+            "team": 1
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10"
+          ],
+          [
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10",
+            "1,3",
+            "2,3",
+            "3,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "-1,3",
+            "0,3",
+            "-1,4",
+            "10,0",
+            "11,0",
+            "12,0",
+            "10,1",
+            "11,1",
+            "12,1",
+            "10,2",
+            "11,2",
+            "10,3",
+            "11,3",
+            "10,4"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 160,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 160,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 40,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 40
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-1": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 40,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 40
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-2": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 40,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 40
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-3": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 40,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 40
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "experiments": {
+    "main": {
+      "label": "",
+      "initial": {
+        "seed": 20261015,
+        "round": 1,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "岛风",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "岛风",
+              "role": "front",
+              "hp": 90,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 40,
+                "life": 3,
+                "reserve": 8,
+                "max": 4,
+                "perWindow": 4
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true
+            },
+            "hp": 90,
+            "pos": {
+              "q": 4,
+              "r": 5
+            },
+            "xy": {
+              "x": 11.258330249197702,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 8,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-2"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 4,
+              "r": 8
+            },
+            "xy": {
+              "x": 13.856406460551018,
+              "y": 12
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-1",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 1,
+              "r": 8
+            },
+            "xy": {
+              "x": 8.660254037844386,
+              "y": 12
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-2",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 4,
+              "r": 2
+            },
+            "xy": {
+              "x": 8.660254037844386,
+              "y": 3
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          },
+          {
+            "id": "1-3",
+            "kind": "ship",
+            "team": 1,
+            "label": "企业",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "企业",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 4,
+                "launch": 2,
+                "rearm": 2,
+                "heal": 1,
+                "plane": {
+                  "role": "heavy",
+                  "hp": 3,
+                  "speed": 5,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 35,
+                  "rearm": 2
+                },
+                "slots": [
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  },
+                  {
+                    "role": "heavy",
+                    "hp": 3,
+                    "speed": 5,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 35,
+                    "rearm": 2
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 7,
+              "r": 2
+            },
+            "xy": {
+              "x": 13.856406460551018,
+              "y": 3
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              3,
+              3,
+              3,
+              3
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-1"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10"
+          ],
+          [
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10",
+            "1,3",
+            "2,3",
+            "3,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "-4,8",
+            "-3,8",
+            "-2,8",
+            "-4,9",
+            "-3,9",
+            "-2,9",
+            "-4,10",
+            "-3,10",
+            "-2,10",
+            "1,0",
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "0,1",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "-1,3",
+            "0,3",
+            "-1,4",
+            "10,0",
+            "11,0",
+            "12,0",
+            "10,1",
+            "11,1",
+            "12,1",
+            "10,2",
+            "11,2",
+            "10,3",
+            "11,3",
+            "10,4"
+          ]
+        ]
+      },
+      "orders": [
+        {
+          "0-0": {
+            "moves": [],
+            "torps": [
+              {
+                "window": 0,
+                "dir": 1
+              },
+              {
+                "window": 0,
+                "dir": 2
+              },
+              {
+                "window": 0,
+                "dir": 4
+              },
+              {
+                "window": 0,
+                "dir": 5
+              }
+            ],
+            "main": [],
+            "planes": [],
+            "sweep": null
+          }
+        }
+      ],
+      "rounds": [
+        {
+          "events": [
+            {
+              "round": 1,
+              "t": 0,
+              "text": "岛风 发射鱼雷",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "team": 0
+            },
+            {
+              "round": 1,
+              "t": 0,
+              "text": "岛风 发射鱼雷",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "team": 0
+            },
+            {
+              "round": 1,
+              "t": 0,
+              "text": "岛风 发射鱼雷",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "team": 0
+            },
+            {
+              "round": 1,
+              "t": 0,
+              "text": "岛风 发射鱼雷",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "team": 0
+            },
+            {
+              "round": 1,
+              "t": 0.625,
+              "text": "企业 遭鱼雷命中 −40",
+              "at": {
+                "q": 4,
+                "r": 2
+              },
+              "team": 1
+            },
+            {
+              "round": 1,
+              "t": 0.625,
+              "text": "企业 遭鱼雷命中 −40",
+              "at": {
+                "q": 7,
+                "r": 2
+              },
+              "team": 1
+            },
+            {
+              "round": 1,
+              "t": 0.629,
+              "text": "企业 遭鱼雷命中 −40",
+              "at": {
+                "q": 4,
+                "r": 8
+              },
+              "team": 1
+            },
+            {
+              "round": 1,
+              "t": 0.629,
+              "text": "企业 遭鱼雷命中 −40",
+              "at": {
+                "q": 1,
+                "r": 8
+              },
+              "team": 1
+            }
+          ],
+          "presentation": [
+            {
+              "id": "action:1:0",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "action:1:1",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "action:1:2",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "action:1:3",
+              "type": "action",
+              "shipId": "0-0",
+              "team": 0,
+              "action": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:4",
+              "type": "effect",
+              "kind": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 2
+              },
+              "team": 1,
+              "time": 0.625,
+              "duration": 0.75,
+              "targetId": "1-2",
+              "position": {
+                "x": 8.660254037844386,
+                "y": 3
+              }
+            },
+            {
+              "id": "action:1:5",
+              "type": "action",
+              "shipId": "1-2",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 4,
+                "r": 2
+              },
+              "time": 0.625,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:6",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 4,
+                "r": 2
+              },
+              "team": 1,
+              "time": 0.625,
+              "duration": 0.65,
+              "text": "−40",
+              "targetId": "1-2",
+              "position": {
+                "x": 8.660254037844386,
+                "y": 3
+              }
+            },
+            {
+              "id": "effect:1:7",
+              "type": "effect",
+              "kind": "torpedo",
+              "at": {
+                "q": 7,
+                "r": 2
+              },
+              "team": 1,
+              "time": 0.625,
+              "duration": 0.75,
+              "targetId": "1-3",
+              "position": {
+                "x": 13.856406460551018,
+                "y": 3
+              }
+            },
+            {
+              "id": "action:1:8",
+              "type": "action",
+              "shipId": "1-3",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 7,
+                "r": 2
+              },
+              "time": 0.625,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:9",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 7,
+                "r": 2
+              },
+              "team": 1,
+              "time": 0.625,
+              "duration": 0.65,
+              "text": "−40",
+              "targetId": "1-3",
+              "position": {
+                "x": 13.856406460551018,
+                "y": 3
+              }
+            },
+            {
+              "id": "effect:1:10",
+              "type": "effect",
+              "kind": "torpedo",
+              "at": {
+                "q": 4,
+                "r": 8
+              },
+              "team": 1,
+              "time": 0.6291666666666667,
+              "duration": 0.75,
+              "targetId": "1-0",
+              "position": {
+                "x": 13.856406460551018,
+                "y": 12
+              }
+            },
+            {
+              "id": "action:1:11",
+              "type": "action",
+              "shipId": "1-0",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 4,
+                "r": 8
+              },
+              "time": 0.6291666666666667,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:12",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 4,
+                "r": 8
+              },
+              "team": 1,
+              "time": 0.6291666666666667,
+              "duration": 0.65,
+              "text": "−40",
+              "targetId": "1-0",
+              "position": {
+                "x": 13.856406460551018,
+                "y": 12
+              }
+            },
+            {
+              "id": "effect:1:13",
+              "type": "effect",
+              "kind": "torpedo",
+              "at": {
+                "q": 1,
+                "r": 8
+              },
+              "team": 1,
+              "time": 0.6291666666666667,
+              "duration": 0.75,
+              "targetId": "1-1",
+              "position": {
+                "x": 8.660254037844386,
+                "y": 12
+              }
+            },
+            {
+              "id": "action:1:14",
+              "type": "action",
+              "shipId": "1-1",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 1,
+                "r": 8
+              },
+              "time": 0.6291666666666667,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:15",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 1,
+                "r": 8
+              },
+              "team": 1,
+              "time": 0.6291666666666667,
+              "duration": 0.65,
+              "text": "−40",
+              "targetId": "1-1",
+              "position": {
+                "x": 8.660254037844386,
+                "y": 12
+              }
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 2,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "岛风",
+                "template": "dd",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "岛风",
+                  "role": "front",
+                  "hp": 90,
+                  "speed": 4,
+                  "vision": 5,
+                  "collision": 15,
+                  "secondary": {
+                    "damage": 8,
+                    "range": 2,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 40,
+                    "life": 3,
+                    "reserve": 8,
+                    "max": 4,
+                    "perWindow": 4
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1
+                  },
+                  "contactSweep": true
+                },
+                "hp": 90,
+                "pos": {
+                  "q": 4,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 11.258330249197702,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 4,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "dd-2"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "企业",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "企业",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 4,
+                    "launch": 2,
+                    "rearm": 2,
+                    "heal": 1,
+                    "plane": {
+                      "role": "heavy",
+                      "hp": 3,
+                      "speed": 5,
+                      "vision": 3,
+                      "range": 12,
+                      "damage": 35,
+                      "rearm": 2
+                    },
+                    "slots": [
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      }
+                    ]
+                  }
+                },
+                "hp": 170,
+                "pos": {
+                  "q": 4,
+                  "r": 8
+                },
+                "xy": {
+                  "x": 13.856406460551018,
+                  "y": 12
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  3,
+                  3,
+                  3,
+                  3
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-1"
+              },
+              {
+                "id": "1-1",
+                "kind": "ship",
+                "team": 1,
+                "label": "企业",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "企业",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 4,
+                    "launch": 2,
+                    "rearm": 2,
+                    "heal": 1,
+                    "plane": {
+                      "role": "heavy",
+                      "hp": 3,
+                      "speed": 5,
+                      "vision": 3,
+                      "range": 12,
+                      "damage": 35,
+                      "rearm": 2
+                    },
+                    "slots": [
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      }
+                    ]
+                  }
+                },
+                "hp": 170,
+                "pos": {
+                  "q": 1,
+                  "r": 8
+                },
+                "xy": {
+                  "x": 8.660254037844386,
+                  "y": 12
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  3,
+                  3,
+                  3,
+                  3
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-1"
+              },
+              {
+                "id": "1-2",
+                "kind": "ship",
+                "team": 1,
+                "label": "企业",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "企业",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 4,
+                    "launch": 2,
+                    "rearm": 2,
+                    "heal": 1,
+                    "plane": {
+                      "role": "heavy",
+                      "hp": 3,
+                      "speed": 5,
+                      "vision": 3,
+                      "range": 12,
+                      "damage": 35,
+                      "rearm": 2
+                    },
+                    "slots": [
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      }
+                    ]
+                  }
+                },
+                "hp": 170,
+                "pos": {
+                  "q": 4,
+                  "r": 2
+                },
+                "xy": {
+                  "x": 8.660254037844386,
+                  "y": 3
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  3,
+                  3,
+                  3,
+                  3
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-1"
+              },
+              {
+                "id": "1-3",
+                "kind": "ship",
+                "team": 1,
+                "label": "企业",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "企业",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 4,
+                    "launch": 2,
+                    "rearm": 2,
+                    "heal": 1,
+                    "plane": {
+                      "role": "heavy",
+                      "hp": 3,
+                      "speed": 5,
+                      "vision": 3,
+                      "range": 12,
+                      "damage": 35,
+                      "rearm": 2
+                    },
+                    "slots": [
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      },
+                      {
+                        "role": "heavy",
+                        "hp": 3,
+                        "speed": 5,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 35,
+                        "rearm": 2
+                      }
+                    ]
+                  }
+                },
+                "hp": 170,
+                "pos": {
+                  "q": 7,
+                  "r": 2
+                },
+                "xy": {
+                  "x": 13.856406460551018,
+                  "y": 3
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "airHP": [
+                  3,
+                  3,
+                  3,
+                  3
+                ],
+                "destroyedPlanes": 0,
+                "catalogId": "cv-1"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 4,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "岛风 发射鱼雷",
+                "at": {
+                  "q": 4,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 1,
+                "t": 0,
+                "text": "岛风 发射鱼雷",
+                "at": {
+                  "q": 4,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 1,
+                "t": 0,
+                "text": "岛风 发射鱼雷",
+                "at": {
+                  "q": 4,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 1,
+                "t": 0,
+                "text": "岛风 发射鱼雷",
+                "at": {
+                  "q": 4,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 1,
+                "t": 0.625,
+                "text": "企业 遭鱼雷命中 −40",
+                "at": {
+                  "q": 4,
+                  "r": 2
+                },
+                "team": 1
+              },
+              {
+                "round": 1,
+                "t": 0.625,
+                "text": "企业 遭鱼雷命中 −40",
+                "at": {
+                  "q": 7,
+                  "r": 2
+                },
+                "team": 1
+              },
+              {
+                "round": 1,
+                "t": 0.629,
+                "text": "企业 遭鱼雷命中 −40",
+                "at": {
+                  "q": 4,
+                  "r": 8
+                },
+                "team": 1
+              },
+              {
+                "round": 1,
+                "t": 0.629,
+                "text": "企业 遭鱼雷命中 −40",
+                "at": {
+                  "q": 1,
+                  "r": 8
+                },
+                "team": 1
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "8,0",
+                "9,0",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "3,10",
+                "4,10"
+              ],
+              [
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "3,10",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10",
+                "1,3",
+                "2,3",
+                "3,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "-4,8",
+                "-3,8",
+                "-2,8",
+                "-4,9",
+                "-3,9",
+                "-2,9",
+                "-4,10",
+                "-3,10",
+                "-2,10",
+                "1,0",
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "8,0",
+                "9,0",
+                "0,1",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "-1,2",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "-1,3",
+                "0,3",
+                "-1,4",
+                "10,0",
+                "11,0",
+                "12,0",
+                "10,1",
+                "11,1",
+                "12,1",
+                "10,2",
+                "11,2",
+                "10,3",
+                "11,3",
+                "10,4"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "beats": [
+    {
+      "start": 0,
+      "end": 2,
+      "round": 0,
+      "from": -0.01,
+      "to": -0.01,
+      "viewer": 0,
+      "title": "四个合法侧向 · 同窗口齐射",
+      "detail": "舰首与舰尾不能发射；同一窗口不能重复同一射向",
+      "preview": true
+    },
+    {
+      "start": 2,
+      "end": 7.5,
+      "round": 0,
+      "from": 0,
+      "to": 1.2,
+      "viewer": 0,
+      "title": "四枚鱼雷 · 每枚伤害 40",
+      "detail": "鱼雷各沿一条直线前进；本回合最多四枚"
+    },
+    {
+      "start": 7.5,
+      "end": 10,
+      "round": 0,
+      "from": 1.2,
+      "to": 1.2,
+      "viewer": 0,
+      "title": "库存 8 → 4 · 封锁多条航路",
+      "detail": "用不同射向逼迫敌舰选择航线，不是同向四连发"
+    }
+  ],
+  "export": {
+    "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+    "formats": {
+      "webm": {
+        "codec": "vp9",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 300,
+        "duration": 10,
+        "audio": false,
+        "bytes": 963845
+      },
+      "mp4": {
+        "codec": "h264",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 300,
+        "duration": 10,
+        "audio": false,
+        "bytes": 946713
+      }
+    },
+    "keyframes": [
+      {
+        "frame": 0,
+        "time": 0
+      },
+      {
+        "frame": 129,
+        "time": 4.3
+      },
+      {
+        "frame": 216,
+        "time": 7.2
+      },
+      {
+        "frame": 299,
+        "time": 9.966666666666667
+      }
+    ]
+  }
+}

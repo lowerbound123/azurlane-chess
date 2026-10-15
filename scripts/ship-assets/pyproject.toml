@@ -1,0 +1,5 @@
+[project]
+name = "azurlane-chess-ship-assets"
+version = "0.0.0"
+requires-python = ">=3.11,<3.14"
+dependencies = ["azlassets==5.3.1", "UnityPy==1.25.0"]

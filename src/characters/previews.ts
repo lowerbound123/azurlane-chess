@@ -3,32 +3,33 @@ import {CharacterLibrary,ShipCharacter} from './spine.ts';
 import {profileFor,type CharacterProfile} from './config.ts';
 
 type Renderer=Pick<THREE.WebGLRenderer,'setSize'|'setClearColor'|'domElement'|'render'|'dispose'|'forceContextLoss'>;
-// One renderer per selection page, one snapshot per character profile, no animation loop.
+// Explicit authoring exporter only: one renderer, one fixed snapshot per profile.
 export class SpinePreviews {
   private entries=new Map<CharacterProfile,Promise<string|null>>();
   private urls=new Set<string>();
   private queue=Promise.resolve();
   private renderer?:Renderer;
   private disposed=false;
-  constructor(private library:Pick<CharacterLibrary,'load'|'dispose'>=new CharacterLibrary(),
+  constructor(private library:Pick<CharacterLibrary,'load'|'dispose'>=new CharacterLibrary({source:true}),
     private rendererFactory:()=>Renderer=()=>new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'low-power'})){}
-  load(template:string):Promise<string|null> {
+  load(template:string):Promise<string|null> {return this.loadProfile(profileFor(template));}
+  loadProfile(profile:CharacterProfile):Promise<string|null> {
     if(this.disposed)return Promise.resolve(null);
-    const profile=profileFor(template),existing=this.entries.get(profile);
+    const existing=this.entries.get(profile);
     if(existing)return existing;
-    const pending=this.queue.then(()=>this.snapshot(template));
+    const pending=this.queue.then(()=>this.snapshot(profile));
     this.entries.set(profile,pending);
     this.queue=pending.then(()=>{},()=>{});
     return pending;
   }
-  private async snapshot(template:string) {
+  private async snapshot(profile:CharacterProfile) {
     if(this.disposed)return null;
-    const actor=new ShipCharacter(this.library,template,0x8eefe3);
+    const actor=new ShipCharacter(this.library,'',0x8eefe3,profile);
     try {
       await actor.ready;
       if(this.disposed)return null;
       const mesh=actor.mesh;
-      if(!mesh)throw new Error('Spine 角色素材加载失败');
+      if(!mesh||actor.profile!==profile)throw new Error('Spine 角色素材加载失败');
       actor.seek(.15);
       const bounds=mesh.skeleton.getBoundsRect(),scale=mesh.scale.x;
       if(!(bounds.width>0&&bounds.height>0))throw new Error('Spine 角色没有可显示的图形');

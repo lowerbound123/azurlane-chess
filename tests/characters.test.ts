@@ -1,33 +1,30 @@
 import type {Game,Presentation} from '../shared/game.ts';
 // @vitest-environment happy-dom
-import {ThreeJsTexture} from '@esotericsoftware/spine-threejs';
+import core from '../src/vendor/spine38/core.mjs';
+import {parseSkeleton} from '../src/vendor/parse.mjs';
 
+import {runtimeAssets} from '../src/assets/runtime.ts';
 import type {CharacterAsset} from '../src/characters/spine.ts';
 import type {CharacterProfile} from '../src/characters/config.ts';
 import {test,afterAll,afterEach} from 'vitest';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { TextureAtlas, Texture, AtlasAttachmentLoader, SkeletonJson, Skeleton, AnimationState, AnimationStateData, Physics } from '@esotericsoftware/spine-core';
+const {Skeleton,AnimationState,AnimationStateData}=core;
 import { animationFor, characterConfig, profileFor } from '../src/characters/config.ts';
 import { sampleBattleVisuals } from '../src/battle-visuals.ts';
 import { playerResult } from '../server/views.ts';
 import * as E from '../src/engine.ts';
-class StubTexture extends Texture {setFilters(){}setWraps(){}dispose(){}}
-function loadDefault(){
- const atlas=new TextureAtlas(fs.readFileSync('public/characters/default/sailor.atlas','utf8'));
- for(const page of atlas.pages)page.setTexture(new StubTexture(Object.assign(document.createElement('img'),{width:256,height:128})));
- return new SkeletonJson(new AtlasAttachmentLoader(atlas)).readSkeletonData(fs.readFileSync('public/characters/default/sailor.json','utf8'));
-}
+function loadDefault(){return parseSkeleton(fs.readFileSync('public/characters/default/sailor.json'),fs.readFileSync('public/characters/default/sailor.atlas','utf8'),undefined,'json').data;}
 test('default Spine asset parses and every mapped animation changes bone poses',()=>{
  const data=loadDefault(), profile=profileFor('unknown');
- assert(data!.version!.startsWith('4.2.'));assert(data.findSkin(profile.skin!));
+ assert(data!.version!.startsWith('3.8.'));assert(data.findSkin(profile.skin!));
  for(const name of new Set(Object.values(profile.animations))){
   const skeleton=new Skeleton(data),state=new AnimationState(new AnimationStateData(data));
-  state.setAnimation(0,name,true);state.update(.17);state.apply(skeleton);skeleton.updateWorldTransform(Physics.update);
-  assert(skeleton.bones.every(b=>[b.worldX,b.worldY,b.rotation].every(Number.isFinite)),name);
-  assert(skeleton.bones.some(b=>b.rotation!==b.data.rotation || b.y!==b.data.y || b.x!==b.data.x),name);
+  state.setAnimation(0,name,true);state.update(.17);state.apply(skeleton);skeleton.updateWorldTransform();
+  assert(skeleton.bones.every((b:any)=>[b.worldX,b.worldY,b.rotation].every(Number.isFinite)),name);
+  assert(skeleton.bones.some((b:any)=>b.rotation!==b.data.rotation || b.y!==b.data.y || b.x!==b.data.x),name);
  }
- assert.equal(animationFor(data,{animations:{hit:'missing',idle:'idle'}},'hit'),'idle');
+ assert.equal(animationFor(data,{animations:{unknown:'missing',idle:'idle'}},'unknown'),'stand');
  assert.equal(profile,characterConfig.profiles.sailor);
 });
 test('actions never expose hidden enemy origin, target or private IDs',()=>{
@@ -37,13 +34,13 @@ test('actions never expose hidden enemy origin, target or private IDs',()=>{
  assert.deepEqual(Object.keys(shown).sort(),['action','age','id','shipId']);
  assert.equal(sampleBattleVisuals(events,.8,new Set(['8,8']),0).actions.length,0);
 });
-test('engine emits fire, torpedo and friendly hit actions, online frames keep only visible actors',()=>{
+test('engine emits mainFire, torpedo and friendly hit actions, online frames keep only visible actors',()=>{
  const a=E.createShip('bb',0,0,{q:3,r:5}),b=E.createShip('dd',0,1,{q:5,r:5}),c=E.createShip('dd',1,0,{q:17,r:12});
  for(const s of [a,b,c]){delete s.cfg.secondary;delete s.cfg.aa;}
  const game:Game={seed:1,round:1,map:{width:E.W,height:E.H,islands:[],mines:[]},ships:[a,b,c],torpedoes:[],planes:[],nextId:0,log:[],winner:null,phase:'plan',explored:[[],[]]};
  const result=E.resolveRound(game,{[a.id]:{...E.emptyPlan(),main:[b.pos]},[b.id]:{...E.emptyPlan(),torps:[{window:0,dir:1}]},[c.id]:{...E.emptyPlan(),torps:[{window:0,dir:1}]}});
  const actions=result.presentation.filter(e=>e.type==='action');
- for(const action of ['fire','torpedo','hit'])assert(actions.some(e=>e.action===action),action);
+ for(const action of ['mainFire','torpedo','hit'])assert(actions.some(e=>e.action===action),action);
  const view=playerResult(game,result,0);
  for(const frame of view.frames)for(const action of frame.visuals.actions){assert(frame.ships.some(s=>s.id===action.shipId));assert.match(action.id,/^a\d+$/);assert.notEqual(action.shipId,c.id);}
 });
@@ -51,7 +48,7 @@ test('engine emits fire, torpedo and friendly hit actions, online frames keep on
 test('late asset completion cannot resurrect a disposed character',async()=>{
  const {ShipCharacter}=await import('../src/characters/spine.ts');
  let resolve!:(asset:CharacterAsset)=>void;const library={load:()=>new Promise<CharacterAsset>(done=>{resolve=done;})};
- const actor=new ShipCharacter(library,'dd',0xffffff);actor.dispose();const spine=await import('@esotericsoftware/spine-threejs');resolve({spine,manager:new spine.AssetManager(),data:loadDefault()});await actor.ready;
+ const actor=new ShipCharacter(library,'dd',0xffffff);actor.dispose();resolve({spine:{SkeletonMesh:class {} as any},manager:{dispose(){}},data:loadDefault()});await actor.ready;
  assert.equal(actor.root.children.length,0);assert.equal(actor.mesh,undefined);
 });
 test('missing custom asset requests the default and still leaves a usable fallback if both fail',async()=>{
@@ -70,23 +67,19 @@ test('online action pose age advances with replay interpolation, rather than wal
 
 test('loaded default character assets release textures once when leaving the scene',async()=>{
  const {CharacterLibrary}=await import('../src/characters/spine.ts');
- // Substitute only browser I/O: parsing, the AssetManager cache and Three textures are real.
- const names=['XMLHttpRequest','Image','ImageBitmap','window','navigator'];
- const descriptors=new Map(names.map(name=>[name,Object.getOwnPropertyDescriptor(globalThis,name)]));
- const requests:string[]=[];
- class LocalRequest {url="";status=0;responseText="";onload=()=>{};
-  overrideMimeType(){} open(_method:string,url:string){this.url=url;requests.push(url);}
-  send(){queueMicrotask(()=>{this.status=200;this.responseText=fs.readFileSync(new URL('../public'+this.url,import.meta.url),'utf8');this.onload();});}
- }
- class LocalImage {width=256;height=128;onload=()=>{};set src(url:string){requests.push(url);queueMicrotask(()=>this.onload());}}
- const globals={XMLHttpRequest:LocalRequest,Image:LocalImage,ImageBitmap:class {},window:{document:{}},navigator:{}};
- for(const [name,value] of Object.entries(globals))Object.defineProperty(globalThis,name,{value,configurable:true});
+ const requests:string[]=[],originalFetch=globalThis.fetch,OriginalImage=globalThis.Image;
+ const originalCreate=URL.createObjectURL,originalRevoke=URL.revokeObjectURL;
+ globalThis.fetch=async(input)=>{const url=String(input);requests.push(url);if(url==='/api/config')return Response.json({assetStorage:{provider:'local'}});return new Response(fs.readFileSync(new URL('../assets/runtime/files'+url,import.meta.url)));};
+ globalThis.Image=class {width=256;height=256;onload=()=>{};set src(_url:string){queueMicrotask(()=>this.onload());}} as any;
+ URL.createObjectURL=()=> 'blob:fixture';URL.revokeObjectURL=()=>{};
  try {
   const library=new CharacterLibrary(),asset=await library.load(characterConfig.profiles.sailor);
-  assert.deepEqual(requests.sort(),['/characters/default/sailor.atlas','/characters/default/sailor.json','/characters/default/sailor.svg']);
-  const atlas=asset.manager.get('/characters/default/sailor.atlas');assert.ok(atlas instanceof TextureAtlas);const pageTexture=atlas.pages[0].texture;assert.ok(pageTexture instanceof ThreeJsTexture);const texture=pageTexture.texture;
-  let disposals=0;texture.addEventListener('dispose',()=>disposals++);
-  assert.doesNotThrow(()=>asset.manager.dispose());assert.equal(disposals,1);
-  library.dispose();await new Promise(resolve=>setImmediate(resolve));assert.equal(disposals,1,'repeated scene cleanup must not dispose twice');
- } finally {for(const [name,descriptor] of descriptors)if(descriptor)Object.defineProperty(globalThis,name,descriptor);else Reflect.deleteProperty(globalThis,name);}
+  const paths=['/api/config',...['characters/default/sailor.atlas','characters/default/sailor.json','characters/default/sailor.webp'].map(id=>'/'+runtimeAssets.files[id].path)];
+  assert.deepEqual(requests.sort(),paths.sort());
+  const mesh=new asset.spine.SkeletonMesh({skeletonData:asset.data});mesh.update(0);
+  let disposals=0;const textures=new Set<any>();mesh.traverse((object:any)=>{for(const material of Array.isArray(object.material)?object.material:[object.material])if(material?.uniforms?.map?.value)textures.add(material.uniforms.map.value);});
+  assert.ok(textures.size>0);for(const texture of textures)texture.addEventListener('dispose',()=>disposals++);
+  asset.manager.dispose();assert.equal(disposals,textures.size);
+  library.dispose();await new Promise(resolve=>setImmediate(resolve));assert.equal(disposals,textures.size);mesh.dispose();
+ }finally{globalThis.fetch=originalFetch;globalThis.Image=OriginalImage;URL.createObjectURL=originalCreate;URL.revokeObjectURL=originalRevoke;}
 });

@@ -1,0 +1,5024 @@
+{
+  "id": "cl-3",
+  "initial": {
+    "seed": 20261015,
+    "round": 1,
+    "ruleset": "fleet-v1",
+    "zones": [],
+    "map": {
+      "width": 13,
+      "height": 11,
+      "islands": [
+        "5,5"
+      ],
+      "mines": []
+    },
+    "ships": [
+      {
+        "id": "0-0",
+        "kind": "ship",
+        "team": 0,
+        "label": "海伦娜",
+        "template": "cl",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "海伦娜",
+          "role": "front",
+          "hp": 150,
+          "speed": 3,
+          "vision": 5,
+          "collision": 20,
+          "secondary": {
+            "damage": 12,
+            "range": 3,
+            "multi": false
+          },
+          "torpedo": {
+            "speed": 4,
+            "damage": 45,
+            "life": 3,
+            "reserve": 6,
+            "max": 3
+          },
+          "aa": {
+            "range": 2,
+            "damage": 1
+          },
+          "radar": {
+            "charges": 3,
+            "range": 6,
+            "radius": 1,
+            "duration": 2
+          }
+        },
+        "hp": 150,
+        "pos": {
+          "q": 2,
+          "r": 5
+        },
+        "xy": {
+          "x": 7.794228634059947,
+          "y": 7.5
+        },
+        "heading": 0,
+        "torps": 6,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "cl-3",
+        "radarLeft": 3
+      },
+      {
+        "id": "1-0",
+        "kind": "ship",
+        "team": 1,
+        "label": "阿卡司塔",
+        "template": "dd",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "阿卡司塔",
+          "role": "front",
+          "hp": 100,
+          "speed": 4,
+          "vision": 5,
+          "collision": 15,
+          "secondary": {
+            "damage": 8,
+            "range": 2,
+            "multi": false
+          },
+          "torpedo": {
+            "speed": 4,
+            "damage": 45,
+            "life": 3,
+            "reserve": 3,
+            "max": 3
+          },
+          "aa": {
+            "range": 3,
+            "damage": 1
+          },
+          "contactSweep": true,
+          "smoke": {
+            "charges": 2,
+            "radius": 1,
+            "duration": 2
+          }
+        },
+        "hp": 100,
+        "pos": {
+          "q": 7,
+          "r": 5
+        },
+        "xy": {
+          "x": 16.454482671904334,
+          "y": 7.5
+        },
+        "heading": 3,
+        "torps": 3,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "dd-3",
+        "smokeLeft": 2
+      },
+      {
+        "id": "0-1",
+        "kind": "ship",
+        "team": 0,
+        "label": "黎塞留",
+        "template": "bb",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "黎塞留",
+          "role": "back",
+          "hp": 270,
+          "speed": 2,
+          "vision": 5,
+          "collision": 35,
+          "secondary": {
+            "damage": 10,
+            "range": 3,
+            "multi": false
+          },
+          "main": {
+            "range": 7,
+            "shots": 2,
+            "damage": 40,
+            "reload": 0
+          }
+        },
+        "hp": 270,
+        "pos": {
+          "q": 1,
+          "r": 7
+        },
+        "xy": {
+          "x": 7.794228634059947,
+          "y": 10.5
+        },
+        "heading": 0,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "bb-3"
+      }
+    ],
+    "planes": [],
+    "torpedoes": [],
+    "nextId": 0,
+    "log": [],
+    "winner": null,
+    "phase": "plan",
+    "explored": [
+      [
+        "2,0",
+        "3,0",
+        "4,0",
+        "5,0",
+        "6,0",
+        "7,0",
+        "1,1",
+        "2,1",
+        "3,1",
+        "4,1",
+        "5,1",
+        "6,1",
+        "7,1",
+        "0,2",
+        "1,2",
+        "2,2",
+        "3,2",
+        "4,2",
+        "5,2",
+        "6,2",
+        "7,2",
+        "-1,3",
+        "0,3",
+        "1,3",
+        "2,3",
+        "3,3",
+        "4,3",
+        "5,3",
+        "6,3",
+        "7,3",
+        "-2,4",
+        "-1,4",
+        "0,4",
+        "1,4",
+        "2,4",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "7,4",
+        "-2,5",
+        "-1,5",
+        "0,5",
+        "1,5",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "-3,6",
+        "-2,6",
+        "-1,6",
+        "0,6",
+        "1,6",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "6,6",
+        "-3,7",
+        "-2,7",
+        "-1,7",
+        "0,7",
+        "1,7",
+        "2,7",
+        "3,7",
+        "4,7",
+        "5,7",
+        "-3,8",
+        "-2,8",
+        "-1,8",
+        "0,8",
+        "1,8",
+        "2,8",
+        "3,8",
+        "4,8",
+        "-3,9",
+        "-2,9",
+        "-1,9",
+        "0,9",
+        "1,9",
+        "2,9",
+        "3,9",
+        "-3,10",
+        "-2,10",
+        "-1,10",
+        "0,10",
+        "1,10",
+        "2,10",
+        "6,7",
+        "-4,8",
+        "5,8",
+        "-4,9",
+        "4,9",
+        "-4,10",
+        "3,10"
+      ],
+      [
+        "7,0",
+        "8,0",
+        "9,0",
+        "10,0",
+        "11,0",
+        "12,0",
+        "6,1",
+        "7,1",
+        "8,1",
+        "9,1",
+        "10,1",
+        "11,1",
+        "12,1",
+        "5,2",
+        "6,2",
+        "7,2",
+        "8,2",
+        "9,2",
+        "10,2",
+        "11,2",
+        "4,3",
+        "5,3",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "10,3",
+        "11,3",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "10,4",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "10,5",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "9,6",
+        "2,7",
+        "3,7",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "8,7",
+        "9,7",
+        "2,8",
+        "3,8",
+        "4,8",
+        "5,8",
+        "6,8",
+        "7,8",
+        "8,8",
+        "2,9",
+        "3,9",
+        "4,9",
+        "5,9",
+        "6,9",
+        "7,9",
+        "8,9",
+        "2,10",
+        "3,10",
+        "4,10",
+        "5,10",
+        "6,10",
+        "7,10"
+      ]
+    ]
+  },
+  "rounds": [
+    {
+      "events": [
+        {
+          "round": 1,
+          "t": 0,
+          "text": "阿卡司塔 释放烟幕",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 1
+        }
+      ],
+      "presentation": [],
+      "game": {
+        "seed": 20261015,
+        "round": 2,
+        "ruleset": "fleet-v1",
+        "zones": [
+          {
+            "kind": "smoke",
+            "team": 1,
+            "center": {
+              "q": 7,
+              "r": 5
+            },
+            "radius": 1,
+            "expires": 3
+          }
+        ],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [
+            "5,5"
+          ],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "海伦娜",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "海伦娜",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 2,
+                "damage": 1
+              },
+              "radar": {
+                "charges": 3,
+                "range": 6,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 2,
+              "r": 5
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-3",
+            "radarLeft": 3
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "阿卡司塔",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "阿卡司塔",
+              "role": "front",
+              "hp": 100,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 3,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true,
+              "smoke": {
+                "charges": 2,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 100,
+            "pos": {
+              "q": 7,
+              "r": 5
+            },
+            "xy": {
+              "x": 16.454482671904334,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 3,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-3",
+            "smokeLeft": 1
+          },
+          {
+            "id": "0-1",
+            "kind": "ship",
+            "team": 0,
+            "label": "黎塞留",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "黎塞留",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 7,
+                "shots": 2,
+                "damage": 40,
+                "reload": 0
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 1,
+              "r": 7
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 10.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-3"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "阿卡司塔 释放烟幕",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "6,7",
+            "-4,8",
+            "5,8",
+            "-4,9",
+            "4,9",
+            "-4,10",
+            "3,10"
+          ],
+          [
+            "7,0",
+            "8,0",
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "0-1": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [
+        {
+          "round": 2,
+          "t": 0,
+          "text": "海伦娜 雷达扫描",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 0
+        }
+      ],
+      "presentation": [],
+      "game": {
+        "seed": 20261015,
+        "round": 3,
+        "ruleset": "fleet-v1",
+        "zones": [
+          {
+            "kind": "radar",
+            "team": 0,
+            "center": {
+              "q": 7,
+              "r": 5
+            },
+            "radius": 1,
+            "expires": 4
+          }
+        ],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [
+            "5,5"
+          ],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "海伦娜",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "海伦娜",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 2,
+                "damage": 1
+              },
+              "radar": {
+                "charges": 3,
+                "range": 6,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 2,
+              "r": 5
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-3",
+            "radarLeft": 2
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "阿卡司塔",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "阿卡司塔",
+              "role": "front",
+              "hp": 100,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 3,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true,
+              "smoke": {
+                "charges": 2,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 100,
+            "pos": {
+              "q": 7,
+              "r": 5
+            },
+            "xy": {
+              "x": 16.454482671904334,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 3,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-3",
+            "smokeLeft": 1
+          },
+          {
+            "id": "0-1",
+            "kind": "ship",
+            "team": 0,
+            "label": "黎塞留",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "黎塞留",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 7,
+                "shots": 2,
+                "damage": 40,
+                "reload": 0
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 1,
+              "r": 7
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 10.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-3"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "阿卡司塔 释放烟幕",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "海伦娜 雷达扫描",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 0
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "6,7",
+            "-4,8",
+            "5,8",
+            "-4,9",
+            "4,9",
+            "-4,10",
+            "3,10",
+            "8,4",
+            "8,5",
+            "7,6"
+          ],
+          [
+            "7,0",
+            "8,0",
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "0-1": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [
+        {
+          "round": 3,
+          "t": 0,
+          "text": "黎塞留 主炮发射 2 发",
+          "at": {
+            "q": 1,
+            "r": 7
+          },
+          "team": 0
+        },
+        {
+          "round": 3,
+          "t": 1,
+          "text": "阿卡司塔 遭主炮命中 −80",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "action:3:0",
+          "type": "action",
+          "shipId": "0-1",
+          "team": 0,
+          "action": "mainFire",
+          "at": {
+            "q": 1,
+            "r": 7
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "main:3:0-1:0",
+          "type": "projectile",
+          "kind": "main",
+          "sourceId": "0-1",
+          "team": 0,
+          "from": {
+            "x": 7.794228634059947,
+            "y": 10.5
+          },
+          "to": {
+            "x": 16.454482671904334,
+            "y": 7.5
+          },
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "start": 0,
+          "end": 1.1
+        },
+        {
+          "id": "launch:3:0-1:0",
+          "type": "effect",
+          "kind": "launch",
+          "team": 0,
+          "at": {
+            "q": 1,
+            "r": 7
+          },
+          "time": 0,
+          "duration": 0.09
+        },
+        {
+          "id": "main:3:0-1:1",
+          "type": "projectile",
+          "kind": "main",
+          "sourceId": "0-1",
+          "team": 0,
+          "from": {
+            "x": 7.794228634059947,
+            "y": 10.5
+          },
+          "to": {
+            "x": 16.454482671904334,
+            "y": 7.5
+          },
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "start": 0.08,
+          "end": 1.1
+        },
+        {
+          "id": "launch:3:0-1:1",
+          "type": "effect",
+          "kind": "launch",
+          "team": 0,
+          "at": {
+            "q": 1,
+            "r": 7
+          },
+          "time": 0.08,
+          "duration": 0.09
+        },
+        {
+          "id": "effect:3:5",
+          "type": "effect",
+          "kind": "main",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 0,
+          "time": 1.1,
+          "duration": 0.65,
+          "targetId": "1-0",
+          "position": {
+            "x": 16.454482671904334,
+            "y": 7.5
+          }
+        },
+        {
+          "id": "effect:3:6",
+          "type": "effect",
+          "kind": "main",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 0,
+          "time": 1.1,
+          "duration": 0.65,
+          "targetId": "1-0",
+          "position": {
+            "x": 16.454482671904334,
+            "y": 7.5
+          }
+        },
+        {
+          "id": "action:3:7",
+          "type": "action",
+          "shipId": "1-0",
+          "team": 1,
+          "action": "hit",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "time": 1.1,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:3:8",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 1,
+          "time": 1.1,
+          "duration": 0.65,
+          "text": "−80",
+          "targetId": "1-0",
+          "position": {
+            "x": 16.454482671904334,
+            "y": 7.5
+          }
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 4,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [
+            "5,5"
+          ],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "海伦娜",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "海伦娜",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 2,
+                "damage": 1
+              },
+              "radar": {
+                "charges": 3,
+                "range": 6,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 2,
+              "r": 5
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-3",
+            "radarLeft": 2
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "阿卡司塔",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "阿卡司塔",
+              "role": "front",
+              "hp": 100,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 3,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true,
+              "smoke": {
+                "charges": 2,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 20,
+            "pos": {
+              "q": 7,
+              "r": 5
+            },
+            "xy": {
+              "x": 16.454482671904334,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 3,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-3",
+            "smokeLeft": 1
+          },
+          {
+            "id": "0-1",
+            "kind": "ship",
+            "team": 0,
+            "label": "黎塞留",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "黎塞留",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 7,
+                "shots": 2,
+                "damage": 40,
+                "reload": 0
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 1,
+              "r": 7
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 10.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 4,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-3"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "阿卡司塔 释放烟幕",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "海伦娜 雷达扫描",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 0,
+            "text": "黎塞留 主炮发射 2 发",
+            "at": {
+              "q": 1,
+              "r": 7
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 1,
+            "text": "阿卡司塔 遭主炮命中 −80",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "6,7",
+            "-4,8",
+            "5,8",
+            "-4,9",
+            "4,9",
+            "-4,10",
+            "3,10",
+            "8,4",
+            "8,5",
+            "7,6"
+          ],
+          [
+            "7,0",
+            "8,0",
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 80,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 80
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "0-1": {
+          "damageDealt": 80,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 80,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "events": [],
+      "presentation": [],
+      "game": {
+        "seed": 20261015,
+        "round": 5,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [
+            "5,5"
+          ],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "海伦娜",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "海伦娜",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 2,
+                "damage": 1
+              },
+              "radar": {
+                "charges": 3,
+                "range": 6,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 2,
+              "r": 5
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-3",
+            "radarLeft": 2
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "阿卡司塔",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "阿卡司塔",
+              "role": "front",
+              "hp": 100,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 3,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true,
+              "smoke": {
+                "charges": 2,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 20,
+            "pos": {
+              "q": 7,
+              "r": 5
+            },
+            "xy": {
+              "x": 16.454482671904334,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 3,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-3",
+            "smokeLeft": 1
+          },
+          {
+            "id": "0-1",
+            "kind": "ship",
+            "team": 0,
+            "label": "黎塞留",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "黎塞留",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 7,
+                "shots": 2,
+                "damage": 40,
+                "reload": 0
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 1,
+              "r": 7
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 10.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 4,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-3"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "阿卡司塔 释放烟幕",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          },
+          {
+            "round": 2,
+            "t": 0,
+            "text": "海伦娜 雷达扫描",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 0,
+            "text": "黎塞留 主炮发射 2 发",
+            "at": {
+              "q": 1,
+              "r": 7
+            },
+            "team": 0
+          },
+          {
+            "round": 3,
+            "t": 1,
+            "text": "阿卡司塔 遭主炮命中 −80",
+            "at": {
+              "q": 7,
+              "r": 5
+            },
+            "team": 1
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "6,7",
+            "-4,8",
+            "5,8",
+            "-4,9",
+            "4,9",
+            "-4,10",
+            "3,10",
+            "8,4",
+            "8,5",
+            "7,6"
+          ],
+          [
+            "7,0",
+            "8,0",
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "0-1": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "experiments": {
+    "main": {
+      "label": "",
+      "initial": {
+        "seed": 20261015,
+        "round": 1,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [
+            "5,5"
+          ],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "海伦娜",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "海伦娜",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 2,
+                "damage": 1
+              },
+              "radar": {
+                "charges": 3,
+                "range": 6,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 2,
+              "r": 5
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-3",
+            "radarLeft": 3
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "阿卡司塔",
+            "template": "dd",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "阿卡司塔",
+              "role": "front",
+              "hp": 100,
+              "speed": 4,
+              "vision": 5,
+              "collision": 15,
+              "secondary": {
+                "damage": 8,
+                "range": 2,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 3,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1
+              },
+              "contactSweep": true,
+              "smoke": {
+                "charges": 2,
+                "radius": 1,
+                "duration": 2
+              }
+            },
+            "hp": 100,
+            "pos": {
+              "q": 7,
+              "r": 5
+            },
+            "xy": {
+              "x": 16.454482671904334,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 3,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "dd-3",
+            "smokeLeft": 2
+          },
+          {
+            "id": "0-1",
+            "kind": "ship",
+            "team": 0,
+            "label": "黎塞留",
+            "template": "bb",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "黎塞留",
+              "role": "back",
+              "hp": 270,
+              "speed": 2,
+              "vision": 5,
+              "collision": 35,
+              "secondary": {
+                "damage": 10,
+                "range": 3,
+                "multi": false
+              },
+              "main": {
+                "range": 7,
+                "shots": 2,
+                "damage": 40,
+                "reload": 0
+              }
+            },
+            "hp": 270,
+            "pos": {
+              "q": 1,
+              "r": 7
+            },
+            "xy": {
+              "x": 7.794228634059947,
+              "y": 10.5
+            },
+            "heading": 0,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "bb-3"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "2,0",
+            "3,0",
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "1,1",
+            "2,1",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "-1,3",
+            "0,3",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "-2,4",
+            "-1,4",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "-2,5",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "-3,6",
+            "-2,6",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "-3,7",
+            "-2,7",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "-3,8",
+            "-2,8",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "-3,9",
+            "-2,9",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "-3,10",
+            "-2,10",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "6,7",
+            "-4,8",
+            "5,8",
+            "-4,9",
+            "4,9",
+            "-4,10",
+            "3,10"
+          ],
+          [
+            "7,0",
+            "8,0",
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "2,10",
+            "3,10",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "orders": [
+        {
+          "1-0": {
+            "moves": [],
+            "torps": [],
+            "main": [],
+            "planes": [],
+            "sweep": null,
+            "smoke": true
+          }
+        },
+        {
+          "0-0": {
+            "moves": [],
+            "torps": [],
+            "main": [],
+            "planes": [],
+            "sweep": null,
+            "radar": {
+              "q": 7,
+              "r": 5
+            }
+          }
+        },
+        {
+          "0-1": {
+            "moves": [],
+            "torps": [],
+            "main": [
+              {
+                "q": 7,
+                "r": 5
+              },
+              {
+                "q": 7,
+                "r": 5
+              }
+            ],
+            "planes": [],
+            "sweep": null
+          }
+        },
+        {}
+      ],
+      "rounds": [
+        {
+          "events": [
+            {
+              "round": 1,
+              "t": 0,
+              "text": "阿卡司塔 释放烟幕",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 1
+            }
+          ],
+          "presentation": [],
+          "game": {
+            "seed": 20261015,
+            "round": 2,
+            "ruleset": "fleet-v1",
+            "zones": [
+              {
+                "kind": "smoke",
+                "team": 1,
+                "center": {
+                  "q": 7,
+                  "r": 5
+                },
+                "radius": 1,
+                "expires": 3
+              }
+            ],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [
+                "5,5"
+              ],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "海伦娜",
+                "template": "cl",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "海伦娜",
+                  "role": "front",
+                  "hp": 150,
+                  "speed": 3,
+                  "vision": 5,
+                  "collision": 20,
+                  "secondary": {
+                    "damage": 12,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 6,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 2,
+                    "damage": 1
+                  },
+                  "radar": {
+                    "charges": 3,
+                    "range": 6,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 150,
+                "pos": {
+                  "q": 2,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 6,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "cl-3",
+                "radarLeft": 3
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "阿卡司塔",
+                "template": "dd",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "阿卡司塔",
+                  "role": "front",
+                  "hp": 100,
+                  "speed": 4,
+                  "vision": 5,
+                  "collision": 15,
+                  "secondary": {
+                    "damage": 8,
+                    "range": 2,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 3,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1
+                  },
+                  "contactSweep": true,
+                  "smoke": {
+                    "charges": 2,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 100,
+                "pos": {
+                  "q": 7,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 16.454482671904334,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 3,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "dd-3",
+                "smokeLeft": 1
+              },
+              {
+                "id": "0-1",
+                "kind": "ship",
+                "team": 0,
+                "label": "黎塞留",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "黎塞留",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 7,
+                    "shots": 2,
+                    "damage": 40,
+                    "reload": 0
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 1,
+                  "r": 7
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 10.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-3"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 0,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "阿卡司塔 释放烟幕",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "6,7",
+                "-4,8",
+                "5,8",
+                "-4,9",
+                "4,9",
+                "-4,10",
+                "3,10"
+              ],
+              [
+                "7,0",
+                "8,0",
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "2,10",
+                "3,10",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [
+            {
+              "round": 2,
+              "t": 0,
+              "text": "海伦娜 雷达扫描",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 0
+            }
+          ],
+          "presentation": [],
+          "game": {
+            "seed": 20261015,
+            "round": 3,
+            "ruleset": "fleet-v1",
+            "zones": [
+              {
+                "kind": "radar",
+                "team": 0,
+                "center": {
+                  "q": 7,
+                  "r": 5
+                },
+                "radius": 1,
+                "expires": 4
+              }
+            ],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [
+                "5,5"
+              ],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "海伦娜",
+                "template": "cl",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "海伦娜",
+                  "role": "front",
+                  "hp": 150,
+                  "speed": 3,
+                  "vision": 5,
+                  "collision": 20,
+                  "secondary": {
+                    "damage": 12,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 6,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 2,
+                    "damage": 1
+                  },
+                  "radar": {
+                    "charges": 3,
+                    "range": 6,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 150,
+                "pos": {
+                  "q": 2,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 6,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "cl-3",
+                "radarLeft": 2
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "阿卡司塔",
+                "template": "dd",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "阿卡司塔",
+                  "role": "front",
+                  "hp": 100,
+                  "speed": 4,
+                  "vision": 5,
+                  "collision": 15,
+                  "secondary": {
+                    "damage": 8,
+                    "range": 2,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 3,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1
+                  },
+                  "contactSweep": true,
+                  "smoke": {
+                    "charges": 2,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 100,
+                "pos": {
+                  "q": 7,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 16.454482671904334,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 3,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "dd-3",
+                "smokeLeft": 1
+              },
+              {
+                "id": "0-1",
+                "kind": "ship",
+                "team": 0,
+                "label": "黎塞留",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "黎塞留",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 7,
+                    "shots": 2,
+                    "damage": 40,
+                    "reload": 0
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 1,
+                  "r": 7
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 10.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-3"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 0,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "阿卡司塔 释放烟幕",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "海伦娜 雷达扫描",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 0
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "6,7",
+                "-4,8",
+                "5,8",
+                "-4,9",
+                "4,9",
+                "-4,10",
+                "3,10",
+                "8,4",
+                "8,5",
+                "7,6"
+              ],
+              [
+                "7,0",
+                "8,0",
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "2,10",
+                "3,10",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [
+            {
+              "round": 3,
+              "t": 0,
+              "text": "黎塞留 主炮发射 2 发",
+              "at": {
+                "q": 1,
+                "r": 7
+              },
+              "team": 0
+            },
+            {
+              "round": 3,
+              "t": 1,
+              "text": "阿卡司塔 遭主炮命中 −80",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 1
+            }
+          ],
+          "presentation": [
+            {
+              "id": "action:3:0",
+              "type": "action",
+              "shipId": "0-1",
+              "team": 0,
+              "action": "mainFire",
+              "at": {
+                "q": 1,
+                "r": 7
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "main:3:0-1:0",
+              "type": "projectile",
+              "kind": "main",
+              "sourceId": "0-1",
+              "team": 0,
+              "from": {
+                "x": 7.794228634059947,
+                "y": 10.5
+              },
+              "to": {
+                "x": 16.454482671904334,
+                "y": 7.5
+              },
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "start": 0,
+              "end": 1.1
+            },
+            {
+              "id": "launch:3:0-1:0",
+              "type": "effect",
+              "kind": "launch",
+              "team": 0,
+              "at": {
+                "q": 1,
+                "r": 7
+              },
+              "time": 0,
+              "duration": 0.09
+            },
+            {
+              "id": "main:3:0-1:1",
+              "type": "projectile",
+              "kind": "main",
+              "sourceId": "0-1",
+              "team": 0,
+              "from": {
+                "x": 7.794228634059947,
+                "y": 10.5
+              },
+              "to": {
+                "x": 16.454482671904334,
+                "y": 7.5
+              },
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "start": 0.08,
+              "end": 1.1
+            },
+            {
+              "id": "launch:3:0-1:1",
+              "type": "effect",
+              "kind": "launch",
+              "team": 0,
+              "at": {
+                "q": 1,
+                "r": 7
+              },
+              "time": 0.08,
+              "duration": 0.09
+            },
+            {
+              "id": "effect:3:5",
+              "type": "effect",
+              "kind": "main",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 0,
+              "time": 1.1,
+              "duration": 0.65,
+              "targetId": "1-0",
+              "position": {
+                "x": 16.454482671904334,
+                "y": 7.5
+              }
+            },
+            {
+              "id": "effect:3:6",
+              "type": "effect",
+              "kind": "main",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 0,
+              "time": 1.1,
+              "duration": 0.65,
+              "targetId": "1-0",
+              "position": {
+                "x": 16.454482671904334,
+                "y": 7.5
+              }
+            },
+            {
+              "id": "action:3:7",
+              "type": "action",
+              "shipId": "1-0",
+              "team": 1,
+              "action": "hit",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "time": 1.1,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:3:8",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 1,
+              "time": 1.1,
+              "duration": 0.65,
+              "text": "−80",
+              "targetId": "1-0",
+              "position": {
+                "x": 16.454482671904334,
+                "y": 7.5
+              }
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 4,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [
+                "5,5"
+              ],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "海伦娜",
+                "template": "cl",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "海伦娜",
+                  "role": "front",
+                  "hp": 150,
+                  "speed": 3,
+                  "vision": 5,
+                  "collision": 20,
+                  "secondary": {
+                    "damage": 12,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 6,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 2,
+                    "damage": 1
+                  },
+                  "radar": {
+                    "charges": 3,
+                    "range": 6,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 150,
+                "pos": {
+                  "q": 2,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 6,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "cl-3",
+                "radarLeft": 2
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "阿卡司塔",
+                "template": "dd",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "阿卡司塔",
+                  "role": "front",
+                  "hp": 100,
+                  "speed": 4,
+                  "vision": 5,
+                  "collision": 15,
+                  "secondary": {
+                    "damage": 8,
+                    "range": 2,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 3,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1
+                  },
+                  "contactSweep": true,
+                  "smoke": {
+                    "charges": 2,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 20,
+                "pos": {
+                  "q": 7,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 16.454482671904334,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 3,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "dd-3",
+                "smokeLeft": 1
+              },
+              {
+                "id": "0-1",
+                "kind": "ship",
+                "team": 0,
+                "label": "黎塞留",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "黎塞留",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 7,
+                    "shots": 2,
+                    "damage": 40,
+                    "reload": 0
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 1,
+                  "r": 7
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 10.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 4,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-3"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 0,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "阿卡司塔 释放烟幕",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "海伦娜 雷达扫描",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 0,
+                "text": "黎塞留 主炮发射 2 发",
+                "at": {
+                  "q": 1,
+                  "r": 7
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 1,
+                "text": "阿卡司塔 遭主炮命中 −80",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "6,7",
+                "-4,8",
+                "5,8",
+                "-4,9",
+                "4,9",
+                "-4,10",
+                "3,10",
+                "8,4",
+                "8,5",
+                "7,6"
+              ],
+              [
+                "7,0",
+                "8,0",
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "2,10",
+                "3,10",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        },
+        {
+          "events": [],
+          "presentation": [],
+          "game": {
+            "seed": 20261015,
+            "round": 5,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [
+                "5,5"
+              ],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "海伦娜",
+                "template": "cl",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "海伦娜",
+                  "role": "front",
+                  "hp": 150,
+                  "speed": 3,
+                  "vision": 5,
+                  "collision": 20,
+                  "secondary": {
+                    "damage": 12,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 6,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 2,
+                    "damage": 1
+                  },
+                  "radar": {
+                    "charges": 3,
+                    "range": 6,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 150,
+                "pos": {
+                  "q": 2,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 6,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "cl-3",
+                "radarLeft": 2
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "阿卡司塔",
+                "template": "dd",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "阿卡司塔",
+                  "role": "front",
+                  "hp": 100,
+                  "speed": 4,
+                  "vision": 5,
+                  "collision": 15,
+                  "secondary": {
+                    "damage": 8,
+                    "range": 2,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 3,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1
+                  },
+                  "contactSweep": true,
+                  "smoke": {
+                    "charges": 2,
+                    "radius": 1,
+                    "duration": 2
+                  }
+                },
+                "hp": 20,
+                "pos": {
+                  "q": 7,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 16.454482671904334,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 3,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "dd-3",
+                "smokeLeft": 1
+              },
+              {
+                "id": "0-1",
+                "kind": "ship",
+                "team": 0,
+                "label": "黎塞留",
+                "template": "bb",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "黎塞留",
+                  "role": "back",
+                  "hp": 270,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 35,
+                  "secondary": {
+                    "damage": 10,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "main": {
+                    "range": 7,
+                    "shots": 2,
+                    "damage": 40,
+                    "reload": 0
+                  }
+                },
+                "hp": 270,
+                "pos": {
+                  "q": 1,
+                  "r": 7
+                },
+                "xy": {
+                  "x": 7.794228634059947,
+                  "y": 10.5
+                },
+                "heading": 0,
+                "torps": 0,
+                "mainReady": 4,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "bb-3"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 0,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "阿卡司塔 释放烟幕",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              },
+              {
+                "round": 2,
+                "t": 0,
+                "text": "海伦娜 雷达扫描",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 0,
+                "text": "黎塞留 主炮发射 2 发",
+                "at": {
+                  "q": 1,
+                  "r": 7
+                },
+                "team": 0
+              },
+              {
+                "round": 3,
+                "t": 1,
+                "text": "阿卡司塔 遭主炮命中 −80",
+                "at": {
+                  "q": 7,
+                  "r": 5
+                },
+                "team": 1
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "2,0",
+                "3,0",
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "1,1",
+                "2,1",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "0,2",
+                "1,2",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "-1,3",
+                "0,3",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "-2,4",
+                "-1,4",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "-2,5",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "-3,6",
+                "-2,6",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "-3,7",
+                "-2,7",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "-3,8",
+                "-2,8",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "-3,9",
+                "-2,9",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "-3,10",
+                "-2,10",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "6,7",
+                "-4,8",
+                "5,8",
+                "-4,9",
+                "4,9",
+                "-4,10",
+                "3,10",
+                "8,4",
+                "8,5",
+                "7,6"
+              ],
+              [
+                "7,0",
+                "8,0",
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "2,10",
+                "3,10",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "beats": [
+    {
+      "start": 0,
+      "end": 2,
+      "round": 0,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "岛后烟幕 · 敌舰不可见",
+      "detail": "先确认常规视野无法看穿岛屿与烟幕"
+    },
+    {
+      "start": 2,
+      "end": 5,
+      "round": 1,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "第二回合 · 扫描指定七格",
+      "detail": "六格是投放距离；雷达扫描范围是中心与周围六格"
+    },
+    {
+      "start": 5,
+      "end": 8,
+      "round": 2,
+      "from": -0.01,
+      "to": -0.01,
+      "viewer": 0,
+      "title": "第三回合 · 扫描仍在持续",
+      "detail": "发现目标后，友舰在下一轮规划炮击",
+      "preview": true
+    },
+    {
+      "start": 8,
+      "end": 11,
+      "round": 2,
+      "from": 0,
+      "to": 1.9,
+      "viewer": 0,
+      "title": "利用情报 · 炮击命中",
+      "detail": "雷达穿透岛屿与烟幕，占用释放轮的全部副炮"
+    },
+    {
+      "start": 11,
+      "end": 14,
+      "round": 3,
+      "from": 0,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "第四回合 · 雷达消散",
+      "detail": "本轮与下一轮有效；雷达储备 3 → 2"
+    }
+  ],
+  "export": {
+    "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+    "formats": {
+      "webm": {
+        "codec": "vp9",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 420,
+        "duration": 14,
+        "audio": false,
+        "bytes": 841299
+      },
+      "mp4": {
+        "codec": "h264",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 420,
+        "duration": 14,
+        "audio": false,
+        "bytes": 925837
+      }
+    },
+    "keyframes": [
+      {
+        "frame": 0,
+        "time": 0
+      },
+      {
+        "frame": 120,
+        "time": 4
+      },
+      {
+        "frame": 302,
+        "time": 10.066666666666666
+      },
+      {
+        "frame": 419,
+        "time": 13.966666666666667
+      }
+    ]
+  }
+}

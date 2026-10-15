@@ -15,7 +15,7 @@ function startCampaign(){if(props.hasCampaign)restart.value=true;else emit('camp
 </script>
 <template>
 <main class="tutorial-menu page">
-<PageHead eyebrow="TRAINING WATERS" title="交互教学" lede="每一步要真的完成操作。演练与普通战局、存档相互独立。"><template #actions><Button variant="outline" @click="$emit('home')"><AppIcon name="back"/> 返回主菜单</Button></template></PageHead>
+<PageHead title="交互教学" lede="每一步要真的完成操作。演练与普通战局、存档相互独立。"><template #actions><Button variant="outline" @click="$emit('home')"><AppIcon name="back"/> 返回主菜单</Button></template></PageHead>
 <section class="campaign-entrance" aria-label="归航行动">
  <div><p class="eyebrow">HOMEWARD · 连续教学战役</p><h2>从一艘驱逐，到一支舰队。</h2><p>沿固定海图北上，穿过雷区、迷雾与封锁线。十段实操，逐步体验十五艘舰船的特色。</p><div class="campaign-tags"><span>约 25–35 分钟</span><span>随时保存继续</span><span>无需连接服务器</span></div><div class="campaign-start"><Button v-if="hasCampaign" variant="default" @click="emit('campaign',true)">继续归航行动</Button><Button :variant="hasCampaign?'outline':'default'" @click="startCampaign">{{hasCampaign?'重新开始教学':'开始归航行动'}}</Button></div><small v-if="campaignNotice" role="status">{{campaignNotice}}</small></div>
  <div class="campaign-route-art" aria-hidden="true"><span>启航</span><i></i><b>01</b><i></i><b>05</b><i></i><b>10</b><span>归航</span></div>

@@ -30,9 +30,9 @@ const panel=()=>document.querySelector<HTMLElement>('[aria-label="占领计分"]
 afterAll(()=>wrapper.unmount());
 
 test('local battle mode choice creates 357 cells and keeps public objectives when plans are hidden',async()=>{
- await router.push('/new/local');await flush();
- assert.equal(document.querySelector<HTMLElement>('[aria-label="对战模式"]')?.dataset.value,'annihilation');
- await chooseSelect('对战模式','domination');vm.start(true);await flush();
+ await router.push('/new');await flush();
+ assert.equal(document.querySelector<HTMLElement>('[data-mode-value="annihilation"]')?.getAttribute('aria-checked'),'true');
+ document.querySelector<HTMLButtonElement>('[data-mode-value="domination"]')!.click();await flush();await router.push('/new/local');await flush();vm.start(true);await flush();
  assert.equal(vm.game!.battleMode,'domination');assert.equal(document.querySelectorAll('[data-map-cell]').length,357);
  assert.ok(panel());assert.match(panel()!.textContent!,/目标.*100/);
  vm.showPlans=false;await flush();
@@ -64,10 +64,10 @@ test('replay scoreboard and map use frame score without leaking final resolved s
 });
 
 test('loaded games restore mode selector and legacy games keep annihilation defaults',async()=>{
- const save=vm.snapshot()!;vm.battleMode='annihilation';vm.applySavedState(save,false);await router.push('/new/local');await flush();
- assert.equal(document.querySelector<HTMLElement>('[aria-label="对战模式"]')?.dataset.value,'domination');
+ const save=vm.snapshot()!;vm.battleMode='annihilation';vm.applySavedState(save,false);await router.push('/new');await flush();
+ assert.equal(document.querySelector<HTMLElement>('[data-mode-value="domination"]')?.getAttribute('aria-checked'),'true');
  save.game=E.createFleetGame();vm.applySavedState(save,false);await flush();
- assert.equal(document.querySelector<HTMLElement>('[aria-label="对战模式"]')?.dataset.value,'annihilation');
+ assert.equal(document.querySelector<HTMLElement>('[data-mode-value="annihilation"]')?.getAttribute('aria-checked'),'true');
  vm.start(true);await flush();assert.equal(document.querySelectorAll('[data-map-cell]').length,285);assert.equal(panel(),null);
 });
 
@@ -92,7 +92,7 @@ test('round completion exposes actual 50 percent capture from final ship positio
 });
 
 test('three objective boundaries render through fog during deploy, execution and hidden plans',async()=>{
- const context={fillRect(){},strokeRect(){},fillText(){}};
+ const context={fillRect(){},strokeRect(){},fillText(){},measureText(text:string){return {width:text.length*90};}};
  const canvas=vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(context as unknown as CanvasRenderingContext2D);
  const bytes=(name:string)=>{const data=readFileSync(new URL('../assets/models/'+name,import.meta.url));return data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength) as ArrayBuffer;};
  const library=await TacticalModels.fromBytes(bytes('aircraft.glb'),bytes('naval-mine.glb'));

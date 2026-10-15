@@ -1,0 +1,1143 @@
+{
+  "profiles": {
+    "aikesaite": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/aikesaite/aikesaite.skel",
+      "atlas": "characters/aikesaite/aikesaite.atlas",
+      "format": "binary",
+      "scale": 0.005064716,
+      "offset": [
+        0.02612,
+        0.024377
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "aisaikesi": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/aisaikesi/aisaikesi.skel",
+      "atlas": "characters/aisaikesi/aisaikesi.atlas",
+      "format": "binary",
+      "scale": 0.004237104,
+      "offset": [
+        0.174111,
+        0.077187
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "aisijimo": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/aisijimo/aisijimo.skel",
+      "atlas": "characters/aisijimo/aisijimo.atlas",
+      "format": "binary",
+      "scale": 0.004645624,
+      "offset": [
+        0.000685,
+        0.05125
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "ajiakesi": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/ajiakesi/ajiakesi.skel",
+      "atlas": "characters/ajiakesi/ajiakesi.atlas",
+      "format": "binary",
+      "scale": 0.004606989,
+      "offset": [
+        0.071809,
+        0.024619
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "ajilisi": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/ajilisi/ajilisi.skel",
+      "atlas": "characters/ajilisi/ajilisi.atlas",
+      "format": "binary",
+      "scale": 0.004505502,
+      "offset": [
+        0.108989,
+        0.013236
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "akasita": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/akasita/akasita.skel",
+      "atlas": "characters/akasita/akasita.atlas",
+      "format": "binary",
+      "scale": 0.004792543,
+      "offset": [
+        0.071478,
+        0.014846
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "baerdimo": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/baerdimo/baerdimo.skel",
+      "atlas": "characters/baerdimo/baerdimo.atlas",
+      "format": "binary",
+      "scale": 0.00443911,
+      "offset": [
+        0.014133,
+        0.061623
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "beikaluolaina": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/beikaluolaina/beikaluolaina.skel",
+      "atlas": "characters/beikaluolaina/beikaluolaina.atlas",
+      "format": "binary",
+      "scale": 0.004821936,
+      "offset": [
+        0.068783,
+        0.027286
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "bisimai": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/bisimai/bisimai.skel",
+      "atlas": "characters/bisimai/bisimai.atlas",
+      "format": "binary",
+      "scale": 0.004341251,
+      "offset": [
+        -0.03804,
+        0.07373
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "boge": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/boge/boge.skel",
+      "atlas": "characters/boge/boge.atlas",
+      "format": "binary",
+      "scale": 0.004947163,
+      "offset": [
+        0.059844,
+        0.018081
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "canglong": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/canglong/canglong.skel",
+      "atlas": "characters/canglong/canglong.atlas",
+      "format": "binary",
+      "scale": 0.003830607,
+      "offset": [
+        0.191211,
+        0.028366
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "changdao": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/changdao/changdao.skel",
+      "atlas": "characters/changdao/changdao.atlas",
+      "format": "binary",
+      "scale": 0.004632234,
+      "offset": [
+        0.050561,
+        0.013501
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "chicheng": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/chicheng/chicheng.skel",
+      "atlas": "characters/chicheng/chicheng.atlas",
+      "format": "binary",
+      "scale": 0.004265817,
+      "offset": [
+        0.081152,
+        0.053771
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "dahuangfeng": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/dahuangfeng/dahuangfeng.skel",
+      "atlas": "characters/dahuangfeng/dahuangfeng.atlas",
+      "format": "binary",
+      "scale": 0.00398239,
+      "offset": [
+        0.133735,
+        0.242397
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "daofeng": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/daofeng/daofeng.skel",
+      "atlas": "characters/daofeng/daofeng.atlas",
+      "format": "binary",
+      "scale": 0.003868302,
+      "offset": [
+        -0.045076,
+        0.017939
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "feilong": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/feilong/feilong.skel",
+      "atlas": "characters/feilong/feilong.atlas",
+      "format": "binary",
+      "scale": 0.003800103,
+      "offset": [
+        0.203534,
+        0.008792
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "hailunna": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/hailunna/hailunna.skel",
+      "atlas": "characters/hailunna/hailunna.atlas",
+      "format": "binary",
+      "scale": 0.00445978,
+      "offset": [
+        0.100921,
+        0.041604
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "hude": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/hude/hude.skel",
+      "atlas": "characters/hude/hude.atlas",
+      "format": "binary",
+      "scale": 0.004588737,
+      "offset": [
+        -0.003771,
+        0.01014
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "jiahe": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/jiahe/jiahe.skel",
+      "atlas": "characters/jiahe/jiahe.atlas",
+      "format": "binary",
+      "scale": 0.004249488,
+      "offset": [
+        0.019937,
+        0.018854
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "jingang": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/jingang/jingang.skel",
+      "atlas": "characters/jingang/jingang.atlas",
+      "format": "binary",
+      "scale": 0.004648773,
+      "offset": [
+        0.018542,
+        0.00808
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "jiujinshan": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/jiujinshan/jiujinshan.skel",
+      "atlas": "characters/jiujinshan/jiujinshan.atlas",
+      "format": "binary",
+      "scale": 0.005032579,
+      "offset": [
+        0.017263,
+        0.02083
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "kasabulanka": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/kasabulanka/kasabulanka.skel",
+      "atlas": "characters/kasabulanka/kasabulanka.atlas",
+      "format": "binary",
+      "scale": 0.00519505,
+      "offset": [
+        -0.021582,
+        0.019468
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "kelifulan": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/kelifulan/kelifulan.skel",
+      "atlas": "characters/kelifulan/kelifulan.atlas",
+      "format": "binary",
+      "scale": 0.00437998,
+      "offset": [
+        -0.022475,
+        0.017174
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "lisailiu": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/lisailiu/lisailiu.skel",
+      "atlas": "characters/lisailiu/lisailiu.atlas",
+      "format": "binary",
+      "scale": 0.00442974,
+      "offset": [
+        -0.227548,
+        0.035376
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "moli": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/moli/moli.skel",
+      "atlas": "characters/moli/moli.atlas",
+      "format": "binary",
+      "scale": 0.004545969,
+      "offset": [
+        0.041319,
+        0.010268
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "ougen": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/ougen/ougen.skel",
+      "atlas": "characters/ougen/ougen.atlas",
+      "format": "binary",
+      "scale": 0.004439317,
+      "offset": [
+        0.076077,
+        0.015916
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "qiye": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/qiye/qiye.skel",
+      "atlas": "characters/qiye/qiye.atlas",
+      "format": "binary",
+      "scale": 0.003875058,
+      "offset": [
+        0.102593,
+        0.047852
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "shengdiyage": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/shengdiyage/shengdiyage.skel",
+      "atlas": "characters/shengdiyage/shengdiyage.atlas",
+      "format": "binary",
+      "scale": 0.00474902,
+      "offset": [
+        0.09661,
+        0.018804
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "sipeibojue": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/sipeibojue/sipeibojue.skel",
+      "atlas": "characters/sipeibojue/sipeibojue.atlas",
+      "format": "binary",
+      "scale": 0.004072201,
+      "offset": [
+        -0.03946,
+        0.05931
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "weiershiqinwang": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/weiershiqinwang/weiershiqinwang.skel",
+      "atlas": "characters/weiershiqinwang/weiershiqinwang.atlas",
+      "format": "binary",
+      "scale": 0.004871668,
+      "offset": [
+        0.053851,
+        0.015975
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "wuzang": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/wuzang/wuzang.skel",
+      "atlas": "characters/wuzang/wuzang.atlas",
+      "format": "binary",
+      "scale": 0.003326956,
+      "offset": [
+        0.032265,
+        0.257005
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "xianggelila": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/xianggelila/xianggelila.skel",
+      "atlas": "characters/xianggelila/xianggelila.atlas",
+      "format": "binary",
+      "scale": 0.005228776,
+      "offset": [
+        -0.003996,
+        0.015798
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "xiongye": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/xiongye/xiongye.skel",
+      "atlas": "characters/xiongye/xiongye.atlas",
+      "format": "binary",
+      "scale": 0.00443941,
+      "offset": [
+        -0.026921,
+        0.030569
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "yanzhan": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/yanzhan/yanzhan.skel",
+      "atlas": "characters/yanzhan/yanzhan.atlas",
+      "format": "binary",
+      "scale": 0.004161296,
+      "offset": [
+        0.011536,
+        0.11951
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "yuekecheng": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/yuekecheng/yuekecheng.skel",
+      "atlas": "characters/yuekecheng/yuekecheng.atlas",
+      "format": "binary",
+      "scale": 0.005178258,
+      "offset": [
+        0.118319,
+        0.013453
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "z13": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/z13/z13.skel",
+      "atlas": "characters/z13/z13.atlas",
+      "format": "binary",
+      "scale": 0.002839073,
+      "offset": [
+        0.03944,
+        0.262914
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "z18": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/z18/z18.skel",
+      "atlas": "characters/z18/z18.atlas",
+      "format": "binary",
+      "scale": 0.004751458,
+      "offset": [
+        0.044069,
+        0.014632
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "z2": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/z2/z2.skel",
+      "atlas": "characters/z2/z2.atlas",
+      "format": "binary",
+      "scale": 0.004528014,
+      "offset": [
+        0.063283,
+        0.022871
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "z35": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/z35/z35.skel",
+      "atlas": "characters/z35/z35.atlas",
+      "format": "binary",
+      "scale": 0.004577347,
+      "offset": [
+        0.068113,
+        0.008878
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "z9": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/z9/z9.skel",
+      "atlas": "characters/z9/z9.atlas",
+      "format": "binary",
+      "scale": 0.002989282,
+      "offset": [
+        0.062599,
+        0.319037
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    },
+    "zhumo": {
+      "runtimeVersion": "3.8",
+      "skeleton": "characters/zhumo/zhumo.skel",
+      "atlas": "characters/zhumo/zhumo.atlas",
+      "format": "binary",
+      "scale": 0.002933654,
+      "offset": [
+        0.061509,
+        0.394814
+      ],
+      "labelHeight": 1.95,
+      "animations": {
+        "idle": "normal",
+        "move": "move",
+        "fire": "attack",
+        "torpedo": "attack",
+        "hit": "normal",
+        "aircraft": "attack",
+        "sweep": "attack"
+      }
+    }
+  },
+  "catalog": {
+    "dd-1": "z35",
+    "dd-2": "daofeng",
+    "dd-3": "akasita",
+    "cl-1": "shengdiyage",
+    "cl-2": "kelifulan",
+    "cl-3": "hailunna",
+    "ca-1": "ougen",
+    "ca-2": "baerdimo",
+    "ca-3": "jiujinshan",
+    "bb-1": "beikaluolaina",
+    "bb-2": "wuzang",
+    "bb-3": "lisailiu",
+    "cv-1": "qiye",
+    "cv-2": "aisaikesi",
+    "cv-3": "xianggelila"
+  },
+  "historical": {
+    "river-plate": {
+      "0-0": "aikesaite",
+      "0-1": "ajiakesi",
+      "0-2": "ajilisi",
+      "1-0": "sipeibojue"
+    },
+    "narvik": {
+      "0-0": "yanzhan",
+      "0-1": "akasita",
+      "0-2": "akasita",
+      "0-3": "aisijimo",
+      "1-0": "z13",
+      "1-1": "z35",
+      "1-2": "z35",
+      "1-3": "z9",
+      "1-4": "z18",
+      "1-5": "z2"
+    },
+    "denmark-strait": {
+      "0-0": "bisimai",
+      "0-1": "ougen",
+      "1-0": "hude",
+      "1-1": "weiershiqinwang"
+    },
+    "midway": {
+      "0-0": "qiye",
+      "0-1": "dahuangfeng",
+      "0-2": "yuekecheng",
+      "1-0": "chicheng",
+      "1-1": "jiahe",
+      "1-2": "canglong",
+      "1-3": "feilong"
+    },
+    "samar": {
+      "0-0": "moli",
+      "0-1": "moli",
+      "0-2": "moli",
+      "0-3": "changdao",
+      "0-4": "boge",
+      "0-5": "kasabulanka",
+      "1-0": "wuzang",
+      "1-1": "jingang",
+      "1-2": "xiongye",
+      "1-3": "zhumo"
+    }
+  },
+  "templates": {
+    "dd": "daofeng",
+    "cl": "kelifulan",
+    "ca": "ougen",
+    "bb": "beikaluolaina",
+    "cv": "qiye"
+  },
+  "identities": {
+    "aikesaite": {
+      "name": "埃克塞特",
+      "avatar": "portraits/aikesaite-avatar.webp",
+      "portrait": "portraits/aikesaite.webp"
+    },
+    "aisaikesi": {
+      "name": "埃塞克斯",
+      "avatar": "portraits/aisaikesi-avatar.webp",
+      "portrait": "portraits/aisaikesi.webp"
+    },
+    "aisijimo": {
+      "name": "爱斯基摩",
+      "avatar": "portraits/aisijimo-avatar.webp",
+      "portrait": "portraits/aisijimo.webp"
+    },
+    "ajiakesi": {
+      "name": "阿贾克斯",
+      "avatar": "portraits/ajiakesi-avatar.webp",
+      "portrait": "portraits/ajiakesi.webp"
+    },
+    "ajilisi": {
+      "name": "阿基里斯",
+      "avatar": "portraits/ajilisi-avatar.webp",
+      "portrait": "portraits/ajilisi.webp"
+    },
+    "akasita": {
+      "name": "阿卡司塔",
+      "avatar": "portraits/akasita-avatar.webp",
+      "portrait": "portraits/akasita.webp"
+    },
+    "baerdimo": {
+      "name": "巴尔的摩",
+      "avatar": "portraits/baerdimo-avatar.webp",
+      "portrait": "portraits/baerdimo.webp"
+    },
+    "beikaluolaina": {
+      "name": "北卡罗来纳",
+      "avatar": "portraits/beikaluolaina-avatar.webp",
+      "portrait": "portraits/beikaluolaina.webp"
+    },
+    "bisimai": {
+      "name": "俾斯麦",
+      "avatar": "portraits/bisimai-avatar.webp",
+      "portrait": "portraits/bisimai.webp"
+    },
+    "boge": {
+      "name": "博格",
+      "avatar": "portraits/boge-avatar.webp",
+      "portrait": "portraits/boge.webp"
+    },
+    "canglong": {
+      "name": "苍龙",
+      "avatar": "portraits/canglong-avatar.webp",
+      "portrait": "portraits/canglong.webp"
+    },
+    "changdao": {
+      "name": "长岛",
+      "avatar": "portraits/changdao-avatar.webp",
+      "portrait": "portraits/changdao.webp"
+    },
+    "chicheng": {
+      "name": "赤城",
+      "avatar": "portraits/chicheng-avatar.webp",
+      "portrait": "portraits/chicheng.webp"
+    },
+    "dahuangfeng": {
+      "name": "大黄蜂",
+      "avatar": "portraits/dahuangfeng-avatar.webp",
+      "portrait": "portraits/dahuangfeng.webp"
+    },
+    "daofeng": {
+      "name": "岛风",
+      "avatar": "portraits/daofeng-avatar.webp",
+      "portrait": "portraits/daofeng.webp"
+    },
+    "feilong": {
+      "name": "飞龙",
+      "avatar": "portraits/feilong-avatar.webp",
+      "portrait": "portraits/feilong.webp"
+    },
+    "hailunna": {
+      "name": "海伦娜",
+      "avatar": "portraits/hailunna-avatar.webp",
+      "portrait": "portraits/hailunna.webp"
+    },
+    "hude": {
+      "name": "胡德",
+      "avatar": "portraits/hude-avatar.webp",
+      "portrait": "portraits/hude.webp"
+    },
+    "jiahe": {
+      "name": "加贺",
+      "avatar": "portraits/jiahe-avatar.webp",
+      "portrait": "portraits/jiahe.webp"
+    },
+    "jingang": {
+      "name": "金刚",
+      "avatar": "portraits/jingang-avatar.webp",
+      "portrait": "portraits/jingang.webp"
+    },
+    "jiujinshan": {
+      "name": "旧金山",
+      "avatar": "portraits/jiujinshan-avatar.webp",
+      "portrait": "portraits/jiujinshan.webp"
+    },
+    "kasabulanka": {
+      "name": "卡萨布兰卡",
+      "avatar": "portraits/kasabulanka-avatar.webp",
+      "portrait": "portraits/kasabulanka.webp"
+    },
+    "kelifulan": {
+      "name": "克利夫兰",
+      "avatar": "portraits/kelifulan-avatar.webp",
+      "portrait": "portraits/kelifulan.webp"
+    },
+    "lisailiu": {
+      "name": "黎塞留",
+      "avatar": "portraits/lisailiu-avatar.webp",
+      "portrait": "portraits/lisailiu.webp"
+    },
+    "moli": {
+      "name": "弗莱彻",
+      "avatar": "portraits/moli-avatar.webp",
+      "portrait": "portraits/moli.webp"
+    },
+    "ougen": {
+      "name": "欧根亲王",
+      "avatar": "portraits/ougen-avatar.webp",
+      "portrait": "portraits/ougen.webp"
+    },
+    "qiye": {
+      "name": "企业",
+      "avatar": "portraits/qiye-avatar.webp",
+      "portrait": "portraits/qiye.webp"
+    },
+    "shengdiyage": {
+      "name": "圣地亚哥",
+      "avatar": "portraits/shengdiyage-avatar.webp",
+      "portrait": "portraits/shengdiyage.webp"
+    },
+    "sipeibojue": {
+      "name": "斯佩伯爵",
+      "avatar": "portraits/sipeibojue-avatar.webp",
+      "portrait": "portraits/sipeibojue.webp"
+    },
+    "weiershiqinwang": {
+      "name": "威尔士亲王",
+      "avatar": "portraits/weiershiqinwang-avatar.webp",
+      "portrait": "portraits/weiershiqinwang.webp"
+    },
+    "wuzang": {
+      "name": "武藏",
+      "avatar": "portraits/wuzang-avatar.webp",
+      "portrait": "portraits/wuzang.webp"
+    },
+    "xianggelila": {
+      "name": "香格里拉",
+      "avatar": "portraits/xianggelila-avatar.webp",
+      "portrait": "portraits/xianggelila.webp"
+    },
+    "xiongye": {
+      "name": "熊野",
+      "avatar": "portraits/xiongye-avatar.webp",
+      "portrait": "portraits/xiongye.webp"
+    },
+    "yanzhan": {
+      "name": "厌战",
+      "avatar": "portraits/yanzhan-avatar.webp",
+      "portrait": "portraits/yanzhan.webp"
+    },
+    "yuekecheng": {
+      "name": "约克城",
+      "avatar": "portraits/yuekecheng-avatar.webp",
+      "portrait": "portraits/yuekecheng.webp"
+    },
+    "z13": {
+      "name": "Z13",
+      "avatar": "portraits/z13-avatar.webp",
+      "portrait": "portraits/z13.webp"
+    },
+    "z18": {
+      "name": "Z18",
+      "avatar": "portraits/z18-avatar.webp",
+      "portrait": "portraits/z18.webp"
+    },
+    "z2": {
+      "name": "Z2",
+      "avatar": "portraits/z2-avatar.webp",
+      "portrait": "portraits/z2.webp"
+    },
+    "z35": {
+      "name": "Z35",
+      "avatar": "portraits/z35-avatar.webp",
+      "portrait": "portraits/z35.webp"
+    },
+    "z9": {
+      "name": "Z9",
+      "avatar": "portraits/z9-avatar.webp",
+      "portrait": "portraits/z9.webp"
+    },
+    "zhumo": {
+      "name": "筑摩",
+      "avatar": "portraits/zhumo-avatar.webp",
+      "portrait": "portraits/zhumo.webp"
+    }
+  }
+}

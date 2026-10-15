@@ -11,7 +11,8 @@ const SessionBody=Type.Object({nickname:Type.String({minLength:1,maxLength:20})}
 export function registerHttpRoutes(instance:FastifyInstance,{models,rate,originCheck}:{models:ModelConfig[];rate:RateGate;originCheck:(request:FastifyRequest)=>void}){
  const app=instance.withTypeProvider<TypeBoxTypeProvider>();const {accounts,gameService}=app;
   app.get('/api/health',async()=>({ok:true,serverId:gameService.serverId,protocolVersion:PROTOCOL_VERSION}));
-  app.get('/api/config',async(req,reply)=>{reply.header('Cache-Control','no-store');return {v:PROTOCOL_VERSION,protocolVersion:PROTOCOL_VERSION,serverId:gameService.serverId,models:publicModels(models),battleModes:['annihilation','domination'],roomLimits:[0,60,120,300],auth:{enabled:accounts.enabled}};});
+  app.get('/api/config',async(req,reply)=>{reply.header('Cache-Control','no-store');return {v:PROTOCOL_VERSION,protocolVersion:PROTOCOL_VERSION,serverId:gameService.serverId,models:publicModels(models),battleModes:['annihilation','domination'],roomLimits:[0,60,120,300],auth:{enabled:accounts.enabled},assetStorage:app.assetStorage.publicConfig};});
+  app.post('/api/assets/resolve',{schema:{body:Type.Object({ids:Type.Array(Type.String({minLength:1,maxLength:1024}),{maxItems:128})},{additionalProperties:false})}},async(req,reply)=>{reply.header('Cache-Control','no-store');return app.assetStorage.resolve(req.body.ids);});
   app.post('/api/session',{schema:{body:SessionBody}},async(req,reply)=>{
     if(!await rate(req,`session:${req.ip}`,10,60000))return reply.code(429).send({code:'RATE_LIMIT',message:'创建访客过于频繁，请稍后再试'});
     reply.header('Cache-Control','no-store');

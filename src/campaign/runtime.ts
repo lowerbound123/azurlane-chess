@@ -1,3 +1,4 @@
+import {effectiveSpeed} from '../../shared/status.ts';
 import type {CampaignState,CampaignFixture} from '../../shared/campaign.ts';
 import type {Game,Ship,Plans,Plan,Hex,Move,RoundResult} from '../../shared/game.ts';
 import * as E from '../engine.ts';
@@ -85,7 +86,8 @@ export function createCampaignFixture(state:CampaignState,fleet?:string[]):Campa
   ['dd-2','cl-3','ca-1','bb-1','cv-3'].forEach((k,i)=>{const s=E.createCatalogShip(k,1,i,H(2+i*2,i>2?0:4));s.hp=Math.round(s.cfg.hp*.6);s.label+=`（训练耐久 ${s.hp}）`;g.ships.push(s)});
  }
  E.updateExploration(g);
- return{game:g,plans:{},selected:(id==='split'||id==='remote-sweep')?get('cl-2').id:state.chapter===5?g.ships.find(s=>s.team===0&&s.cfg.main)!.id:state.chapter===7?g.ships.find(s=>s.team===0&&s.template==='ca')!.id:state.chapter===8?g.ships.find(s=>s.team===0&&s.cfg.carrier)!.id:actor.id};
+ const primary=Object.keys(campaignCheckpoint(state).emphasis)[0];
+ return{game:g,plans:{},selected:g.ships.find(s=>s.team===0&&s.catalogId===primary)?.id??actor.id};
 }
 
 /** A heading-aware route, avoiding friendly hulls; chooses a best partial route if distant. */
@@ -95,7 +97,7 @@ function navigate(game:Game,s:Ship,goal:Hex):Move[]{
  const queue:Node[]=[{pos:s.pos,heading:s.heading,moves:[]}],seen=new Set<string>();let best=queue[0];
  for(let i=0;i<queue.length;i++){
   const a=queue[i];if(E.hexDist(a.pos,goal)<E.hexDist(best.pos,goal))best=a;
-  if(E.same(a.pos,goal))return a.moves;if(a.moves.length>=s.cfg.speed)continue;
+  if(E.same(a.pos,goal))return a.moves;if(a.moves.length>=effectiveSpeed(s,game.round))continue;
   for(const turn of[0,-1,1])for(const forward of[true,false]){
    const heading=E.mod(a.heading+turn),pos=forward?E.add(a.pos,heading):a.pos,k=`${E.key(pos)}:${heading}`;
    if(!E.legal(game.map,pos)||blocked.has(E.key(pos))||seen.has(k))continue;seen.add(k);queue.push({pos,heading,moves:[...a.moves,{turn,forward}]});
@@ -245,7 +247,7 @@ export function evaluateCampaignRound(state:CampaignState,before:Game,submitted:
   if(id==='aa')passed=(result.combatStats[by('cl-1')!.id]?.planesShotDown??0)>0;
  }
  if(id==='final')passed=g.winner===0&&enemies.every(s=>!E.alive(s));
- if(passed){next.status='checkpoint-complete';next.completed=[...new Set([...state.completed,id])];next.feedback=id==='final'?`封锁线已突破。存活 ${allies.filter(E.alive).length} 艘；本轮造成 ${Math.round(allies.reduce((n,s)=>n+(result.combatStats[s.id]?.damageDealt??0),0))} 伤害。正式对局全灭或第 30 回合结束，依次比较存活舰数、总耐久。`:'检查点完成。继续航行将进入下一整备点，清理本段遗留武器并补给。';return next;}
+ if(passed){next.status='checkpoint-complete';next.completed=[...new Set([...state.completed,id])];next.feedback=id==='final'?`封锁线已突破。存活 ${allies.filter(E.alive).length} 艘；本轮造成 ${Math.round(allies.reduce((n,s)=>n+(result.combatStats[s.id]?.damageDealt??0),0))} 伤害。正式对局全灭或第 30 回合结束，依次比较存活舰数、总耐久。`:'本段完成，舰队将自动沿航道前往下一段，并完成补给与会合。';return next;}
  const fail=(why:string)=>{next.status='failed';next.feedback=`${why}。请重试当前检查点，恢复本段舰船、资源与任务目标。`;return next};
  if(state.chapter<9&&allies.some(s=>!E.alive(s)))return fail('必要友舰已经沉没');
  if(id.startsWith('torpedo-')&&actor.torps===0&&!g.torpedoes.some(t=>t.team===0))return fail('所需鱼雷弹药耗尽');

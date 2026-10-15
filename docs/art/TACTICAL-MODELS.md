@@ -1,11 +1,31 @@
-# 飞机与水雷模型（v0.5.7）
+# 飞机与水雷模型
 
-通过 Blender MCP 在 Blender 5.2.2 LTS 中制作。原场景保留，资产制作位于独立的 `AZ_Tactical_Models_v057` 场景。
+通过 Blender MCP 在 Blender 5.2.2 LTS 中制作。原场景保留，飞机制作位于独立的 `AZ_Aircraft_Library` 场景；重复执行制作脚本会创建带序号的新场景，导出的运行时节点名称保持稳定。
 
-- `assets/models/tactical-models.blend`：可编辑源资产库，包含本次模型场景。
-- `assets/models/aircraft.glb`：舰载机。机首朝 +X，Blender Z 向上；glTF 转换后 Three.js Y 向上。包含机身、座舱、发动机、螺旋桨、翼面、尾翼、起落架和挂载。`Propeller` 节点保留独立旋转轴。
+- `assets/models/aircraft-library.blend`：四机型的可编辑源资产库，按两行排列。可分别选择四个根对象编辑。
+- `assets/models/aircraft/{fighter,bomber,scout,heavy}.glb`：四款独立模型，均在原点，机首朝 +X，Blender Z 向上；glTF 转换后 Three.js Y 向上。
+- `assets/models/aircraft.glb`：正式游戏使用的组合包，约 585 KiB，内含四个独立根节点 `Aircraft_fighter` / `Aircraft_bomber` / `Aircraft_scout` / `Aircraft_heavy`。渲染器按 `cfg.role` 仅克隆对应机型，缺少 role 的旧记录默认用轰炸机。所有模型无外部贴图。
+- `assets/models/tactical-models.blend`：原水雷制作库；其中的旧通用飞机仅为历史源资产，正式游戏已不再使用。
 - `assets/models/naval-mine.glb`：接触式锚雷，包含金属壳体、焊缝、法兰铆钉、十二个触角、引信、锚环及链节。
-- `scripts/build-tactical-models.py`：通过 Blender MCP 执行的制作脚本。`ROOT` 指向项目目录；不清空已有场景，静态零件按材质合并。
+- `scripts/build-aircraft-models.py`：通过 Blender MCP 执行的四机型制作脚本，项目根目录从脚本位置解析。静态零件按材质合并，螺旋桨保留独立旋转轴，并带 `animatedPropeller` 标记。战斗机、轰炸机、侦察机各 1 个，强袭机 4 个；正式地图在现有动画循环中驱动全部旋转轴。
+- `scripts/build-tactical-models.py`：原模型制作脚本，现只导出水雷，不覆盖新版飞机包。
+
+## 四机型视觉设计
+
+| 机型 | 主要轮廓 | 配色与细节 | 静态及螺旋桨 Mesh 数 |
+| --- | --- | --- | --- |
+| 战斗机 | 紧凑机身、收尖机翼、单垂尾 | 象牙白与朱红；短座舱、翼炮 | 7 |
+| 轰炸机 | 宽阔机翼、长串列座舱、单垂尾 | 深海蓝与琥珀黄；俯冲减速板、腹部挂弹 | 8 |
+| 侦察机 | 修长直翼、双浮筒及支架 | 海绿色与象牙白；观察座舱、相机、天线 | 7 |
+| 强袭机 | 四发动机、宽翼、双垂尾 | 橄榄绿与黄翼尖；背部炮塔、成对挂弹 | 14 |
+
+不同阵营沿用脚下的青色／红色细环；机型配色不代表阵营。战斗机、轰炸机、强袭机的地图缩放为 0.9，侦察机为 0.72。强袭机自身翼展更大，因此仍是最大的机型，同时避免沿用旧模型 1.1 倍缩放后过大。
+
+强袭机机舱已按实机照片的连接形态修正：四台发动机沿机身方向后移 0.10，前伸距离缩短约 27%；机舱半径由 0.085 加至 0.10。后部整流罩采用机翼同色，保留饱满的肩部并延伸到机翼后缘附近，金属色仅用于前部发动机罩。螺旋桨半径与侧向间距保持不变。
+
+重新制作后执行 `npm run assets:generate`、`npm run assets:prepare`，同时保留源文件和 `assets/runtime` 的更新。清单格式、资源 ID、存档字段均不改变。远端返回有效 GLB 但缺少任意机型时，也会按既有有界重试规则回退本地资源。
+
+开发预览：启动 `npm run dev -- --port 4175` 后访问 `/tools/aircraft-preview.html`。支持斜视、俯视、纯色轮廓、暂停螺旋桨，以及使用正式 `BattleMap3D` 的四机型战场、镜头控制和阵营切换。该入口仅在开发环境挂载。
 
 资源采用无外部纹理的 GLB，Vite 输出内容哈希地址并使用长期缓存。战场进入时并行下载；跨页面保留二进制缓存，每个地图拥有可单独释放的模型实例及 GPU 资源。下载失败显示地图重试入口；退出加载中的战场不会随后创建地图资源。
 

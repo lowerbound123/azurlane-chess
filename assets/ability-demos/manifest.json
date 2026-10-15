@@ -1,0 +1,1325 @@
+{
+  "schema": 1,
+  "clips": {
+    "bb-2": {
+      "id": "bb-2",
+      "duration": 12,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 6.2,
+      "name": "武藏",
+      "ability": "重型主炮",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "一发重炮 · 覆盖七格",
+          "detail": "瞄准中心格，周围六格也会受到波及"
+        },
+        {
+          "start": 2,
+          "end": 9,
+          "round": 1,
+          "title": "中心 120 · 邻格 60",
+          "detail": "主炮实际结算；范围伤害同样会命中友军"
+        },
+        {
+          "start": 9,
+          "end": 12,
+          "round": 1,
+          "title": "重火力需要预判落点",
+          "detail": "一发炮弹｜七格范围｜中心双倍｜注意友军位置"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 1085765,
+          "sha256": "348feda9dc0331393fc0cee454dbf46cf0f1e55d0183c28a43076c989281b606"
+        },
+        "demo.mp4": {
+          "bytes": 1061647,
+          "sha256": "97133bc11691f181d3e0f1100ebb2de16aa5208c68acb3dfc3b37db1706e9514"
+        },
+        "poster.webp": {
+          "bytes": 63644,
+          "sha256": "d3374774b97936bf1a76e1414c4a26b4a9f4ca11915dbc538ff9d93c3c04e722"
+        },
+        "contact.webp": {
+          "bytes": 92958,
+          "sha256": "60847584a1f5be7ba7eb333a13bd30745a83430ce94dce8549239e851e3072af"
+        },
+        "evidence.json": {
+          "bytes": 80158,
+          "sha256": "f2c41c81bd3b5c1ae549a3670694f0709e676d3145984b0c871d906d7bbabfc1"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 1085765
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 1061647
+        }
+      }
+    },
+    "dd-3": {
+      "id": "dd-3",
+      "duration": 14,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 1.4,
+      "name": "阿卡司塔",
+      "ability": "烟幕掩护",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2.5,
+          "round": 1,
+          "title": "释放烟幕 · 覆盖七格",
+          "detail": "我方视角：烟幕内视野也会缩至一格"
+        },
+        {
+          "start": 2.5,
+          "end": 6,
+          "round": 1,
+          "title": "敌方视角 · 舰船隐蔽",
+          "detail": "烟幕遮蔽舰船；画面不会显示隐藏轮廓"
+        },
+        {
+          "start": 6,
+          "end": 11,
+          "round": 2,
+          "title": "第二回合 · 贴近仍会发现",
+          "detail": "烟幕持续；敌舰进入相邻格后可以看见舰船"
+        },
+        {
+          "start": 11,
+          "end": 14,
+          "round": 3,
+          "title": "第三回合 · 烟幕消散",
+          "detail": "本回合与下一回合有效；消耗一次烟幕储备"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 698557,
+          "sha256": "e610c6bedd7418c45c6be7c0c50f436a08451172f253b7015ee1e5dc142f34c0"
+        },
+        "demo.mp4": {
+          "bytes": 717911,
+          "sha256": "bdca7789a9d54646f3336f5884e84e64ef1ab8f2c4b611e76e7e3ead8919624c"
+        },
+        "poster.webp": {
+          "bytes": 36358,
+          "sha256": "742755b1983bd0dd54341e0e24e57d6fb33e6f2400499db96255bb5eaaedff66"
+        },
+        "contact.webp": {
+          "bytes": 64228,
+          "sha256": "49a8ef46daac6920b00efd5ca4eb3b567fb0c8f42d254da80853f5a7c8d88f47"
+        },
+        "evidence.json": {
+          "bytes": 89646,
+          "sha256": "9e6252bd070b03868857ffbf01dd7bb9729b338dbe472bd864f2f13f5fbff31a"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 698557
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 717911
+        }
+      }
+    },
+    "cv-2": {
+      "id": "cv-2",
+      "duration": 18,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 6.5,
+      "name": "埃塞克斯",
+      "ability": "战斗机与轰炸机",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "四架战斗机 · 两架轰炸机",
+          "detail": "本次出动一战一轰；每回合合计最多放飞两架"
+        },
+        {
+          "start": 2,
+          "end": 4,
+          "round": 1,
+          "title": "分工出击 · 巡逻与轰炸",
+          "detail": "战斗机前往巡逻点；轰炸机飞向目标舰"
+        },
+        {
+          "start": 4,
+          "end": 6,
+          "round": 1,
+          "title": "战斗机拦截 · 空战伤害 2",
+          "detail": "真实拦截来袭敌机，阻止其继续接近舰队"
+        },
+        {
+          "start": 6,
+          "end": 8,
+          "round": 1,
+          "title": "轰炸机投弹 · 对舰伤害 25",
+          "detail": "命中后自动返航；接近舰船时也会受到防空火力"
+        },
+        {
+          "start": 8,
+          "end": 12,
+          "round": 2,
+          "title": "轰炸机返航 · 战斗机继续巡逻",
+          "detail": "空战伤害 2｜轰炸伤害 25｜飞机自动返航"
+        },
+        {
+          "start": 12,
+          "end": 15,
+          "round": 3,
+          "title": "回收飞机 · 等待整备",
+          "detail": "实际回收后进入整备，不能立刻重复出击"
+        },
+        {
+          "start": 15,
+          "end": 18,
+          "round": 4,
+          "title": "规划下一轮空中支援",
+          "detail": "有限机库与起飞额度，需要在制空和打击间分配"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 1101792,
+          "sha256": "9849ac4ce32a3432dda71359e45aae3f71f101647f6d0933469f7572b949c768"
+        },
+        "demo.mp4": {
+          "bytes": 1052073,
+          "sha256": "9b23ff5ef5fc5ef280cd3210d9ee8ba2771d96f020d9217c3a9cb234f0be5071"
+        },
+        "poster.webp": {
+          "bytes": 60936,
+          "sha256": "d4571e9bd4311a511528ab5f219233549d220ee5694c64107612357ddc588de6"
+        },
+        "contact.webp": {
+          "bytes": 81130,
+          "sha256": "6efff4c75f5325ee6761e8dab955d95ea820c87d85c962bdcbaa1559f2a93379"
+        },
+        "evidence.json": {
+          "bytes": 177783,
+          "sha256": "b968ffd79293c4021942067360b67e5a79d2429fddbd96f2d2867ea4d1dffb3c"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 540,
+          "duration": 18,
+          "audio": false,
+          "bytes": 1101792
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 540,
+          "duration": 18,
+          "audio": false,
+          "bytes": 1052073
+        }
+      }
+    },
+    "dd-1": {
+      "id": "dd-1",
+      "duration": 12,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 8,
+      "name": "Z35",
+      "ability": "航迹布雷",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "沿航迹布雷 · 库存六枚",
+          "detail": "本回合完成两次前进，在身后留下两枚水雷"
+        },
+        {
+          "start": 2,
+          "end": 5.5,
+          "round": 1,
+          "title": "本回合布设 · 下回合武装",
+          "detail": "每回合最多布设两枚；灰色水雷尚未武装"
+        },
+        {
+          "start": 5.5,
+          "end": 10,
+          "round": 2,
+          "title": "第二回合 · 水雷命中 40",
+          "detail": "敌舰驶入已武装雷区；未触发的水雷继续留在海面"
+        },
+        {
+          "start": 10,
+          "end": 12,
+          "round": 2,
+          "title": "封锁航路 · 预判敌舰走向",
+          "detail": "库存 6 → 4；有接触排雷能力的舰船可以清除水雷"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 822046,
+          "sha256": "97bffd120888bd4974a260e266782c79da0ce8d477d2d26bf2a6d70596cb731c"
+        },
+        "demo.mp4": {
+          "bytes": 895849,
+          "sha256": "07699fa85dba626be547e40fb70e2f3ace1c8092dc720f23c531c334f8e98b1e"
+        },
+        "poster.webp": {
+          "bytes": 59128,
+          "sha256": "82203f3e06cdf3324e5382ae066b2d2b3ce113ba6309545647980caabaa260e9"
+        },
+        "contact.webp": {
+          "bytes": 86150,
+          "sha256": "b909fd65a9e8ff1c3c79d7c0f9b45231e2349b632a969858862da2d43ec605e9"
+        },
+        "evidence.json": {
+          "bytes": 74599,
+          "sha256": "8be820486f06c8808e0c6db3009615ab357f4101396fb4d26874382ad06a7c96"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 822046
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 895849
+        }
+      }
+    },
+    "dd-2": {
+      "id": "dd-2",
+      "duration": 10,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 4.3,
+      "name": "岛风",
+      "ability": "四向鱼雷齐射",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "四个合法侧向 · 同窗口齐射",
+          "detail": "舰首与舰尾不能发射；同一窗口不能重复同一射向"
+        },
+        {
+          "start": 2,
+          "end": 7.5,
+          "round": 1,
+          "title": "四枚鱼雷 · 每枚伤害 40",
+          "detail": "鱼雷各沿一条直线前进；本回合最多四枚"
+        },
+        {
+          "start": 7.5,
+          "end": 10,
+          "round": 1,
+          "title": "库存 8 → 4 · 封锁多条航路",
+          "detail": "用不同射向逼迫敌舰选择航线，不是同向四连发"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 963845,
+          "sha256": "62c5291dbf749b8e384974b76cabffd700711efbe67e040e0dc2ed040a613a7f"
+        },
+        "demo.mp4": {
+          "bytes": 946713,
+          "sha256": "6d9adb18afcf10de83479372694d4e1b1dedaa6fce9946aca03c7eda76430669"
+        },
+        "poster.webp": {
+          "bytes": 66832,
+          "sha256": "3803701be6f8d1141951f90fdee2ae9b5aafd7a31945ad8dd0c4bf290b0a381b"
+        },
+        "contact.webp": {
+          "bytes": 97490,
+          "sha256": "3a876a8b6e93d094b62afef3c12292f02793ebd19efa29e3ca10be28f96e2680"
+        },
+        "evidence.json": {
+          "bytes": 92089,
+          "sha256": "2c9903a68739bc6f69f0822387946caff78c36097b9603dd8321ac0007415b45"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 963845
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 946713
+        }
+      }
+    },
+    "cl-1": {
+      "id": "cl-1",
+      "duration": 10,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 5.8,
+      "name": "圣地亚哥",
+      "ability": "双层防空",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "三格外圈 · 一格内圈",
+          "detail": "一架 2 HP 轰炸机正在接近防空区域"
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "round": 1,
+          "title": "外圈扣 1 · 内圈再扣 1",
+          "detail": "双层防空在投弹前击落来袭轰炸机"
+        },
+        {
+          "start": 7,
+          "end": 10,
+          "round": 1,
+          "title": "每层每轮对每架飞机各触发一次",
+          "detail": "不是持续扣血；注意用防空舰保护舰队航路"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 701551,
+          "sha256": "673ee1d824e6dea54b2bf25345ed8789c15eae18102d92109802b3125518991f"
+        },
+        "demo.mp4": {
+          "bytes": 757142,
+          "sha256": "88dfbc676a90244f83ca9754f692ac4a303a70494f055b93320547d90b77859e"
+        },
+        "poster.webp": {
+          "bytes": 62552,
+          "sha256": "62666f0cabbfcb0425cbf0e0c78297beb6f9011f1344413d8e41ead6b4d78309"
+        },
+        "contact.webp": {
+          "bytes": 96190,
+          "sha256": "330d785c3d57578a2ca45c88a8c242d40c65f5cd2cb1c9dd44a34b0698f08c03"
+        },
+        "evidence.json": {
+          "bytes": 45472,
+          "sha256": "4372964895a2e95634b8513e5c540a29e82c933897436d7cf4f4739c73a79c81"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 701551
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 757142
+        }
+      }
+    },
+    "cl-2": {
+      "id": "cl-2",
+      "duration": 10,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 3.1,
+      "name": "克利夫兰",
+      "ability": "双目标副炮",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "三格射程 · 两个不同目标",
+          "detail": "两艘敌舰同时进入副炮射程"
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "round": 1,
+          "title": "分别命中 · 各造成 12 伤害",
+          "detail": "每回合最多攻击两艘不同敌舰"
+        },
+        {
+          "start": 6,
+          "end": 10,
+          "round": 1,
+          "title": "用位置换取双目标火力",
+          "detail": "同一个目标不会因此承受两次副炮攻击"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 854156,
+          "sha256": "58f3c232370fb4692a3b939afec571c85cbb79f1efe665c98cbec5d1dc52c0a4"
+        },
+        "demo.mp4": {
+          "bytes": 839381,
+          "sha256": "a23229880ece801f6aeddef40eeb538ae895ba37dbb9977e2fc5d208c49773ff"
+        },
+        "poster.webp": {
+          "bytes": 62460,
+          "sha256": "a9d6be9c25bf8fbd0a2cc0b915cd9c1a10ba762a672d0cb8d8c8ea6c6c7ef039"
+        },
+        "contact.webp": {
+          "bytes": 91860,
+          "sha256": "f4241e779840047e8377e9f0583da9cb56a6e70e413247bc7ff03b24d41c5d2c"
+        },
+        "evidence.json": {
+          "bytes": 61202,
+          "sha256": "3fab2fd54ddfa2261590cede228392ea70a1e954703c8bbde157d0cb4b1fd886"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 854156
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 839381
+        }
+      }
+    },
+    "cl-3": {
+      "id": "cl-3",
+      "duration": 14,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 4,
+      "name": "海伦娜",
+      "ability": "定点雷达",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "岛后烟幕 · 敌舰不可见",
+          "detail": "先确认常规视野无法看穿岛屿与烟幕"
+        },
+        {
+          "start": 2,
+          "end": 5,
+          "round": 2,
+          "title": "第二回合 · 扫描指定七格",
+          "detail": "六格是投放距离；雷达扫描范围是中心与周围六格"
+        },
+        {
+          "start": 5,
+          "end": 8,
+          "round": 3,
+          "title": "第三回合 · 扫描仍在持续",
+          "detail": "发现目标后，友舰在下一轮规划炮击"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "round": 3,
+          "title": "利用情报 · 炮击命中",
+          "detail": "雷达穿透岛屿与烟幕，占用释放轮的全部副炮"
+        },
+        {
+          "start": 11,
+          "end": 14,
+          "round": 4,
+          "title": "第四回合 · 雷达消散",
+          "detail": "本轮与下一轮有效；雷达储备 3 → 2"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 841299,
+          "sha256": "34d737bacf4d07fb88b09e33d93d11962c3d1ebce32709645c06ef1487a25f1c"
+        },
+        "demo.mp4": {
+          "bytes": 925837,
+          "sha256": "dccfbc4700f7625445bf7b9ba41c73899898663ffee65259ef34b57e18b4951d"
+        },
+        "poster.webp": {
+          "bytes": 60608,
+          "sha256": "c7f2fdcd9b1fa55b08ed30e32f86e0faaf6785856772b61f107ce79b5467232e"
+        },
+        "contact.webp": {
+          "bytes": 85986,
+          "sha256": "78134e68acf09e29dbe72e7bd26794b3cf3c0479bbb2edd15ca60961c5abeb8c"
+        },
+        "evidence.json": {
+          "bytes": 116063,
+          "sha256": "2cc1852219c2e231b83ff66d009abd9be1dd3f8df26b9751c17146190d4dde30"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 841299
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 925837
+        }
+      }
+    },
+    "ca-1": {
+      "id": "ca-1",
+      "duration": 16,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 9,
+      "name": "欧根亲王",
+      "ability": "海域封锁",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "驻守海域 · 放弃移动与转向",
+          "detail": "锁住周围六格；敌舰进入相邻格后被拦停"
+        },
+        {
+          "start": 2,
+          "end": 7,
+          "round": 1,
+          "title": "封锁航路 · 鱼雷 45 → 18",
+          "detail": "真实鱼雷命中驻守舰，自身鱼雷伤害减少 60%"
+        },
+        {
+          "start": 7,
+          "end": 12,
+          "round": 1,
+          "title": "主炮减伤 · 60 → 42",
+          "detail": "驻守时自身主炮与副炮伤害减少 30%"
+        },
+        {
+          "start": 12,
+          "end": 16,
+          "round": 1,
+          "title": "用机动换取控制与生存",
+          "detail": "同一段真实结算展示拦停、鱼雷减伤和炮击减伤"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 1513626,
+          "sha256": "0b02b7a7bc778aa41cdb9adb72230ba5067f2233e842a37b93fcc78beeb94460"
+        },
+        "demo.mp4": {
+          "bytes": 1514332,
+          "sha256": "022d06f605f79fdd6516e4bbb680f03b0be092b6f5b54cd68bdc66ab754fff06"
+        },
+        "poster.webp": {
+          "bytes": 67424,
+          "sha256": "674230997beda81cf59ee5af7ceb49476017d37540567ea7e4b48c4e163b9cab"
+        },
+        "contact.webp": {
+          "bytes": 98774,
+          "sha256": "3bbf7b86144eb1fd959b0fa0733fb1bad1897076aa1ed30aa2677d5040dd591a"
+        },
+        "evidence.json": {
+          "bytes": 73356,
+          "sha256": "e9ae5c990f7164d372d3444afb6e90d92372925c7d5b9f78e86bc89089d24654"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 480,
+          "duration": 16,
+          "audio": false,
+          "bytes": 1513626
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 480,
+          "duration": 16,
+          "audio": false,
+          "bytes": 1514332
+        }
+      }
+    },
+    "ca-2": {
+      "id": "ca-2",
+      "duration": 14,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 7.7,
+      "name": "巴尔的摩",
+      "ability": "舰队护航",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "护航移动 · 本回合最多一步",
+          "detail": "前进后靠近友舰，保护邻接的其他友方舰船"
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "round": 1,
+          "title": "航空炸弹 · 友舰 25 → 18",
+          "detail": "护航对友舰提供 30% 减伤，伤害逐次四舍五入"
+        },
+        {
+          "start": 6,
+          "end": 10,
+          "round": 1,
+          "title": "同轮炮击 · 友舰 42，自身 60",
+          "detail": "护航只保护其他友舰；自己不会获得这份减伤"
+        },
+        {
+          "start": 10,
+          "end": 14,
+          "round": 1,
+          "title": "保护邻舰 · 分配舰队站位",
+          "detail": "仅减免主炮与航空炸弹伤害；多个护航不叠加"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 1177424,
+          "sha256": "0442c398fc2b9033fbd703990e44dd49b14f9ef70b37c62a299e5c6c1b6a4f23"
+        },
+        "demo.mp4": {
+          "bytes": 1198654,
+          "sha256": "3a1d31bd96ada8ccf2f07c4efd3297602a94b715fe4bc49dfe13ca59588bd0df"
+        },
+        "poster.webp": {
+          "bytes": 65206,
+          "sha256": "4322fdfafeb349f5f86787d4c17f2421274cffdc30c57b1bf35d27960aee6dc6"
+        },
+        "contact.webp": {
+          "bytes": 95854,
+          "sha256": "8567ffda978a12434c48a98c79f0b16cfdce7129108f1ac0f3ecd6c4cea93732"
+        },
+        "evidence.json": {
+          "bytes": 81743,
+          "sha256": "d5bc392738a38ec9139ccbf3a87833c1f19a1de0cd0cf0cd2a8156bd3e38629f"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 1177424
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 420,
+          "duration": 14,
+          "audio": false,
+          "bytes": 1198654
+        }
+      }
+    },
+    "ca-3": {
+      "id": "ca-3",
+      "duration": 12,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 4.3,
+      "name": "旧金山",
+      "ability": "突击副炮",
+      "cues": [
+        {
+          "start": 0,
+          "end": 1,
+          "round": 1,
+          "title": "示例 A · 完成两次前进",
+          "detail": "副炮在移动结束后统一结算"
+        },
+        {
+          "start": 1,
+          "end": 5,
+          "round": 1,
+          "title": "示例 A · 两次命中 2 × 16",
+          "detail": "实际完成两次前进，获得一次额外副炮攻击"
+        },
+        {
+          "start": 5,
+          "end": 6,
+          "round": 1,
+          "title": "示例 A · 合计 32 伤害",
+          "detail": "下面切换至相同初始局面的独立对照"
+        },
+        {
+          "start": 6,
+          "end": 7,
+          "round": 1,
+          "title": "示例 B · 一次前进加转向",
+          "detail": "场景已重置；原地转向不计入前进次数",
+          "experiment": "示例 B · 独立对照"
+        },
+        {
+          "start": 7,
+          "end": 10,
+          "round": 1,
+          "title": "示例 B · 仅命中 1 × 16",
+          "detail": "一次前进不足以触发额外攻击",
+          "experiment": "示例 B · 独立对照"
+        },
+        {
+          "start": 10,
+          "end": 12,
+          "round": 1,
+          "title": "两步 32 · 一步加转向 16",
+          "detail": "等待、转向和未完成的计划步数都不算前进",
+          "experiment": "示例 B · 独立对照"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 959950,
+          "sha256": "25f95bc8e99daa63347800083c30a1880b826245a692a61b9ef237b26cdb5784"
+        },
+        "demo.mp4": {
+          "bytes": 958943,
+          "sha256": "cc2e5ac1f05f4012fae2b6be4cf85015f559567879adc33dc7b776ee46c8c2c8"
+        },
+        "poster.webp": {
+          "bytes": 59032,
+          "sha256": "a338ed91e3b1d0ee4c438c127357e6d4130f666f8aab8c135978451a032e4f68"
+        },
+        "contact.webp": {
+          "bytes": 86228,
+          "sha256": "3763d40f91c7952e9ceb03c4c45701e72d936d59c8086bfd319614029cb2f046"
+        },
+        "evidence.json": {
+          "bytes": 65017,
+          "sha256": "223ad269bcf36bcfc4ba2354b2da9f26c302051717a15722739bfc29beb36a2d"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 959950
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 958943
+        }
+      }
+    },
+    "bb-1": {
+      "id": "bb-1",
+      "duration": 12,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 5.3,
+      "name": "北卡罗来纳",
+      "ability": "三联装主炮",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "九格射程 · 三发主炮",
+          "detail": "静止靶场中三发均瞄准同一格"
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "round": 1,
+          "title": "三发各 60 · 合计 180",
+          "detail": "命中按同一轮主炮结果合并显示；移动敌舰可能避开"
+        },
+        {
+          "start": 6,
+          "end": 7,
+          "round": 1,
+          "title": "炮击完成 · 进入装填",
+          "detail": "额外装填一回合，下一轮无法再次开炮"
+        },
+        {
+          "start": 7,
+          "end": 9,
+          "round": 2,
+          "title": "第二回合 · 主炮装填中",
+          "detail": "即使提交炮击，也不会发射新的炮弹"
+        },
+        {
+          "start": 9,
+          "end": 12,
+          "round": 3,
+          "title": "第三回合 · 主炮再次就绪",
+          "detail": "保留移动和副炮，安排下一轮远程打击"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 753407,
+          "sha256": "cfe5fecacfcd990cdcfbf8f30f89537bc6a6b12209762ab36db44ff6c279caf0"
+        },
+        "demo.mp4": {
+          "bytes": 727163,
+          "sha256": "22a9f15ef09a917a80d219878357989fecb791ca023e6e45fe1d775e1f962906"
+        },
+        "poster.webp": {
+          "bytes": 53466,
+          "sha256": "d8532bd011ed9cb5cf7c1f820306ab2975892e8bad656525130f801f7710f632"
+        },
+        "contact.webp": {
+          "bytes": 77734,
+          "sha256": "d85d98da3faefdc34f9e4b14b3ad3fe8cc1b98715683790e88bcc4e6ddde18bc"
+        },
+        "evidence.json": {
+          "bytes": 85800,
+          "sha256": "4337459cc1bfdd0afbb8da228e6b9d5572ad80e03e3345e2b3bcfe4f9b179001"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 753407
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 360,
+          "duration": 12,
+          "audio": false,
+          "bytes": 727163
+        }
+      }
+    },
+    "bb-3": {
+      "id": "bb-3",
+      "duration": 10,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 3.7,
+      "name": "黎塞留",
+      "ability": "快速装填主炮",
+      "cues": [
+        {
+          "start": 0,
+          "end": 1,
+          "round": 1,
+          "title": "七格射程 · 两发各 40",
+          "detail": "额外装填零回合，可以连续两轮开火"
+        },
+        {
+          "start": 1,
+          "end": 5,
+          "round": 1,
+          "title": "第一回合 · 两发合计 80",
+          "detail": "两发炮弹在本回合正常落点结算"
+        },
+        {
+          "start": 5,
+          "end": 8.5,
+          "round": 2,
+          "title": "第二回合 · 再次命中 80",
+          "detail": "这是下一回合的第二次齐射，不是同轮四连发"
+        },
+        {
+          "start": 8.5,
+          "end": 10,
+          "round": 2,
+          "title": "持续火力 · 每轮重新预判落点",
+          "detail": "两轮共 160 伤害，射程比九格主炮更短"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 597693,
+          "sha256": "77eb5a768cade2da7c099cded650ea00a22dfb51ad24a6e82b63e6b96a87fd25"
+        },
+        "demo.mp4": {
+          "bytes": 587753,
+          "sha256": "1436fb394b3e0f67ac402a6584dddcfa1718d4c57704896fcce274a554256a63"
+        },
+        "poster.webp": {
+          "bytes": 52246,
+          "sha256": "c8a667a99ae5781614f5d2a9e9268da885739fd5ce7eabbcad3f7ac3b9e169b3"
+        },
+        "contact.webp": {
+          "bytes": 77750,
+          "sha256": "92c611226244c433180386a4f6c2b85ff10fdd2589b9cf1a9ef40bbe568fe829"
+        },
+        "evidence.json": {
+          "bytes": 71863,
+          "sha256": "be55ecbd91ef4da47c8ba18c658900282832a971a8a6476507d8c215e615c86b"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 597693
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 300,
+          "duration": 10,
+          "audio": false,
+          "bytes": 587753
+        }
+      }
+    },
+    "cv-1": {
+      "id": "cv-1",
+      "duration": 18,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 5.6,
+      "name": "企业",
+      "ability": "强袭航空队",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "四架强袭机 · 每轮放飞两架",
+          "detail": "每架 3 HP；敌方防空舰此轮正在执行清雷任务"
+        },
+        {
+          "start": 2,
+          "end": 8,
+          "round": 1,
+          "title": "穿过双层防空 · 每架轰炸 35",
+          "detail": "先后承受两次 1 点防空后仍能投弹；两架合计 70"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "round": 2,
+          "title": "第二回合 · 飞机已经回收",
+          "detail": "返航完成后还需要等待整备，不能立即重飞"
+        },
+        {
+          "start": 11,
+          "end": 14,
+          "round": 3,
+          "title": "快进至第三回合 · 继续整备",
+          "detail": "强袭机整备两回合；整备完成时回复 1 HP"
+        },
+        {
+          "start": 14,
+          "end": 18,
+          "round": 4,
+          "title": "第四回合 · 两架强袭机再次就绪",
+          "detail": "耐久与轰炸更强，但整备比普通轰炸机更久"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 1133462,
+          "sha256": "e869c71ed6a05636fef40096619a33e6e420b4e352bf150a109ecd83813514d9"
+        },
+        "demo.mp4": {
+          "bytes": 1173025,
+          "sha256": "c0e3fd6a2172c9f54d9413234d58902c25bb83ebf508ae496f6bd5f5db831881"
+        },
+        "poster.webp": {
+          "bytes": 57720,
+          "sha256": "a919c2fcae454eb877b6f3f1246b002636c71495bda9be05a7bb8c6c84ef0eef"
+        },
+        "contact.webp": {
+          "bytes": 82856,
+          "sha256": "18f304d4d9f944f2de2b665a33567321094612ca7235d9694e088e246590e8b8"
+        },
+        "evidence.json": {
+          "bytes": 146256,
+          "sha256": "fabd0d55e99977f4e1584d6d3a8b989c13d19dd335be13d3256719580a4dfa41"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 540,
+          "duration": 18,
+          "audio": false,
+          "bytes": 1133462
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 540,
+          "duration": 18,
+          "audio": false,
+          "bytes": 1173025
+        }
+      }
+    },
+    "cv-3": {
+      "id": "cv-3",
+      "duration": 16,
+      "fps": 30,
+      "width": 768,
+      "height": 960,
+      "posterTime": 4.8,
+      "name": "香格里拉",
+      "ability": "侦察与打击",
+      "cues": [
+        {
+          "start": 0,
+          "end": 2,
+          "round": 1,
+          "title": "两架侦察机 · 四架轰炸机",
+          "detail": "先派侦察机发现远处目标，此时敌舰不可见"
+        },
+        {
+          "start": 2,
+          "end": 6,
+          "round": 1,
+          "title": "侦察机前出 · 展开五格视野",
+          "detail": "1 HP、航速 8、航程 16；侦察机不能投弹"
+        },
+        {
+          "start": 6,
+          "end": 8,
+          "round": 2,
+          "title": "第二回合 · 选择已发现目标",
+          "detail": "发现目标后，下一轮规划才新增锁定攻击指令"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "round": 2,
+          "title": "轰炸机出击 · 侦察机返航",
+          "detail": "混合机队共享每轮两架的放飞额度"
+        },
+        {
+          "start": 11,
+          "end": 14,
+          "round": 3,
+          "title": "第三回合 · 轰炸命中 25",
+          "detail": "轰炸机执行打击；侦察机提供发现目标的机会"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "round": 4,
+          "title": "返航回收 · 规划下一次侦察",
+          "detail": "情报与火力分工，保持对远处海域的控制"
+        }
+      ],
+      "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+      "files": {
+        "demo.webm": {
+          "bytes": 984271,
+          "sha256": "43d6354b5a968c271871b7ec57d5db5bef788ffb5423a89bff28267796e068c1"
+        },
+        "demo.mp4": {
+          "bytes": 1068442,
+          "sha256": "7db343dd9947e2b8fe1607ae1b2d64b65ae5984123192c17e6e8ee6a205de29b"
+        },
+        "poster.webp": {
+          "bytes": 63920,
+          "sha256": "3bd6c55293e393d1c1e368fb02013dc5a7e58611a9057d73e3ee3ad3007c65ca"
+        },
+        "contact.webp": {
+          "bytes": 83002,
+          "sha256": "e7ab304e32cf589ba3aab56942683b77cca708c86ed2675f1c07ffbfb9e90d95"
+        },
+        "evidence.json": {
+          "bytes": 120048,
+          "sha256": "7eaa9bcf2e7496ebfce5b8397094cdb2f47bfcacd49727a5dcd9c8d0f0cce0fb"
+        }
+      },
+      "formats": {
+        "webm": {
+          "codec": "vp9",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 480,
+          "duration": 16,
+          "audio": false,
+          "bytes": 984271
+        },
+        "mp4": {
+          "codec": "h264",
+          "width": 768,
+          "height": 960,
+          "fps": "30/1",
+          "frames": 480,
+          "duration": 16,
+          "audio": false,
+          "bytes": 1068442
+        }
+      }
+    }
+  }
+}

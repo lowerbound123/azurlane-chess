@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "studyOnly": true,
+  "models": {
+    "mk14": {
+      "bytes": 201140,
+      "meshes": 14
+    },
+    "type93": {
+      "bytes": 212420,
+      "meshes": 13
+    },
+    "g7e": {
+      "bytes": 213396,
+      "meshes": 14
+    },
+    "mk13": {
+      "bytes": 309664,
+      "meshes": 20
+    }
+  }
+}

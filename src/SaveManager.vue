@@ -25,7 +25,7 @@ function time(t:string){
 <template>
 <div :class="standalone?'save-page':'modal-backdrop save-backdrop'">
 <section class="save-manager" :role="standalone?'region':'dialog'" :aria-modal="standalone?undefined:true" aria-label="保存与读取游戏">
-<PageHead eyebrow="CAPTAIN’S ARCHIVE" title="保存与读取"><template #actions><Button variant="outline" @click="$emit('close')"><AppIcon name="back"/> {{inBattle?'返回战局':'返回主菜单'}}</Button></template></PageHead>
+<PageHead title="保存与读取"><template #actions><Button variant="outline" @click="$emit('close')"><AppIcon name="back"/> {{inBattle?'返回战局':'返回主菜单'}}</Button></template></PageHead>
 <p class="save-explanation">自动存档记录稳定的部署、规划与回合结果。手动槽位不会自动覆盖。存档仅在当前浏览器；导出 JSON 可跨设备备份</p>
 <p v-if="notice" class="save-notice" role="status">{{notice}}</p>
 <AlertDialog :open="!!pending" @update:open="!$event&&$emit('cancel')"><AlertDialogContent class="save-confirm"><AlertDialogTitle>确认存档操作</AlertDialogTitle><AlertDialogDescription>{{pending?.message}}</AlertDialogDescription>

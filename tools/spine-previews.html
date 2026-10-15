@@ -1,14 +1,16 @@
 <!doctype html><html><head><meta charset="utf-8"><title>Spine thumbnail exporter</title></head><body><script type="module">
-import {SHIPS} from '/src/ship-catalog.ts';
-import {profileIdFor} from '/src/characters/config.ts';
+import {characterConfig} from '/src/characters/config.ts';
 import {SpinePreviews} from '/src/characters/previews.ts';
-const profiles=new Map(SHIPS.map(ship=>[profileIdFor(ship.template),ship.template]));
+const requested=new URLSearchParams(location.search).get('profiles');
+const selected=requested===null?null:new Set(requested.split(','));
+const profiles=Object.entries(characterConfig.profiles).filter(([id])=>!selected||selected.has(id));
+if(selected&&profiles.length!==selected.size)throw new Error('Unknown Spine export profile');
 const previews=new SpinePreviews();
 window.spineSnapshots=(async()=>{
   const images={};
   try {
-    for(const [id,template] of profiles) {
-      const url=await previews.load(template);
+    for(const [id,profile] of profiles) {
+      const url=await previews.loadProfile(profile);
       if(!url)throw new Error('Spine snapshot cancelled');
       const blob=await(await fetch(url)).blob();
       images[id]=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(blob);});

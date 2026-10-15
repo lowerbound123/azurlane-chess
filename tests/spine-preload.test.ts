@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import {test,vi,beforeEach,afterEach,expect,type MockInstance} from 'vitest';
 let scheduleSpinePreload:typeof import('../src/characters/preload.ts').scheduleSpinePreload;
-const manifest={'node_modules/@esotericsoftware/spine-threejs/dist/index.js':{file:'assets/spine-test.js',imports:['_three.js']},'_three.js':{file:'assets/three-test.js'}};
+const manifest={'src/vendor/spine38/adapter.ts':{file:'assets/spine-test.js',imports:['_three.js']},'_three.js':{file:'assets/three-test.js'}};
 let load:MockInstance<typeof fetch>;
 let idleCallback:IdleRequestCallback,cancel:()=>void;
 const idle=vi.fn((callback:IdleRequestCallback)=>{idleCallback=callback;return 7;}),cancelIdle=vi.fn();
@@ -28,6 +28,20 @@ test('homepage load must finish before idle downloads can warm the runtime cache
   expect(load).toHaveBeenCalledWith('/assets/spine-test.js',{priority:'low',cache:'force-cache'});
   expect(load).toHaveBeenCalledWith('/assets/three-test.js',{priority:'low',cache:'force-cache'});
   cancel();cancel=scheduleSpinePreload();expect(idle).toHaveBeenCalledTimes(1);expect(load).toHaveBeenCalledTimes(3);
+});
+test('production shared chunks can retain the adapter name under a generated manifest key',async()=>{
+  vi.spyOn(document,'readyState','get').mockReturnValue('complete');
+  const builtManifest={
+    '_adapter-build.js':{file:'assets/adapter-build.js',name:'adapter',isDynamicEntry:true,imports:['_runtime-build.js','index.html']},
+    '_runtime-build.js':{file:'assets/runtime-build.js',imports:['_adapter-build.js']},
+    'index.html':{file:'assets/index-build.js',isEntry:true},
+  };
+  load.mockImplementation(async input=>new Response(String(input).endsWith('spine-assets.json')?JSON.stringify(builtManifest):'export {};'));
+  const warn=vi.spyOn(console,'warn').mockImplementation(()=>{});
+  cancel=scheduleSpinePreload();runIdle();
+  await vi.waitFor(()=>expect(load).toHaveBeenCalledTimes(4));
+  for(const file of ['adapter','runtime','index'])expect(load).toHaveBeenCalledWith(`/assets/${file}-build.js`,{priority:'low',cache:'force-cache'});
+  expect(warn).not.toHaveBeenCalled();
 });
 test('leaving the homepage before page load removes its pending listener',()=>{
   vi.spyOn(document,'readyState','get').mockReturnValue('loading');

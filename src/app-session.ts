@@ -1,3 +1,6 @@
+import {useHistorical} from './composables/use-historical.ts';
+import {getHistoricalDefinition} from './history/index.ts';
+import type {HistoricalId} from '../shared/history.ts';
 import {useCampaign} from './composables/use-campaign.ts';
 import {useEventListener} from '@vueuse/core';
 
@@ -22,7 +25,8 @@ export function createAppSession(router:Router){
 const actions={} as SessionActions;
 const core=createSessionCore(router,actions);
 const campaignController=useCampaign(core,actions);
-Object.assign(actions,campaignController,useConnection(core,actions),useSaves(core,actions),useTutorial(core,actions),usePlanning(core,actions),useReplay(core,actions),useMap(core,actions));
+const historicalController=useHistorical(core,actions);
+Object.assign(actions,campaignController,historicalController,useConnection(core,actions),useSaves(core,actions),useTutorial(core,actions),usePlanning(core,actions),useReplay(core,actions),useMap(core,actions));
 actions.refreshSaves();
 useEventListener(window,'keydown',actions.keydown);useEventListener(window,'focus',actions.syncAccount);
 const {ui, connection, localGame, showRules, showLog, connectionBusy, connectionWanted, startupComplete, onlineStatus, onlineState, tutorial, campaign, onlineActive, activeBattle, game, busy, preferences, onlineClient, accountClient, onlineTicker, saves, ship, lesson, computer, runtime}=core;
@@ -31,6 +35,8 @@ watch([onlineStatus,onlineState],()=>{if(!connectionBusy.value)validateCurrentRo
 const removeBefore=router.beforeEach((to,from)=>{
     if (busy.value && !onlineActive.value && from.meta.battle && to.fullPath !== from.fullPath) { say('请先完成本回合播放'); return false; }
     if (to.name === 'lesson' && !T.TUTORIAL_LESSONS.some(l=>l.id===to.params.lessonId)) return '/tutorial';
+    if(to.name==='historical-battle'&&!getHistoricalDefinition(String(to.params.scenarioId)))return '/history';
+    if(core.historical.value&&(to.name!=='historical-battle'||to.params.scenarioId!==core.historical.value.scenarioId))actions.exitHistorical(false);
     if(campaign.value&&to.name!=='campaign')actions.exitCampaign(false);
     if (tutorial.value && to.name !== 'lesson') exitTutorial(false);
     if (onlineActive.value && (to.name !== 'online-battle' || to.params.matchId !== onlineState.value?.match?.id)) restoreOfflineBattle();
@@ -46,6 +52,8 @@ const removeAfter=router.afterEach((to,from,failure)=>{
     showRules.value=false; showLog.value=false;
     if (from.meta.battle && !to.meta.battle) computer.dispose();
     if (to.name === 'saves') refreshSaves();
+    if(to.name==='historical-battle'&&core.historical.value?.scenarioId!==to.params.scenarioId)actions.startHistorical(String(to.params.scenarioId) as HistoricalId,true,false);
+    if(to.name==='historical-menu')core.historicalRevision.value++;
     if(to.name==='campaign'&&!campaign.value)actions.startCampaign(true,false);
     if (to.name === 'lesson' && tutorial.value?.lessonId !== to.params.lessonId) startLesson(String(to.params.lessonId),false);
     validateCurrentRoute();
@@ -64,5 +72,5 @@ onUnmounted(() => {
     clearTimeout(runtime.resolveTimer);clearTimeout(runtime.toastTimer);
     runtime.stopPlayback?.();
   });
-return {...core,...campaignController,...actions,E,P,S,T};
+return {...core,...campaignController,...historicalController,...actions,E,P,S,T};
 }

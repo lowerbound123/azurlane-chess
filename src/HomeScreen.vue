@@ -5,16 +5,17 @@ import ResumeBar from './components/shell/ResumeBar.vue';
 import ProgressiveImage from './components/ProgressiveImage.vue';
 import {Button} from './components/ui/button';
 import {APP_VERSION} from './version.ts';
+import {shipArt} from './ship-art.ts';
+const cover=shipArt.identities.ougen;
 withDefaults(defineProps<{canResume?:boolean;saveCount?:number;onlineResume?:boolean;onlineTitle?:string}>(),{});
-defineEmits(['new','load','book','tutorial','resume','online']);
+defineEmits(['new','load','book','tutorial','historical','resume','online']);
 </script>
 <template>
 <main class="home-screen">
   <div class="home-chart hex-texture" aria-hidden="true"><div class="chart-ring"><BrandMark/></div><span class="chart-coordinate">35° 00′ N / 139° 00′ E</span></div>
-  <figure class="home-art" aria-hidden="true"><ProgressiveImage path="portraits/default-ship.png" alt=""/><figcaption>AI 生成 · 默认立绘</figcaption></figure>
+  <figure class="home-art" aria-hidden="true"><ProgressiveImage :path="cover.portrait" alt=""/><figcaption>{{cover.name}} · 基础立绘</figcaption></figure>
   <section class="home-command">
     <div class="home-heading reveal">
-      <p class="eyebrow">AZUR LANE / TACTICAL CHESS</p>
       <h1>碧蓝<span>推演棋</span></h1>
       <p class="home-subtitle">每一次出航，都是一场推演。</p>
       <p class="home-lede">编队，部署，然后让双方的计划同时执行。<br>在迷雾中寻找对手，用航线与火力掌控海域。</p>
@@ -24,6 +25,7 @@ defineEmits(['new','load','book','tutorial','resume','online']);
       <Button variant="ghost" class="home-card" @click="$emit('load')"><span class="menu-index">02</span><AppIcon name="folder"/><span class="menu-copy"><strong>读取游戏</strong><small>{{saveCount||0}} 个本机存档 · JSON 备份</small></span><AppIcon name="next"/></Button>
       <Button variant="ghost" class="home-card" @click="$emit('book')"><span class="menu-index">03</span><AppIcon name="book"/><span class="menu-copy"><strong>图文教程</strong><small>航线、火力与视野的作战指南</small></span><AppIcon name="next"/></Button>
       <Button variant="ghost" class="home-card" @click="$emit('tutorial')"><span class="menu-index">04</span><AppIcon name="tutorial"/><span class="menu-copy"><strong>交互教学</strong><small>在独立演练海域，完成第一次下令</small></span><AppIcon name="next"/></Button>
+      <Button variant="ghost" class="home-card" @click="$emit('historical')"><span class="menu-index">05</span><AppIcon name="flag"/><span class="menu-copy"><strong>历史战斗</strong><small>五场独立海战 · 指挥历史舰队</small></span><AppIcon name="next"/></Button>
     </nav>
     <div class="home-resumes">
       <ResumeBar v-if="canResume" title="当前战局已保留" hint="返回海图，继续规划" action="继续当前战局" @resume="$emit('resume')"/>
@@ -34,9 +36,9 @@ defineEmits(['new','load','book','tutorial','resume','online']);
 </main>
 </template>
 <style scoped>
-.home-screen { position: relative; isolation: isolate; min-height: calc(100dvh - var(--header-h)); overflow: hidden; padding: clamp(40px, 7vh, 80px) max(32px, calc((100vw - 1240px) / 2)) 88px; }
+.home-screen { position: relative; isolation: isolate; min-height: calc(100dvh - var(--header-h)); overflow: hidden; padding: 20px max(32px, calc((100vw - 1240px) / 2)) 88px; }
 .home-command { position: relative; z-index: 2; width: min(490px, 48%); }
-.home-heading h1 { margin: 22px 0 16px; font-size: clamp(48px, 5.6vw, 78px); line-height: 1.15; font-weight: 750; letter-spacing: .12em; }
+.home-heading h1 { margin: 0 0 16px; font-size: clamp(48px, 5.6vw, 78px); line-height: 1.15; font-weight: 750; letter-spacing: .12em; }
 .home-heading h1 span { display: block; color: var(--brass-hi); }
 .home-subtitle { color: var(--text-1); font-size: 17px; letter-spacing: .08em; }
 .home-lede { margin-top: 12px; color: var(--text-2); font-size: 13px; line-height: 1.9; }
@@ -65,6 +67,6 @@ defineEmits(['new','load','book','tutorial','resume','online']);
 .home-foot { position: absolute; bottom: 22px; left: max(32px, calc((100vw - 1240px) / 2)); right: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; font-size: 11px; color: var(--text-3); }
 .home-foot > span:first-child { display: flex; align-items: center; gap: 10px; color: var(--text-2); }.home-foot > span:last-child { margin-left: auto; }
 @media(max-width: 760px) {
- .home-screen { padding: 36px 22px 110px; }.home-command { width: min(440px, 100%); }.home-heading h1 { font-size: 54px; margin-top: 18px; }.home-art { width: 95vw; height: 65%; top: 0; right: -32%; opacity: .22; mask-image: linear-gradient(180deg, black 30%, transparent); }.home-heading { text-shadow: 0 2px 18px var(--abyss); }.home-menu { margin-top: 28px; }.home-chart { inset: 0; }.chart-coordinate { display: none; }.home-foot { left: 22px; right: 22px; bottom: 20px; }.home-foot > span:nth-child(2) { flex-basis: 100%; font-size: 10px; }.home-foot > span:last-child { position: absolute; top: 0; right: 0; }.home-card { gap: 14px; min-height: 68px; padding: 12px 16px; }
+ .home-screen { padding: 18px 22px 110px; }.home-command { width: min(440px, 100%); }.home-heading h1 { font-size: 54px; }.home-art { width: 95vw; height: 65%; top: 0; right: -32%; opacity: .22; mask-image: linear-gradient(180deg, black 30%, transparent); }.home-heading { text-shadow: 0 2px 18px var(--abyss); }.home-menu { margin-top: 28px; }.home-chart { inset: 0; }.chart-coordinate { display: none; }.home-foot { left: 22px; right: 22px; bottom: 20px; }.home-foot > span:nth-child(2) { flex-basis: 100%; font-size: 10px; }.home-foot > span:last-child { position: absolute; top: 0; right: 0; }.home-card { gap: 14px; min-height: 68px; padding: 12px 16px; }
 }
 </style>

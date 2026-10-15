@@ -1,5 +1,5 @@
 import type {Point3,XY,Hex,Presentation,ProjectilePresentation} from "../shared/game.ts";
-export interface SampledVisuals {projectiles:{id:string;kind:string;team:number|null;position:Point3|null;trail:Point3[]}[];effects:{id:string;kind:string;at:Hex;age:number;text:string}[];actions:{id:string;shipId:string;action:string;age:number}[]}
+export interface SampledVisuals {projectiles:{id:string;kind:string;team:number|null;position:Point3|null;trail:Point3[]}[];effects:{id:string;kind:string;at:Hex;age:number;text:string;duration?:number;targetId?:string;position?:XY}[];actions:{id:string;shipId:string;action:string;age:number}[]}
 import { hexToXY, xyToHex, key } from './engine.ts';
 
 const lerp=(a: Point3,b: Point3,u: number)=>({x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u,z:a.z+(b.z-a.z)*u});
@@ -28,16 +28,16 @@ function clipSegment(a: Point3,b: Point3,centers: XY[]) {
 }
 
 function position(event: ProjectilePresentation,u: number) {
-  const main=event.kind==='main',aa=event.kind==='aa';
+  const main=event.kind==='main',aa=event.kind==='aa',fighter=event.kind==='fighter',bomb=event.kind==='bomb';
   const distance=Math.hypot(event.to.x-event.from.x,event.to.y-event.from.y);
   const height=main?Math.max(1.5,Math.min(5,distance*.28)):aa?.15:.12;
   return {x:event.from.x+(event.to.x-event.from.x)*u,
-    y:(aa?.2+u*1.4:main?0:.15)+4*height*u*(1-u),
+    y:bomb?1.8*(1-u*u):fighter?1.8:(aa?.2+u*1.6:main?0:.15)+4*height*u*(1-u),
     z:event.from.y+(event.to.y-event.from.y)*u};
 }
 
 /** Pure time sampling. The renderer receives only visible fragments and no source metadata. */
-export function sampleBattleVisuals(events: Presentation[]=[],time: number=0,visible: Set<string>|string[]=new Set(),viewerTeam: number|null=null) {
+export function sampleBattleVisuals(events: Presentation[]=[],time: number=0,visible: Set<string>|string[]=new Set(),viewerTeam: number|null=null,targets:readonly {id:string;team:number;xy:XY}[]=[] ) {
   const cells=visible instanceof Set?visible:new Set(visible);
   const centers=[...cells].map(k=>{const [q,r]=k.split(',').map(Number);return hexToXY({q,r});});
   const projectiles:SampledVisuals["projectiles"]=[],effects:SampledVisuals["effects"]=[],actions:SampledVisuals["actions"]=[];
@@ -50,7 +50,8 @@ export function sampleBattleVisuals(events: Presentation[]=[],time: number=0,vis
     }
     if(event.type==='effect'){
       const age=(time-event.time)/event.duration;
-      if(age>=0&&age<=1&&(cells.has(key(event.at))||(viewerTeam!==null&&event.kind==='hit'&&event.team===viewerTeam)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age,text:event.text??''});
+      const target=event.targetId?targets.find(t=>t.id===event.targetId&&(t.team===viewerTeam||cells.has(key(xyToHex(t.xy))))):undefined;
+      if(age>=0&&age<=1&&(target||cells.has(key(event.at))||(viewerTeam!==null&&event.kind==='hit'&&event.team===viewerTeam)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age,text:event.text??'',duration:event.duration,...(target?{targetId:target.id,position:{...target.xy}}:event.position?{position:{...event.position}}:{})});
       continue;
     }
     if(event.type!=='projectile'||time<event.start||time>event.end)continue;

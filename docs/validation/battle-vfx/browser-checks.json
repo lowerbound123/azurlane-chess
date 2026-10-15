@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "real battle renderer: support, heavy, main, torpedo, bomb, fighter, four aircraft",
+    "16 persistent visuals created from actual support state",
+    "three simultaneous main trajectories remain distinct",
+    "standard torpedo exists before impact",
+    "fog clipping and mobile no overflow",
+    "only seven retained previews; link to real battle harness"
+  ],
+  "errors": []
+}

@@ -7,6 +7,6 @@ export interface CampaignState {
  feedback?:string;
 }
 export interface CampaignFixture {game:Game;plans:Plans;selected:string}
-export interface CampaignCheckpoint {id:string;title:string;instruction:string;hints:string[];focus:Hex;targets?:Hex[];unlocks:string[]}
+export interface CampaignCheckpoint {id:string;title:string;instruction:string;hints:string[];focus:Hex;targets?:Hex[];unlocks:string[];emphasis:Record<string,string[]>;controls:string[]}
 export interface CampaignChapter {id:string;title:string;description:string;minutes:number;rows:[number,number];checkpoints:CampaignCheckpoint[]}
 export interface CampaignSave extends CampaignFixture {state:CampaignState;fleet?:string[];checkpointExplored?:string[][]}

@@ -1,3 +1,4 @@
+import {effectiveSpeed} from '../shared/status.ts';
 import type {ModelConfig,Logger,GenerateOptions} from './types.ts';
 import type {Ship,Game,Hex,Plan,Plans} from '../shared/game.ts';
 import type {ClientGame,ClientShip} from '../shared/network.ts';
@@ -56,13 +57,13 @@ function commandConstraints(ship:ClientShip, view:ClientGame, team:number) {
   const guide:CommandGuide = {
     canGuard:!!ship.cfg.guard,
     ...(view.ruleset?{skills:{minesLeft:ship.minesLeft??0,maxMines:ship.cfg.minelayer?.max??0,smokeLeft:ship.smokeLeft??0,radarLeft:ship.radarLeft??0,radarRange:ship.cfg.radar?.range??0,escort:ship.cfg.escort??null},readySlots:(ship.airReady??[]).flatMap((ready,slot)=>ready!==null&&ready<=view.round?[{slot,hp:ship.airHP?.[slot],cfg:ship.cfg.carrier?.slots?.[slot]??ship.cfg.carrier?.plane}]:[])}:{}),
-    maxMoves: ship.cfg.speed,
+    maxMoves: effectiveSpeed(ship,view.round),
     maxTorps: Math.min(ship.torps || 0, ship.cfg.torpedo?.max || 0),
     maxMain: ship.cfg.main && (ship.mainReady??Infinity) <= view.round ? ship.cfg.main.shots : 0,
     maxPlanes: Math.min(ship.cfg.carrier?.launch || 0, (ship.airReady || []).filter(n => n !== null && n <= view.round).length),
     visibleEnemyIds: enemies.map(s => s.id),
     firstMoves: [-1, 0, 1].flatMap(turn => [false, true].map(forward => ({ turn, forward })))
-      .filter(move => route(materializeObservation({...view,ships:[ship]}).ships[0], { moves: [move] }, view.map).length === 2),
+      .filter(move => route(materializeObservation({...view,ships:[ship]}).ships[0], { moves: [move] }, view.map,view.round).length === 2),
     mainTargetSuggestions: [],
     sweepTargets: view.map.mines.filter(h => ship.cfg.secondary && hexDist(ship.pos, h) <= ship.cfg.secondary.range && hasLOS(view.map, ship.pos, h)),
   };
@@ -76,7 +77,7 @@ function commandConstraints(ship:ClientShip, view:ClientGame, team:number) {
   else {planeChoices.push(object({mode:{type:'string',enum:['point']},target:point}));if(enemies.length)planeChoices.push(object({mode:{type:'string',enum:['target']},targetId:{type:'string',enum:guide.visibleEnemyIds}}));}
   if(!planeChoices.length)planeChoices.push(object({slot:{type:'integer'},mode:{type:'string',enum:['point']},target:point}));
   const schema = object({
-    ...(view.ruleset?{smoke:{type:'boolean',...(ship.smokeLeft?{}:{enum:[false]})},escort:{type:'boolean',...(ship.cfg.escort?{}:{enum:[false]})},mineSteps:array({type:'integer',minimum:1,maximum:ship.cfg.speed},Math.min(ship.minesLeft??0,ship.cfg.minelayer?.max??0)),...(ship.radarLeft?{radar:{anyOf:[point,{type:'null'}]}}:{})}:{}),
+    ...(view.ruleset?{smoke:{type:'boolean',...(ship.smokeLeft?{}:{enum:[false]})},escort:{type:'boolean',...(ship.cfg.escort?{}:{enum:[false]})},mineSteps:array({type:'integer',minimum:1,maximum:effectiveSpeed(ship,view.round)},Math.min(ship.minesLeft??0,ship.cfg.minelayer?.max??0)),...(ship.radarLeft?{radar:{anyOf:[point,{type:'null'}]}}:{})}:{}),
     moves: array(object({ turn: { type: 'integer', enum: [-1, 0, 1] }, forward: { type: 'boolean' } }), guide.maxMoves),
     torps: array(object({ window: { type: 'integer', minimum: 0, maximum: guide.maxMoves }, dir: { type: 'integer', minimum: 0, maximum: 5 } }), guide.maxTorps),
     main: array(point, guide.maxMain),
@@ -89,7 +90,7 @@ function commandConstraints(ship:ClientShip, view:ClientGame, team:number) {
 const RULES = `You command one fleet in a simultaneous-order hex naval game. Return ONLY JSON {"plans":{"own-ship-id":{"moves":[],"torps":[],"main":[],"planes":[],"sweep":null,"guard":false}}}. Include each living own ship. Never issue enemy orders. No commentary, markdown or extra keys.
 The supplied player view is all information available to you; unseen cells/enemies remain unknown. Do not infer hidden map mines or enemy orders. There are no human orders in this snapshot. Teams commit simultaneously, then the server simulates the round. Your task is ONLY to choose reasonable orders for the CURRENT round: preserve your fleet and attack visible opportunities. Do not simulate future rounds, enumerate hypothetical enemy orders, or search for a globally optimal plan.
 Coordinates are axial q,r; rectangular bounds use c=q+floor(r/2), 0<=c<map.width, 0<=r<map.height. Directions 0..5 are [(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]. Distance=max(abs(dq),abs(dr),abs(dq+dr)). Islands block movement and line of sight; unexplored map is unknown.
-Capabilities come from each ship.cfg, not its class label. moves has at most cfg.speed steps. Each step turns -1/0/+1 first (heading modulo 6), then moves one hex if forward=true; turning in place still costs a full step. A shorter route stops early. Avoid islands, known mines and crossing friendly routes: collisions damage and stop ships and may roll routes back.
+Capabilities come from each ship.cfg, not its class label. moves has at most commandGuide.maxMoves steps; temporary statuses can change base cfg.speed. Status outgoingDamage/incomingDamage values are additive ratios and speed/vision are flat modifiers. Each step turns -1/0/+1 first (heading modulo 6), then moves one hex if forward=true; turning in place still costs a full step. A shorter route stops early. Avoid islands, known mines and crossing friendly routes: collisions damage and stop ships and may roll routes back.
 torps is available only with cfg.torpedo. Each entry {window,dir}: window=0 is round start, window=k is after k movement steps, so 0<=window<=moves.length. Up to cfg.torpedo.perWindow (default 1) distinct directions per window, at most min(ship.torps,cfg.torpedo.max) per round. Only broadside launch: dir must differ from route-node heading and opposite heading ((heading+3)%6). Torpedoes travel straight at configured speed, survive configured life, stop at islands and damage friendly as well as enemy ships; unreached windows cancel. Reserve is finite.
 main uses coordinate targets in bounds within cfg.main.range of START position. Only if mainReady<=round; at most cfg.main.shots shots. Duplicate coordinates allowed. Shells hit at END of round; lead moving targets. Reload skips cfg.main.reload following rounds. main is unavailable without cfg.main.
 guard is true only with cfg.guard and MUST have moves=[]. It sacrifices ALL movement for THIS round, including turns in place: enemies already in the six adjacent hexes cannot move; entering enemies stop in their first adjacent hex. Allies and aircraft are unaffected. Only the guarding cruiser takes 60% less torpedo damage; cfg.guard.gunReduction reduces main and secondary gun damage if configured; aircraft damage is unaffected. Guard ends after this round. Use it to pin nearby enemies or brace for torpedoes, not while advancing.
@@ -169,7 +170,7 @@ export class AIService {
     const suggestions = planAI(navigationView, team);
     for (const [id, c] of constraints) {
       c.guide.suggestedPlan = suggestions[id];
-      c.guide.suggestedRoute = route(navigationView.ships.find(ship=>ship.id===id)!, suggestions[id], view.map).map((node, window) => ({
+      c.guide.suggestedRoute = route(navigationView.ships.find(ship=>ship.id===id)!, suggestions[id], view.map,view.round).map((node, window) => ({
         window, pos: node.pos, heading: node.heading,
         torpedoDirs: [0, 1, 2, 3, 4, 5].filter(d => d !== node.heading && d !== (node.heading + 3) % 6),
       }));

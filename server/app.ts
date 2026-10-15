@@ -1,3 +1,5 @@
+import {AssetStorage,loadAssetStorageConfig,loadRuntimeManifest} from './asset-storage.ts';
+import {createAssetSigner} from './asset-signers.ts';
 import {registerHttpRoutes} from './http-routes.ts';
 import {registerWebSocketRoutes} from './websocket-routes.ts';
 import {registerPageRoutes} from './page-routes.ts';
@@ -10,7 +12,7 @@ import type {ServiceOptions,ModelConfig,Player} from './types.ts';
 import type {FastifyInstance,FastifyServerOptions} from 'fastify';
 import type {TypeBoxTypeProvider} from '@fastify/type-provider-typebox';
 interface AppOptions extends Omit<ServiceOptions,'logger'|'models'> {service?:GameService;models?:ModelConfig[];allowedOrigins?:string[];staticRoot?:string;logger?:boolean;requireBuild?:boolean;authEnabled?:boolean;authDbPath?:string;authCookieSecure?:boolean;authNow?:()=>number}
-declare module 'fastify' {interface FastifyInstance {accounts:Accounts;gameService:GameService}}
+declare module 'fastify' {interface FastifyInstance {accounts:Accounts;gameService:GameService;assetStorage:AssetStorage}}
 import path from 'node:path';
 import { existsSync } from 'node:fs';
 import { GameService } from './game-service.ts';
@@ -23,9 +25,13 @@ export async function createApp({service,models,allowedOrigins,staticRoot=path.j
   authEnabled=process.env.AUTH_ENABLED==='true',authDbPath=process.env.AUTH_DB_PATH||path.join(root,'data/accounts.sqlite'),
   authCookieSecure=process.env.AUTH_COOKIE_SECURE!=='false',authNow=Date.now,...serviceOptions}:Omit<AppOptions,'logger'>&{logger?:boolean}={}) {
   if(requireBuild&&!existsSync(path.join(staticRoot,'index.html')))throw new Error('缺少网页构建产物，请先执行 npm run build');
+  const storageConfig=loadAssetStorageConfig({staticRoot});
+  const manifest=loadRuntimeManifest(staticRoot,!requireBuild);
+  const signer=await createAssetSigner(storageConfig);
   models??=loadModels();
   const app=Fastify({logger:logger===true?{redact:['req.headers.cookie','res.headers["set-cookie"]','req.body.password','req.body.confirmPassword']}:logger,
     trustProxy:['127.0.0.1','::1'],ajv:{customOptions:{removeAdditional:false,coerceTypes:false}},bodyLimit:65536,requestTimeout:10000}).withTypeProvider<TypeBoxTypeProvider>();
+  app.decorate('assetStorage',new AssetStorage(storageConfig,manifest,signer,Date.now,event=>app.log.warn(event,'资源签名失败，使用本地资源')));
   const accounts=new Accounts({enabled:authEnabled,filename:authDbPath,staticRoot,secure:authCookieSecure,now:authNow});
   app.decorate('accounts',accounts);
   const origins=new Set(allowedOrigins||String(process.env.ALLOWED_ORIGINS||`http://127.0.0.1:${process.env.PORT||3000},http://localhost:${process.env.PORT||3000}`).split(',').map(s=>s.trim()).filter(Boolean));

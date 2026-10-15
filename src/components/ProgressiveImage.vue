@@ -1,22 +1,26 @@
 <script setup lang="ts">
-import {computed,ref,watch} from 'vue';
-import assets from '../../.generated/image-assets.json';
-
+import {computed,onMounted,onUnmounted,ref,watch} from 'vue';
+import {runtimeAssets} from '../assets/runtime.ts';
+import {useAssetUrls} from '../composables/use-asset-urls.ts';
 const props=withDefaults(defineProps<{path:string;alt:string;size?:'avatar'|'portrait'}>(),{size:'portrait'});
-interface ImageAsset {src:string;preview:string;width:number;height:number;variants:{src:string;width:number}[]}
-const image=computed(()=>(assets as Record<string,ImageAsset>)[props.path]);
-const url=(src:string)=>import.meta.env.BASE_URL+src;
-const variants=computed(()=>props.size==='avatar'?image.value.variants.filter(v=>v.width<=256):image.value.variants);
-const src=computed(()=>url(variants.value.at(-1)!.src));
-const srcset=computed(()=>variants.value.map(v=>`${url(v.src)} ${v.width}w`).join(', '));
-const loaded=ref(false),failed=ref(false);
-watch(()=>[props.path,props.size],()=>{loaded.value=false;failed.value=false;},{flush:'sync'});
+const image=computed(()=>runtimeAssets.images[props.path]);
+const variants=computed(()=>image.value?(props.size==='avatar'?image.value.variants.filter(v=>v.width<=256):image.value.variants):[]);
+const fullId=computed(()=>variants.value.at(-1)?.src??image.value?.src);
+const ids=computed(()=>image.value?[...new Set([image.value.preview,...variants.value.map(v=>v.src),fullId.value!])]:[]);
+const root=ref<HTMLElement>(),visible=ref(false),loaded=ref(false);
+const {urls,failed,onError}=useAssetUrls(ids,visible);
+const src=computed(()=>fullId.value?urls.value[fullId.value]:undefined);
+const srcset=computed(()=>variants.value.map(v=>urls.value[v.src]?`${urls.value[v.src]} ${v.width}w`:'').filter(Boolean).join(', '));
+let observer:IntersectionObserver|undefined;
+onMounted(()=>{if(typeof IntersectionObserver==='undefined'){visible.value=true;return;}observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){visible.value=true;observer?.disconnect();}},{rootMargin:'200px'});if(root.value)observer.observe(root.value);});
+onUnmounted(()=>observer?.disconnect());
+watch(()=>[props.path,props.size,src.value],()=>{loaded.value=false;},{flush:'sync'});
 </script>
 <template>
-  <span class="progressive-image" :class="{'image-loaded':loaded,'image-failed':failed}" :style="{'aspect-ratio':image.width+'/'+image.height}">
-    <img class="image-preview" :src="url(image.preview)" alt="" aria-hidden="true" :width="image.width" :height="image.height" decoding="async"/>
-    <img :key="src" class="image-full" :src="src" :srcset="srcset" :sizes="size==='avatar'?'128px':'(max-width: 700px) 45vw, 600px'" :alt="alt" :width="image.width" :height="image.height" loading="lazy" decoding="async" @load="loaded=true" @error="failed=true"/>
-    <span v-if="failed" class="image-error" role="status">图片加载失败</span>
+  <span ref="root" class="progressive-image" :class="{'image-loaded':loaded,'image-failed':failed||!image}" :style="{'aspect-ratio':image?image.width+'/'+image.height:undefined}">
+    <img v-if="image&&urls[image.preview]" class="image-preview" :src="urls[image.preview]" alt="" aria-hidden="true" :width="image.width" :height="image.height" decoding="async" @error="onError"/>
+    <img v-if="image&&src" :key="src" class="image-full" :src="src" :srcset="srcset" :sizes="size==='avatar'?'128px':'(max-width: 700px) 45vw, 600px'" :alt="alt" :width="image.width" :height="image.height" loading="lazy" decoding="async" @load="loaded=true" @error="onError"/>
+    <span v-if="failed||!image" class="image-error" role="status">图片加载失败</span>
   </span>
 </template>
 <style scoped>

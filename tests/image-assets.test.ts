@@ -1,37 +1,22 @@
-import {test} from 'vitest';
-import assert from 'node:assert/strict';
-import sharp from 'sharp';
-import {mkdtemp,mkdir,writeFile,readFile,rm,readdir} from 'node:fs/promises';
+import {test,expect} from 'vitest';
+import {readFile,writeFile,copyFile,rm} from 'node:fs/promises';
 import {join} from 'node:path';
-import {tmpdir} from 'node:os';
-import {execFileSync} from 'node:child_process';
-
-test('publish tree contains WebP only, preserves alpha and atlas dimensions, and changes hashes when pixels change',async()=>{
-  const root=await mkdtemp(join(tmpdir(),'azurlane-images-'));
-  try {
-    const source=join(root,'public/sprites');await mkdir(source,{recursive:true});
-    const input=await sharp({create:{width:300,height:400,channels:4,background:{r:20,g:100,b:180,alpha:.5}}}).png().toBuffer();
-    await writeFile(join(source,'ship.png'),input);
-    await writeFile(join(source,'photo.JPG'),await sharp(input).jpeg().toBuffer());
-    await writeFile(join(source,'ship.atlas'),'ship.png\nsize: 300,400\n');
-    const run=()=>execFileSync(process.execPath,['scripts/prepare-assets.mjs',root],{stdio:'pipe'});
-    run();
-    const manifest=JSON.parse(await readFile(join(root,'.generated/image-assets.json'),'utf8'));
-    const image=manifest['sprites/ship.png'];
-    assert.deepEqual([image.width,image.height],[300,400]);
-    assert.equal((await sharp(join(root,'.generated/public',image.src)).metadata()).hasAlpha,true);
-    const alpha=await sharp(join(root,'.generated/public',image.src)).ensureAlpha().extractChannel(3).raw().toBuffer();
-    assert.ok(alpha.every(value=>Math.abs(value-128)<=1));
-    assert.deepEqual(await readFile(join(source,'ship.png')),input,'original artwork is retained');
-    const published=await readdir(join(root,'.generated/public'),{recursive:true});
-    assert.ok(published.every(file=>! /\.(png|jpe?g)$/i.test(file)));
-    assert.ok(Object.keys(manifest).includes('sprites/photo.JPG'));
-    assert.match(await readFile(join(root,'.generated/public/sprites/ship.atlas'),'utf8'),/\.\.\/assets\/images\/ship-full-[a-f0-9]{16}\.webp\nsize: 300,400/);
-    assert.equal((await sharp(join(root,'.generated/public',image.preview)).metadata()).width,24);
-    await writeFile(join(source,'ship.png'),await sharp({create:{width:300,height:400,channels:4,background:'#ff0000'}}).png().toBuffer());
-    run();
-    const changed=JSON.parse(await readFile(join(root,'.generated/image-assets.json'),'utf8'));
-    assert.notEqual(changed['sprites/ship.png'].src,image.src);
-    assert.ok(!(await readdir(join(root,'.generated/public/assets/images'))).includes(image.src.split('/').at(-1)),'stale output removed');
-  } finally {await rm(root,{recursive:true,force:true});}
+import sharp from 'sharp';
+import {runtimeFixture,previewFingerprint} from './helpers/runtime-assets.ts';
+import {generateAssets} from '../scripts/generate-assets.mjs';
+import {prepareAssets} from '../scripts/prepare-assets.mjs';
+test('fixed WebP preserves alpha and atlas page aliases; explicit regeneration changes pixel hashes',async()=>{
+ const root=await runtimeFixture();try{
+  const input=await readFile(join(root,'public/portraits/test.png'));
+  await copyFile(join(root,'public/portraits/test.png'),join(root,'public/characters/default/texture.png'));
+  const atlas='texture.png\nsize: 300,400\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\n';
+  await writeFile(join(root,'public/characters/default/sailor.atlas'),atlas);await previewFingerprint(root);
+  const manifest=await generateAssets(root);await prepareAssets(root);const image=manifest.images['portraits/test.png'],texture=manifest.files[manifest.spine.sailor.pages['texture.png']];
+  expect(texture.contentType).toBe('image/webp');expect(texture.path).toMatch(/\.webp$/);
+  expect(await readFile(join(root,'assets/runtime/files',manifest.files[manifest.spine.sailor.atlas].path),'utf8')).toBe(atlas);
+  const alpha=await sharp(join(root,'.generated/public',manifest.files[image.src].path)).ensureAlpha().extractChannel(3).raw().toBuffer();expect(alpha.every(v=>Math.abs(v-128)<=1)).toBe(true);
+  expect(await readFile(join(root,'public/portraits/test.png'))).toEqual(input);
+  await sharp({create:{width:300,height:400,channels:4,background:'#ff0000'}}).png().toFile(join(root,'public/portraits/test.png'));await expect(prepareAssets(root)).rejects.toThrow(/assets:generate/);
+  const changed=await generateAssets(root);await prepareAssets(root);expect(changed.images['portraits/test.png'].src).not.toBe(image.src);
+ }finally{await rm(root,{recursive:true,force:true});}
 });

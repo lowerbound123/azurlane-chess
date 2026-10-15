@@ -18,7 +18,7 @@ test('both perspectives exclude hidden units, terrain, seed and opponent explora
     assert.deepEqual(v.explored[1 - team], []); assert.deepEqual(v.log, []);
     assert.ok(v.ships.every(s => s.team === team || visible.has(E.key(E.xyToHex(s.xy)))));
     assert.ok(v.map.islands.every(k => g.explored[team].includes(k)));
-    assert.deepEqual(v.map.mines, g.map.mines);
+    assert.deepEqual(v.map.mines, g.map.mines.filter(m=>g.explored[team].includes(E.key(m))));
     assert.equal(v.ships.filter(s => s.team === team).length, 5);
   }
 });
@@ -75,12 +75,14 @@ test('adversarial replay clips projectiles, redacts hidden attackers and blocks 
   }
 });
 
-test('mines are globally public in both state and playback outside vision', () => {
+test('mines require exploration in state and playback and remain known outside current vision', () => {
   const g = fixture(), mine = E.fromCR(9, 7); g.map.mines = [mine];
   const frames:BattleFrame[]=[{t:0,visible:[],explored:[], ships: [], planes: [], torpedoes: [], mines: [mine], effects: [], visibleByTeam: [[], []], exploredByTeam: [[], []] }];
   for (const team of [0, 1]) {
-    assert.deepEqual(playerView(g, team).map.mines, [mine]);
-    assert.deepEqual(playerResult(g, {game:g,frames,events:[],presentation:[],counts:[],combatStats:{}}, team).frames[0].mines, [mine]);
+    g.explored![team]=[];assert.deepEqual(playerView(g, team).map.mines, []);
+    assert.deepEqual(playerResult(g, {game:g,frames,events:[],presentation:[],counts:[],combatStats:{}}, team).frames[0].mines, []);
+    g.explored![team]=[E.key(mine)];frames[0].exploredByTeam![team]=[E.key(mine)];assert.deepEqual(playerView(g,team).map.mines,[mine]);
+    assert.deepEqual(playerResult(g,{game:g,frames,events:[],presentation:[],counts:[],combatStats:{}},team).frames[0].mines,[mine]);
   }
 });
 

@@ -2,6 +2,7 @@ import {test,expect} from 'vitest';
 import * as E from '../src/engine.ts';
 import type {CampaignSave} from '../shared/campaign.ts';
 import {createCampaignStorage,CAMPAIGN_SAVE_KEY} from '../src/campaign/storage.ts';
+import {applyBattleStatus} from '../shared/status.ts';
 
 const memory=()=>{const data=new Map<string,string>();return {data,getItem:(k:string)=>data.get(k)??null,setItem:(k:string,v:string)=>{data.set(k,v);},removeItem:(k:string)=>{data.delete(k);}};};
 function fixture():CampaignSave {
@@ -35,4 +36,10 @@ test('sunk moving ships retain their last physical position without breaking sav
  const save=fixture(),ship=save.game.ships[0];ship.hp=0;ship.xy.x+=.4;
  const repo=createCampaignStorage(memory());expect(repo.write(save).ok).toBe(true);expect(repo.read().kind).toBe('resume');
  ship.xy.x=NaN;expect(repo.write(save).ok).toBe(false);
+});
+test('campaign saves damage snapshots created by legal status bonuses after the status expires',()=>{
+ const save=fixture(),repo=createCampaignStorage(memory());save.game.ships=[E.createCatalogShip('dd-2',0,0,E.fromCR(4,20))];
+ const ship=save.game.ships[0];applyBattleStatus(save.game,ship.id,{id:'test-output',name:'增伤示例',kind:'buff',icon:'up',description:'测试',effects:[{kind:'outgoingDamage',value:5}]},{duration:1});
+ expect(repo.write(save).ok).toBe(true);save.game=E.resolveRound(save.game,{[ship.id]:{...E.emptyPlan(),torps:[{window:0,dir:1}]}},{termination:'mission'}).game;
+ expect(save.game.torpedoes[0].cfg.damage).toBe(240);expect(save.game.ships[0].statuses).toBeUndefined();expect(repo.write(save).ok).toBe(true);expect(repo.read().kind).toBe('resume');
 });

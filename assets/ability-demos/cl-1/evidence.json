@@ -1,0 +1,1980 @@
+{
+  "id": "cl-1",
+  "initial": {
+    "seed": 20261015,
+    "round": 1,
+    "ruleset": "fleet-v1",
+    "zones": [],
+    "map": {
+      "width": 13,
+      "height": 11,
+      "islands": [],
+      "mines": []
+    },
+    "ships": [
+      {
+        "id": "0-0",
+        "kind": "ship",
+        "team": 0,
+        "label": "圣地亚哥",
+        "template": "cl",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "圣地亚哥",
+          "role": "front",
+          "hp": 150,
+          "speed": 3,
+          "vision": 5,
+          "collision": 20,
+          "secondary": {
+            "damage": 12,
+            "range": 3,
+            "multi": false
+          },
+          "torpedo": {
+            "speed": 4,
+            "damage": 45,
+            "life": 3,
+            "reserve": 6,
+            "max": 3
+          },
+          "aa": {
+            "range": 3,
+            "damage": 1,
+            "inner": {
+              "range": 1,
+              "damage": 1
+            }
+          }
+        },
+        "hp": 150,
+        "pos": {
+          "q": 4,
+          "r": 5
+        },
+        "xy": {
+          "x": 11.258330249197702,
+          "y": 7.5
+        },
+        "heading": 0,
+        "torps": 6,
+        "mainReady": 1,
+        "airReady": [],
+        "airHP": [],
+        "destroyedPlanes": 0,
+        "catalogId": "cl-1"
+      },
+      {
+        "id": "1-0",
+        "kind": "ship",
+        "team": 1,
+        "label": "埃塞克斯",
+        "template": "cv",
+        "cfg": {
+          "radius": 0.8650254037844386,
+          "name": "埃塞克斯",
+          "role": "back",
+          "hp": 210,
+          "speed": 2,
+          "vision": 5,
+          "collision": 15,
+          "carrier": {
+            "stock": 6,
+            "launch": 2,
+            "rearm": 1,
+            "heal": 1,
+            "plane": {
+              "role": "fighter",
+              "hp": 2,
+              "speed": 6,
+              "vision": 3,
+              "range": 12,
+              "damage": 0,
+              "rearm": 1,
+              "attack": {
+                "range": 1,
+                "damage": 2
+              }
+            },
+            "slots": [
+              {
+                "role": "fighter",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 0,
+                "rearm": 1,
+                "attack": {
+                  "range": 1,
+                  "damage": 2
+                }
+              },
+              {
+                "role": "fighter",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 0,
+                "rearm": 1,
+                "attack": {
+                  "range": 1,
+                  "damage": 2
+                }
+              },
+              {
+                "role": "fighter",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 0,
+                "rearm": 1,
+                "attack": {
+                  "range": 1,
+                  "damage": 2
+                }
+              },
+              {
+                "role": "fighter",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 0,
+                "rearm": 1,
+                "attack": {
+                  "range": 1,
+                  "damage": 2
+                }
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              },
+              {
+                "role": "bomber",
+                "hp": 2,
+                "speed": 6,
+                "vision": 3,
+                "range": 12,
+                "damage": 25,
+                "rearm": 1
+              }
+            ]
+          }
+        },
+        "hp": 210,
+        "pos": {
+          "q": 9,
+          "r": 5
+        },
+        "xy": {
+          "x": 19.918584287042087,
+          "y": 7.5
+        },
+        "heading": 3,
+        "torps": 0,
+        "mainReady": 1,
+        "airReady": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "airHP": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "destroyedPlanes": 0,
+        "catalogId": "cv-2"
+      }
+    ],
+    "planes": [],
+    "torpedoes": [],
+    "nextId": 0,
+    "log": [],
+    "winner": null,
+    "phase": "plan",
+    "explored": [
+      [
+        "4,0",
+        "5,0",
+        "6,0",
+        "7,0",
+        "8,0",
+        "9,0",
+        "3,1",
+        "4,1",
+        "5,1",
+        "6,1",
+        "7,1",
+        "8,1",
+        "9,1",
+        "2,2",
+        "3,2",
+        "4,2",
+        "5,2",
+        "6,2",
+        "7,2",
+        "8,2",
+        "9,2",
+        "1,3",
+        "2,3",
+        "3,3",
+        "4,3",
+        "5,3",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "0,4",
+        "1,4",
+        "2,4",
+        "3,4",
+        "4,4",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "-1,5",
+        "0,5",
+        "1,5",
+        "2,5",
+        "3,5",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "-1,6",
+        "0,6",
+        "1,6",
+        "2,6",
+        "3,6",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "-1,7",
+        "0,7",
+        "1,7",
+        "2,7",
+        "3,7",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "-1,8",
+        "0,8",
+        "1,8",
+        "2,8",
+        "3,8",
+        "4,8",
+        "5,8",
+        "6,8",
+        "-1,9",
+        "0,9",
+        "1,9",
+        "2,9",
+        "3,9",
+        "4,9",
+        "5,9",
+        "-1,10",
+        "0,10",
+        "1,10",
+        "2,10",
+        "3,10",
+        "4,10"
+      ],
+      [
+        "9,0",
+        "10,0",
+        "11,0",
+        "12,0",
+        "8,1",
+        "9,1",
+        "10,1",
+        "11,1",
+        "12,1",
+        "7,2",
+        "8,2",
+        "9,2",
+        "10,2",
+        "11,2",
+        "6,3",
+        "7,3",
+        "8,3",
+        "9,3",
+        "10,3",
+        "11,3",
+        "5,4",
+        "6,4",
+        "7,4",
+        "8,4",
+        "9,4",
+        "10,4",
+        "4,5",
+        "5,5",
+        "6,5",
+        "7,5",
+        "8,5",
+        "9,5",
+        "10,5",
+        "4,6",
+        "5,6",
+        "6,6",
+        "7,6",
+        "8,6",
+        "9,6",
+        "4,7",
+        "5,7",
+        "6,7",
+        "7,7",
+        "8,7",
+        "9,7",
+        "4,8",
+        "5,8",
+        "6,8",
+        "7,8",
+        "8,8",
+        "4,9",
+        "5,9",
+        "6,9",
+        "7,9",
+        "8,9",
+        "4,10",
+        "5,10",
+        "6,10",
+        "7,10"
+      ]
+    ]
+  },
+  "rounds": [
+    {
+      "events": [
+        {
+          "round": 1,
+          "t": 0,
+          "text": "埃塞克斯 放飞",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "team": 1
+        },
+        {
+          "round": 1,
+          "t": 0.588,
+          "text": "圣地亚哥 击落敌机",
+          "at": {
+            "q": 5,
+            "r": 5
+          },
+          "team": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "action:1:0",
+          "type": "action",
+          "shipId": "1-0",
+          "team": 1,
+          "action": "aircraft",
+          "at": {
+            "q": 9,
+            "r": 5
+          },
+          "time": 0,
+          "duration": 0.65
+        },
+        {
+          "id": "effect:1:1",
+          "type": "effect",
+          "kind": "aa",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 0,
+          "time": 0.25416666666666665,
+          "duration": 0.12
+        },
+        {
+          "id": "effect:1:1:trace",
+          "type": "projectile",
+          "kind": "aa",
+          "team": 0,
+          "from": {
+            "x": 11.258330249197702,
+            "y": 7.5
+          },
+          "to": {
+            "x": 17.277206805499564,
+            "y": 7.5
+          },
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "start": 0.25416666666666665,
+          "end": 0.29916666666666664
+        },
+        {
+          "id": "effect:1:3",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 7,
+            "r": 5
+          },
+          "team": 1,
+          "time": 0.25416666666666665,
+          "duration": 0.65,
+          "text": "−1"
+        },
+        {
+          "id": "effect:1:4",
+          "type": "effect",
+          "kind": "aa",
+          "at": {
+            "q": 5,
+            "r": 5
+          },
+          "team": 0,
+          "time": 0.5875,
+          "duration": 0.12
+        },
+        {
+          "id": "effect:1:4:trace",
+          "type": "projectile",
+          "kind": "aa",
+          "team": 0,
+          "from": {
+            "x": 11.258330249197702,
+            "y": 7.5
+          },
+          "to": {
+            "x": 13.813105190361822,
+            "y": 7.5
+          },
+          "at": {
+            "q": 5,
+            "r": 5
+          },
+          "start": 0.5875,
+          "end": 0.6325000000000001
+        },
+        {
+          "id": "effect:1:6",
+          "type": "effect",
+          "kind": "hit",
+          "at": {
+            "q": 5,
+            "r": 5
+          },
+          "team": 1,
+          "time": 0.5875,
+          "duration": 0.65,
+          "text": "−1"
+        }
+      ],
+      "game": {
+        "seed": 20261015,
+        "round": 2,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "圣地亚哥",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "圣地亚哥",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1,
+                "inner": {
+                  "range": 1,
+                  "damage": 1
+                }
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 4,
+              "r": 5
+            },
+            "xy": {
+              "x": 11.258330249197702,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-1"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "埃塞克斯",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "埃塞克斯",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "fighter",
+                  "hp": 2,
+                  "speed": 6,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 0,
+                  "rearm": 1,
+                  "attack": {
+                    "range": 1,
+                    "damage": 2
+                  }
+                },
+                "slots": [
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1,
+              null,
+              1
+            ],
+            "airHP": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 1,
+            "catalogId": "cv-2"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 1,
+        "log": [
+          {
+            "round": 1,
+            "t": 0,
+            "text": "埃塞克斯 放飞",
+            "at": {
+              "q": 9,
+              "r": 5
+            },
+            "team": 1
+          },
+          {
+            "round": 1,
+            "t": 0.588,
+            "text": "圣地亚哥 击落敌机",
+            "at": {
+              "q": 5,
+              "r": 5
+            },
+            "team": 0
+          }
+        ],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10",
+            "6,2",
+            "5,3",
+            "4,4",
+            "3,5",
+            "3,6",
+            "3,7",
+            "3,8"
+          ]
+        ]
+      },
+      "combatStats": {
+        "0-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 1,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        },
+        "1-0": {
+          "damageDealt": 0,
+          "friendlyDamage": 0,
+          "damageTaken": {
+            "enemy": 0,
+            "friendly": 0,
+            "environment": 0
+          },
+          "shipsSunk": 0,
+          "planesShotDown": 0,
+          "damageBySource": {
+            "main": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "secondary": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "torpedo": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "air": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "collision": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "environment": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            },
+            "grounding": {
+              "dealt": 0,
+              "friendly": 0,
+              "taken": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "experiments": {
+    "main": {
+      "label": "",
+      "initial": {
+        "seed": 20261015,
+        "round": 1,
+        "ruleset": "fleet-v1",
+        "zones": [],
+        "map": {
+          "width": 13,
+          "height": 11,
+          "islands": [],
+          "mines": []
+        },
+        "ships": [
+          {
+            "id": "0-0",
+            "kind": "ship",
+            "team": 0,
+            "label": "圣地亚哥",
+            "template": "cl",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "圣地亚哥",
+              "role": "front",
+              "hp": 150,
+              "speed": 3,
+              "vision": 5,
+              "collision": 20,
+              "secondary": {
+                "damage": 12,
+                "range": 3,
+                "multi": false
+              },
+              "torpedo": {
+                "speed": 4,
+                "damage": 45,
+                "life": 3,
+                "reserve": 6,
+                "max": 3
+              },
+              "aa": {
+                "range": 3,
+                "damage": 1,
+                "inner": {
+                  "range": 1,
+                  "damage": 1
+                }
+              }
+            },
+            "hp": 150,
+            "pos": {
+              "q": 4,
+              "r": 5
+            },
+            "xy": {
+              "x": 11.258330249197702,
+              "y": 7.5
+            },
+            "heading": 0,
+            "torps": 6,
+            "mainReady": 1,
+            "airReady": [],
+            "airHP": [],
+            "destroyedPlanes": 0,
+            "catalogId": "cl-1"
+          },
+          {
+            "id": "1-0",
+            "kind": "ship",
+            "team": 1,
+            "label": "埃塞克斯",
+            "template": "cv",
+            "cfg": {
+              "radius": 0.8650254037844386,
+              "name": "埃塞克斯",
+              "role": "back",
+              "hp": 210,
+              "speed": 2,
+              "vision": 5,
+              "collision": 15,
+              "carrier": {
+                "stock": 6,
+                "launch": 2,
+                "rearm": 1,
+                "heal": 1,
+                "plane": {
+                  "role": "fighter",
+                  "hp": 2,
+                  "speed": 6,
+                  "vision": 3,
+                  "range": 12,
+                  "damage": 0,
+                  "rearm": 1,
+                  "attack": {
+                    "range": 1,
+                    "damage": 2
+                  }
+                },
+                "slots": [
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "fighter",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 0,
+                    "rearm": 1,
+                    "attack": {
+                      "range": 1,
+                      "damage": 2
+                    }
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  },
+                  {
+                    "role": "bomber",
+                    "hp": 2,
+                    "speed": 6,
+                    "vision": 3,
+                    "range": 12,
+                    "damage": 25,
+                    "rearm": 1
+                  }
+                ]
+              }
+            },
+            "hp": 210,
+            "pos": {
+              "q": 9,
+              "r": 5
+            },
+            "xy": {
+              "x": 19.918584287042087,
+              "y": 7.5
+            },
+            "heading": 3,
+            "torps": 0,
+            "mainReady": 1,
+            "airReady": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "airHP": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "destroyedPlanes": 0,
+            "catalogId": "cv-2"
+          }
+        ],
+        "planes": [],
+        "torpedoes": [],
+        "nextId": 0,
+        "log": [],
+        "winner": null,
+        "phase": "plan",
+        "explored": [
+          [
+            "4,0",
+            "5,0",
+            "6,0",
+            "7,0",
+            "8,0",
+            "9,0",
+            "3,1",
+            "4,1",
+            "5,1",
+            "6,1",
+            "7,1",
+            "8,1",
+            "9,1",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2",
+            "6,2",
+            "7,2",
+            "8,2",
+            "9,2",
+            "1,3",
+            "2,3",
+            "3,3",
+            "4,3",
+            "5,3",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "0,4",
+            "1,4",
+            "2,4",
+            "3,4",
+            "4,4",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "-1,5",
+            "0,5",
+            "1,5",
+            "2,5",
+            "3,5",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "-1,6",
+            "0,6",
+            "1,6",
+            "2,6",
+            "3,6",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "-1,7",
+            "0,7",
+            "1,7",
+            "2,7",
+            "3,7",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "-1,8",
+            "0,8",
+            "1,8",
+            "2,8",
+            "3,8",
+            "4,8",
+            "5,8",
+            "6,8",
+            "-1,9",
+            "0,9",
+            "1,9",
+            "2,9",
+            "3,9",
+            "4,9",
+            "5,9",
+            "-1,10",
+            "0,10",
+            "1,10",
+            "2,10",
+            "3,10",
+            "4,10"
+          ],
+          [
+            "9,0",
+            "10,0",
+            "11,0",
+            "12,0",
+            "8,1",
+            "9,1",
+            "10,1",
+            "11,1",
+            "12,1",
+            "7,2",
+            "8,2",
+            "9,2",
+            "10,2",
+            "11,2",
+            "6,3",
+            "7,3",
+            "8,3",
+            "9,3",
+            "10,3",
+            "11,3",
+            "5,4",
+            "6,4",
+            "7,4",
+            "8,4",
+            "9,4",
+            "10,4",
+            "4,5",
+            "5,5",
+            "6,5",
+            "7,5",
+            "8,5",
+            "9,5",
+            "10,5",
+            "4,6",
+            "5,6",
+            "6,6",
+            "7,6",
+            "8,6",
+            "9,6",
+            "4,7",
+            "5,7",
+            "6,7",
+            "7,7",
+            "8,7",
+            "9,7",
+            "4,8",
+            "5,8",
+            "6,8",
+            "7,8",
+            "8,8",
+            "4,9",
+            "5,9",
+            "6,9",
+            "7,9",
+            "8,9",
+            "4,10",
+            "5,10",
+            "6,10",
+            "7,10"
+          ]
+        ]
+      },
+      "orders": [
+        {
+          "1-0": {
+            "moves": [],
+            "torps": [],
+            "main": [],
+            "planes": [
+              {
+                "slot": 4,
+                "mode": "point",
+                "target": {
+                  "q": 4,
+                  "r": 5
+                }
+              }
+            ],
+            "sweep": null
+          }
+        }
+      ],
+      "rounds": [
+        {
+          "events": [
+            {
+              "round": 1,
+              "t": 0,
+              "text": "埃塞克斯 放飞",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "team": 1
+            },
+            {
+              "round": 1,
+              "t": 0.588,
+              "text": "圣地亚哥 击落敌机",
+              "at": {
+                "q": 5,
+                "r": 5
+              },
+              "team": 0
+            }
+          ],
+          "presentation": [
+            {
+              "id": "action:1:0",
+              "type": "action",
+              "shipId": "1-0",
+              "team": 1,
+              "action": "aircraft",
+              "at": {
+                "q": 9,
+                "r": 5
+              },
+              "time": 0,
+              "duration": 0.65
+            },
+            {
+              "id": "effect:1:1",
+              "type": "effect",
+              "kind": "aa",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 0,
+              "time": 0.25416666666666665,
+              "duration": 0.12
+            },
+            {
+              "id": "effect:1:1:trace",
+              "type": "projectile",
+              "kind": "aa",
+              "team": 0,
+              "from": {
+                "x": 11.258330249197702,
+                "y": 7.5
+              },
+              "to": {
+                "x": 17.277206805499564,
+                "y": 7.5
+              },
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "start": 0.25416666666666665,
+              "end": 0.29916666666666664
+            },
+            {
+              "id": "effect:1:3",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 7,
+                "r": 5
+              },
+              "team": 1,
+              "time": 0.25416666666666665,
+              "duration": 0.65,
+              "text": "−1"
+            },
+            {
+              "id": "effect:1:4",
+              "type": "effect",
+              "kind": "aa",
+              "at": {
+                "q": 5,
+                "r": 5
+              },
+              "team": 0,
+              "time": 0.5875,
+              "duration": 0.12
+            },
+            {
+              "id": "effect:1:4:trace",
+              "type": "projectile",
+              "kind": "aa",
+              "team": 0,
+              "from": {
+                "x": 11.258330249197702,
+                "y": 7.5
+              },
+              "to": {
+                "x": 13.813105190361822,
+                "y": 7.5
+              },
+              "at": {
+                "q": 5,
+                "r": 5
+              },
+              "start": 0.5875,
+              "end": 0.6325000000000001
+            },
+            {
+              "id": "effect:1:6",
+              "type": "effect",
+              "kind": "hit",
+              "at": {
+                "q": 5,
+                "r": 5
+              },
+              "team": 1,
+              "time": 0.5875,
+              "duration": 0.65,
+              "text": "−1"
+            }
+          ],
+          "game": {
+            "seed": 20261015,
+            "round": 2,
+            "ruleset": "fleet-v1",
+            "zones": [],
+            "map": {
+              "width": 13,
+              "height": 11,
+              "islands": [],
+              "mines": []
+            },
+            "ships": [
+              {
+                "id": "0-0",
+                "kind": "ship",
+                "team": 0,
+                "label": "圣地亚哥",
+                "template": "cl",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "圣地亚哥",
+                  "role": "front",
+                  "hp": 150,
+                  "speed": 3,
+                  "vision": 5,
+                  "collision": 20,
+                  "secondary": {
+                    "damage": 12,
+                    "range": 3,
+                    "multi": false
+                  },
+                  "torpedo": {
+                    "speed": 4,
+                    "damage": 45,
+                    "life": 3,
+                    "reserve": 6,
+                    "max": 3
+                  },
+                  "aa": {
+                    "range": 3,
+                    "damage": 1,
+                    "inner": {
+                      "range": 1,
+                      "damage": 1
+                    }
+                  }
+                },
+                "hp": 150,
+                "pos": {
+                  "q": 4,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 11.258330249197702,
+                  "y": 7.5
+                },
+                "heading": 0,
+                "torps": 6,
+                "mainReady": 1,
+                "airReady": [],
+                "airHP": [],
+                "destroyedPlanes": 0,
+                "catalogId": "cl-1"
+              },
+              {
+                "id": "1-0",
+                "kind": "ship",
+                "team": 1,
+                "label": "埃塞克斯",
+                "template": "cv",
+                "cfg": {
+                  "radius": 0.8650254037844386,
+                  "name": "埃塞克斯",
+                  "role": "back",
+                  "hp": 210,
+                  "speed": 2,
+                  "vision": 5,
+                  "collision": 15,
+                  "carrier": {
+                    "stock": 6,
+                    "launch": 2,
+                    "rearm": 1,
+                    "heal": 1,
+                    "plane": {
+                      "role": "fighter",
+                      "hp": 2,
+                      "speed": 6,
+                      "vision": 3,
+                      "range": 12,
+                      "damage": 0,
+                      "rearm": 1,
+                      "attack": {
+                        "range": 1,
+                        "damage": 2
+                      }
+                    },
+                    "slots": [
+                      {
+                        "role": "fighter",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 0,
+                        "rearm": 1,
+                        "attack": {
+                          "range": 1,
+                          "damage": 2
+                        }
+                      },
+                      {
+                        "role": "fighter",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 0,
+                        "rearm": 1,
+                        "attack": {
+                          "range": 1,
+                          "damage": 2
+                        }
+                      },
+                      {
+                        "role": "fighter",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 0,
+                        "rearm": 1,
+                        "attack": {
+                          "range": 1,
+                          "damage": 2
+                        }
+                      },
+                      {
+                        "role": "fighter",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 0,
+                        "rearm": 1,
+                        "attack": {
+                          "range": 1,
+                          "damage": 2
+                        }
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      },
+                      {
+                        "role": "bomber",
+                        "hp": 2,
+                        "speed": 6,
+                        "vision": 3,
+                        "range": 12,
+                        "damage": 25,
+                        "rearm": 1
+                      }
+                    ]
+                  }
+                },
+                "hp": 210,
+                "pos": {
+                  "q": 9,
+                  "r": 5
+                },
+                "xy": {
+                  "x": 19.918584287042087,
+                  "y": 7.5
+                },
+                "heading": 3,
+                "torps": 0,
+                "mainReady": 1,
+                "airReady": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  null,
+                  1
+                ],
+                "airHP": [
+                  2,
+                  2,
+                  2,
+                  2,
+                  2,
+                  2
+                ],
+                "destroyedPlanes": 1,
+                "catalogId": "cv-2"
+              }
+            ],
+            "planes": [],
+            "torpedoes": [],
+            "nextId": 1,
+            "log": [
+              {
+                "round": 1,
+                "t": 0,
+                "text": "埃塞克斯 放飞",
+                "at": {
+                  "q": 9,
+                  "r": 5
+                },
+                "team": 1
+              },
+              {
+                "round": 1,
+                "t": 0.588,
+                "text": "圣地亚哥 击落敌机",
+                "at": {
+                  "q": 5,
+                  "r": 5
+                },
+                "team": 0
+              }
+            ],
+            "winner": null,
+            "phase": "plan",
+            "explored": [
+              [
+                "4,0",
+                "5,0",
+                "6,0",
+                "7,0",
+                "8,0",
+                "9,0",
+                "3,1",
+                "4,1",
+                "5,1",
+                "6,1",
+                "7,1",
+                "8,1",
+                "9,1",
+                "2,2",
+                "3,2",
+                "4,2",
+                "5,2",
+                "6,2",
+                "7,2",
+                "8,2",
+                "9,2",
+                "1,3",
+                "2,3",
+                "3,3",
+                "4,3",
+                "5,3",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "0,4",
+                "1,4",
+                "2,4",
+                "3,4",
+                "4,4",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "-1,5",
+                "0,5",
+                "1,5",
+                "2,5",
+                "3,5",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "-1,6",
+                "0,6",
+                "1,6",
+                "2,6",
+                "3,6",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "-1,7",
+                "0,7",
+                "1,7",
+                "2,7",
+                "3,7",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "-1,8",
+                "0,8",
+                "1,8",
+                "2,8",
+                "3,8",
+                "4,8",
+                "5,8",
+                "6,8",
+                "-1,9",
+                "0,9",
+                "1,9",
+                "2,9",
+                "3,9",
+                "4,9",
+                "5,9",
+                "-1,10",
+                "0,10",
+                "1,10",
+                "2,10",
+                "3,10",
+                "4,10"
+              ],
+              [
+                "9,0",
+                "10,0",
+                "11,0",
+                "12,0",
+                "8,1",
+                "9,1",
+                "10,1",
+                "11,1",
+                "12,1",
+                "7,2",
+                "8,2",
+                "9,2",
+                "10,2",
+                "11,2",
+                "6,3",
+                "7,3",
+                "8,3",
+                "9,3",
+                "10,3",
+                "11,3",
+                "5,4",
+                "6,4",
+                "7,4",
+                "8,4",
+                "9,4",
+                "10,4",
+                "4,5",
+                "5,5",
+                "6,5",
+                "7,5",
+                "8,5",
+                "9,5",
+                "10,5",
+                "4,6",
+                "5,6",
+                "6,6",
+                "7,6",
+                "8,6",
+                "9,6",
+                "4,7",
+                "5,7",
+                "6,7",
+                "7,7",
+                "8,7",
+                "9,7",
+                "4,8",
+                "5,8",
+                "6,8",
+                "7,8",
+                "8,8",
+                "4,9",
+                "5,9",
+                "6,9",
+                "7,9",
+                "8,9",
+                "4,10",
+                "5,10",
+                "6,10",
+                "7,10",
+                "6,2",
+                "5,3",
+                "4,4",
+                "3,5",
+                "3,6",
+                "3,7",
+                "3,8"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "beats": [
+    {
+      "start": 0,
+      "end": 2,
+      "round": 0,
+      "from": -0.01,
+      "to": -0.01,
+      "viewer": 0,
+      "title": "三格外圈 · 一格内圈",
+      "detail": "一架 2 HP 轰炸机正在接近防空区域",
+      "preview": true
+    },
+    {
+      "start": 2,
+      "end": 7,
+      "round": 0,
+      "from": 0,
+      "to": 0.9,
+      "viewer": 0,
+      "title": "外圈扣 1 · 内圈再扣 1",
+      "detail": "双层防空在投弹前击落来袭轰炸机"
+    },
+    {
+      "start": 7,
+      "end": 10,
+      "round": 0,
+      "from": 1.1,
+      "to": 1.1,
+      "viewer": 0,
+      "title": "每层每轮对每架飞机各触发一次",
+      "detail": "不是持续扣血；注意用防空舰保护舰队航路"
+    }
+  ],
+  "export": {
+    "fingerprint": "e9a8fc7173af59bada89516beb6b0c1ece6cf2edf5c34af20a6d787401b79d2a",
+    "formats": {
+      "webm": {
+        "codec": "vp9",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 300,
+        "duration": 10,
+        "audio": false,
+        "bytes": 701551
+      },
+      "mp4": {
+        "codec": "h264",
+        "width": 768,
+        "height": 960,
+        "fps": "30/1",
+        "frames": 300,
+        "duration": 10,
+        "audio": false,
+        "bytes": 757142
+      }
+    },
+    "keyframes": [
+      {
+        "frame": 0,
+        "time": 0
+      },
+      {
+        "frame": 174,
+        "time": 5.8
+      },
+      {
+        "frame": 216,
+        "time": 7.2
+      },
+      {
+        "frame": 299,
+        "time": 9.966666666666667
+      }
+    ]
+  }
+}
