@@ -71,6 +71,7 @@ function start(confirmed = false) {
     showRanges.value = true;
     showPlans.value = true;
     game.value = E.createFleetGame(selectedFleet.value, Number(seed.value) || 20261004, undefined, battleMode.value);
+    core.activeBattle.value.wakeTimeline=null;
     nameFleet(game.value!.ships, selectedFleet.value, 0);
     selected.value = "0-0";
     plans.value = {};

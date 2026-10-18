@@ -62,10 +62,12 @@ function writeSave({ id, label }: {id:string;label:string}, confirmed: boolean =
     refreshSaves();
   }
 function applySavedState(state: SaveState, navigate: boolean = true) {
+    localGame.audioEpoch++;
     swapMode.value=false; ordersOpen.value=true; mapView.value?.reset();
     runtime.stopPlayback?.();
     clearTimeout(runtime.toastTimer);
     localGame.game = E.clone(state.game);
+    localGame.wakeTimeline=null;
     E.updateExploration(localGame.game!);
     localGame.plans = E.clone(state.plans);
     localGame.selected = state.selected;

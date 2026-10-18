@@ -4,6 +4,7 @@ import path from 'node:path';
 import {parseAtlas} from '../src/vendor/parse.mjs';
 import {DEFAULT_CHARACTER_PROFILE} from '../src/characters/default-profile.ts';
 import {spineFingerprint} from './spine-preview-manifest.mjs';
+import {audioSourceState,validateRuntimeAudio} from './battle-audio-assets.mjs';
 export const digest=data=>createHash('sha256').update(data).digest('hex');
 export const safePath=name=>typeof name==='string'&&name.length>0&&!name.includes('\\')&&!name.startsWith('/')&&!name.split('/').some(s=>s==='..'||s==='.'||s==='')&&!/[\u0000-\u001f]/.test(name);
 export async function walk(dir){const result=[];for(const entry of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name.localeCompare(b.name))){const file=path.join(dir,entry.name);if(entry.isDirectory())result.push(...await walk(file));else if(entry.isFile())result.push(file);}return result;}
@@ -21,6 +22,7 @@ export async function authoringState(root){
  const raster=(await walk(path.join(root,'public'))).map(p=>path.relative(path.join(root,'public'),p).split(path.sep).join('/')).filter(p=>/\.(png|jpe?g)$/i.test(p)||(/\.webp$/i.test(p)&&(generated?(p==='portraits/default-ship.webp'||identityImages.has(p)):p.startsWith('portraits/'))));
  const sources=new Set(['src/characters/default-profile.ts','src/characters/config.ts','src/characters/previews.ts','public/characters/previews/manifest.json','assets/models/aircraft.glb','assets/models/naval-mine.glb','assets/models/torpedoes/mk14.glb',...raster.map(p=>'public/'+p)]);
  if(generated)sources.add('src/characters/ships.generated.json');
+ const audio=await audioSourceState(root);for(const source of audio?.sources??[])sources.add(source);
  const previews=JSON.parse(await readFile(path.join(root,'public/characters/previews/manifest.json'),'utf8')),spine={},fingerprints={};
  for(const [id,profile]of Object.entries(profiles)){
   const fingerprint=await spineFingerprint(root,profile),preview=previews.profiles?.[id];
@@ -31,7 +33,7 @@ export async function authoringState(root){
   sources.add('public/'+profile.skeleton);sources.add('public/'+profile.atlas);sources.add('public/'+preview.image);spine[id]={profile,pages,preview:preview.image};fingerprints[id]=fingerprint;
  }
  const hashes={};for(const file of [...sources].sort())hashes[file]=digest(await readFile(path.join(root,file)));
- return {raster,sources:hashes,spine,fingerprints};
+ return {raster,sources:hashes,spine,fingerprints,audio};
 }
 export async function validateRuntime(root,options={}){
  const regenerate='请执行 npm run assets:generate（Spine 素材变更先执行 npm run assets:spine）';
@@ -63,5 +65,6 @@ export async function validateRuntime(root,options={}){
  const required=[...Object.values(manifest.models??{}),...Object.values(manifest.spinePreviews??{}),...Object.values(manifest.images??{}).flatMap(i=>[i.src,i.preview,...i.variants.map(v=>v.src)]),...Object.values(manifest.spine??{}).flatMap(s=>[s.skeleton,s.atlas,...Object.values(s.pages)])];
  if(required.some(id=>!manifest.files[id]))throw new Error(`固定美术依赖不完整，${regenerate}`);
  if(options.abilityDemos!==false){const {validatePublishedAbilityDemos}=await import('./ability-demo-assets.mjs');await validatePublishedAbilityDemos(root,manifest);}
+ validateRuntimeAudio(manifest,current.audio);
  return manifest;
 }

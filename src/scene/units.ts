@@ -36,7 +36,6 @@ export class Units {
           body.add(ring(new THREE.Vector3(), .23, color, -.12));
         } else {
           const torp=this.models.create('torpedo');torp.scale.setScalar(.18);body.add(torp);g.userData.propellers=[];torp.traverse(o=>{if(o.userData.torpedoPropeller)g!.userData.propellers!.push(o);});
-          const wake = new THREE.Mesh(new THREE.ConeGeometry(.11, .55, 3), new THREE.MeshBasicMaterial({ color: new THREE.Color(0xb8dfdd).lerp(new THREE.Color(color),.45), transparent: true, opacity: .48 })); wake.rotation.z = -Math.PI / 2; wake.position.x = -.48; body.add(wake);
         }
       }
       g.userData.statusActive=kind!=='torpedo'&&!!item.statuses?.length;
@@ -64,7 +63,7 @@ export class Units {
           if (g.userData.card) { disposeTree(g.userData.card); g.userData.card.removeFromParent(); }
           const card = label(item.label, { color: item.team === (model.myTeam ?? 0) ? '#8eefe3' : '#ffa18c', hp: item.hp / item.cfg.hp, selected:!!selected, width: selected ? 2.6 : 2.2, height: selected ? .75 : .65,shipType:item.template }); card.center.set(.5, 0); card.position.y = 1.65; g.userData.caption!.add(card); g.userData.card = card; g.userData.signature = signature;
         }
-        const actions=(model.visuals?.actions || []).filter(a=>a.shipId===item.id);
+        const actions=(model.visuals?.actions || []).filter(a=>a.shipId===item.id&&!a.soundOnly);
         const active=actions.findLast(a=>a.action==='dead') || actions.findLast(a=>a.action==='hit') || actions.findLast(a=>a.action==='mainFire') || actions.at(-1);
         const last=g.userData.lastXY;
         const moving=item.hp>0&&!!model.busy && last && Math.hypot(last.x-item.xy.x,last.y-item.xy.y)>.00001;

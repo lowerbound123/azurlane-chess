@@ -67,6 +67,42 @@ test('automatic sailing resolves crossed destinations without colliding or cutti
  expect(built.fixture.game.ships.map(s=>s.pos)).toEqual(base.game.ships.map(s=>s.pos));
 });
 
+test('a one-cell handoff turns in place instead of sailing a loop to regain its heading',()=>{
+ const state=C.createCampaignState(),base=C.createCampaignFixture(state),ship=base.game.ships[0];
+ base.game.map.islands=[];ship.pos=E.fromCR(5,50);ship.xy=E.hexToXY(ship.pos);ship.heading=3;
+ const target=E.clone(base);target.game.ships[0].pos=E.add(ship.pos,0);target.game.ships[0].xy=E.hexToXY(target.game.ships[0].pos);
+ const built=transit(base.game,target);let sailed=0;
+ for(let i=1;i<built.frames.length;i++){
+  const a=built.frames[i-1].ships.find(s=>s.id===ship.id)!,b=built.frames[i].ships.find(s=>s.id===ship.id)!;
+  sailed+=Math.hypot(b.xy.x-a.xy.x,b.xy.y-a.xy.y)/Math.sqrt(3);
+ }
+ expect(sailed).toBeCloseTo(1,8);
+ expect(built.frames.at(-1)!.ships.find(s=>s.id===ship.id)!.heading).toBe(3);
+});
+
+test('all checkpoint camera anchors progress north rather than resetting within a chapter',()=>{
+ let row=Infinity;
+ for(const [chapter,definition] of C.CAMPAIGN_CHAPTERS.entries())for(const checkpoint of definition.checkpoints.keys()){
+  const focus=C.campaignFocus({...C.createCampaignState(),chapter,checkpoint});
+  expect(focus.r,definition.checkpoints[checkpoint].id).toBeLessThan(row);row=focus.r;
+ }
+});
+
+test('a leading ship clears a narrow northbound lane before the ship queued behind it',()=>{
+ const base=C.createCampaignFixture({...C.createCampaignState(),chapter:2}),[rear,lead]=base.game.ships;
+ const lane=new Set([50,51,52,53,54].map(r=>E.key(E.fromCR(6,r))));
+ base.game.map.islands=E.allHexes(base.game.map).filter(h=>!lane.has(E.key(h))).map(E.key);
+ for(const [ship,row] of [[rear,54],[lead,53]] as const){ship.pos=E.fromCR(6,row);ship.xy=E.hexToXY(ship.pos);ship.heading=5;}
+ const target=E.clone(base);target.game.ships[0].pos=E.fromCR(6,51);target.game.ships[1].pos=E.fromCR(6,50);
+ for(const ship of target.game.ships)ship.xy=E.hexToXY(ship.pos);
+ const built=transit(base.game,target);
+ for(let i=1;i<built.frames.length;i++)for(const ship of built.frames[i].ships){
+  const before=built.frames[i-1].ships.find(s=>s.id===ship.id)!;
+  expect(ship.xy.y).toBeLessThanOrEqual(before.xy.y+1e-8);
+ }
+ expect(built.fixture.game.ships.map(s=>s.pos.r)).toEqual([51,50]);
+});
+
 test('finishing smoke training late cannot reveal the next radar target before its smoke becomes active',()=>{
  let state={...C.createCampaignState(),chapter:6},game=C.createCampaignFixture(state).game;
  for(let i=0;i<15&&state.status==='playing';i++){
@@ -118,7 +154,11 @@ test('every checkpoint remains playable after continuous sailing, with ordered r
   const before=fixture.game,built=C.buildCampaignTransit(before,C.createCampaignFixture(next),{from:C.campaignFocus(state),to:C.campaignFocus(next)});
   for(const ally of built.fixture.game.ships.filter(s=>s.team===0)){
    const previous=before.ships.find(s=>s.team===0&&s.catalogId===ally.catalogId);
-   if(previous){expect(ally.id).toBe(previous.id);continue;}
+   if(previous){
+    expect(ally.id).toBe(previous.id);
+    expect(ally.pos.r,id+' hands '+ally.catalogId+' back to the south').toBeLessThanOrEqual(previous.pos.r);
+    continue;
+   }
    const index=built.frames.findIndex(f=>f.ships.some(s=>s.id===ally.id));
    expect(index,id+' discovers '+ally.catalogId).toBeGreaterThan(0);
    const contact=built.frames[index],prior=built.frames[index-1];
@@ -127,7 +167,11 @@ test('every checkpoint remains playable after continuous sailing, with ordered r
   }
   for(let i=1;i<built.frames.length;i++)for(const ship of built.frames[i].ships){
    const prior=built.frames[i-1].ships.find(s=>s.id===ship.id);
-   if(prior){expect(E.hexDist(prior.pos,ship.pos),id+' teleport '+ship.id).toBeLessThanOrEqual(1);expect(ship.catalogId).toBe(prior.catalogId);}
+   if(prior){
+    expect(E.hexDist(prior.pos,ship.pos),id+' teleport '+ship.id).toBeLessThanOrEqual(1);expect(ship.catalogId).toBe(prior.catalogId);
+    if(built.fixture.game.ships.some(s=>s.id===ship.id&&s.team===0)&&before.ships.some(s=>s.id===ship.id&&s.team===0))
+     expect(ship.xy.y,id+' backtracks '+ship.catalogId).toBeLessThanOrEqual(prior.xy.y+1e-8);
+   }
    expect(E.legal(before.map,ship.pos),id+' land '+ship.id).toBe(true);
   }
   expect(storage.write({state:next,...built.fixture}).ok,id+' saved handoff').toBe(true);

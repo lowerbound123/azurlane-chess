@@ -1,4 +1,5 @@
 import {DEATH_PRESENTATION_DURATION} from '../shared/character-presentation.ts';
+import {REPLAY_FRAME_MS} from '../shared/replay-timing.ts';
 interface PositionedUnit {id:string;xy:{x:number;y:number}}
 export interface PlaybackFrame {t?:number;cameraFocus?:{x:number;y:number;radius?:number};visibilityBarrier?:boolean;zones?:{kind:string}[];ships:PositionedUnit[];torpedoes:PositionedUnit[];planes:PositionedUnit[];visuals?:{actions:{age:number;action?:string}[];effects?:{age:number;duration?:number}[]}}
 interface PlaybackOptions<F extends PlaybackFrame> {speed:()=>number;render:(frame:F,fraction:number)=>void;complete:()=>void;interpolate?:boolean;request?:(callback:FrameRequestCallback)=>number;cancel?:(id:number)=>void;now?:()=>number}
@@ -21,19 +22,19 @@ export function playFrames<F extends PlaybackFrame>(frames:F[], { speed, render,
 }:PlaybackOptions<F>) {
   let stopped=false,handle=0,elapsed=0,previous=now();
   if(!frames.length){complete();return ()=>{};}
-  const duration = frames.length * 110;
+  const duration = frames.length * REPLAY_FRAME_MS;
   const barriers=frames.flatMap((frame,index)=>index>0&&frame.visibilityBarrier?[index]:[]);let barrier=0;
   render(frames[0], 0);
   const tick = (timestamp: number) => {
     if (stopped) return;
     // A background tab or a long render must not skip the entire battle.
-    elapsed += Math.min(110, Math.max(0, timestamp - previous)) * speed();
+    elapsed += Math.min(REPLAY_FRAME_MS, Math.max(0, timestamp - previous)) * speed();
     previous = timestamp;
     // First contact must be presented before later frames can activate its vision,
     // even at 4x speed or after a slow/background animation frame.
-    if(barrier<barriers.length&&elapsed>=barriers[barrier]*110)elapsed=barriers[barrier++]*110;
+    if(barrier<barriers.length&&elapsed>=barriers[barrier]*REPLAY_FRAME_MS)elapsed=barriers[barrier++]*REPLAY_FRAME_MS;
     elapsed = Math.min(elapsed, duration);
-    const position = elapsed / 110, index = Math.min(Math.floor(position), frames.length - 1);
+    const position = elapsed / REPLAY_FRAME_MS, index = Math.min(Math.floor(position), frames.length - 1);
     const fraction = position - index;
     let frame = interpolate ? interpolateFrame(frames[index], frames[index + 1], fraction) : frames[index];
     // The last discrete snapshot is held for the original 110 ms. Continue its

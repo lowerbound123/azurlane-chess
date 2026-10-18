@@ -3199,6 +3199,1566 @@
       "bytes": 260,
       "contentType": "image/svg+xml"
     },
+    "audio/voice/aikesaite/skill": {
+      "path": "assets/runtime/voice-aikesaite-skill-45584c23e8b5ae10.webm",
+      "sha256": "45584c23e8b5ae10b7d18875c6620802de8ab576bc06c5f8fe23cb92bab847b9",
+      "bytes": 8592,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aikesaite/lose": {
+      "path": "assets/runtime/voice-aikesaite-lose-a6632b4674ccfa2d.webm",
+      "sha256": "a6632b4674ccfa2daf2443083d1ae728c1fc536b12914769bc81605afdca5bdc",
+      "bytes": 18683,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aikesaite/mvp": {
+      "path": "assets/runtime/voice-aikesaite-mvp-01d49226e5141aee.webm",
+      "sha256": "01d49226e5141aeee7d01e94fb9cba5642028cda070aff18d6ea2e57cf628877",
+      "bytes": 33447,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/skill": {
+      "path": "assets/runtime/voice-aisaikesi-skill-1a41fc03354cd9e7.webm",
+      "sha256": "1a41fc03354cd9e7015046477fca412b1a713ee5fbc09c774de41aa896c85ff4",
+      "bytes": 8170,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/lose": {
+      "path": "assets/runtime/voice-aisaikesi-lose-40dea4ea0017c21a.webm",
+      "sha256": "40dea4ea0017c21a0932247e01bc1868f4702155e232746e6c96cfc40582ed14",
+      "bytes": 15838,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/lose_5": {
+      "path": "assets/runtime/voice-aisaikesi-lose_5-b77843709b19aba5.webm",
+      "sha256": "b77843709b19aba5324058c5e3acb4c38980bcf60295d1034bba43fd43dcc401",
+      "bytes": 26492,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp": {
+      "path": "assets/runtime/voice-aisaikesi-mvp-5c35e7105d5f72c3.webm",
+      "sha256": "5c35e7105d5f72c367f7a6756a85abd1014f0f568c170b78393de4fb50993fe6",
+      "bytes": 17201,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_3": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_3-04abbbe562ce6740.webm",
+      "sha256": "04abbbe562ce6740e63e7e5f9d704eafbac6a8d92901c835fd4f9ce5b3dab1a9",
+      "bytes": 16878,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_4": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_4-9f77ef0ce257136b.webm",
+      "sha256": "9f77ef0ce257136be4be1914b481190d88b25abfdc1b2ee2bb10d54e7922e86c",
+      "bytes": 26857,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_5": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_5-fd9350a98990b7a2.webm",
+      "sha256": "fd9350a98990b7a20f9ec787448d78d79d1dfc2bcb74e8d0eb57f3dc4a80be35",
+      "bytes": 18073,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_6": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_6-420666ebdfa1e674.webm",
+      "sha256": "420666ebdfa1e67477abae0e487308dd03ec61968b5519fb4d1c707eb02f055f",
+      "bytes": 18200,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_7": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_7-8a030cd8b2f60b16.webm",
+      "sha256": "8a030cd8b2f60b16a4f3f36c017ecdbbd821afedaefb4f6c10ef1d472e2eee97",
+      "bytes": 31665,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisaikesi/mvp_9": {
+      "path": "assets/runtime/voice-aisaikesi-mvp_9-3449c71354da1dce.webm",
+      "sha256": "3449c71354da1dce4b49441c4479f8a105848603fc9a737d4f062ab66060afb8",
+      "bytes": 12161,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisijimo/skill": {
+      "path": "assets/runtime/voice-aisijimo-skill-82156baf8ac3d074.webm",
+      "sha256": "82156baf8ac3d0742dc82990e155b60ee5ec6dafef027b557fe63beef2d06eb7",
+      "bytes": 13824,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisijimo/lose": {
+      "path": "assets/runtime/voice-aisijimo-lose-c15610d2269f7d6f.webm",
+      "sha256": "c15610d2269f7d6fec0a064876473c6e4d94c1b8fbd9b7ce69a732766c8f00fc",
+      "bytes": 16241,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/aisijimo/mvp": {
+      "path": "assets/runtime/voice-aisijimo-mvp-85eff6bf36f0a7a2.webm",
+      "sha256": "85eff6bf36f0a7a2c16a7f3299f14744cea8f9e90e672961cf9abca24b5a8d1f",
+      "bytes": 29692,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/skill": {
+      "path": "assets/runtime/voice-ajiakesi-skill-9a50e981754e77f7.webm",
+      "sha256": "9a50e981754e77f73de0b6005040f61541de3dba104ecef730edd1a352f47d4e",
+      "bytes": 19328,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/lose": {
+      "path": "assets/runtime/voice-ajiakesi-lose-8f02682cb66db943.webm",
+      "sha256": "8f02682cb66db943349da5d2211a293c4cd22a310a87ebb5cf2b2c138c6fe87c",
+      "bytes": 16431,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/lose_ex1100": {
+      "path": "assets/runtime/voice-ajiakesi-lose_ex1100-44b23ecf38f7f2ac.webm",
+      "sha256": "44b23ecf38f7f2ac33cf7a74e3f3b545a2db68fa1f6b74660247f1d5217ab273",
+      "bytes": 23264,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/mvp": {
+      "path": "assets/runtime/voice-ajiakesi-mvp-5a95ca93a54dce40.webm",
+      "sha256": "5a95ca93a54dce40a300a7119e768b44b9445c89e982be87c1b37b547760bd50",
+      "bytes": 21516,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/mvp_1": {
+      "path": "assets/runtime/voice-ajiakesi-mvp_1-533fb61bc0520fb1.webm",
+      "sha256": "533fb61bc0520fb1cc446c6efd3fbee4bf9a0244614a7f3b3440bcf3ac1454d9",
+      "bytes": 19394,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajiakesi/mvp_ex1100": {
+      "path": "assets/runtime/voice-ajiakesi-mvp_ex1100-54dfadcb3f4cb38d.webm",
+      "sha256": "54dfadcb3f4cb38d1ed51e3816e007dedb8f7c7ed52f047031f2131d5f0ef54a",
+      "bytes": 40768,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajilisi/skill": {
+      "path": "assets/runtime/voice-ajilisi-skill-9078b9f39a619654.webm",
+      "sha256": "9078b9f39a619654ddba2e84c387fa27ffc4a0ea62abf227a8616077f505e7b7",
+      "bytes": 9961,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajilisi/lose": {
+      "path": "assets/runtime/voice-ajilisi-lose-6e6f63279b79da8c.webm",
+      "sha256": "6e6f63279b79da8cd1b17a6220978874ae2702716c6a722fb6712d60be5688dd",
+      "bytes": 19713,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ajilisi/mvp": {
+      "path": "assets/runtime/voice-ajilisi-mvp-a503bebefc6514aa.webm",
+      "sha256": "a503bebefc6514aa4633fb78329f338fe20a013f7a27bd188d386bacd91d2922",
+      "bytes": 14663,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/akasita/skill": {
+      "path": "assets/runtime/voice-akasita-skill-e76f4806f9dc8ea7.webm",
+      "sha256": "e76f4806f9dc8ea79779061f53c5578ff28a8869c1e04241a817909ea9b8754e",
+      "bytes": 13808,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/akasita/lose": {
+      "path": "assets/runtime/voice-akasita-lose-41fe6ce583407130.webm",
+      "sha256": "41fe6ce5834071300096a29fd12c0e8a5363b61e8418376af6c8487a4ac49d19",
+      "bytes": 19229,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/akasita/mvp": {
+      "path": "assets/runtime/voice-akasita-mvp-83921f9c56b52a5e.webm",
+      "sha256": "83921f9c56b52a5e8959f2f390a8bdb34c317d1e33423c01687f616a71d61d41",
+      "bytes": 24057,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/akasita/mvp_9": {
+      "path": "assets/runtime/voice-akasita-mvp_9-9594f1dfd40b6050.webm",
+      "sha256": "9594f1dfd40b60508b43a6c1ab4b95e9064cba1e80ab51123d1888e8374c863b",
+      "bytes": 15200,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/skill": {
+      "path": "assets/runtime/voice-baerdimo-skill-f74ca08912e8bc23.webm",
+      "sha256": "f74ca08912e8bc23358eaac9b3d26c51e19fb3d99b82277be4e9964d1b1fac82",
+      "bytes": 12046,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/lose": {
+      "path": "assets/runtime/voice-baerdimo-lose-e1fae3ca2bb6b0c0.webm",
+      "sha256": "e1fae3ca2bb6b0c07e9b8d7b811e5aa64250317f7fbb4c97c3f0545bcc9774c7",
+      "bytes": 17350,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/lose_5": {
+      "path": "assets/runtime/voice-baerdimo-lose_5-e217fbebdce14540.webm",
+      "sha256": "e217fbebdce145409e7b969b3325017bc00c717a1b1074c7e4a2ecbbe977de2e",
+      "bytes": 24705,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/mvp": {
+      "path": "assets/runtime/voice-baerdimo-mvp-f413f7ce8c4cd0df.webm",
+      "sha256": "f413f7ce8c4cd0df05ac4abfdd3a83a551eb044b61ef6d4f976fdf796e05096c",
+      "bytes": 18752,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/mvp_2": {
+      "path": "assets/runtime/voice-baerdimo-mvp_2-0332f984fd3a6d43.webm",
+      "sha256": "0332f984fd3a6d43a133129e12464ee00aea792448ec4fd306d71cebc11ee123",
+      "bytes": 56107,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/baerdimo/mvp_5": {
+      "path": "assets/runtime/voice-baerdimo-mvp_5-f90405c77dbf32b3.webm",
+      "sha256": "f90405c77dbf32b3996ff6a86359c23e55d9b0d86ce63efea6d87edfeceabfca",
+      "bytes": 21263,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/beikaluolaina/skill": {
+      "path": "assets/runtime/voice-beikaluolaina-skill-433d61269dc68083.webm",
+      "sha256": "433d61269dc680833d7dceebbc2b7f7ecf38e35dbf778186c294c38636713a62",
+      "bytes": 10919,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/beikaluolaina/lose": {
+      "path": "assets/runtime/voice-beikaluolaina-lose-01e9e63dc76c3c23.webm",
+      "sha256": "01e9e63dc76c3c230ac445ab3c424df0e8b3cf802074dc196abd7ab95cf3931c",
+      "bytes": 15964,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/beikaluolaina/mvp": {
+      "path": "assets/runtime/voice-beikaluolaina-mvp-9156a767333d83ae.webm",
+      "sha256": "9156a767333d83ae5ed3a7e641b65786d8a651e81f8dee52a717f425c263eb17",
+      "bytes": 14256,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/beikaluolaina/mvp_1": {
+      "path": "assets/runtime/voice-beikaluolaina-mvp_1-f479f53fb20d9c8d.webm",
+      "sha256": "f479f53fb20d9c8d186543814ef2a1fd26769873926b4b5148f1a5a384e14dea",
+      "bytes": 31306,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/bisimai/skill": {
+      "path": "assets/runtime/voice-bisimai-skill-8375ee4a40df91cd.webm",
+      "sha256": "8375ee4a40df91cda1221b15bc4abfe0c1e1afd00254416899c034a1c4d325d4",
+      "bytes": 12313,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/bisimai/lose": {
+      "path": "assets/runtime/voice-bisimai-lose-4048fea40bc8821b.webm",
+      "sha256": "4048fea40bc8821b57e89de3e5900e3cff12417c0440b9f53b7886bc626ddc3b",
+      "bytes": 26878,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/bisimai/mvp": {
+      "path": "assets/runtime/voice-bisimai-mvp-bc80fe011450296b.webm",
+      "sha256": "bc80fe011450296bd6413643aee16fab79a03a6573c0dea9e04f99609d49fcab",
+      "bytes": 24821,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/bisimai/mvp_2": {
+      "path": "assets/runtime/voice-bisimai-mvp_2-fdc1f21bbd37321b.webm",
+      "sha256": "fdc1f21bbd37321bae4a07634e5337282b715d3160fd9512d2f291db73f0aa22",
+      "bytes": 25297,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/bisimai/mvp_8": {
+      "path": "assets/runtime/voice-bisimai-mvp_8-424d618970b56737.webm",
+      "sha256": "424d618970b567370abbca2982fd66e00d3202a538a4ff8ead7ef6e2a4f7062d",
+      "bytes": 30934,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/boge/skill": {
+      "path": "assets/runtime/voice-boge-skill-595939cc1907aa13.webm",
+      "sha256": "595939cc1907aa13c05e2cbfebfb1d22c5795ac002cdaff1ddec6366d1c6a4da",
+      "bytes": 13287,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/boge/lose": {
+      "path": "assets/runtime/voice-boge-lose-7d4eda0693a0f7ee.webm",
+      "sha256": "7d4eda0693a0f7eeb30e8e486711ec5bd7809a845dffb2b19d7cee700aa3405f",
+      "bytes": 15502,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/boge/mvp": {
+      "path": "assets/runtime/voice-boge-mvp-43a0edf1d76bfc68.webm",
+      "sha256": "43a0edf1d76bfc6874682444f12582f8cc6b4a7993f747050fe4a733b703c165",
+      "bytes": 20116,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/canglong/skill": {
+      "path": "assets/runtime/voice-canglong-skill-0159c671c8cc254c.webm",
+      "sha256": "0159c671c8cc254cb73bb08766cfcd500a220ce78eadff61cc85f4644d0b8656",
+      "bytes": 5554,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/canglong/lose": {
+      "path": "assets/runtime/voice-canglong-lose-aa5f689940dd73d2.webm",
+      "sha256": "aa5f689940dd73d29c9526dd167c02d3a9be5b277abf413a735338a95763a52e",
+      "bytes": 24686,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/canglong/mvp": {
+      "path": "assets/runtime/voice-canglong-mvp-8aa8df112328c478.webm",
+      "sha256": "8aa8df112328c4783d28eede930e9073106ed63497820c988dad63fb0e7fd179",
+      "bytes": 15058,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/canglong/mvp_1": {
+      "path": "assets/runtime/voice-canglong-mvp_1-907021921f3305e8.webm",
+      "sha256": "907021921f3305e8c88d7e0624dad0be2bec7be667614e5fd3097f69f7c23a9d",
+      "bytes": 21668,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/changdao/skill": {
+      "path": "assets/runtime/voice-changdao-skill-c65ca30824aec48b.webm",
+      "sha256": "c65ca30824aec48b9d672b77f1d537e27c8c7c40bb4e8f3db1829e22ee439419",
+      "bytes": 23564,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/changdao/lose": {
+      "path": "assets/runtime/voice-changdao-lose-b94359448b2aa07b.webm",
+      "sha256": "b94359448b2aa07bd06175e068b0b6b33a26870963cce14ccc01d654757a72fc",
+      "bytes": 23984,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/changdao/lose_1": {
+      "path": "assets/runtime/voice-changdao-lose_1-8ef4d354a3c18f7a.webm",
+      "sha256": "8ef4d354a3c18f7aad0328c1167f3549e78c3ca7f7b879c824a6aff1f664c81e",
+      "bytes": 21602,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/changdao/lose_3": {
+      "path": "assets/runtime/voice-changdao-lose_3-762bea4e5da5210d.webm",
+      "sha256": "762bea4e5da5210defba2ce11e598f0effa7e426168b795b6131d2abf821138c",
+      "bytes": 20973,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/changdao/mvp": {
+      "path": "assets/runtime/voice-changdao-mvp-6e1f3de49e6cf51e.webm",
+      "sha256": "6e1f3de49e6cf51ef266dd304b35286457658c6d1e14d384d6bd893cd5b5c0ee",
+      "bytes": 30914,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/skill": {
+      "path": "assets/runtime/voice-chicheng-skill-7c0058797f5fe018.webm",
+      "sha256": "7c0058797f5fe01811a9142622d72aef3aab6466cd14a52229fcd4a6eb08d04b",
+      "bytes": 25504,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/lose": {
+      "path": "assets/runtime/voice-chicheng-lose-1eda49b8643ccad7.webm",
+      "sha256": "1eda49b8643ccad7863be23c47ff8af961c58dc4304158dd446eda11e35a9000",
+      "bytes": 28675,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/lose_3": {
+      "path": "assets/runtime/voice-chicheng-lose_3-d6f713a3c9c3d989.webm",
+      "sha256": "d6f713a3c9c3d98941e57b92021ecce2da30f455b0bcb3a7ffb08794a805ba97",
+      "bytes": 17487,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/mvp": {
+      "path": "assets/runtime/voice-chicheng-mvp-9ceab20d5652999e.webm",
+      "sha256": "9ceab20d5652999e6075289daeaeced767eff236b8a839577ad9148c79380337",
+      "bytes": 20673,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/mvp_3": {
+      "path": "assets/runtime/voice-chicheng-mvp_3-c9b822f02b6a06e0.webm",
+      "sha256": "c9b822f02b6a06e051591ad685f2014e03cd1eb312213ebc480cf5e488122042",
+      "bytes": 32788,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/chicheng/mvp_4": {
+      "path": "assets/runtime/voice-chicheng-mvp_4-ee1062af5989d7b6.webm",
+      "sha256": "ee1062af5989d7b6d54f6d31bebffbe8376487f4e3f52c3a6c0603e57d076ba1",
+      "bytes": 39176,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/dahuangfeng/skill": {
+      "path": "assets/runtime/voice-dahuangfeng-skill-1249bdde6353c708.webm",
+      "sha256": "1249bdde6353c708363cd249c8c5f58dbc3d4588f27cfff7551e4ce3318c3c86",
+      "bytes": 6915,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/dahuangfeng/lose": {
+      "path": "assets/runtime/voice-dahuangfeng-lose-ee39934c8dd25589.webm",
+      "sha256": "ee39934c8dd2558957e96fd23b90fc81290d509a6cc424b561a6020c6117db92",
+      "bytes": 11195,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/dahuangfeng/lose_3": {
+      "path": "assets/runtime/voice-dahuangfeng-lose_3-9a091dfde73eab65.webm",
+      "sha256": "9a091dfde73eab656b1b5fc8f14fd7457548ff775124f14bcfd675051a3f93de",
+      "bytes": 17602,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/dahuangfeng/mvp": {
+      "path": "assets/runtime/voice-dahuangfeng-mvp-6becb4efa5ec8666.webm",
+      "sha256": "6becb4efa5ec86664ada0ebaa1b0d002ec3eef982873e2a1c5eba7f2845acc6a",
+      "bytes": 10901,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/dahuangfeng/mvp_3": {
+      "path": "assets/runtime/voice-dahuangfeng-mvp_3-6495a9c93e0d743f.webm",
+      "sha256": "6495a9c93e0d743f7e36edd4731f3a2fefd7068830c9c0b799ffc8fca1a6f5c3",
+      "bytes": 19155,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/skill": {
+      "path": "assets/runtime/voice-daofeng-skill-8c67acb847d71e53.webm",
+      "sha256": "8c67acb847d71e536412240bce8bb00abfbe05b12b38b9a5550e58b3f79e46b8",
+      "bytes": 18053,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/lose": {
+      "path": "assets/runtime/voice-daofeng-lose-1a33871b91954330.webm",
+      "sha256": "1a33871b91954330ba92f4d470446cf91702802660ab253121d39e9a3f0c3f65",
+      "bytes": 17724,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/lose_3": {
+      "path": "assets/runtime/voice-daofeng-lose_3-d717eb458bf03b34.webm",
+      "sha256": "d717eb458bf03b34c2f77ba1f3facec27b539526586b3e826c36b4a6972cf3ee",
+      "bytes": 22930,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/mvp": {
+      "path": "assets/runtime/voice-daofeng-mvp-d537dfb2bb6a281b.webm",
+      "sha256": "d537dfb2bb6a281b499c0499b652e8f986358c515dde269ed8f60b64c1b38015",
+      "bytes": 21644,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/mvp_1": {
+      "path": "assets/runtime/voice-daofeng-mvp_1-f8c9b48a61038e00.webm",
+      "sha256": "f8c9b48a61038e008921470870bfc9e5e49bb47d31ce3f122008664e17fed20a",
+      "bytes": 21182,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/mvp_2": {
+      "path": "assets/runtime/voice-daofeng-mvp_2-fa49fa2295aeb5a3.webm",
+      "sha256": "fa49fa2295aeb5a3b9623937481b93b6392695f590102827f2b8d72e70d87d02",
+      "bytes": 26094,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/daofeng/mvp_ex1100": {
+      "path": "assets/runtime/voice-daofeng-mvp_ex1100-3e4a5ef66472bbf5.webm",
+      "sha256": "3e4a5ef66472bbf5a75b08310f0e15ecb96d404e9b13b23ea2c6a761ddb8a6e6",
+      "bytes": 19538,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/feilong/skill": {
+      "path": "assets/runtime/voice-feilong-skill-e88073533ace29c2.webm",
+      "sha256": "e88073533ace29c224fe2e7200d47c859c2614bea09b43aeb9b49d4fee36b806",
+      "bytes": 12068,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/feilong/skill_9": {
+      "path": "assets/runtime/voice-feilong-skill_9-152761744ff4fec3.webm",
+      "sha256": "152761744ff4fec31a426fa063869b6f7709304674ab7d9992e8ae677e78b95e",
+      "bytes": 7762,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/feilong/lose": {
+      "path": "assets/runtime/voice-feilong-lose-8c9b27a291086537.webm",
+      "sha256": "8c9b27a29108653761952f12d9668ce60470a74e8c5931f07b5de01fed0abdce",
+      "bytes": 11481,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/feilong/mvp": {
+      "path": "assets/runtime/voice-feilong-mvp-ea711180903818a4.webm",
+      "sha256": "ea711180903818a466172f73060d70ce0fabc6d14dadb3896973cfe56fc94b4b",
+      "bytes": 14300,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/skill": {
+      "path": "assets/runtime/voice-hailunna-skill-6ed2f5abe331755e.webm",
+      "sha256": "6ed2f5abe331755e4d0ccff93d95886fd02511144d16ad2b3130d5a064cc16be",
+      "bytes": 11132,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose": {
+      "path": "assets/runtime/voice-hailunna-lose-1b7f85bc895aea5d.webm",
+      "sha256": "1b7f85bc895aea5dae8a83cc8d276168896f1b3be48b254229b558bd6ae4d389",
+      "bytes": 21069,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose_1": {
+      "path": "assets/runtime/voice-hailunna-lose_1-9f6aef67ef955a00.webm",
+      "sha256": "9f6aef67ef955a00228cca15595e224d65e05ea516587df01ab98453d32cb33e",
+      "bytes": 14998,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose_2": {
+      "path": "assets/runtime/voice-hailunna-lose_2-7de587b21bae1061.webm",
+      "sha256": "7de587b21bae10613b70be2b7988b34f9c9d415b87a8e8c733c4b20ac2fd9aeb",
+      "bytes": 14998,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose_3": {
+      "path": "assets/runtime/voice-hailunna-lose_3-c5d642cf9676e602.webm",
+      "sha256": "c5d642cf9676e602d4eb0301d4aa9c3ec4a6fdf253e378003c01045226f6308a",
+      "bytes": 24294,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose_8": {
+      "path": "assets/runtime/voice-hailunna-lose_8-4791f6889e2935d0.webm",
+      "sha256": "4791f6889e2935d02e5732a683eb59608f318e97b88823adbfcc93e907173689",
+      "bytes": 20702,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/lose_9": {
+      "path": "assets/runtime/voice-hailunna-lose_9-bb19bb7370df8d9a.webm",
+      "sha256": "bb19bb7370df8d9a5713f0596d7415fb3a1e250d461cc2971e48b20ee6743111",
+      "bytes": 18159,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp": {
+      "path": "assets/runtime/voice-hailunna-mvp-3d0d06f2662dd920.webm",
+      "sha256": "3d0d06f2662dd9204ea88b828c51f8cbc0b0fa817a91b5b0567bdc10c60f0c3c",
+      "bytes": 3184,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_1": {
+      "path": "assets/runtime/voice-hailunna-mvp_1-10c93f1d00776ed7.webm",
+      "sha256": "10c93f1d00776ed7a19be195a6641fe2b85d2691c5fc3b59fd94140aa22eaf10",
+      "bytes": 18149,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_2": {
+      "path": "assets/runtime/voice-hailunna-mvp_2-fd37e159fc1b73ae.webm",
+      "sha256": "fd37e159fc1b73ae41f09846cbe4b881c2bc06b2dd9eb2ff046672d597388266",
+      "bytes": 18149,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_3": {
+      "path": "assets/runtime/voice-hailunna-mvp_3-95c22c6b2ae887f3.webm",
+      "sha256": "95c22c6b2ae887f3cba0818ad785bf52da5b2436f562dafb76d0125148ead3cd",
+      "bytes": 19027,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_4": {
+      "path": "assets/runtime/voice-hailunna-mvp_4-822f3b67e6533215.webm",
+      "sha256": "822f3b67e65332152274446f2899f063ccb81170c64130a0282c1a4f1f2ac76b",
+      "bytes": 32581,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_8": {
+      "path": "assets/runtime/voice-hailunna-mvp_8-56353036afe0bd83.webm",
+      "sha256": "56353036afe0bd8351cf093abdef448149aef2f7aa041c9bc3408399aa3c01d5",
+      "bytes": 23102,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hailunna/mvp_9": {
+      "path": "assets/runtime/voice-hailunna-mvp_9-d321e8032f0b36c4.webm",
+      "sha256": "d321e8032f0b36c480903dd05ae3329a2d94842dfe96382a724f99aab44cc03e",
+      "bytes": 24824,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hude/skill": {
+      "path": "assets/runtime/voice-hude-skill-ffbd7bec982f6107.webm",
+      "sha256": "ffbd7bec982f6107bd79689b2159b52b21fc252b309b4b871028765aa6f539d2",
+      "bytes": 8173,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hude/lose": {
+      "path": "assets/runtime/voice-hude-lose-a0fcd0dd880d5e0e.webm",
+      "sha256": "a0fcd0dd880d5e0e57507ecda01a7a4d89bb64d21c6321f1e928c13bd2d044c2",
+      "bytes": 20523,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hude/mvp": {
+      "path": "assets/runtime/voice-hude-mvp-bd8e906b00f99186.webm",
+      "sha256": "bd8e906b00f99186ae202226f9fb8834862c4402c297d6d9fe908a8632e0f86e",
+      "bytes": 18354,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hude/mvp_2": {
+      "path": "assets/runtime/voice-hude-mvp_2-ffe489cf8b4a1a15.webm",
+      "sha256": "ffe489cf8b4a1a150e42c22b89c8bc20f46fbd0d12271d498d4da3cdc9026fc9",
+      "bytes": 27942,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/hude/mvp_4": {
+      "path": "assets/runtime/voice-hude-mvp_4-c709416b2b4ad1fe.webm",
+      "sha256": "c709416b2b4ad1fe0a5c9ec9ba51642cd65415a63abe26d7d28652352397a896",
+      "bytes": 27154,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiahe/skill": {
+      "path": "assets/runtime/voice-jiahe-skill-dd93e2583601afba.webm",
+      "sha256": "dd93e2583601afba97e10e991f03010985c5c8526a1cf40556684703ae320161",
+      "bytes": 16151,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiahe/lose": {
+      "path": "assets/runtime/voice-jiahe-lose-94f0913276cd8d97.webm",
+      "sha256": "94f0913276cd8d97c2753a813c94538f5b47b95be1e2ed3d42535e4f380bbb35",
+      "bytes": 20035,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiahe/mvp": {
+      "path": "assets/runtime/voice-jiahe-mvp-5e345c81cd7cca0f.webm",
+      "sha256": "5e345c81cd7cca0f1930f0137176fac2a9afe171eea884a2ff12a2511f5a5365",
+      "bytes": 25313,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiahe/mvp_3": {
+      "path": "assets/runtime/voice-jiahe-mvp_3-244c5e0ab0c676b9.webm",
+      "sha256": "244c5e0ab0c676b93a59fbd7ef4330c51bb4aa5b823927eecf3b3168f31b7417",
+      "bytes": 37139,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jingang/skill": {
+      "path": "assets/runtime/voice-jingang-skill-50fb26b1f9f66ee9.webm",
+      "sha256": "50fb26b1f9f66ee9531d6fa5d9c4b360ca7d1ca514a7d18390115a77850b8a51",
+      "bytes": 8119,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jingang/lose": {
+      "path": "assets/runtime/voice-jingang-lose-4f802d3d13debc44.webm",
+      "sha256": "4f802d3d13debc44d81197eebfa36ebe88c8fe07f9bf55dd4e5ffc0facb15c7d",
+      "bytes": 25319,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jingang/mvp": {
+      "path": "assets/runtime/voice-jingang-mvp-973a7a9d19add9d7.webm",
+      "sha256": "973a7a9d19add9d73f725f2e716f2483f710e86a54a92d50ec8af7d1a880c9c8",
+      "bytes": 14592,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jingang/mvp_3": {
+      "path": "assets/runtime/voice-jingang-mvp_3-6b44fdec56fc4daf.webm",
+      "sha256": "6b44fdec56fc4dafac24863b51b4014c2189fa280ff7b81b06e341ac3fddc021",
+      "bytes": 28252,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jingang/mvp_4": {
+      "path": "assets/runtime/voice-jingang-mvp_4-6a534ae6f4e3ad17.webm",
+      "sha256": "6a534ae6f4e3ad17c045915d8a03c0f7350d9db7e1e3102965fa0999f6f0141a",
+      "bytes": 34689,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiujinshan/skill": {
+      "path": "assets/runtime/voice-jiujinshan-skill-5b4017aa29192f9d.webm",
+      "sha256": "5b4017aa29192f9d4fcbffbc0d488ecb6e75dadf3b8b52f50ea2efed29ae37ad",
+      "bytes": 16374,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiujinshan/lose": {
+      "path": "assets/runtime/voice-jiujinshan-lose-d70f2b3cf72eb901.webm",
+      "sha256": "d70f2b3cf72eb901b5b229ed3b0e0412b2965ddda0c7d1d604109601df0d6b50",
+      "bytes": 30504,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiujinshan/mvp": {
+      "path": "assets/runtime/voice-jiujinshan-mvp-b6b8f46d59913698.webm",
+      "sha256": "b6b8f46d599136987a2ea9de892894bfc2e31ee177e6318e489522fdd5cbf1e2",
+      "bytes": 24345,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiujinshan/mvp_1": {
+      "path": "assets/runtime/voice-jiujinshan-mvp_1-c3508a955b8a48c0.webm",
+      "sha256": "c3508a955b8a48c092ac3140c407723406198fa7ad426635dd40c84bd1e830e3",
+      "bytes": 24767,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/jiujinshan/mvp_2": {
+      "path": "assets/runtime/voice-jiujinshan-mvp_2-0fb9c4ba70a8a3f8.webm",
+      "sha256": "0fb9c4ba70a8a3f8d119c6dc53514db146a9feb5fb80ef36b724cacf2c3980b7",
+      "bytes": 19088,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kasabulanka/skill": {
+      "path": "assets/runtime/voice-kasabulanka-skill-e2f7abe7548e40cf.webm",
+      "sha256": "e2f7abe7548e40cf922e669ee99b8fd78000886affd18d4ad43311fb9469537d",
+      "bytes": 12214,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kasabulanka/lose": {
+      "path": "assets/runtime/voice-kasabulanka-lose-62f52615a425bcef.webm",
+      "sha256": "62f52615a425bcef62b327b0d583373f683cef67e91fe5723682774ebd987ebf",
+      "bytes": 25760,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kasabulanka/mvp": {
+      "path": "assets/runtime/voice-kasabulanka-mvp-5380f8eb627f364f.webm",
+      "sha256": "5380f8eb627f364f7ae9b461532d7511aa71a8f0fd81991314c6446a60ad70c6",
+      "bytes": 36924,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/skill": {
+      "path": "assets/runtime/voice-kelifulan-skill-c4787426a42e4983.webm",
+      "sha256": "c4787426a42e49837bf5629218ce997aa53450b283a18ee163a7862e316e62a8",
+      "bytes": 7142,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/skill_2": {
+      "path": "assets/runtime/voice-kelifulan-skill_2-e83565d1577116c4.webm",
+      "sha256": "e83565d1577116c42cb6df0701ecdf7d53c978bd65b0987a7b8841d57671f3b2",
+      "bytes": 10756,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/lose": {
+      "path": "assets/runtime/voice-kelifulan-lose-ca82a8e68ddf2a12.webm",
+      "sha256": "ca82a8e68ddf2a12e58fc5a7126d45a4e22649446c707672afc782e0cd7167cc",
+      "bytes": 19871,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/lose_7": {
+      "path": "assets/runtime/voice-kelifulan-lose_7-74326b639019650d.webm",
+      "sha256": "74326b639019650d872b149a56c63e1c3ab89ce4e1f3929c6566170049488004",
+      "bytes": 18763,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/mvp": {
+      "path": "assets/runtime/voice-kelifulan-mvp-604b1c26e3366e46.webm",
+      "sha256": "604b1c26e3366e4663279d3e0154ad3094733425b5966adb0ca1eef1ac7e1053",
+      "bytes": 17532,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/kelifulan/mvp_7": {
+      "path": "assets/runtime/voice-kelifulan-mvp_7-27e04bb53f4b2877.webm",
+      "sha256": "27e04bb53f4b2877c7def17d6e158723b85b34625894f2ef2174067bbec6fead",
+      "bytes": 16308,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/lisailiu/skill": {
+      "path": "assets/runtime/voice-lisailiu-skill-4dd28461ae092785.webm",
+      "sha256": "4dd28461ae0927857a9372a14c303a189bd8d50a31d95236401292ebb4fa3aab",
+      "bytes": 11522,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/lisailiu/lose": {
+      "path": "assets/runtime/voice-lisailiu-lose-b39121056329953a.webm",
+      "sha256": "b39121056329953a7271c6e389e3b2917916aaa13cefb248bddebe9ffedc0045",
+      "bytes": 15087,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/lisailiu/mvp": {
+      "path": "assets/runtime/voice-lisailiu-mvp-85e834dddbfee7dc.webm",
+      "sha256": "85e834dddbfee7dc9d4ebc8e4c37cdb7f4c6865601db6b191caf2e5bc808b8cf",
+      "bytes": 33106,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/moli/skill": {
+      "path": "assets/runtime/voice-moli-skill-3112e253be970d03.webm",
+      "sha256": "3112e253be970d034d0592c14d375ac7470104e0a63afcd0d80f576aae1988cd",
+      "bytes": 8115,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/moli/lose": {
+      "path": "assets/runtime/voice-moli-lose-6ca6533d9a56a702.webm",
+      "sha256": "6ca6533d9a56a7024d4dcbd39337536efac542a372d8fa78073f328b6bfae1d5",
+      "bytes": 23877,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/moli/mvp": {
+      "path": "assets/runtime/voice-moli-mvp-da38d1b1d34193ec.webm",
+      "sha256": "da38d1b1d34193ece803aeea1adfca622c2420a1f946c68b12455dfee16086d5",
+      "bytes": 14222,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/skill": {
+      "path": "assets/runtime/voice-ougen-skill-58a7995b6362adbc.webm",
+      "sha256": "58a7995b6362adbc89089c14df9fe97b80a3042a5026eb60b44869c853ffc1ed",
+      "bytes": 17012,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/lose": {
+      "path": "assets/runtime/voice-ougen-lose-a1898c8ed123ce1e.webm",
+      "sha256": "a1898c8ed123ce1e671af820f4f715215d2e8185967acd99332edf9edf1ebb02",
+      "bytes": 18450,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/lose_4": {
+      "path": "assets/runtime/voice-ougen-lose_4-e916e71bd4671982.webm",
+      "sha256": "e916e71bd46719823926c3950c319ff6a1fe1041c491a67b9e08692e01ef3ed0",
+      "bytes": 11397,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/mvp": {
+      "path": "assets/runtime/voice-ougen-mvp-8450ab2780dea2d4.webm",
+      "sha256": "8450ab2780dea2d40f8fa035c20fedbf1328fb0784032229e18f2a13f7e31f81",
+      "bytes": 24933,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/mvp_4": {
+      "path": "assets/runtime/voice-ougen-mvp_4-3efd83bb41c79ca7.webm",
+      "sha256": "3efd83bb41c79ca7c8e7c01491a681f303c0732455d76bfa2d71271438d4ad83",
+      "bytes": 21136,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/mvp_5": {
+      "path": "assets/runtime/voice-ougen-mvp_5-cb94ce169c91e1b9.webm",
+      "sha256": "cb94ce169c91e1b994fbab3d68bf306ea112ddced189cbe0e51686bc213de5ca",
+      "bytes": 14156,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/ougen/mvp_7": {
+      "path": "assets/runtime/voice-ougen-mvp_7-f7d9f6164b7d0aae.webm",
+      "sha256": "f7d9f6164b7d0aaeb49467f39836c20df3d122953bb91301a27669e580e8d173",
+      "bytes": 29696,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/skill": {
+      "path": "assets/runtime/voice-qiye-skill-6d99cefb272ebdc7.webm",
+      "sha256": "6d99cefb272ebdc75f9627e04992fa3da4e0440edfc8b790e6932ccd014ec332",
+      "bytes": 3181,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/lose": {
+      "path": "assets/runtime/voice-qiye-lose-6a5897aef2ea427e.webm",
+      "sha256": "6a5897aef2ea427e4036b43d4e7fa0aeb09fbcf3afcf7409015d3a4ecaf0dd73",
+      "bytes": 15142,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/lose_3": {
+      "path": "assets/runtime/voice-qiye-lose_3-0fb107ac45988e9e.webm",
+      "sha256": "0fb107ac45988e9eda1b4fb88a126eb7e598be3847f1c13b9b78e1fc0a5b14d8",
+      "bytes": 16186,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/lose_4": {
+      "path": "assets/runtime/voice-qiye-lose_4-cdd9ab4ad35819f4.webm",
+      "sha256": "cdd9ab4ad35819f49083a7707c43c5e2e3642b1762f4f18afc3c754584e7d63d",
+      "bytes": 10277,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/lose_7": {
+      "path": "assets/runtime/voice-qiye-lose_7-d0b4304bd1fa5347.webm",
+      "sha256": "d0b4304bd1fa5347e4cca35795e9905d253038d3481df09b909c266bc47c41f6",
+      "bytes": 16191,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp": {
+      "path": "assets/runtime/voice-qiye-mvp-2716c13589c45e5f.webm",
+      "sha256": "2716c13589c45e5f680848fc5e1853f35c7557a3556f204889a209cbb6c85f10",
+      "bytes": 22284,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_10": {
+      "path": "assets/runtime/voice-qiye-mvp_10-87b37807db89bfc4.webm",
+      "sha256": "87b37807db89bfc441dc5ab95437b0e00c33aa179edf5528bb56c514e6196f11",
+      "bytes": 13463,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_3": {
+      "path": "assets/runtime/voice-qiye-mvp_3-008a8be80b74a4b5.webm",
+      "sha256": "008a8be80b74a4b542b922ca2863166cbfe08eeb87d62d4023c80902b0bd46d2",
+      "bytes": 23187,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_4": {
+      "path": "assets/runtime/voice-qiye-mvp_4-6f3c3120f73e8524.webm",
+      "sha256": "6f3c3120f73e8524f6b006746073389d8e125fab2b24120f8e90ed9caa99d8a0",
+      "bytes": 15794,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_5": {
+      "path": "assets/runtime/voice-qiye-mvp_5-81fca48910d75054.webm",
+      "sha256": "81fca48910d75054e090788aeb4a6eacd87e727bceee62c612b45d0b9ee26cd2",
+      "bytes": 13068,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_6": {
+      "path": "assets/runtime/voice-qiye-mvp_6-13e3251053993d9f.webm",
+      "sha256": "13e3251053993d9fd8ad65208c4be8b449b70ce2c525e349322a0e2b3a29f241",
+      "bytes": 28130,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/qiye/mvp_7": {
+      "path": "assets/runtime/voice-qiye-mvp_7-a35088b07d22240d.webm",
+      "sha256": "a35088b07d22240d2cc28ed48a79ca3d8fceacaef7f096f07483f508f8705d26",
+      "bytes": 19335,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/shengdiyage/skill": {
+      "path": "assets/runtime/voice-shengdiyage-skill-5641de4aebb6c7da.webm",
+      "sha256": "5641de4aebb6c7dacd741f2a812414058b99525de601dd79f99f245cd3297516",
+      "bytes": 19591,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/shengdiyage/lose": {
+      "path": "assets/runtime/voice-shengdiyage-lose-a9eac80f1ec72291.webm",
+      "sha256": "a9eac80f1ec72291ec875706be68be1c769050a76d62b24edd1f23cbba21aef0",
+      "bytes": 35504,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/shengdiyage/mvp": {
+      "path": "assets/runtime/voice-shengdiyage-mvp-705d19be1f92f13b.webm",
+      "sha256": "705d19be1f92f13b0257e034487771e042931c817e0011fd64d2c5de531db6d3",
+      "bytes": 20686,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/shengdiyage/mvp_8": {
+      "path": "assets/runtime/voice-shengdiyage-mvp_8-8708c5db22231604.webm",
+      "sha256": "8708c5db222316047b6346a88f53424944e5950b3f99aa5610f37ab2518912a7",
+      "bytes": 21728,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/skill": {
+      "path": "assets/runtime/voice-sipeibojue-skill-e37f619d741cbb56.webm",
+      "sha256": "e37f619d741cbb566fb53ca2c4338cc679b0fa5a3c46a4f0c27971dc071e7b44",
+      "bytes": 7527,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/lose": {
+      "path": "assets/runtime/voice-sipeibojue-lose-189b1cd7596ce4a2.webm",
+      "sha256": "189b1cd7596ce4a2ad6a2723fb3be725765a28824fad87f6ad72b192306c3767",
+      "bytes": 18736,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/lose_1": {
+      "path": "assets/runtime/voice-sipeibojue-lose_1-8b8a085f5041048e.webm",
+      "sha256": "8b8a085f5041048e6eeee760d018b7c57d8912637ae5834b768891d64288a760",
+      "bytes": 15241,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/lose_2": {
+      "path": "assets/runtime/voice-sipeibojue-lose_2-99b90b049c3a1a53.webm",
+      "sha256": "99b90b049c3a1a53ea03ef3ac1e6b8a832569e17b1dc21b79bf67507fc766243",
+      "bytes": 15564,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/lose_4": {
+      "path": "assets/runtime/voice-sipeibojue-lose_4-bc88627556b6980b.webm",
+      "sha256": "bc88627556b6980ba23ce47d11f19aa0dcfca29ff088b3081febbd1f8acffc23",
+      "bytes": 22660,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/mvp": {
+      "path": "assets/runtime/voice-sipeibojue-mvp-cd4182d43c913879.webm",
+      "sha256": "cd4182d43c91387993681f5001189461dc2ab50211e6c3959b39e3239de4fca1",
+      "bytes": 13811,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/mvp_2": {
+      "path": "assets/runtime/voice-sipeibojue-mvp_2-f22b8d44f1ca411a.webm",
+      "sha256": "f22b8d44f1ca411a442600d79d59ea533026937bfeec5c99a986ec32a8b47f9b",
+      "bytes": 30776,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/sipeibojue/mvp_4": {
+      "path": "assets/runtime/voice-sipeibojue-mvp_4-947cce1c0426f42a.webm",
+      "sha256": "947cce1c0426f42aac539b0cf2b5285415ee3392d0e0ebc455fb1d0bd4734113",
+      "bytes": 16398,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/weiershiqinwang/skill": {
+      "path": "assets/runtime/voice-weiershiqinwang-skill-5b11966a480347f9.webm",
+      "sha256": "5b11966a480347f97b05d29607b2ae0b9359269ad6bc98616b3a28203bbf0a4f",
+      "bytes": 6573,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/weiershiqinwang/lose": {
+      "path": "assets/runtime/voice-weiershiqinwang-lose-e8a801feea1212bb.webm",
+      "sha256": "e8a801feea1212bb0f4c201be8e325f54c4caf49f9d0cf1f672f1bc48d4b130b",
+      "bytes": 19991,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/weiershiqinwang/lose_ex1100": {
+      "path": "assets/runtime/voice-weiershiqinwang-lose_ex1100-42c0f2206b0f8299.webm",
+      "sha256": "42c0f2206b0f8299cafa2f76e344b2a320fffb9f6ba1da18eb9a622027bdca77",
+      "bytes": 21300,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/weiershiqinwang/mvp": {
+      "path": "assets/runtime/voice-weiershiqinwang-mvp-ecd9517454979ba3.webm",
+      "sha256": "ecd9517454979ba3d69194618ebaadc7dfce11ce7a33d7b384c33279b121d0df",
+      "bytes": 18156,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/skill": {
+      "path": "assets/runtime/voice-wuzang-skill-a00c6d67a93f4a8a.webm",
+      "sha256": "a00c6d67a93f4a8aa887c6f23a9cccb136b8ae538d5b562b3e3ebfdf192cfd88",
+      "bytes": 8376,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/lose": {
+      "path": "assets/runtime/voice-wuzang-lose-67a223a3884feae3.webm",
+      "sha256": "67a223a3884feae3eacff1cf50b0b24b7082094fc21140642a546ee2bf442c9e",
+      "bytes": 28367,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/lose_1": {
+      "path": "assets/runtime/voice-wuzang-lose_1-63817109eb37f6b8.webm",
+      "sha256": "63817109eb37f6b8a59c9fb3a6c4a2dae59917d8743dc0a6ab937675e3c17d05",
+      "bytes": 15166,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/lose_8": {
+      "path": "assets/runtime/voice-wuzang-lose_8-dd2546c3937f84e4.webm",
+      "sha256": "dd2546c3937f84e43d25c97bea4e7a39ca6abd71191344f0611fdb03731ec3e8",
+      "bytes": 42982,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/lose_ex1100": {
+      "path": "assets/runtime/voice-wuzang-lose_ex1100-d2e73b0e26debb00.webm",
+      "sha256": "d2e73b0e26debb00b3d44ac6a7f8f7cc310f68c0df73b190e8c9b9c3cbcb96a3",
+      "bytes": 34826,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/mvp": {
+      "path": "assets/runtime/voice-wuzang-mvp-9926caf2331537e3.webm",
+      "sha256": "9926caf2331537e3518f014a32cd44479690032bdf0ffc9fd1b4be3abe9b4b79",
+      "bytes": 11483,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/mvp_2": {
+      "path": "assets/runtime/voice-wuzang-mvp_2-1c20e246bac2c75a.webm",
+      "sha256": "1c20e246bac2c75aa411b923ff5db0f731e0b42d2edd5afeb93cb367fa1941ef",
+      "bytes": 35149,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/mvp_8": {
+      "path": "assets/runtime/voice-wuzang-mvp_8-b7d070355d432725.webm",
+      "sha256": "b7d070355d432725e8d085d977f1605d8fd340b68f5498218cf86633fda4c0eb",
+      "bytes": 26915,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/wuzang/mvp_ex1100": {
+      "path": "assets/runtime/voice-wuzang-mvp_ex1100-bf25960a62bcb5a5.webm",
+      "sha256": "bf25960a62bcb5a569de8537151d2c40aefe126609cc2b1117b421749fd65912",
+      "bytes": 25070,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xianggelila/skill": {
+      "path": "assets/runtime/voice-xianggelila-skill-68b9ef94f8057b2c.webm",
+      "sha256": "68b9ef94f8057b2cb016bc24e1de3a189e6dac9b916b6cf59a5baf94f200d956",
+      "bytes": 14803,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xianggelila/lose": {
+      "path": "assets/runtime/voice-xianggelila-lose-81743350dba674e9.webm",
+      "sha256": "81743350dba674e923054b9a507cdbfb63ac7af4617e1b7a69ee306d3e0f9047",
+      "bytes": 13072,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xianggelila/mvp": {
+      "path": "assets/runtime/voice-xianggelila-mvp-43fdbb62803f30c4.webm",
+      "sha256": "43fdbb62803f30c4fcffde96b2fbbc8a536d814acc4385f57dbf9407fdbf038a",
+      "bytes": 22197,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xiongye/skill": {
+      "path": "assets/runtime/voice-xiongye-skill-02936ffa5f83c011.webm",
+      "sha256": "02936ffa5f83c011e7d3512d8b92d7f6ed382e036eb83c49cd5baf8f64997f9e",
+      "bytes": 9929,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xiongye/lose": {
+      "path": "assets/runtime/voice-xiongye-lose-8dc04d00c60e204e.webm",
+      "sha256": "8dc04d00c60e204e6bc5786040c7f0c469ab138e280b2ae4c6b736a8c871d49c",
+      "bytes": 10834,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/xiongye/mvp": {
+      "path": "assets/runtime/voice-xiongye-mvp-2a309645c68284fa.webm",
+      "sha256": "2a309645c68284fa861223a2a214469461548a70be89433ebe703e06114305d3",
+      "bytes": 24326,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/skill": {
+      "path": "assets/runtime/voice-yanzhan-skill-16f07f23652cd5ab.webm",
+      "sha256": "16f07f23652cd5abfee12731531f54ebe4cea984ef81e3b95215aecdae2535f9",
+      "bytes": 12478,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/lose": {
+      "path": "assets/runtime/voice-yanzhan-lose-9b67ce229268b5df.webm",
+      "sha256": "9b67ce229268b5dfa3bb851dd72317a3a1edaf3752e940fde95bf4da8948f960",
+      "bytes": 36737,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/lose_2": {
+      "path": "assets/runtime/voice-yanzhan-lose_2-c3a42158d9746190.webm",
+      "sha256": "c3a42158d9746190145a3ae2c31498a652ccda54c7c05db701ba49841bf34b9e",
+      "bytes": 13335,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/mvp": {
+      "path": "assets/runtime/voice-yanzhan-mvp-cac316a8320d4a0a.webm",
+      "sha256": "cac316a8320d4a0a81d01ef2df8539ca3da3c9a895a5f58b237101c7a6c3380c",
+      "bytes": 25267,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/mvp_2": {
+      "path": "assets/runtime/voice-yanzhan-mvp_2-2bdb689a8a5d1218.webm",
+      "sha256": "2bdb689a8a5d1218c27de52d5cf4fda1fea839bbcb5d43eb81479c54c82de2c0",
+      "bytes": 11303,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yanzhan/mvp_3": {
+      "path": "assets/runtime/voice-yanzhan-mvp_3-67641c6e82de5772.webm",
+      "sha256": "67641c6e82de57721fae5280544a7b2dee2884e0a8c4ecb1f4fa374e647b7d76",
+      "bytes": 34640,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/skill": {
+      "path": "assets/runtime/voice-yuekecheng-skill-d0de138052a1c519.webm",
+      "sha256": "d0de138052a1c519bea2a4d76a4076718e6aade0c988dffeb575b0dd7940fa44",
+      "bytes": 6281,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/skill_1": {
+      "path": "assets/runtime/voice-yuekecheng-skill_1-cf15644816b98af8.webm",
+      "sha256": "cf15644816b98af8d77592d0093ba6b228b1f704a7492a1554ffd03fbdfb6fc9",
+      "bytes": 17151,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/lose": {
+      "path": "assets/runtime/voice-yuekecheng-lose-c71d91a0036e19d9.webm",
+      "sha256": "c71d91a0036e19d917cae601a775e172a562d1d2be2ab216254985bc253fa0ea",
+      "bytes": 14247,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/lose_1": {
+      "path": "assets/runtime/voice-yuekecheng-lose_1-292af25ec37fa38c.webm",
+      "sha256": "292af25ec37fa38ce130f5e2773dc5134c73af43781b21f49020fd243136835f",
+      "bytes": 22239,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/lose_2": {
+      "path": "assets/runtime/voice-yuekecheng-lose_2-ffe71f9510b361d1.webm",
+      "sha256": "ffe71f9510b361d1b48a54d01ad282829dbafd302503450219849affc5742d10",
+      "bytes": 14441,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/lose_8": {
+      "path": "assets/runtime/voice-yuekecheng-lose_8-517d07a3a3da2f2d.webm",
+      "sha256": "517d07a3a3da2f2dda87b5da45f19125c0619d0f1358d10eef5529307a18fe1d",
+      "bytes": 29927,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/mvp": {
+      "path": "assets/runtime/voice-yuekecheng-mvp-322f3486d9acded8.webm",
+      "sha256": "322f3486d9acded8d04d06418d285416b52fda8d5219e2c05c47c660248f01b6",
+      "bytes": 18712,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/mvp_1": {
+      "path": "assets/runtime/voice-yuekecheng-mvp_1-e70bc119f77030c9.webm",
+      "sha256": "e70bc119f77030c9dd26effab47bcbaa015fe815f5870dc925978abd40c00797",
+      "bytes": 23543,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/mvp_2": {
+      "path": "assets/runtime/voice-yuekecheng-mvp_2-4d006842f5436aed.webm",
+      "sha256": "4d006842f5436aed837f1aae7d2de033a71832c334b23f9a166be40115bd64c8",
+      "bytes": 19110,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/yuekecheng/mvp_8": {
+      "path": "assets/runtime/voice-yuekecheng-mvp_8-3b89185c0e2695c2.webm",
+      "sha256": "3b89185c0e2695c2dc312ef913681df6bb307c3db0becf4d8d1f95956585fadf",
+      "bytes": 56464,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z13/skill": {
+      "path": "assets/runtime/voice-z13-skill-de17e9e3b8f7837d.webm",
+      "sha256": "de17e9e3b8f7837d24e118430de68da199124ad206f82e2bfb964b0725659f09",
+      "bytes": 15391,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z13/lose": {
+      "path": "assets/runtime/voice-z13-lose-5a9d411a2979960f.webm",
+      "sha256": "5a9d411a2979960f430664790c4d17bbff8a210902735c91b01ddbab9f5b78d1",
+      "bytes": 38807,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z13/mvp": {
+      "path": "assets/runtime/voice-z13-mvp-b266b4afce738eec.webm",
+      "sha256": "b266b4afce738eecb46ab0cba2a122634280b6be44886279f0493bb0ea7a7029",
+      "bytes": 24908,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z18/skill": {
+      "path": "assets/runtime/voice-z18-skill-057aaacc75e29262.webm",
+      "sha256": "057aaacc75e292621a480cb333f6d1b57adeaef32c6f9a01b4a712d76eb2f949",
+      "bytes": 10013,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z18/lose": {
+      "path": "assets/runtime/voice-z18-lose-39690a98ee74d572.webm",
+      "sha256": "39690a98ee74d5724ad304b8f6acc5fb69af2146c6ac9a219e6fe702cb20bb09",
+      "bytes": 13305,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z18/mvp": {
+      "path": "assets/runtime/voice-z18-mvp-1870853b61cf0830.webm",
+      "sha256": "1870853b61cf083093e81d341267562702352655f8f0493d3881af5dadf1468c",
+      "bytes": 9572,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z2/skill": {
+      "path": "assets/runtime/voice-z2-skill-6d283b00fcb6ec3e.webm",
+      "sha256": "6d283b00fcb6ec3e4adf1b8e92d84a0d82d21ac450b92b0c245405aa669a6b03",
+      "bytes": 12016,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z2/lose": {
+      "path": "assets/runtime/voice-z2-lose-08a8732e8512d10f.webm",
+      "sha256": "08a8732e8512d10fbc8ed2cf7fe429e58607f55e3df963519933eed9a3c97838",
+      "bytes": 34655,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z2/mvp": {
+      "path": "assets/runtime/voice-z2-mvp-2afcaa743619ee37.webm",
+      "sha256": "2afcaa743619ee378fe2c5d8b142139adf89ee4e08642698738d1f9b538a72ad",
+      "bytes": 33894,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z35/skill": {
+      "path": "assets/runtime/voice-z35-skill-e6fff7f9d8247ec4.webm",
+      "sha256": "e6fff7f9d8247ec421ed3ed40bd5c212d7c4400298bcd3858321e73e8fe6ff93",
+      "bytes": 15066,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z35/lose": {
+      "path": "assets/runtime/voice-z35-lose-ae2b40dc614b9936.webm",
+      "sha256": "ae2b40dc614b9936c8f4dadb18cabaa9f5e069c19d00875c8b02d880575a18cd",
+      "bytes": 16752,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z35/mvp": {
+      "path": "assets/runtime/voice-z35-mvp-1a33b7d7d2c89b0c.webm",
+      "sha256": "1a33b7d7d2c89b0ca2dd10e288ca43fb111d6473751ae3568bfdb64fcaea29ee",
+      "bytes": 17490,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z35/mvp_2": {
+      "path": "assets/runtime/voice-z35-mvp_2-3be11fe0b64c752e.webm",
+      "sha256": "3be11fe0b64c752e88f66c5a2b46599f762aa74a731f367a77378b3e4eebff2a",
+      "bytes": 24559,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z9/skill": {
+      "path": "assets/runtime/voice-z9-skill-ee53ecc34c9c564f.webm",
+      "sha256": "ee53ecc34c9c564ff63bbd99855ad00e42dcfb9a4926fad1b6e62780135c6e7e",
+      "bytes": 14560,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z9/lose": {
+      "path": "assets/runtime/voice-z9-lose-3fcb0629bb2da78d.webm",
+      "sha256": "3fcb0629bb2da78de60bd4806e780dac68edf1966ffbdf938db4562ae955c936",
+      "bytes": 46912,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z9/lose_ex1100": {
+      "path": "assets/runtime/voice-z9-lose_ex1100-28ec36964d995bd8.webm",
+      "sha256": "28ec36964d995bd8d1cac18f7b6439f527eda0e16dec64631d71c5e79229e5fc",
+      "bytes": 40960,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z9/mvp": {
+      "path": "assets/runtime/voice-z9-mvp-184335947b6c1369.webm",
+      "sha256": "184335947b6c1369915eab9c9c6a010db22351d5ff1822e92cc813b99e57cef7",
+      "bytes": 52141,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/z9/mvp_ex1100": {
+      "path": "assets/runtime/voice-z9-mvp_ex1100-5186bc019bfc5409.webm",
+      "sha256": "5186bc019bfc540971a03c2fb5873f9e7de9316e6f7abb18bdcbef7e47a0e4cb",
+      "bytes": 26423,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/zhumo/skill": {
+      "path": "assets/runtime/voice-zhumo-skill-40d2c1a6f4505e1c.webm",
+      "sha256": "40d2c1a6f4505e1c1b91cf61541da2da65f2a6c8cb5257639630736fcfb0c9a9",
+      "bytes": 14574,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/zhumo/lose": {
+      "path": "assets/runtime/voice-zhumo-lose-05f8b671d1a5c468.webm",
+      "sha256": "05f8b671d1a5c468981694ed5da5962f2d7fe8bb667b7f610decce253f306264",
+      "bytes": 19356,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/zhumo/mvp": {
+      "path": "assets/runtime/voice-zhumo-mvp-a8bb8ee4a275a3a9.webm",
+      "sha256": "a8bb8ee4a275a3a94d2fbbdec1949b36550ce3d68d544f2a108d6e53e2ad2806",
+      "bytes": 24840,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/voice/zhumo/mvp_ex1100": {
+      "path": "assets/runtime/voice-zhumo-mvp_ex1100-340ea1e37f789fa3.webm",
+      "sha256": "340ea1e37f789fa35b2abdd7695aae3ecd0a99141f905af7445cbda9ab1e1f35",
+      "bytes": 23986,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-air-atk": {
+      "path": "assets/runtime/battle-air-atk-fc14ba2a8ff55908.webm",
+      "sha256": "fc14ba2a8ff55908cd97698cb8af2ca71a93f0d6a02bdcdacd2b26ba11604847",
+      "bytes": 26080,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-boom1": {
+      "path": "assets/runtime/battle-boom1-9c6b7b404d75e7e9.webm",
+      "sha256": "9c6b7b404d75e7e96d6f0c2f6b44384344852e2266f5cbc5bb61f56a338c6ccb",
+      "bytes": 19644,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-boom2": {
+      "path": "assets/runtime/battle-boom2-dfd99c06c310e46d.webm",
+      "sha256": "dfd99c06c310e46d5ba3f413c11744f4337efd38a80a78542772930d9723d1d6",
+      "bytes": 21434,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-155mm": {
+      "path": "assets/runtime/battle-cannon-155mm-e0e6d0b18f86bbb7.webm",
+      "sha256": "e0e6d0b18f86bbb7877b13d61609dce001c22ecb1388662d437e0859599e0df6",
+      "bytes": 11543,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-203mm": {
+      "path": "assets/runtime/battle-cannon-203mm-f81e45476953be41.webm",
+      "sha256": "f81e45476953be41b04d61b1d4ac35941f9953e707a2b4e16ea88ad9a270f353",
+      "bytes": 15927,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-356mm": {
+      "path": "assets/runtime/battle-cannon-356mm-f608a1f6b4fbce1f.webm",
+      "sha256": "f608a1f6b4fbce1fa18e38fe44eaa8471b4641ff80e2e97cbc9962e6befee82f",
+      "bytes": 19915,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-air": {
+      "path": "assets/runtime/battle-cannon-air-a189b9bb562e57da.webm",
+      "sha256": "a189b9bb562e57da4996adfb0a750c89991d2f3b0168d8bb22bc454d5bd25eaf",
+      "bytes": 14853,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-air-overload": {
+      "path": "assets/runtime/battle-cannon-air-overload-5e0a075eef884ac5.webm",
+      "sha256": "5e0a075eef884ac5238b9a36ca2574b8c757628ffa46d6c6bb070a6875b6dcf3",
+      "bytes": 34916,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-main": {
+      "path": "assets/runtime/battle-cannon-main-2268408cb6f259f5.webm",
+      "sha256": "2268408cb6f259f5d91b9e17737ee91df5701be0332612c50b654df493641f86",
+      "bytes": 20556,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-main-prepared": {
+      "path": "assets/runtime/battle-cannon-main-prepared-07d55eff624fb845.webm",
+      "sha256": "07d55eff624fb84552708acfa1555a05557881bcc468099151739490b744c9d2",
+      "bytes": 24556,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-cannon-sub": {
+      "path": "assets/runtime/battle-cannon-sub-f11ce92bcf8ba564.webm",
+      "sha256": "f11ce92bcf8ba564e2a50d1bd0be02a7a5c431f2e28306877e2c38cd2bca707b",
+      "bytes": 11147,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-dididi": {
+      "path": "assets/runtime/battle-dididi-980ea4141ae72ff1.webm",
+      "sha256": "980ea4141ae72ff1d7bbba1783f6d7fd22a1e2a08e7f2770df6921e220033c91",
+      "bytes": 9378,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-firework": {
+      "path": "assets/runtime/battle-firework-2984dcb44734c2fd.webm",
+      "sha256": "2984dcb44734c2fd3968014d557b3fbe1e2467dd41bfbbbb2b5e900f9e4de68e",
+      "bytes": 64451,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-hit": {
+      "path": "assets/runtime/battle-hit-eb2197f20f03e061.webm",
+      "sha256": "eb2197f20f03e0615894dcd9bc9d5bee56ccab5fdfb8787e95e92f057b5aaf29",
+      "bytes": 14372,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-hit-cirt": {
+      "path": "assets/runtime/battle-hit-cirt-b633b4e7e6ba9fc1.webm",
+      "sha256": "b633b4e7e6ba9fc1a88d22d8ec9f186ca48d769a1f9a24f6dd0ab437e4aab4aa",
+      "bytes": 13261,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi1": {
+      "path": "assets/runtime/battle-jianqi1-45e2872a3fac04e8.webm",
+      "sha256": "45e2872a3fac04e8088f0f9b8e9ea06e8132fac0d7ac06089d1daf2ba6be069f",
+      "bytes": 23936,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi10": {
+      "path": "assets/runtime/battle-jianqi10-2949330621794c88.webm",
+      "sha256": "2949330621794c881a3290d3b2fbffeaad7bc4b233e3ab957abdc862f0cc99f0",
+      "bytes": 21755,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi2": {
+      "path": "assets/runtime/battle-jianqi2-66959562a6b320fa.webm",
+      "sha256": "66959562a6b320fa74836cf8ee09055dc3b4a362590925a50410d79c9d5c5d3a",
+      "bytes": 5267,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi3": {
+      "path": "assets/runtime/battle-jianqi3-ecd0f242a2cc6999.webm",
+      "sha256": "ecd0f242a2cc69992d299d20d1428a4f7aee72681aaaed3f0fab87a5b94adc08",
+      "bytes": 11595,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi4": {
+      "path": "assets/runtime/battle-jianqi4-faa8d2284d22a842.webm",
+      "sha256": "faa8d2284d22a8420e5cb2de75414069b968eb8bc4ff3c4e1a33713f15ed11e0",
+      "bytes": 23694,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi5": {
+      "path": "assets/runtime/battle-jianqi5-5271b43ce9de0ca9.webm",
+      "sha256": "5271b43ce9de0ca9330cf2073bb6035ad4cb74f5b580d5e6c8ecf2a494641e5d",
+      "bytes": 29276,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi6": {
+      "path": "assets/runtime/battle-jianqi6-e36c4d822cfb4906.webm",
+      "sha256": "e36c4d822cfb4906bf4c4ddf7d1e502f1c2c0f1f71c72326b72490bfb8325084",
+      "bytes": 16692,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi7": {
+      "path": "assets/runtime/battle-jianqi7-e90456bb2fdfd5a4.webm",
+      "sha256": "e90456bb2fdfd5a4554f7807c87b53738b324b6e91a49307eb8bc98d3cfba4d1",
+      "bytes": 18168,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi8": {
+      "path": "assets/runtime/battle-jianqi8-b35de1bfc543daec.webm",
+      "sha256": "b35de1bfc543daecf20639f14aea3e42f64b75e758b5ec75590687b7215573d3",
+      "bytes": 26994,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-jianqi9": {
+      "path": "assets/runtime/battle-jianqi9-275c878d55498f83.webm",
+      "sha256": "275c878d55498f83c915576ff83f5ab10f434217daf2be78fac19ffa221ae5f5",
+      "bytes": 22137,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-lightning-hit": {
+      "path": "assets/runtime/battle-lightning-hit-14c5f79c9d745b0c.webm",
+      "sha256": "14c5f79c9d745b0cceca71208ce33a2e4c903429778facd56b94f5031b1b8219",
+      "bytes": 6536,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-plane": {
+      "path": "assets/runtime/battle-plane-731eedbd2c3d5b5b.webm",
+      "sha256": "731eedbd2c3d5b5b44241198fe01b8d54270bd85ced9630e8a59f1d4074cae26",
+      "bytes": 21391,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-raser": {
+      "path": "assets/runtime/battle-raser-219ea0946102bce8.webm",
+      "sha256": "219ea0946102bce8487a92de3def8bfdcd5b3401bb73c68f904d2e9de5c2e22e",
+      "bytes": 19945,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-remote-boom": {
+      "path": "assets/runtime/battle-remote-boom-13968fc90d39bbfd.webm",
+      "sha256": "13968fc90d39bbfd9d7703b66b1e0a7b403ce33634cb4b9d5e5d43c83a234bf3",
+      "bytes": 40970,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-remote-fire": {
+      "path": "assets/runtime/battle-remote-fire-657d7d6ea6e35bf8.webm",
+      "sha256": "657d7d6ea6e35bf8a156e0fba2efdd52ac232f273fd8f1a6925535cd23fa841c",
+      "bytes": 11543,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-remote-fly": {
+      "path": "assets/runtime/battle-remote-fly-98bc5160ffee6a30.webm",
+      "sha256": "98bc5160ffee6a30325ffddd800e94b8264ab2e3f92e259c1399815be12b43d6",
+      "bytes": 23837,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-ryza1": {
+      "path": "assets/runtime/battle-ryza1-48c94e414ed4fe98.webm",
+      "sha256": "48c94e414ed4fe98e277d0dcb025c3cc56641f96db3cc115c6e803745abaf596",
+      "bytes": 12986,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-scan": {
+      "path": "assets/runtime/battle-scan-de16538e6b036759.webm",
+      "sha256": "de16538e6b0367599bd5db06c9a87aa210215f62153d3320ba849bb08edb1439",
+      "bytes": 60293,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-ship-move": {
+      "path": "assets/runtime/battle-ship-move-9039f2b721331399.webm",
+      "sha256": "9039f2b72133139961e2c6c835b8b6b27bbdf9e60d93192162b2fe971c1a7dd2",
+      "bytes": 16015,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-shuihua": {
+      "path": "assets/runtime/battle-shuihua-b652fef32cdf1927.webm",
+      "sha256": "b652fef32cdf192748d4b5db883e52da0f2c09c53f8810bf0e24bd00116eeefe",
+      "bytes": 9770,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-sink": {
+      "path": "assets/runtime/battle-sink-5919886433a60273.webm",
+      "sha256": "5919886433a60273718ae85e7cd78e4c1c361c36a7c7a7750e25c64653f86cfd",
+      "bytes": 11372,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-torpedo-hit": {
+      "path": "assets/runtime/battle-torpedo-hit-e6b38e336e47eea9.webm",
+      "sha256": "e6b38e336e47eea9fa895d23e429e23c8dfdae98dc413a8b495cae8d5dfd9725",
+      "bytes": 22012,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-torpedo-move": {
+      "path": "assets/runtime/battle-torpedo-move-cd8b0592eb695f27.webm",
+      "sha256": "cd8b0592eb695f270bad3fac7d4f5035e046cc09e9196f5ce0dd8b8d6a83ae21",
+      "bytes": 16352,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/effect/battle-wave": {
+      "path": "assets/runtime/battle-wave-45817b40b4f24062.webm",
+      "sha256": "45817b40b4f24062dd75d8159869ba9f744e1c6cb89e992b5d367cb907bdf2b5",
+      "bytes": 51940,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/combat": {
+      "path": "assets/runtime/bgm-combat-98c9cda11e563e6f.webm",
+      "sha256": "98c9cda11e563e6fba7d64ce233471d6002d32142ed97943746e6a294ad1349e",
+      "bytes": 971993,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/archive": {
+      "path": "assets/runtime/bgm-archive-0001c7fed3d54c56.webm",
+      "sha256": "0001c7fed3d54c56c25db03cbfdf762b2240d90453f9de63574314c7760922b6",
+      "bytes": 724109,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/campaign": {
+      "path": "assets/runtime/bgm-campaign-dbc84b52e9c9f177.webm",
+      "sha256": "dbc84b52e9c9f177000faa05fe37ae526b75e63eb527ad4cd7f6498375003f2e",
+      "bytes": 1151847,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/fleet-assembly": {
+      "path": "assets/runtime/bgm-fleet-assembly-f8544ce5651d10f5.webm",
+      "sha256": "f8544ce5651d10f5a464173e3957086cfe10e24ed857e09f83d9bcd1b1311aa8",
+      "bytes": 1773977,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/main-menu": {
+      "path": "assets/runtime/bgm-main-menu-e82636d84e49a427.webm",
+      "sha256": "e82636d84e49a42744fe166e7918b6811a1966b1e8b939586c33499c8f1ba7b1",
+      "bytes": 641032,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/port": {
+      "path": "assets/runtime/bgm-port-c531b98ab2d83616.webm",
+      "sha256": "c531b98ab2d836167bcdfb4ad9a173757a1f691a0c9b43e08fef1dccae03e1ea",
+      "bytes": 811402,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
+    "audio/music/stage-select": {
+      "path": "assets/runtime/bgm-stage-select-0d12dc0c5b2a5ef7.webm",
+      "sha256": "0d12dc0c5b2a5ef728dd89f840121c892afe2808eb70bea658a3b443b61959bf",
+      "bytes": 630044,
+      "contentType": "audio/webm; codecs=\"opus\""
+    },
     "ability-demo/dd-1/webm": {
       "path": "assets/runtime/ability-dd-1-demo-97bffd120888bd49.webm",
       "sha256": "97bffd120888bd4974a260e266782c79da0ce8d477d2d26bf2a6d70596cb731c",
@@ -6150,6 +7710,267 @@
     "mine": "models/mine"
   },
   "sources": {
+    "assets/battle-audio/effects/battle-air-atk.webm": "fc14ba2a8ff55908cd97698cb8af2ca71a93f0d6a02bdcdacd2b26ba11604847",
+    "assets/battle-audio/effects/battle-boom1.webm": "9c6b7b404d75e7e96d6f0c2f6b44384344852e2266f5cbc5bb61f56a338c6ccb",
+    "assets/battle-audio/effects/battle-boom2.webm": "dfd99c06c310e46d5ba3f413c11744f4337efd38a80a78542772930d9723d1d6",
+    "assets/battle-audio/effects/battle-cannon-155mm.webm": "e0e6d0b18f86bbb7877b13d61609dce001c22ecb1388662d437e0859599e0df6",
+    "assets/battle-audio/effects/battle-cannon-203mm.webm": "f81e45476953be41b04d61b1d4ac35941f9953e707a2b4e16ea88ad9a270f353",
+    "assets/battle-audio/effects/battle-cannon-356mm.webm": "f608a1f6b4fbce1fa18e38fe44eaa8471b4641ff80e2e97cbc9962e6befee82f",
+    "assets/battle-audio/effects/battle-cannon-air-overload.webm": "5e0a075eef884ac5238b9a36ca2574b8c757628ffa46d6c6bb070a6875b6dcf3",
+    "assets/battle-audio/effects/battle-cannon-air.webm": "a189b9bb562e57da4996adfb0a750c89991d2f3b0168d8bb22bc454d5bd25eaf",
+    "assets/battle-audio/effects/battle-cannon-main-prepared.webm": "07d55eff624fb84552708acfa1555a05557881bcc468099151739490b744c9d2",
+    "assets/battle-audio/effects/battle-cannon-main.webm": "2268408cb6f259f5d91b9e17737ee91df5701be0332612c50b654df493641f86",
+    "assets/battle-audio/effects/battle-cannon-sub.webm": "f11ce92bcf8ba564e2a50d1bd0be02a7a5c431f2e28306877e2c38cd2bca707b",
+    "assets/battle-audio/effects/battle-dididi.webm": "980ea4141ae72ff1d7bbba1783f6d7fd22a1e2a08e7f2770df6921e220033c91",
+    "assets/battle-audio/effects/battle-firework.webm": "2984dcb44734c2fd3968014d557b3fbe1e2467dd41bfbbbb2b5e900f9e4de68e",
+    "assets/battle-audio/effects/battle-hit-cirt.webm": "b633b4e7e6ba9fc1a88d22d8ec9f186ca48d769a1f9a24f6dd0ab437e4aab4aa",
+    "assets/battle-audio/effects/battle-hit.webm": "eb2197f20f03e0615894dcd9bc9d5bee56ccab5fdfb8787e95e92f057b5aaf29",
+    "assets/battle-audio/effects/battle-jianqi1.webm": "45e2872a3fac04e8088f0f9b8e9ea06e8132fac0d7ac06089d1daf2ba6be069f",
+    "assets/battle-audio/effects/battle-jianqi10.webm": "2949330621794c881a3290d3b2fbffeaad7bc4b233e3ab957abdc862f0cc99f0",
+    "assets/battle-audio/effects/battle-jianqi2.webm": "66959562a6b320fa74836cf8ee09055dc3b4a362590925a50410d79c9d5c5d3a",
+    "assets/battle-audio/effects/battle-jianqi3.webm": "ecd0f242a2cc69992d299d20d1428a4f7aee72681aaaed3f0fab87a5b94adc08",
+    "assets/battle-audio/effects/battle-jianqi4.webm": "faa8d2284d22a8420e5cb2de75414069b968eb8bc4ff3c4e1a33713f15ed11e0",
+    "assets/battle-audio/effects/battle-jianqi5.webm": "5271b43ce9de0ca9330cf2073bb6035ad4cb74f5b580d5e6c8ecf2a494641e5d",
+    "assets/battle-audio/effects/battle-jianqi6.webm": "e36c4d822cfb4906bf4c4ddf7d1e502f1c2c0f1f71c72326b72490bfb8325084",
+    "assets/battle-audio/effects/battle-jianqi7.webm": "e90456bb2fdfd5a4554f7807c87b53738b324b6e91a49307eb8bc98d3cfba4d1",
+    "assets/battle-audio/effects/battle-jianqi8.webm": "b35de1bfc543daecf20639f14aea3e42f64b75e758b5ec75590687b7215573d3",
+    "assets/battle-audio/effects/battle-jianqi9.webm": "275c878d55498f83c915576ff83f5ab10f434217daf2be78fac19ffa221ae5f5",
+    "assets/battle-audio/effects/battle-lightning-hit.webm": "14c5f79c9d745b0cceca71208ce33a2e4c903429778facd56b94f5031b1b8219",
+    "assets/battle-audio/effects/battle-plane.webm": "731eedbd2c3d5b5b44241198fe01b8d54270bd85ced9630e8a59f1d4074cae26",
+    "assets/battle-audio/effects/battle-raser.webm": "219ea0946102bce8487a92de3def8bfdcd5b3401bb73c68f904d2e9de5c2e22e",
+    "assets/battle-audio/effects/battle-remote-boom.webm": "13968fc90d39bbfd9d7703b66b1e0a7b403ce33634cb4b9d5e5d43c83a234bf3",
+    "assets/battle-audio/effects/battle-remote-fire.webm": "657d7d6ea6e35bf8a156e0fba2efdd52ac232f273fd8f1a6925535cd23fa841c",
+    "assets/battle-audio/effects/battle-remote-fly.webm": "98bc5160ffee6a30325ffddd800e94b8264ab2e3f92e259c1399815be12b43d6",
+    "assets/battle-audio/effects/battle-ryza1.webm": "48c94e414ed4fe98e277d0dcb025c3cc56641f96db3cc115c6e803745abaf596",
+    "assets/battle-audio/effects/battle-scan.webm": "de16538e6b0367599bd5db06c9a87aa210215f62153d3320ba849bb08edb1439",
+    "assets/battle-audio/effects/battle-ship-move.webm": "9039f2b72133139961e2c6c835b8b6b27bbdf9e60d93192162b2fe971c1a7dd2",
+    "assets/battle-audio/effects/battle-shuihua.webm": "b652fef32cdf192748d4b5db883e52da0f2c09c53f8810bf0e24bd00116eeefe",
+    "assets/battle-audio/effects/battle-sink.webm": "5919886433a60273718ae85e7cd78e4c1c361c36a7c7a7750e25c64653f86cfd",
+    "assets/battle-audio/effects/battle-torpedo-hit.webm": "e6b38e336e47eea9fa895d23e429e23c8dfdae98dc413a8b495cae8d5dfd9725",
+    "assets/battle-audio/effects/battle-torpedo-move.webm": "cd8b0592eb695f270bad3fac7d4f5035e046cc09e9196f5ce0dd8b8d6a83ae21",
+    "assets/battle-audio/effects/battle-wave.webm": "45817b40b4f24062dd75d8159869ba9f744e1c6cb89e992b5d367cb907bdf2b5",
+    "assets/battle-audio/manifest.json": "adcae5033681685a9cd0381516f64b8a0767d3f5d548ebe905ee8d41a0ba3ce9",
+    "assets/battle-audio/music/archive/bgm-bar-soft.webm": "0001c7fed3d54c56c25db03cbfdf762b2240d90453f9de63574314c7760922b6",
+    "assets/battle-audio/music/campaign/cue-d3ff72b5d2c7039c.webm": "dbc84b52e9c9f177000faa05fe37ae526b75e63eb527ad4cd7f6498375003f2e",
+    "assets/battle-audio/music/cue-ae25ef708681729d.webm": "98c9cda11e563e6fba7d64ce233471d6002d32142ed97943746e6a294ad1349e",
+    "assets/battle-audio/music/fleet-assembly/cue-c8c4ab8a1b6be288.webm": "f8544ce5651d10f5a464173e3957086cfe10e24ed857e09f83d9bcd1b1311aa8",
+    "assets/battle-audio/music/main-menu/cue-c91817c75bbd6ce9.webm": "e82636d84e49a42744fe166e7918b6811a1966b1e8b939586c33499c8f1ba7b1",
+    "assets/battle-audio/music/port/cue-16b2af85a43e6e8b.webm": "c531b98ab2d836167bcdfb4ad9a173757a1f691a0c9b43e08fef1dccae03e1ea",
+    "assets/battle-audio/music/stage-select/AL_battle_normal.webm": "0d12dc0c5b2a5ef728dd89f840121c892afe2808eb70bea658a3b443b61959bf",
+    "assets/battle-audio/voices/aikesaite/lose.webm": "a6632b4674ccfa2daf2443083d1ae728c1fc536b12914769bc81605afdca5bdc",
+    "assets/battle-audio/voices/aikesaite/mvp.webm": "01d49226e5141aeee7d01e94fb9cba5642028cda070aff18d6ea2e57cf628877",
+    "assets/battle-audio/voices/aikesaite/skill.webm": "45584c23e8b5ae10b7d18875c6620802de8ab576bc06c5f8fe23cb92bab847b9",
+    "assets/battle-audio/voices/aisaikesi/lose.webm": "40dea4ea0017c21a0932247e01bc1868f4702155e232746e6c96cfc40582ed14",
+    "assets/battle-audio/voices/aisaikesi/lose_5.webm": "b77843709b19aba5324058c5e3acb4c38980bcf60295d1034bba43fd43dcc401",
+    "assets/battle-audio/voices/aisaikesi/mvp.webm": "5c35e7105d5f72c367f7a6756a85abd1014f0f568c170b78393de4fb50993fe6",
+    "assets/battle-audio/voices/aisaikesi/mvp_3.webm": "04abbbe562ce6740e63e7e5f9d704eafbac6a8d92901c835fd4f9ce5b3dab1a9",
+    "assets/battle-audio/voices/aisaikesi/mvp_4.webm": "9f77ef0ce257136be4be1914b481190d88b25abfdc1b2ee2bb10d54e7922e86c",
+    "assets/battle-audio/voices/aisaikesi/mvp_5.webm": "fd9350a98990b7a20f9ec787448d78d79d1dfc2bcb74e8d0eb57f3dc4a80be35",
+    "assets/battle-audio/voices/aisaikesi/mvp_6.webm": "420666ebdfa1e67477abae0e487308dd03ec61968b5519fb4d1c707eb02f055f",
+    "assets/battle-audio/voices/aisaikesi/mvp_7.webm": "8a030cd8b2f60b16a4f3f36c017ecdbbd821afedaefb4f6c10ef1d472e2eee97",
+    "assets/battle-audio/voices/aisaikesi/mvp_9.webm": "3449c71354da1dce4b49441c4479f8a105848603fc9a737d4f062ab66060afb8",
+    "assets/battle-audio/voices/aisaikesi/skill.webm": "1a41fc03354cd9e7015046477fca412b1a713ee5fbc09c774de41aa896c85ff4",
+    "assets/battle-audio/voices/aisijimo/lose.webm": "c15610d2269f7d6fec0a064876473c6e4d94c1b8fbd9b7ce69a732766c8f00fc",
+    "assets/battle-audio/voices/aisijimo/mvp.webm": "85eff6bf36f0a7a2c16a7f3299f14744cea8f9e90e672961cf9abca24b5a8d1f",
+    "assets/battle-audio/voices/aisijimo/skill.webm": "82156baf8ac3d0742dc82990e155b60ee5ec6dafef027b557fe63beef2d06eb7",
+    "assets/battle-audio/voices/ajiakesi/lose.webm": "8f02682cb66db943349da5d2211a293c4cd22a310a87ebb5cf2b2c138c6fe87c",
+    "assets/battle-audio/voices/ajiakesi/lose_ex1100.webm": "44b23ecf38f7f2ac33cf7a74e3f3b545a2db68fa1f6b74660247f1d5217ab273",
+    "assets/battle-audio/voices/ajiakesi/mvp.webm": "5a95ca93a54dce40a300a7119e768b44b9445c89e982be87c1b37b547760bd50",
+    "assets/battle-audio/voices/ajiakesi/mvp_1.webm": "533fb61bc0520fb1cc446c6efd3fbee4bf9a0244614a7f3b3440bcf3ac1454d9",
+    "assets/battle-audio/voices/ajiakesi/mvp_ex1100.webm": "54dfadcb3f4cb38d1ed51e3816e007dedb8f7c7ed52f047031f2131d5f0ef54a",
+    "assets/battle-audio/voices/ajiakesi/skill.webm": "9a50e981754e77f73de0b6005040f61541de3dba104ecef730edd1a352f47d4e",
+    "assets/battle-audio/voices/ajilisi/lose.webm": "6e6f63279b79da8cd1b17a6220978874ae2702716c6a722fb6712d60be5688dd",
+    "assets/battle-audio/voices/ajilisi/mvp.webm": "a503bebefc6514aa4633fb78329f338fe20a013f7a27bd188d386bacd91d2922",
+    "assets/battle-audio/voices/ajilisi/skill.webm": "9078b9f39a619654ddba2e84c387fa27ffc4a0ea62abf227a8616077f505e7b7",
+    "assets/battle-audio/voices/akasita/lose.webm": "41fe6ce5834071300096a29fd12c0e8a5363b61e8418376af6c8487a4ac49d19",
+    "assets/battle-audio/voices/akasita/mvp.webm": "83921f9c56b52a5e8959f2f390a8bdb34c317d1e33423c01687f616a71d61d41",
+    "assets/battle-audio/voices/akasita/mvp_9.webm": "9594f1dfd40b60508b43a6c1ab4b95e9064cba1e80ab51123d1888e8374c863b",
+    "assets/battle-audio/voices/akasita/skill.webm": "e76f4806f9dc8ea79779061f53c5578ff28a8869c1e04241a817909ea9b8754e",
+    "assets/battle-audio/voices/baerdimo/lose.webm": "e1fae3ca2bb6b0c07e9b8d7b811e5aa64250317f7fbb4c97c3f0545bcc9774c7",
+    "assets/battle-audio/voices/baerdimo/lose_5.webm": "e217fbebdce145409e7b969b3325017bc00c717a1b1074c7e4a2ecbbe977de2e",
+    "assets/battle-audio/voices/baerdimo/mvp.webm": "f413f7ce8c4cd0df05ac4abfdd3a83a551eb044b61ef6d4f976fdf796e05096c",
+    "assets/battle-audio/voices/baerdimo/mvp_2.webm": "0332f984fd3a6d43a133129e12464ee00aea792448ec4fd306d71cebc11ee123",
+    "assets/battle-audio/voices/baerdimo/mvp_5.webm": "f90405c77dbf32b3996ff6a86359c23e55d9b0d86ce63efea6d87edfeceabfca",
+    "assets/battle-audio/voices/baerdimo/skill.webm": "f74ca08912e8bc23358eaac9b3d26c51e19fb3d99b82277be4e9964d1b1fac82",
+    "assets/battle-audio/voices/beikaluolaina/lose.webm": "01e9e63dc76c3c230ac445ab3c424df0e8b3cf802074dc196abd7ab95cf3931c",
+    "assets/battle-audio/voices/beikaluolaina/mvp.webm": "9156a767333d83ae5ed3a7e641b65786d8a651e81f8dee52a717f425c263eb17",
+    "assets/battle-audio/voices/beikaluolaina/mvp_1.webm": "f479f53fb20d9c8d186543814ef2a1fd26769873926b4b5148f1a5a384e14dea",
+    "assets/battle-audio/voices/beikaluolaina/skill.webm": "433d61269dc680833d7dceebbc2b7f7ecf38e35dbf778186c294c38636713a62",
+    "assets/battle-audio/voices/bisimai/lose.webm": "4048fea40bc8821b57e89de3e5900e3cff12417c0440b9f53b7886bc626ddc3b",
+    "assets/battle-audio/voices/bisimai/mvp.webm": "bc80fe011450296bd6413643aee16fab79a03a6573c0dea9e04f99609d49fcab",
+    "assets/battle-audio/voices/bisimai/mvp_2.webm": "fdc1f21bbd37321bae4a07634e5337282b715d3160fd9512d2f291db73f0aa22",
+    "assets/battle-audio/voices/bisimai/mvp_8.webm": "424d618970b567370abbca2982fd66e00d3202a538a4ff8ead7ef6e2a4f7062d",
+    "assets/battle-audio/voices/bisimai/skill.webm": "8375ee4a40df91cda1221b15bc4abfe0c1e1afd00254416899c034a1c4d325d4",
+    "assets/battle-audio/voices/boge/lose.webm": "7d4eda0693a0f7eeb30e8e486711ec5bd7809a845dffb2b19d7cee700aa3405f",
+    "assets/battle-audio/voices/boge/mvp.webm": "43a0edf1d76bfc6874682444f12582f8cc6b4a7993f747050fe4a733b703c165",
+    "assets/battle-audio/voices/boge/skill.webm": "595939cc1907aa13c05e2cbfebfb1d22c5795ac002cdaff1ddec6366d1c6a4da",
+    "assets/battle-audio/voices/canglong/lose.webm": "aa5f689940dd73d29c9526dd167c02d3a9be5b277abf413a735338a95763a52e",
+    "assets/battle-audio/voices/canglong/mvp.webm": "8aa8df112328c4783d28eede930e9073106ed63497820c988dad63fb0e7fd179",
+    "assets/battle-audio/voices/canglong/mvp_1.webm": "907021921f3305e8c88d7e0624dad0be2bec7be667614e5fd3097f69f7c23a9d",
+    "assets/battle-audio/voices/canglong/skill.webm": "0159c671c8cc254cb73bb08766cfcd500a220ce78eadff61cc85f4644d0b8656",
+    "assets/battle-audio/voices/changdao/lose.webm": "b94359448b2aa07bd06175e068b0b6b33a26870963cce14ccc01d654757a72fc",
+    "assets/battle-audio/voices/changdao/lose_1.webm": "8ef4d354a3c18f7aad0328c1167f3549e78c3ca7f7b879c824a6aff1f664c81e",
+    "assets/battle-audio/voices/changdao/lose_3.webm": "762bea4e5da5210defba2ce11e598f0effa7e426168b795b6131d2abf821138c",
+    "assets/battle-audio/voices/changdao/mvp.webm": "6e1f3de49e6cf51ef266dd304b35286457658c6d1e14d384d6bd893cd5b5c0ee",
+    "assets/battle-audio/voices/changdao/skill.webm": "c65ca30824aec48b9d672b77f1d537e27c8c7c40bb4e8f3db1829e22ee439419",
+    "assets/battle-audio/voices/chicheng/lose.webm": "1eda49b8643ccad7863be23c47ff8af961c58dc4304158dd446eda11e35a9000",
+    "assets/battle-audio/voices/chicheng/lose_3.webm": "d6f713a3c9c3d98941e57b92021ecce2da30f455b0bcb3a7ffb08794a805ba97",
+    "assets/battle-audio/voices/chicheng/mvp.webm": "9ceab20d5652999e6075289daeaeced767eff236b8a839577ad9148c79380337",
+    "assets/battle-audio/voices/chicheng/mvp_3.webm": "c9b822f02b6a06e051591ad685f2014e03cd1eb312213ebc480cf5e488122042",
+    "assets/battle-audio/voices/chicheng/mvp_4.webm": "ee1062af5989d7b6d54f6d31bebffbe8376487f4e3f52c3a6c0603e57d076ba1",
+    "assets/battle-audio/voices/chicheng/skill.webm": "7c0058797f5fe01811a9142622d72aef3aab6466cd14a52229fcd4a6eb08d04b",
+    "assets/battle-audio/voices/dahuangfeng/lose.webm": "ee39934c8dd2558957e96fd23b90fc81290d509a6cc424b561a6020c6117db92",
+    "assets/battle-audio/voices/dahuangfeng/lose_3.webm": "9a091dfde73eab656b1b5fc8f14fd7457548ff775124f14bcfd675051a3f93de",
+    "assets/battle-audio/voices/dahuangfeng/mvp.webm": "6becb4efa5ec86664ada0ebaa1b0d002ec3eef982873e2a1c5eba7f2845acc6a",
+    "assets/battle-audio/voices/dahuangfeng/mvp_3.webm": "6495a9c93e0d743f7e36edd4731f3a2fefd7068830c9c0b799ffc8fca1a6f5c3",
+    "assets/battle-audio/voices/dahuangfeng/skill.webm": "1249bdde6353c708363cd249c8c5f58dbc3d4588f27cfff7551e4ce3318c3c86",
+    "assets/battle-audio/voices/daofeng/lose.webm": "1a33871b91954330ba92f4d470446cf91702802660ab253121d39e9a3f0c3f65",
+    "assets/battle-audio/voices/daofeng/lose_3.webm": "d717eb458bf03b34c2f77ba1f3facec27b539526586b3e826c36b4a6972cf3ee",
+    "assets/battle-audio/voices/daofeng/mvp.webm": "d537dfb2bb6a281b499c0499b652e8f986358c515dde269ed8f60b64c1b38015",
+    "assets/battle-audio/voices/daofeng/mvp_1.webm": "f8c9b48a61038e008921470870bfc9e5e49bb47d31ce3f122008664e17fed20a",
+    "assets/battle-audio/voices/daofeng/mvp_2.webm": "fa49fa2295aeb5a3b9623937481b93b6392695f590102827f2b8d72e70d87d02",
+    "assets/battle-audio/voices/daofeng/mvp_ex1100.webm": "3e4a5ef66472bbf5a75b08310f0e15ecb96d404e9b13b23ea2c6a761ddb8a6e6",
+    "assets/battle-audio/voices/daofeng/skill.webm": "8c67acb847d71e536412240bce8bb00abfbe05b12b38b9a5550e58b3f79e46b8",
+    "assets/battle-audio/voices/feilong/lose.webm": "8c9b27a29108653761952f12d9668ce60470a74e8c5931f07b5de01fed0abdce",
+    "assets/battle-audio/voices/feilong/mvp.webm": "ea711180903818a466172f73060d70ce0fabc6d14dadb3896973cfe56fc94b4b",
+    "assets/battle-audio/voices/feilong/skill.webm": "e88073533ace29c224fe2e7200d47c859c2614bea09b43aeb9b49d4fee36b806",
+    "assets/battle-audio/voices/feilong/skill_9.webm": "152761744ff4fec31a426fa063869b6f7709304674ab7d9992e8ae677e78b95e",
+    "assets/battle-audio/voices/hailunna/lose.webm": "1b7f85bc895aea5dae8a83cc8d276168896f1b3be48b254229b558bd6ae4d389",
+    "assets/battle-audio/voices/hailunna/lose_1.webm": "9f6aef67ef955a00228cca15595e224d65e05ea516587df01ab98453d32cb33e",
+    "assets/battle-audio/voices/hailunna/lose_2.webm": "7de587b21bae10613b70be2b7988b34f9c9d415b87a8e8c733c4b20ac2fd9aeb",
+    "assets/battle-audio/voices/hailunna/lose_3.webm": "c5d642cf9676e602d4eb0301d4aa9c3ec4a6fdf253e378003c01045226f6308a",
+    "assets/battle-audio/voices/hailunna/lose_8.webm": "4791f6889e2935d02e5732a683eb59608f318e97b88823adbfcc93e907173689",
+    "assets/battle-audio/voices/hailunna/lose_9.webm": "bb19bb7370df8d9a5713f0596d7415fb3a1e250d461cc2971e48b20ee6743111",
+    "assets/battle-audio/voices/hailunna/mvp.webm": "3d0d06f2662dd9204ea88b828c51f8cbc0b0fa817a91b5b0567bdc10c60f0c3c",
+    "assets/battle-audio/voices/hailunna/mvp_1.webm": "10c93f1d00776ed7a19be195a6641fe2b85d2691c5fc3b59fd94140aa22eaf10",
+    "assets/battle-audio/voices/hailunna/mvp_2.webm": "fd37e159fc1b73ae41f09846cbe4b881c2bc06b2dd9eb2ff046672d597388266",
+    "assets/battle-audio/voices/hailunna/mvp_3.webm": "95c22c6b2ae887f3cba0818ad785bf52da5b2436f562dafb76d0125148ead3cd",
+    "assets/battle-audio/voices/hailunna/mvp_4.webm": "822f3b67e65332152274446f2899f063ccb81170c64130a0282c1a4f1f2ac76b",
+    "assets/battle-audio/voices/hailunna/mvp_8.webm": "56353036afe0bd8351cf093abdef448149aef2f7aa041c9bc3408399aa3c01d5",
+    "assets/battle-audio/voices/hailunna/mvp_9.webm": "d321e8032f0b36c480903dd05ae3329a2d94842dfe96382a724f99aab44cc03e",
+    "assets/battle-audio/voices/hailunna/skill.webm": "6ed2f5abe331755e4d0ccff93d95886fd02511144d16ad2b3130d5a064cc16be",
+    "assets/battle-audio/voices/hude/lose.webm": "a0fcd0dd880d5e0e57507ecda01a7a4d89bb64d21c6321f1e928c13bd2d044c2",
+    "assets/battle-audio/voices/hude/mvp.webm": "bd8e906b00f99186ae202226f9fb8834862c4402c297d6d9fe908a8632e0f86e",
+    "assets/battle-audio/voices/hude/mvp_2.webm": "ffe489cf8b4a1a150e42c22b89c8bc20f46fbd0d12271d498d4da3cdc9026fc9",
+    "assets/battle-audio/voices/hude/mvp_4.webm": "c709416b2b4ad1fe0a5c9ec9ba51642cd65415a63abe26d7d28652352397a896",
+    "assets/battle-audio/voices/hude/skill.webm": "ffbd7bec982f6107bd79689b2159b52b21fc252b309b4b871028765aa6f539d2",
+    "assets/battle-audio/voices/jiahe/lose.webm": "94f0913276cd8d97c2753a813c94538f5b47b95be1e2ed3d42535e4f380bbb35",
+    "assets/battle-audio/voices/jiahe/mvp.webm": "5e345c81cd7cca0f1930f0137176fac2a9afe171eea884a2ff12a2511f5a5365",
+    "assets/battle-audio/voices/jiahe/mvp_3.webm": "244c5e0ab0c676b93a59fbd7ef4330c51bb4aa5b823927eecf3b3168f31b7417",
+    "assets/battle-audio/voices/jiahe/skill.webm": "dd93e2583601afba97e10e991f03010985c5c8526a1cf40556684703ae320161",
+    "assets/battle-audio/voices/jingang/lose.webm": "4f802d3d13debc44d81197eebfa36ebe88c8fe07f9bf55dd4e5ffc0facb15c7d",
+    "assets/battle-audio/voices/jingang/mvp.webm": "973a7a9d19add9d73f725f2e716f2483f710e86a54a92d50ec8af7d1a880c9c8",
+    "assets/battle-audio/voices/jingang/mvp_3.webm": "6b44fdec56fc4dafac24863b51b4014c2189fa280ff7b81b06e341ac3fddc021",
+    "assets/battle-audio/voices/jingang/mvp_4.webm": "6a534ae6f4e3ad17c045915d8a03c0f7350d9db7e1e3102965fa0999f6f0141a",
+    "assets/battle-audio/voices/jingang/skill.webm": "50fb26b1f9f66ee9531d6fa5d9c4b360ca7d1ca514a7d18390115a77850b8a51",
+    "assets/battle-audio/voices/jiujinshan/lose.webm": "d70f2b3cf72eb901b5b229ed3b0e0412b2965ddda0c7d1d604109601df0d6b50",
+    "assets/battle-audio/voices/jiujinshan/mvp.webm": "b6b8f46d599136987a2ea9de892894bfc2e31ee177e6318e489522fdd5cbf1e2",
+    "assets/battle-audio/voices/jiujinshan/mvp_1.webm": "c3508a955b8a48c092ac3140c407723406198fa7ad426635dd40c84bd1e830e3",
+    "assets/battle-audio/voices/jiujinshan/mvp_2.webm": "0fb9c4ba70a8a3f8d119c6dc53514db146a9feb5fb80ef36b724cacf2c3980b7",
+    "assets/battle-audio/voices/jiujinshan/skill.webm": "5b4017aa29192f9d4fcbffbc0d488ecb6e75dadf3b8b52f50ea2efed29ae37ad",
+    "assets/battle-audio/voices/kasabulanka/lose.webm": "62f52615a425bcef62b327b0d583373f683cef67e91fe5723682774ebd987ebf",
+    "assets/battle-audio/voices/kasabulanka/mvp.webm": "5380f8eb627f364f7ae9b461532d7511aa71a8f0fd81991314c6446a60ad70c6",
+    "assets/battle-audio/voices/kasabulanka/skill.webm": "e2f7abe7548e40cf922e669ee99b8fd78000886affd18d4ad43311fb9469537d",
+    "assets/battle-audio/voices/kelifulan/lose.webm": "ca82a8e68ddf2a12e58fc5a7126d45a4e22649446c707672afc782e0cd7167cc",
+    "assets/battle-audio/voices/kelifulan/lose_7.webm": "74326b639019650d872b149a56c63e1c3ab89ce4e1f3929c6566170049488004",
+    "assets/battle-audio/voices/kelifulan/mvp.webm": "604b1c26e3366e4663279d3e0154ad3094733425b5966adb0ca1eef1ac7e1053",
+    "assets/battle-audio/voices/kelifulan/mvp_7.webm": "27e04bb53f4b2877c7def17d6e158723b85b34625894f2ef2174067bbec6fead",
+    "assets/battle-audio/voices/kelifulan/skill.webm": "c4787426a42e49837bf5629218ce997aa53450b283a18ee163a7862e316e62a8",
+    "assets/battle-audio/voices/kelifulan/skill_2.webm": "e83565d1577116c42cb6df0701ecdf7d53c978bd65b0987a7b8841d57671f3b2",
+    "assets/battle-audio/voices/lisailiu/lose.webm": "b39121056329953a7271c6e389e3b2917916aaa13cefb248bddebe9ffedc0045",
+    "assets/battle-audio/voices/lisailiu/mvp.webm": "85e834dddbfee7dc9d4ebc8e4c37cdb7f4c6865601db6b191caf2e5bc808b8cf",
+    "assets/battle-audio/voices/lisailiu/skill.webm": "4dd28461ae0927857a9372a14c303a189bd8d50a31d95236401292ebb4fa3aab",
+    "assets/battle-audio/voices/moli/lose.webm": "6ca6533d9a56a7024d4dcbd39337536efac542a372d8fa78073f328b6bfae1d5",
+    "assets/battle-audio/voices/moli/mvp.webm": "da38d1b1d34193ece803aeea1adfca622c2420a1f946c68b12455dfee16086d5",
+    "assets/battle-audio/voices/moli/skill.webm": "3112e253be970d034d0592c14d375ac7470104e0a63afcd0d80f576aae1988cd",
+    "assets/battle-audio/voices/ougen/lose.webm": "a1898c8ed123ce1e671af820f4f715215d2e8185967acd99332edf9edf1ebb02",
+    "assets/battle-audio/voices/ougen/lose_4.webm": "e916e71bd46719823926c3950c319ff6a1fe1041c491a67b9e08692e01ef3ed0",
+    "assets/battle-audio/voices/ougen/mvp.webm": "8450ab2780dea2d40f8fa035c20fedbf1328fb0784032229e18f2a13f7e31f81",
+    "assets/battle-audio/voices/ougen/mvp_4.webm": "3efd83bb41c79ca7c8e7c01491a681f303c0732455d76bfa2d71271438d4ad83",
+    "assets/battle-audio/voices/ougen/mvp_5.webm": "cb94ce169c91e1b994fbab3d68bf306ea112ddced189cbe0e51686bc213de5ca",
+    "assets/battle-audio/voices/ougen/mvp_7.webm": "f7d9f6164b7d0aaeb49467f39836c20df3d122953bb91301a27669e580e8d173",
+    "assets/battle-audio/voices/ougen/skill.webm": "58a7995b6362adbc89089c14df9fe97b80a3042a5026eb60b44869c853ffc1ed",
+    "assets/battle-audio/voices/qiye/lose.webm": "6a5897aef2ea427e4036b43d4e7fa0aeb09fbcf3afcf7409015d3a4ecaf0dd73",
+    "assets/battle-audio/voices/qiye/lose_3.webm": "0fb107ac45988e9eda1b4fb88a126eb7e598be3847f1c13b9b78e1fc0a5b14d8",
+    "assets/battle-audio/voices/qiye/lose_4.webm": "cdd9ab4ad35819f49083a7707c43c5e2e3642b1762f4f18afc3c754584e7d63d",
+    "assets/battle-audio/voices/qiye/lose_7.webm": "d0b4304bd1fa5347e4cca35795e9905d253038d3481df09b909c266bc47c41f6",
+    "assets/battle-audio/voices/qiye/mvp.webm": "2716c13589c45e5f680848fc5e1853f35c7557a3556f204889a209cbb6c85f10",
+    "assets/battle-audio/voices/qiye/mvp_10.webm": "87b37807db89bfc441dc5ab95437b0e00c33aa179edf5528bb56c514e6196f11",
+    "assets/battle-audio/voices/qiye/mvp_3.webm": "008a8be80b74a4b542b922ca2863166cbfe08eeb87d62d4023c80902b0bd46d2",
+    "assets/battle-audio/voices/qiye/mvp_4.webm": "6f3c3120f73e8524f6b006746073389d8e125fab2b24120f8e90ed9caa99d8a0",
+    "assets/battle-audio/voices/qiye/mvp_5.webm": "81fca48910d75054e090788aeb4a6eacd87e727bceee62c612b45d0b9ee26cd2",
+    "assets/battle-audio/voices/qiye/mvp_6.webm": "13e3251053993d9fd8ad65208c4be8b449b70ce2c525e349322a0e2b3a29f241",
+    "assets/battle-audio/voices/qiye/mvp_7.webm": "a35088b07d22240d2cc28ed48a79ca3d8fceacaef7f096f07483f508f8705d26",
+    "assets/battle-audio/voices/qiye/skill.webm": "6d99cefb272ebdc75f9627e04992fa3da4e0440edfc8b790e6932ccd014ec332",
+    "assets/battle-audio/voices/shengdiyage/lose.webm": "a9eac80f1ec72291ec875706be68be1c769050a76d62b24edd1f23cbba21aef0",
+    "assets/battle-audio/voices/shengdiyage/mvp.webm": "705d19be1f92f13b0257e034487771e042931c817e0011fd64d2c5de531db6d3",
+    "assets/battle-audio/voices/shengdiyage/mvp_8.webm": "8708c5db222316047b6346a88f53424944e5950b3f99aa5610f37ab2518912a7",
+    "assets/battle-audio/voices/shengdiyage/skill.webm": "5641de4aebb6c7dacd741f2a812414058b99525de601dd79f99f245cd3297516",
+    "assets/battle-audio/voices/sipeibojue/lose.webm": "189b1cd7596ce4a2ad6a2723fb3be725765a28824fad87f6ad72b192306c3767",
+    "assets/battle-audio/voices/sipeibojue/lose_1.webm": "8b8a085f5041048e6eeee760d018b7c57d8912637ae5834b768891d64288a760",
+    "assets/battle-audio/voices/sipeibojue/lose_2.webm": "99b90b049c3a1a53ea03ef3ac1e6b8a832569e17b1dc21b79bf67507fc766243",
+    "assets/battle-audio/voices/sipeibojue/lose_4.webm": "bc88627556b6980ba23ce47d11f19aa0dcfca29ff088b3081febbd1f8acffc23",
+    "assets/battle-audio/voices/sipeibojue/mvp.webm": "cd4182d43c91387993681f5001189461dc2ab50211e6c3959b39e3239de4fca1",
+    "assets/battle-audio/voices/sipeibojue/mvp_2.webm": "f22b8d44f1ca411a442600d79d59ea533026937bfeec5c99a986ec32a8b47f9b",
+    "assets/battle-audio/voices/sipeibojue/mvp_4.webm": "947cce1c0426f42aac539b0cf2b5285415ee3392d0e0ebc455fb1d0bd4734113",
+    "assets/battle-audio/voices/sipeibojue/skill.webm": "e37f619d741cbb566fb53ca2c4338cc679b0fa5a3c46a4f0c27971dc071e7b44",
+    "assets/battle-audio/voices/weiershiqinwang/lose.webm": "e8a801feea1212bb0f4c201be8e325f54c4caf49f9d0cf1f672f1bc48d4b130b",
+    "assets/battle-audio/voices/weiershiqinwang/lose_ex1100.webm": "42c0f2206b0f8299cafa2f76e344b2a320fffb9f6ba1da18eb9a622027bdca77",
+    "assets/battle-audio/voices/weiershiqinwang/mvp.webm": "ecd9517454979ba3d69194618ebaadc7dfce11ce7a33d7b384c33279b121d0df",
+    "assets/battle-audio/voices/weiershiqinwang/skill.webm": "5b11966a480347f97b05d29607b2ae0b9359269ad6bc98616b3a28203bbf0a4f",
+    "assets/battle-audio/voices/wuzang/lose.webm": "67a223a3884feae3eacff1cf50b0b24b7082094fc21140642a546ee2bf442c9e",
+    "assets/battle-audio/voices/wuzang/lose_1.webm": "63817109eb37f6b8a59c9fb3a6c4a2dae59917d8743dc0a6ab937675e3c17d05",
+    "assets/battle-audio/voices/wuzang/lose_8.webm": "dd2546c3937f84e43d25c97bea4e7a39ca6abd71191344f0611fdb03731ec3e8",
+    "assets/battle-audio/voices/wuzang/lose_ex1100.webm": "d2e73b0e26debb00b3d44ac6a7f8f7cc310f68c0df73b190e8c9b9c3cbcb96a3",
+    "assets/battle-audio/voices/wuzang/mvp.webm": "9926caf2331537e3518f014a32cd44479690032bdf0ffc9fd1b4be3abe9b4b79",
+    "assets/battle-audio/voices/wuzang/mvp_2.webm": "1c20e246bac2c75aa411b923ff5db0f731e0b42d2edd5afeb93cb367fa1941ef",
+    "assets/battle-audio/voices/wuzang/mvp_8.webm": "b7d070355d432725e8d085d977f1605d8fd340b68f5498218cf86633fda4c0eb",
+    "assets/battle-audio/voices/wuzang/mvp_ex1100.webm": "bf25960a62bcb5a569de8537151d2c40aefe126609cc2b1117b421749fd65912",
+    "assets/battle-audio/voices/wuzang/skill.webm": "a00c6d67a93f4a8aa887c6f23a9cccb136b8ae538d5b562b3e3ebfdf192cfd88",
+    "assets/battle-audio/voices/xianggelila/lose.webm": "81743350dba674e923054b9a507cdbfb63ac7af4617e1b7a69ee306d3e0f9047",
+    "assets/battle-audio/voices/xianggelila/mvp.webm": "43fdbb62803f30c4fcffde96b2fbbc8a536d814acc4385f57dbf9407fdbf038a",
+    "assets/battle-audio/voices/xianggelila/skill.webm": "68b9ef94f8057b2cb016bc24e1de3a189e6dac9b916b6cf59a5baf94f200d956",
+    "assets/battle-audio/voices/xiongye/lose.webm": "8dc04d00c60e204e6bc5786040c7f0c469ab138e280b2ae4c6b736a8c871d49c",
+    "assets/battle-audio/voices/xiongye/mvp.webm": "2a309645c68284fa861223a2a214469461548a70be89433ebe703e06114305d3",
+    "assets/battle-audio/voices/xiongye/skill.webm": "02936ffa5f83c011e7d3512d8b92d7f6ed382e036eb83c49cd5baf8f64997f9e",
+    "assets/battle-audio/voices/yanzhan/lose.webm": "9b67ce229268b5dfa3bb851dd72317a3a1edaf3752e940fde95bf4da8948f960",
+    "assets/battle-audio/voices/yanzhan/lose_2.webm": "c3a42158d9746190145a3ae2c31498a652ccda54c7c05db701ba49841bf34b9e",
+    "assets/battle-audio/voices/yanzhan/mvp.webm": "cac316a8320d4a0a81d01ef2df8539ca3da3c9a895a5f58b237101c7a6c3380c",
+    "assets/battle-audio/voices/yanzhan/mvp_2.webm": "2bdb689a8a5d1218c27de52d5cf4fda1fea839bbcb5d43eb81479c54c82de2c0",
+    "assets/battle-audio/voices/yanzhan/mvp_3.webm": "67641c6e82de57721fae5280544a7b2dee2884e0a8c4ecb1f4fa374e647b7d76",
+    "assets/battle-audio/voices/yanzhan/skill.webm": "16f07f23652cd5abfee12731531f54ebe4cea984ef81e3b95215aecdae2535f9",
+    "assets/battle-audio/voices/yuekecheng/lose.webm": "c71d91a0036e19d917cae601a775e172a562d1d2be2ab216254985bc253fa0ea",
+    "assets/battle-audio/voices/yuekecheng/lose_1.webm": "292af25ec37fa38ce130f5e2773dc5134c73af43781b21f49020fd243136835f",
+    "assets/battle-audio/voices/yuekecheng/lose_2.webm": "ffe71f9510b361d1b48a54d01ad282829dbafd302503450219849affc5742d10",
+    "assets/battle-audio/voices/yuekecheng/lose_8.webm": "517d07a3a3da2f2dda87b5da45f19125c0619d0f1358d10eef5529307a18fe1d",
+    "assets/battle-audio/voices/yuekecheng/mvp.webm": "322f3486d9acded8d04d06418d285416b52fda8d5219e2c05c47c660248f01b6",
+    "assets/battle-audio/voices/yuekecheng/mvp_1.webm": "e70bc119f77030c9dd26effab47bcbaa015fe815f5870dc925978abd40c00797",
+    "assets/battle-audio/voices/yuekecheng/mvp_2.webm": "4d006842f5436aed837f1aae7d2de033a71832c334b23f9a166be40115bd64c8",
+    "assets/battle-audio/voices/yuekecheng/mvp_8.webm": "3b89185c0e2695c2dc312ef913681df6bb307c3db0becf4d8d1f95956585fadf",
+    "assets/battle-audio/voices/yuekecheng/skill.webm": "d0de138052a1c519bea2a4d76a4076718e6aade0c988dffeb575b0dd7940fa44",
+    "assets/battle-audio/voices/yuekecheng/skill_1.webm": "cf15644816b98af8d77592d0093ba6b228b1f704a7492a1554ffd03fbdfb6fc9",
+    "assets/battle-audio/voices/z13/lose.webm": "5a9d411a2979960f430664790c4d17bbff8a210902735c91b01ddbab9f5b78d1",
+    "assets/battle-audio/voices/z13/mvp.webm": "b266b4afce738eecb46ab0cba2a122634280b6be44886279f0493bb0ea7a7029",
+    "assets/battle-audio/voices/z13/skill.webm": "de17e9e3b8f7837d24e118430de68da199124ad206f82e2bfb964b0725659f09",
+    "assets/battle-audio/voices/z18/lose.webm": "39690a98ee74d5724ad304b8f6acc5fb69af2146c6ac9a219e6fe702cb20bb09",
+    "assets/battle-audio/voices/z18/mvp.webm": "1870853b61cf083093e81d341267562702352655f8f0493d3881af5dadf1468c",
+    "assets/battle-audio/voices/z18/skill.webm": "057aaacc75e292621a480cb333f6d1b57adeaef32c6f9a01b4a712d76eb2f949",
+    "assets/battle-audio/voices/z2/lose.webm": "08a8732e8512d10fbc8ed2cf7fe429e58607f55e3df963519933eed9a3c97838",
+    "assets/battle-audio/voices/z2/mvp.webm": "2afcaa743619ee378fe2c5d8b142139adf89ee4e08642698738d1f9b538a72ad",
+    "assets/battle-audio/voices/z2/skill.webm": "6d283b00fcb6ec3e4adf1b8e92d84a0d82d21ac450b92b0c245405aa669a6b03",
+    "assets/battle-audio/voices/z35/lose.webm": "ae2b40dc614b9936c8f4dadb18cabaa9f5e069c19d00875c8b02d880575a18cd",
+    "assets/battle-audio/voices/z35/mvp.webm": "1a33b7d7d2c89b0ca2dd10e288ca43fb111d6473751ae3568bfdb64fcaea29ee",
+    "assets/battle-audio/voices/z35/mvp_2.webm": "3be11fe0b64c752e88f66c5a2b46599f762aa74a731f367a77378b3e4eebff2a",
+    "assets/battle-audio/voices/z35/skill.webm": "e6fff7f9d8247ec421ed3ed40bd5c212d7c4400298bcd3858321e73e8fe6ff93",
+    "assets/battle-audio/voices/z9/lose.webm": "3fcb0629bb2da78de60bd4806e780dac68edf1966ffbdf938db4562ae955c936",
+    "assets/battle-audio/voices/z9/lose_ex1100.webm": "28ec36964d995bd8d1cac18f7b6439f527eda0e16dec64631d71c5e79229e5fc",
+    "assets/battle-audio/voices/z9/mvp.webm": "184335947b6c1369915eab9c9c6a010db22351d5ff1822e92cc813b99e57cef7",
+    "assets/battle-audio/voices/z9/mvp_ex1100.webm": "5186bc019bfc540971a03c2fb5873f9e7de9316e6f7abb18bdcbef7e47a0e4cb",
+    "assets/battle-audio/voices/z9/skill.webm": "ee53ecc34c9c564ff63bbd99855ad00e42dcfb9a4926fad1b6e62780135c6e7e",
+    "assets/battle-audio/voices/zhumo/lose.webm": "05f8b671d1a5c468981694ed5da5962f2d7fe8bb667b7f610decce253f306264",
+    "assets/battle-audio/voices/zhumo/mvp.webm": "a8bb8ee4a275a3a94d2fbbdec1949b36550ce3d68d544f2a108d6e53e2ad2806",
+    "assets/battle-audio/voices/zhumo/mvp_ex1100.webm": "340ea1e37f789fa35b2abdd7695aae3ecd0a99141f905af7445cbda9ab1e1f35",
+    "assets/battle-audio/voices/zhumo/skill.webm": "40d2c1a6f4505e1c1b91cf61541da2da65f2a6c8cb5257639630736fcfb0c9a9",
     "assets/models/aircraft.glb": "606c14b75e3f90b0cc8af6194cd4bc331e3434b93e88bd031911b84766610e55",
     "assets/models/naval-mine.glb": "85b044e12d9db344070d07f3a11a5f6a3bd05b24337e7bd2e03dff1617d7980c",
     "assets/models/torpedoes/mk14.glb": "8a67cf4418da5d87e88e20a97408757418f7387c05c3836757f0ba639a5b41d6",
@@ -6453,6 +8274,602 @@
     "z35": "28500e94900c332e05351fa1476fd7f3eb3ad1244adbc22e218196305c4c6256",
     "z9": "daf65e477842d5f823e3bbe0a18fbf2a0a186671644396df4a1484610466f044",
     "zhumo": "e0982708809b2dbb288f39c3cdac533471e3a6e09b70b5dfc9044e0e81869803"
+  },
+  "audio": {
+    "music": {
+      "combat": "audio/music/combat",
+      "archive": "audio/music/archive",
+      "campaign": "audio/music/campaign",
+      "fleet-assembly": "audio/music/fleet-assembly",
+      "main-menu": "audio/music/main-menu",
+      "port": "audio/music/port",
+      "stage-select": "audio/music/stage-select"
+    },
+    "voices": {
+      "aikesaite": {
+        "skill": [
+          "audio/voice/aikesaite/skill"
+        ],
+        "lose": [
+          "audio/voice/aikesaite/lose"
+        ],
+        "victory": [
+          "audio/voice/aikesaite/mvp"
+        ]
+      },
+      "aisaikesi": {
+        "skill": [
+          "audio/voice/aisaikesi/skill"
+        ],
+        "lose": [
+          "audio/voice/aisaikesi/lose",
+          "audio/voice/aisaikesi/lose_5"
+        ],
+        "victory": [
+          "audio/voice/aisaikesi/mvp",
+          "audio/voice/aisaikesi/mvp_3",
+          "audio/voice/aisaikesi/mvp_4",
+          "audio/voice/aisaikesi/mvp_5",
+          "audio/voice/aisaikesi/mvp_6",
+          "audio/voice/aisaikesi/mvp_7",
+          "audio/voice/aisaikesi/mvp_9"
+        ]
+      },
+      "aisijimo": {
+        "skill": [
+          "audio/voice/aisijimo/skill"
+        ],
+        "lose": [
+          "audio/voice/aisijimo/lose"
+        ],
+        "victory": [
+          "audio/voice/aisijimo/mvp"
+        ]
+      },
+      "ajiakesi": {
+        "skill": [
+          "audio/voice/ajiakesi/skill"
+        ],
+        "lose": [
+          "audio/voice/ajiakesi/lose",
+          "audio/voice/ajiakesi/lose_ex1100"
+        ],
+        "victory": [
+          "audio/voice/ajiakesi/mvp",
+          "audio/voice/ajiakesi/mvp_1",
+          "audio/voice/ajiakesi/mvp_ex1100"
+        ]
+      },
+      "ajilisi": {
+        "skill": [
+          "audio/voice/ajilisi/skill"
+        ],
+        "lose": [
+          "audio/voice/ajilisi/lose"
+        ],
+        "victory": [
+          "audio/voice/ajilisi/mvp"
+        ]
+      },
+      "akasita": {
+        "skill": [
+          "audio/voice/akasita/skill"
+        ],
+        "lose": [
+          "audio/voice/akasita/lose"
+        ],
+        "victory": [
+          "audio/voice/akasita/mvp",
+          "audio/voice/akasita/mvp_9"
+        ]
+      },
+      "baerdimo": {
+        "skill": [
+          "audio/voice/baerdimo/skill"
+        ],
+        "lose": [
+          "audio/voice/baerdimo/lose",
+          "audio/voice/baerdimo/lose_5"
+        ],
+        "victory": [
+          "audio/voice/baerdimo/mvp",
+          "audio/voice/baerdimo/mvp_2",
+          "audio/voice/baerdimo/mvp_5"
+        ]
+      },
+      "beikaluolaina": {
+        "skill": [
+          "audio/voice/beikaluolaina/skill"
+        ],
+        "lose": [
+          "audio/voice/beikaluolaina/lose"
+        ],
+        "victory": [
+          "audio/voice/beikaluolaina/mvp",
+          "audio/voice/beikaluolaina/mvp_1"
+        ]
+      },
+      "bisimai": {
+        "skill": [
+          "audio/voice/bisimai/skill"
+        ],
+        "lose": [
+          "audio/voice/bisimai/lose"
+        ],
+        "victory": [
+          "audio/voice/bisimai/mvp",
+          "audio/voice/bisimai/mvp_2",
+          "audio/voice/bisimai/mvp_8"
+        ]
+      },
+      "boge": {
+        "skill": [
+          "audio/voice/boge/skill"
+        ],
+        "lose": [
+          "audio/voice/boge/lose"
+        ],
+        "victory": [
+          "audio/voice/boge/mvp"
+        ]
+      },
+      "canglong": {
+        "skill": [
+          "audio/voice/canglong/skill"
+        ],
+        "lose": [
+          "audio/voice/canglong/lose"
+        ],
+        "victory": [
+          "audio/voice/canglong/mvp",
+          "audio/voice/canglong/mvp_1"
+        ]
+      },
+      "changdao": {
+        "skill": [
+          "audio/voice/changdao/skill"
+        ],
+        "lose": [
+          "audio/voice/changdao/lose",
+          "audio/voice/changdao/lose_1",
+          "audio/voice/changdao/lose_3"
+        ],
+        "victory": [
+          "audio/voice/changdao/mvp"
+        ]
+      },
+      "chicheng": {
+        "skill": [
+          "audio/voice/chicheng/skill"
+        ],
+        "lose": [
+          "audio/voice/chicheng/lose",
+          "audio/voice/chicheng/lose_3"
+        ],
+        "victory": [
+          "audio/voice/chicheng/mvp",
+          "audio/voice/chicheng/mvp_3",
+          "audio/voice/chicheng/mvp_4"
+        ]
+      },
+      "dahuangfeng": {
+        "skill": [
+          "audio/voice/dahuangfeng/skill"
+        ],
+        "lose": [
+          "audio/voice/dahuangfeng/lose",
+          "audio/voice/dahuangfeng/lose_3"
+        ],
+        "victory": [
+          "audio/voice/dahuangfeng/mvp",
+          "audio/voice/dahuangfeng/mvp_3"
+        ]
+      },
+      "daofeng": {
+        "skill": [
+          "audio/voice/daofeng/skill"
+        ],
+        "lose": [
+          "audio/voice/daofeng/lose",
+          "audio/voice/daofeng/lose_3"
+        ],
+        "victory": [
+          "audio/voice/daofeng/mvp",
+          "audio/voice/daofeng/mvp_1",
+          "audio/voice/daofeng/mvp_2",
+          "audio/voice/daofeng/mvp_ex1100"
+        ]
+      },
+      "feilong": {
+        "skill": [
+          "audio/voice/feilong/skill",
+          "audio/voice/feilong/skill_9"
+        ],
+        "lose": [
+          "audio/voice/feilong/lose"
+        ],
+        "victory": [
+          "audio/voice/feilong/mvp"
+        ]
+      },
+      "hailunna": {
+        "skill": [
+          "audio/voice/hailunna/skill"
+        ],
+        "lose": [
+          "audio/voice/hailunna/lose",
+          "audio/voice/hailunna/lose_1",
+          "audio/voice/hailunna/lose_2",
+          "audio/voice/hailunna/lose_3",
+          "audio/voice/hailunna/lose_8",
+          "audio/voice/hailunna/lose_9"
+        ],
+        "victory": [
+          "audio/voice/hailunna/mvp",
+          "audio/voice/hailunna/mvp_1",
+          "audio/voice/hailunna/mvp_2",
+          "audio/voice/hailunna/mvp_3",
+          "audio/voice/hailunna/mvp_4",
+          "audio/voice/hailunna/mvp_8",
+          "audio/voice/hailunna/mvp_9"
+        ]
+      },
+      "hude": {
+        "skill": [
+          "audio/voice/hude/skill"
+        ],
+        "lose": [
+          "audio/voice/hude/lose"
+        ],
+        "victory": [
+          "audio/voice/hude/mvp",
+          "audio/voice/hude/mvp_2",
+          "audio/voice/hude/mvp_4"
+        ]
+      },
+      "jiahe": {
+        "skill": [
+          "audio/voice/jiahe/skill"
+        ],
+        "lose": [
+          "audio/voice/jiahe/lose"
+        ],
+        "victory": [
+          "audio/voice/jiahe/mvp",
+          "audio/voice/jiahe/mvp_3"
+        ]
+      },
+      "jingang": {
+        "skill": [
+          "audio/voice/jingang/skill"
+        ],
+        "lose": [
+          "audio/voice/jingang/lose"
+        ],
+        "victory": [
+          "audio/voice/jingang/mvp",
+          "audio/voice/jingang/mvp_3",
+          "audio/voice/jingang/mvp_4"
+        ]
+      },
+      "jiujinshan": {
+        "skill": [
+          "audio/voice/jiujinshan/skill"
+        ],
+        "lose": [
+          "audio/voice/jiujinshan/lose"
+        ],
+        "victory": [
+          "audio/voice/jiujinshan/mvp",
+          "audio/voice/jiujinshan/mvp_1",
+          "audio/voice/jiujinshan/mvp_2"
+        ]
+      },
+      "kasabulanka": {
+        "skill": [
+          "audio/voice/kasabulanka/skill"
+        ],
+        "lose": [
+          "audio/voice/kasabulanka/lose"
+        ],
+        "victory": [
+          "audio/voice/kasabulanka/mvp"
+        ]
+      },
+      "kelifulan": {
+        "skill": [
+          "audio/voice/kelifulan/skill",
+          "audio/voice/kelifulan/skill_2"
+        ],
+        "lose": [
+          "audio/voice/kelifulan/lose",
+          "audio/voice/kelifulan/lose_7"
+        ],
+        "victory": [
+          "audio/voice/kelifulan/mvp",
+          "audio/voice/kelifulan/mvp_7"
+        ]
+      },
+      "lisailiu": {
+        "skill": [
+          "audio/voice/lisailiu/skill"
+        ],
+        "lose": [
+          "audio/voice/lisailiu/lose"
+        ],
+        "victory": [
+          "audio/voice/lisailiu/mvp"
+        ]
+      },
+      "moli": {
+        "skill": [
+          "audio/voice/moli/skill"
+        ],
+        "lose": [
+          "audio/voice/moli/lose"
+        ],
+        "victory": [
+          "audio/voice/moli/mvp"
+        ]
+      },
+      "ougen": {
+        "skill": [
+          "audio/voice/ougen/skill"
+        ],
+        "lose": [
+          "audio/voice/ougen/lose",
+          "audio/voice/ougen/lose_4"
+        ],
+        "victory": [
+          "audio/voice/ougen/mvp",
+          "audio/voice/ougen/mvp_4",
+          "audio/voice/ougen/mvp_5",
+          "audio/voice/ougen/mvp_7"
+        ]
+      },
+      "qiye": {
+        "skill": [
+          "audio/voice/qiye/skill"
+        ],
+        "lose": [
+          "audio/voice/qiye/lose",
+          "audio/voice/qiye/lose_3",
+          "audio/voice/qiye/lose_4",
+          "audio/voice/qiye/lose_7"
+        ],
+        "victory": [
+          "audio/voice/qiye/mvp",
+          "audio/voice/qiye/mvp_10",
+          "audio/voice/qiye/mvp_3",
+          "audio/voice/qiye/mvp_4",
+          "audio/voice/qiye/mvp_5",
+          "audio/voice/qiye/mvp_6",
+          "audio/voice/qiye/mvp_7"
+        ]
+      },
+      "shengdiyage": {
+        "skill": [
+          "audio/voice/shengdiyage/skill"
+        ],
+        "lose": [
+          "audio/voice/shengdiyage/lose"
+        ],
+        "victory": [
+          "audio/voice/shengdiyage/mvp",
+          "audio/voice/shengdiyage/mvp_8"
+        ]
+      },
+      "sipeibojue": {
+        "skill": [
+          "audio/voice/sipeibojue/skill"
+        ],
+        "lose": [
+          "audio/voice/sipeibojue/lose",
+          "audio/voice/sipeibojue/lose_1",
+          "audio/voice/sipeibojue/lose_2",
+          "audio/voice/sipeibojue/lose_4"
+        ],
+        "victory": [
+          "audio/voice/sipeibojue/mvp",
+          "audio/voice/sipeibojue/mvp_2",
+          "audio/voice/sipeibojue/mvp_4"
+        ]
+      },
+      "weiershiqinwang": {
+        "skill": [
+          "audio/voice/weiershiqinwang/skill"
+        ],
+        "lose": [
+          "audio/voice/weiershiqinwang/lose",
+          "audio/voice/weiershiqinwang/lose_ex1100"
+        ],
+        "victory": [
+          "audio/voice/weiershiqinwang/mvp"
+        ]
+      },
+      "wuzang": {
+        "skill": [
+          "audio/voice/wuzang/skill"
+        ],
+        "lose": [
+          "audio/voice/wuzang/lose",
+          "audio/voice/wuzang/lose_1",
+          "audio/voice/wuzang/lose_8",
+          "audio/voice/wuzang/lose_ex1100"
+        ],
+        "victory": [
+          "audio/voice/wuzang/mvp",
+          "audio/voice/wuzang/mvp_2",
+          "audio/voice/wuzang/mvp_8",
+          "audio/voice/wuzang/mvp_ex1100"
+        ]
+      },
+      "xianggelila": {
+        "skill": [
+          "audio/voice/xianggelila/skill"
+        ],
+        "lose": [
+          "audio/voice/xianggelila/lose"
+        ],
+        "victory": [
+          "audio/voice/xianggelila/mvp"
+        ]
+      },
+      "xiongye": {
+        "skill": [
+          "audio/voice/xiongye/skill"
+        ],
+        "lose": [
+          "audio/voice/xiongye/lose"
+        ],
+        "victory": [
+          "audio/voice/xiongye/mvp"
+        ]
+      },
+      "yanzhan": {
+        "skill": [
+          "audio/voice/yanzhan/skill"
+        ],
+        "lose": [
+          "audio/voice/yanzhan/lose",
+          "audio/voice/yanzhan/lose_2"
+        ],
+        "victory": [
+          "audio/voice/yanzhan/mvp",
+          "audio/voice/yanzhan/mvp_2",
+          "audio/voice/yanzhan/mvp_3"
+        ]
+      },
+      "yuekecheng": {
+        "skill": [
+          "audio/voice/yuekecheng/skill",
+          "audio/voice/yuekecheng/skill_1"
+        ],
+        "lose": [
+          "audio/voice/yuekecheng/lose",
+          "audio/voice/yuekecheng/lose_1",
+          "audio/voice/yuekecheng/lose_2",
+          "audio/voice/yuekecheng/lose_8"
+        ],
+        "victory": [
+          "audio/voice/yuekecheng/mvp",
+          "audio/voice/yuekecheng/mvp_1",
+          "audio/voice/yuekecheng/mvp_2",
+          "audio/voice/yuekecheng/mvp_8"
+        ]
+      },
+      "z13": {
+        "skill": [
+          "audio/voice/z13/skill"
+        ],
+        "lose": [
+          "audio/voice/z13/lose"
+        ],
+        "victory": [
+          "audio/voice/z13/mvp"
+        ]
+      },
+      "z18": {
+        "skill": [
+          "audio/voice/z18/skill"
+        ],
+        "lose": [
+          "audio/voice/z18/lose"
+        ],
+        "victory": [
+          "audio/voice/z18/mvp"
+        ]
+      },
+      "z2": {
+        "skill": [
+          "audio/voice/z2/skill"
+        ],
+        "lose": [
+          "audio/voice/z2/lose"
+        ],
+        "victory": [
+          "audio/voice/z2/mvp"
+        ]
+      },
+      "z35": {
+        "skill": [
+          "audio/voice/z35/skill"
+        ],
+        "lose": [
+          "audio/voice/z35/lose"
+        ],
+        "victory": [
+          "audio/voice/z35/mvp",
+          "audio/voice/z35/mvp_2"
+        ]
+      },
+      "z9": {
+        "skill": [
+          "audio/voice/z9/skill"
+        ],
+        "lose": [
+          "audio/voice/z9/lose",
+          "audio/voice/z9/lose_ex1100"
+        ],
+        "victory": [
+          "audio/voice/z9/mvp",
+          "audio/voice/z9/mvp_ex1100"
+        ]
+      },
+      "zhumo": {
+        "skill": [
+          "audio/voice/zhumo/skill"
+        ],
+        "lose": [
+          "audio/voice/zhumo/lose"
+        ],
+        "victory": [
+          "audio/voice/zhumo/mvp",
+          "audio/voice/zhumo/mvp_ex1100"
+        ]
+      }
+    },
+    "effects": {
+      "battle-air-atk": "audio/effect/battle-air-atk",
+      "battle-boom1": "audio/effect/battle-boom1",
+      "battle-boom2": "audio/effect/battle-boom2",
+      "battle-cannon-155mm": "audio/effect/battle-cannon-155mm",
+      "battle-cannon-203mm": "audio/effect/battle-cannon-203mm",
+      "battle-cannon-356mm": "audio/effect/battle-cannon-356mm",
+      "battle-cannon-air": "audio/effect/battle-cannon-air",
+      "battle-cannon-air-overload": "audio/effect/battle-cannon-air-overload",
+      "battle-cannon-main": "audio/effect/battle-cannon-main",
+      "battle-cannon-main-prepared": "audio/effect/battle-cannon-main-prepared",
+      "battle-cannon-sub": "audio/effect/battle-cannon-sub",
+      "battle-dididi": "audio/effect/battle-dididi",
+      "battle-firework": "audio/effect/battle-firework",
+      "battle-hit": "audio/effect/battle-hit",
+      "battle-hit-cirt": "audio/effect/battle-hit-cirt",
+      "battle-jianqi1": "audio/effect/battle-jianqi1",
+      "battle-jianqi10": "audio/effect/battle-jianqi10",
+      "battle-jianqi2": "audio/effect/battle-jianqi2",
+      "battle-jianqi3": "audio/effect/battle-jianqi3",
+      "battle-jianqi4": "audio/effect/battle-jianqi4",
+      "battle-jianqi5": "audio/effect/battle-jianqi5",
+      "battle-jianqi6": "audio/effect/battle-jianqi6",
+      "battle-jianqi7": "audio/effect/battle-jianqi7",
+      "battle-jianqi8": "audio/effect/battle-jianqi8",
+      "battle-jianqi9": "audio/effect/battle-jianqi9",
+      "battle-lightning-hit": "audio/effect/battle-lightning-hit",
+      "battle-plane": "audio/effect/battle-plane",
+      "battle-raser": "audio/effect/battle-raser",
+      "battle-remote-boom": "audio/effect/battle-remote-boom",
+      "battle-remote-fire": "audio/effect/battle-remote-fire",
+      "battle-remote-fly": "audio/effect/battle-remote-fly",
+      "battle-ryza1": "audio/effect/battle-ryza1",
+      "battle-scan": "audio/effect/battle-scan",
+      "battle-ship-move": "audio/effect/battle-ship-move",
+      "battle-shuihua": "audio/effect/battle-shuihua",
+      "battle-sink": "audio/effect/battle-sink",
+      "battle-torpedo-hit": "audio/effect/battle-torpedo-hit",
+      "battle-torpedo-move": "audio/effect/battle-torpedo-move",
+      "battle-wave": "audio/effect/battle-wave"
+    }
   },
   "abilityDemos": {
     "dd-1": {

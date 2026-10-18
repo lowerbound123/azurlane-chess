@@ -1400,5 +1400,40 @@
     "ca": "ougen",
     "bb": "beikaluolaina",
     "cv": "qiye"
+  },
+  "audio": {
+    "music": "cue/bgm-battle-arcticocean.b",
+    "musicLibrary": {
+      "main-menu": {
+        "name": "经典主界面",
+        "usage": "主界面、返回主菜单",
+        "bundle": "cue/bgm-main.b"
+      },
+      "stage-select": {
+        "name": "常规关卡",
+        "usage": "选关、关卡详情",
+        "bundle": "cue/bgm-level02.b"
+      },
+      "fleet-assembly": {
+        "name": "皇家主题",
+        "usage": "编队、出击准备",
+        "bundle": "cue/bgm-level03.b"
+      },
+      "archive": {
+        "name": "柔和酒吧",
+        "usage": "存档、图鉴、设置",
+        "bundle": "cue/bgm-bar-soft.b"
+      },
+      "port": {
+        "name": "晴空细雨",
+        "usage": "休闲主页、港口",
+        "bundle": "cue/bgm-story-afterrain-soft.b"
+      },
+      "campaign": {
+        "name": "余烬主题",
+        "usage": "战役地图、高难关卡预览",
+        "bundle": "cue/bgm-main-ashes-theme.b"
+      }
+    }
   }
 }

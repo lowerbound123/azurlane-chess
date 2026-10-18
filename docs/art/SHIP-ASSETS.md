@@ -6,7 +6,7 @@
 
 ## 使用
 
-需要项目指定的 Node.js；首次下载还需 [uv](https://docs.astral.sh/uv/)，脚本会在 `.generated/ship-assets-python` 初始化锁定的 Python 3.11 环境。只检查已有文件不需要 Python 或网络。
+需要项目指定的 Node.js；首次下载还需 [uv](https://docs.astral.sh/uv/)，脚本会在 `.generated/ship-assets-python` 初始化锁定的 Python 3.11 环境。音频首次导入还需要带 HCA 解码、libopus 编码的 `ffmpeg`、`ffprobe`。语音／音效／BGM 统一使用 WebM／Opus、48 kHz，VBR 目标码率分别为 32／64／80 kbit/s，保留源声道数。只检查已有文件不需要 Python、FFmpeg 或网络。
 
 ```sh
 npm run assets:check
@@ -15,6 +15,16 @@ npm run assets:fetch
 ```
 
 `assets:fetch` 校验本地哈希，仅请求缺失或损坏的组件。图集页损坏只修复该角色的小人包；立绘缺失只请求立绘包。完整资源再次执行返回 `planned: []`、`changed: false`，不请求远端、不导出缩略图、不重写运行时文件。正常 dev/test/build 只验证并复制固定资源，不联网。
+
+同一入口也准备当前实际引用舰船的战斗语音、通用战斗音效，以及 `audio.music` 指定的战斗配乐和 `audio.musicLibrary` 列出的通用 BGM。音频源文件保存在 `assets/battle-audio`；`assets:generate` 将游戏使用的技能、阵亡、胜利语音以及音效、BGM 登记到运行时资源清单，构建仍只校验和复制。需要单独处理音频时使用：
+
+```sh
+npm run assets:fetch -- --audio-only --dry-run
+npm run assets:fetch -- --audio-only
+npm run assets:check -- --audio-only
+```
+
+语音只请求实际映射引用的基础角色 `cue/cv-<编号>-battle.b`，不下载未引用的备用舰、主界面语音包或礼物语音包。文件损坏只重做所属音频包；已完成的其他包保持不变。完整说明及清单结构见 [战斗音频资源](BATTLE-AUDIO.md)。
 
 首次导入或小人资源变化需要本机浏览器导出待机图，可使用已安装 Chrome：
 
@@ -32,12 +42,14 @@ SPINE_BROWSER_EXECUTABLE='/Applications/Google Chrome.app/Contents/MacOS/Google 
 - `historicalSubstitutions`：无对应舰娘的历史单位使用的外观及理由。
 - `templates`：旧存档或无独立身份靶舰的同舰种默认资源。
 - `portraits`：最长边不超过 1600px、WebP 质量 80、头像最大 256px；`portraits.watermark` 配置固定文字“请支持官方碧蓝航线喵～”，烘焙到全部 41 张舰娘立绘、41 张头像及默认立绘中。
+- `audio.music`：一首配乐的精确官方包路径。通用音效固定为 `cue/se-battle.b`；战斗语音编号从实际引用舰船的基础 `skinId` 去掉末位 `0` 得到。
+- `audio.musicLibrary`：可选的具名通用 BGM 曲库，格式为 `<曲目ID>: {name, usage, bundle}`。`usage` 只记录建议页面用途；新增曲目只处理新增包，名称／用途变化不重转码。每首独立保存到 `music/<曲目ID>`，已有战斗配乐和语音／音效不变。
 
-改动后运行 `assets:fetch`。名称或映射变化会更新展示数据；基础资源名、源提交或压缩参数变化会重新处理受影响资源。`painting` 与 `chibi` 使用独立配置指纹，修改水印或立绘压缩参数只使立绘组件失效，不会重新下载 Spine 小人。运行时生成清单 `src/characters/ships.generated.json` 和 `assets/ship-assets.lock.json` 随资源一起保存，不手工修改。锁文件记录 CDN 版本、bundle MD5、最终文件 SHA-256、全部动作名和显示参数。新增战役单位应在配置中补齐；测试会校验各模式覆盖率及舰种一致性。
+改动后运行 `assets:fetch`。名称或映射变化会更新展示数据；基础资源名、源提交或压缩参数变化会重新处理受影响资源。`painting` 与 `chibi` 使用独立配置指纹，修改水印或立绘压缩参数只使立绘组件失效，不会重新下载 Spine 小人。运行时生成清单 `src/characters/ships.generated.json` 和 `assets/ship-assets.lock.json` 随资源一起保存，不手工修改。锁文件记录 CDN 版本、bundle MD5、最终文件 SHA-256、全部动作名和显示参数。新增战役单位应在配置中补齐显式映射，并确保舰种一致。
 
 ## 来源与失败处理
 
-官方路径精确请求 `char/<base>`、`painting/<base>`，并从基础 prefab 的可见图层枚举必要纹理依赖。武藏、岛风、Z13、Z9 额外合成人物／前景，Z13 还读取 prefab 明确引用的默认表情 Sprite；按官方层级顺序、位置、尺寸、缩放和 pivot 合成，缺少任一必要层会报错。配置中的 `paintingLayers` 固定这四张基础立绘的所需层名，来源与布局记录在锁文件。下载器不使用舰名前缀匹配，不获取皮肤、语音、Live2D 或整包客户端。实现参考 [AzurLane-AssetDownloader](https://github.com/nobbyfix/AzurLane-AssetDownloader)，Python 的直接和传递依赖锁定在 `scripts/ship-assets/uv.lock`。
+官方路径精确请求 `char/<base>`、`painting/<base>`，并从基础 prefab 的可见图层枚举必要纹理依赖。武藏、岛风、Z13、Z9 额外合成人物／前景，Z13 还读取 prefab 明确引用的默认表情 Sprite；按官方层级顺序、位置、尺寸、缩放和 pivot 合成，缺少任一必要层会报错。配置中的 `paintingLayers` 固定这四张基础立绘的所需层名，来源与布局记录在锁文件。下载器不使用舰名前缀匹配，不获取额外皮肤包、Live2D 或整包客户端；音频仅获取上文声明的精确范围。实现参考 [AzurLane-AssetDownloader](https://github.com/nobbyfix/AzurLane-AssetDownloader)，Python 的直接和传递依赖锁定在 `scripts/ship-assets/uv.lock`。
 
 立绘明确的索引缺失或 HTTP 404 才会尝试配置中的公开仓库；来源固定至完整 Git 提交。Spine 小人只使用官方 CDN 下载的原生 3.8.99 资源，已移除旧版公开 Spine 备用源配置。同一舰娘仍无完整资源时，按顺序挑选可用同舰种替补，普通目录避免与其他槽位重复，历史文本保留原名。超时、限流、校验和提取错误会报错，不会自动换人。
 

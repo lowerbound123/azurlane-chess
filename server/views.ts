@@ -9,6 +9,7 @@ const SubmittedPlansSchema=Type.Unsafe<SubmittedPlans>(schemas.SubmittedPlans);
 import {SHIP_DEFINITIONS} from '../src/ship-definitions.ts';
 import * as E from '../src/engine.ts';
 import { sampleBattleVisuals } from '../src/battle-visuals.ts';
+import {projectTorpedoWakes} from '../src/wake-tracks.ts';
 
 const copy = E.clone;
 const point = (p:Hex) => ({ q: p.q, r: p.r });
@@ -108,7 +109,8 @@ export function playerResult(before:Game, result:RoundResult, team:number):Clien
     const frame = [...frames].reverse().find(f => f.t <= (e.t??0)) || frames[0];
     return e.at && frame?.visible.includes(E.key(e.at));
   }).slice(-300).map(e => ({ round: e.round, t: e.t, at: point(e.at!), team: null, text: '可见区域发生战斗事件' }));
-  return { game: playerView(result.game, team), frames, events, presentation: [] };
+  const torpedoWakes=projectTorpedoWakes(result.torpedoWakes??[],result.frames,team);
+  return { ...(torpedoWakes.length?{torpedoWakes}:{}),game: playerView(result.game, team), frames, events, presentation: [] };
 }
 
 function invalid(reason='请检查己方单位、指令格式和已知地图。'):never {throw Object.assign(new Error(`作战指令无效：${reason}`),{code:'INVALID_ORDERS'});}

@@ -11,6 +11,7 @@ import {TacticalModels} from '../scene/tactical-models.ts';
 import {Board,mapViewBounds,mapCameraDistance} from '../scene/board.ts';
 import {Units,type StatusAnchor} from '../scene/units.ts';
 import {Effects} from '../scene/effects.ts';
+import {Wakes} from '../scene/wakes.ts';
 
 // Interaction state is independent of camera controls: a gesture can never become an order.
 export function movedPointer(start:XY,event:Pick<PointerEvent,'clientX'|'clientY'>,threshold=6) {
@@ -51,7 +52,7 @@ type MapEvents=HTMLElementEventMap&DocumentEventMap&{webglcontextlost:Event};
 type MapEmits={ (event:'zoom',value:number):void;(event:'rotate',value:boolean):void;(event:'hex',value:{hex:Hex;event:PointerEvent;forceMove:boolean}):void;(event:'ship',value:{ship:RenderShip;event:PointerEvent}):void;(event:'node',value:{index:number;shipId:string}):void;(event:'hover',value:Hex|null):void;(event:'home'):void;(event:'undo'):void};
 export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},emit:MapEmits,onStatusPositions?:(anchors:StatusAnchor[])=>void){
     const error=ref(''),loading=ref(false);let generation=0,models:TacticalModels|null=null;
-    let renderer:THREE.WebGLRenderer|null=null,scene:THREE.Scene|null=null,camera:THREE.OrthographicCamera|null=null,controls:OrbitControls|null=null,board:Board|null=null,units:Units|null=null,effects:Effects|null=null,observer:ResizeObserver|null=null,frame=0;
+    let renderer:THREE.WebGLRenderer|null=null,scene:THREE.Scene|null=null,camera:THREE.OrthographicCamera|null=null,controls:OrbitControls|null=null,board:Board|null=null,units:Units|null=null,effects:Effects|null=null,wakes:Wakes|null=null,observer:ResizeObserver|null=null,frame=0;
     let dirty = true, syncNeeded = true, rotating = false, listeners:(()=>void)[] = [], width = 1, height = 1;
     const center = new THREE.Vector3(15.9, 0, 10.5), raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
     const seaPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hit = new THREE.Vector3();
@@ -135,6 +136,7 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
       else if(traveling)fit();
       traveling=!!props.model.travelFocus;
       board!.update(props.model); units!.update(props.model); effects!.update(props.model.visuals,[...props.model.ships,...props.model.planes]); effects!.abilities.update(props.model);
+      wakes!.update(props.model);
       Object.assign(renderer!.domElement.dataset, { rendererStatus: 'ready', cellCount: String(props.model.cells.length), shipCount: String(props.model.ships.length), planeCount: String(props.model.planes?.length || 0),torpedoCount:String(props.model.torpedoes.length),mineCount:String(board!.plans.children.filter(o=>o.userData.mine).length),anchoredEffectCount:String(props.model.visuals?.effects?.filter(e=>e.targetId).length??0),abilityCount:String(effects!.abilities.cache.size), projectileCount: String(props.model.visuals?.projectiles?.length || 0),projectileHeadCount:String(props.model.visuals?.projectiles?.filter(p=>p.position).length??0), effectCount: String(props.model.visuals?.effects?.length || 0) });
       syncNeeded = false; dirty = true;
     }
@@ -145,7 +147,7 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
         if (syncNeeded) update();
         const changed = controls!.update();
         const characterChanged=now-lastCharacterFrame>=1000/30;
-        if(characterChanged){units!.tick((now-lastCharacterFrame)/1000,camera!,props.model.visualTime);effects!.abilities.seek((props.model.round??0)*8+(props.model.visualTime??now/1000));lastCharacterFrame=now;}
+        if(characterChanged){units!.tick((now-lastCharacterFrame)/1000,camera!,props.model.visualTime);effects!.abilities.seek((props.model.round??0)*8+(props.model.visualTime??now/1000));wakes!.tick(now/1000,!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);lastCharacterFrame=now;}
         const seaChanged = now-lastSeaFrame >= 1000/30 && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
         // Ambient water keeps its own clock across round resets and replay speeds.
         if(seaChanged){board!.tick(now/1000);lastSeaFrame=now;}
@@ -158,9 +160,9 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
     function cleanup() {
       onStatusPositions?.([]);generation++;loading.value=false;
       cancelAnimationFrame(frame); frame = 0; observer?.disconnect(); observer = null; listeners.forEach(fn => fn()); listeners = [];
-      controls?.dispose(); board?.dispose(); units?.dispose(); effects?.dispose();models?.dispose();models=null;
+      controls?.dispose(); board?.dispose(); units?.dispose(); effects?.dispose();wakes?.dispose();models?.dispose();models=null;
       if (renderer) { renderer!.dispose(); renderer!.forceContextLoss(); renderer!.domElement.remove(); }
-      renderer=null;controls=null;board=null;units=null;effects=null;scene=null;camera=null; pointers.clear(); gestureSuppressed = false;
+      renderer=null;controls=null;board=null;units=null;effects=null;wakes=null;scene=null;camera=null; pointers.clear(); gestureSuppressed = false;
     }
     async function initialize() {
       cleanup(); setRotate(false); error.value = ''; syncNeeded = true; dirty = true;
@@ -176,6 +178,7 @@ export function useBattleMap(host:Ref<HTMLElement|null>,props:{model:MapModel},e
         controls!.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.PAN, RIGHT: null }; controls!.touches = { ONE: rotating ? THREE.TOUCH.ROTATE : THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN };
         controls!.addEventListener('change', () => { dirty = true; emit('zoom', camera!.zoom); });
         board = new Board(scene,models); units = new Units(scene,models); effects = new Effects(scene);
+        wakes = new Wakes(scene);
         listen(canvas, 'pointerdown', e => { if(e.pointerType==='mouse'){applyDesktopMouseButtons(controls!,e);if(e.button===1||e.button===2)e.preventDefault();} if (!pointers.size) gestureSuppressed = false; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, button: e.button }); if (pointers.size > 1) gestureSuppressed = true; }, true);
         listen(canvas, 'pointermove', e => { const start = pointers.get(e.pointerId); if (start && movedPointer(start, e)) gestureSuppressed = true; if (!pointers.size) emit('hover', readPointer(e)); }, true);
         listen(canvas, 'pointerup', e => { const start = pointers.get(e.pointerId); if (!start) return; const suppress = gestureSuppressed || movedPointer(start, e) || pointers.size > 1; pointers.delete(e.pointerId); if (!suppress) pick(e); }, true);

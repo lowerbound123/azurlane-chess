@@ -1,9 +1,10 @@
 import {wrap,releaseProxy,type Remote} from 'comlink';
+import battleWorkerUrl from '../workers/battle.worker.ts?worker&url';
 import type {BattleWorkerAPI,LocalRoundRequest} from '../workers/battle-api.ts';
 import type {RoundResult} from '../../shared/game.ts';
 export interface BattleWorkerHandle {api:BattleWorkerAPI;dispose:()=>void}
 export const createBattleWorker=():BattleWorkerHandle=>{
- const worker=new Worker(new URL('../workers/battle.worker.ts',import.meta.url),{type:'module'});
+ const worker=new Worker(battleWorkerUrl,{type:'module'});
  const api:Remote<BattleWorkerAPI>=wrap(worker);
  return {api,dispose:()=>{api[releaseProxy]();worker.terminate();}};
 };

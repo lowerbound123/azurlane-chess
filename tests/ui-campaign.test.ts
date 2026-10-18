@@ -3,6 +3,8 @@ import {test,expect,afterEach,vi} from 'vitest';
 import {mountGame,settleGame} from './helpers/mount-game.ts';
 import {CAMPAIGN_SAVE_KEY,createCampaignStorage} from '../src/campaign/storage.ts';
 import * as C from '../src/campaign/index.ts';
+import legacyCampaignSave from './fixtures/campaign-save-v085.json';
+import type {CampaignSave} from '../shared/campaign.ts';
 let mounted:Awaited<ReturnType<typeof mountGame>>|undefined;
 afterEach(()=>{mounted?.wrapper.unmount();mounted=undefined;localStorage.clear();window.history.replaceState({},'','/');});
 const button=(text:string)=>[...document.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent?.includes(text));
@@ -127,6 +129,17 @@ test('reload during automatic sailing resumes the settled checkpoint and continu
 test('damaged campaign save redirects to the tutorial menu without overwriting it',async()=>{
  localStorage.setItem(CAMPAIGN_SAVE_KEY,'broken');window.history.replaceState({},'','/tutorial/campaign');document.body.innerHTML='<div id="app"></div>';mounted=await mountGame();await settleGame();
  expect(mounted.router.currentRoute.value.name).toBe('tutorial');expect(mounted.session.campaign).toBeNull();expect(localStorage.getItem(CAMPAIGN_SAVE_KEY)).toBe('broken');expect(document.body.textContent).toContain('读取失败');
+});
+test('the old teaching coastline resumes at the same checkpoint on the new northbound layout',async()=>{
+ const legacy=legacyCampaignSave as unknown as CampaignSave;
+ expect(createCampaignStorage(localStorage).write(legacy).ok).toBe(true);
+ window.history.replaceState({},'','/tutorial/campaign');document.body.innerHTML='<div id="app"></div>';mounted=await mountGame();await settleGame();
+ const vm=mounted.session,next=C.createCampaignFixture(legacy.state);
+ expect(vm.campaign?.chapter).toBe(legacy.state.chapter);expect(vm.campaign?.checkpoint).toBe(legacy.state.checkpoint);
+ expect(vm.campaign?.completed).toEqual(legacy.state.completed);
+ expect(vm.game?.round).toBe(1);expect(vm.game?.map.islands).toEqual(next.game.map.islands);
+ expect(vm.game?.ships.map(s=>s.pos)).toEqual(next.game.ships.map(s=>s.pos));
+ expect(createCampaignStorage(localStorage).read().kind).toBe('resume');
 });
 test('reload during calculation restores the last planned checkpoint without leaking a stale result',async()=>{
  const {session:vm}=await setup();vm.startCampaign(false);await settleGame();vm.campaignSuggest();await settleGame();const saved=localStorage.getItem(CAMPAIGN_SAVE_KEY);

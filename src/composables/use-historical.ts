@@ -17,6 +17,7 @@ export function useHistorical(core:SessionCore,actions:SessionActions){
  });
  const historicalProgress=computed(()=>historical.value&&historicalStore.game?H.historicalObjectives(historicalStore.game,historical.value):[]);
  function resetTransient(){
+  historicalStore.wakeTimeline=null;
   historicalStore.generation++;computer.dispose();runtime.stopPlayback?.();runtime.stopPlayback=undefined;
   historicalStore.busy=false;historicalStore.finished=null;historicalStore.playFrame=null;historicalStore.progress=0;historicalStore.history={};historicalStore.lastMovement={};historicalStore.hover=null;
   mode.value='move';pendingTurn.value=0;torpWindow.value=0;planeMode.value='point';airRole.value='bomber';replan.value=false;swapMode.value=false;

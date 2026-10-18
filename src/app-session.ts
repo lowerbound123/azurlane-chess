@@ -20,6 +20,7 @@ import {useTutorial} from './composables/use-tutorial.ts';
 import {usePlanning} from './composables/use-planning.ts';
 import {useReplay} from './composables/use-replay.ts';
 import {useMap} from './composables/use-map.ts';
+import {useGameAudio} from './composables/use-game-audio.ts';
 export function createAppSession(router:Router){
 // Actions are assembled synchronously before any lifecycle event or I/O callback can use them.
 const actions={} as SessionActions;
@@ -27,6 +28,7 @@ const core=createSessionCore(router,actions);
 const campaignController=useCampaign(core,actions);
 const historicalController=useHistorical(core,actions);
 Object.assign(actions,campaignController,historicalController,useConnection(core,actions),useSaves(core,actions),useTutorial(core,actions),usePlanning(core,actions),useReplay(core,actions),useMap(core,actions));
+const audio=useGameAudio(core);
 actions.refreshSaves();
 useEventListener(window,'keydown',actions.keydown);useEventListener(window,'focus',actions.syncAccount);
 const {ui, connection, localGame, showRules, showLog, connectionBusy, connectionWanted, startupComplete, onlineStatus, onlineState, tutorial, campaign, onlineActive, activeBattle, game, busy, preferences, onlineClient, accountClient, onlineTicker, saves, ship, lesson, computer, runtime}=core;
@@ -59,7 +61,10 @@ const removeAfter=router.afterEach((to,from,failure)=>{
     validateCurrentRoute();
   });
 onMounted(() => {
-
+    // The startup loader may outlive the router's initial navigation. Re-run the
+    // settled location through this session's guards and initialization hooks.
+    const initialRoute=router.currentRoute.value;
+    if(initialRoute.matched.length)void router.replace({path:initialRoute.path,query:initialRoute.query,hash:initialRoute.hash,force:true});
     (async()=>{await Promise.allSettled([accountClient.initialize(),refreshOnlineConfig()]);
       if (!runtime.disposed && connectionWanted.value) await connectOnline();
       startupComplete.value=true; validateCurrentRoute();
@@ -72,5 +77,5 @@ onUnmounted(() => {
     clearTimeout(runtime.resolveTimer);clearTimeout(runtime.toastTimer);
     runtime.stopPlayback?.();
   });
-return {...core,...campaignController,...historicalController,...actions,E,P,S,T};
+return {...core,...campaignController,...historicalController,...actions,audio,E,P,S,T};
 }

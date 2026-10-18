@@ -27,6 +27,8 @@ export interface Torpedo {
  id: string; kind: 'torpedo'; team: Team; owner: string; xy: XY; heading: number; age: number; launched: number;
  birth: number; armed: boolean; cfg: TorpedoConfig;
 }
+/** Presentation-only final motion, including torpedoes lost between snapshots. */
+export interface TorpedoWake {team:Team;from:XY;to:XY;start:number;end:number}
 export interface Plane {
  statuses?:import('./status.ts').StatusInstance[];
  id: string; kind: 'plane'; team: Team; mother: string; slot: number; hp: number; cfg: PlaneConfig; xy: XY;
@@ -53,8 +55,8 @@ export interface RouteNode { pos: Hex; heading: number }
 export interface Effect {kind:string;at:Hex;from?:Hex;text?:string}
 interface PresentationBase {id:string;team:Team|null;at:Hex;sourceId?:string}
 export interface EffectPresentation extends PresentationBase {type:'effect';kind:string;time:number;duration:number;text?:string;targetId?:string;position?:XY;from?:never;to?:never;start?:never;end?:never;shipId?:never;action?:never}
-export interface ProjectilePresentation extends PresentationBase {type:'projectile';kind:string;from:XY;to:XY;start:number;end:number;time?:never;duration?:never;text?:never;shipId?:never;action?:never}
-export interface ActionPresentation extends PresentationBase {type:'action';shipId:string;action:string;time:number;duration:number;kind?:never;text?:never;from?:never;to?:never;start?:never;end?:never}
+export interface ProjectilePresentation extends PresentationBase {type:'projectile';kind:string;from:XY;to:XY;start:number;end:number;targetId?:string;time?:never;duration?:never;text?:never;shipId?:never;action?:never}
+export interface ActionPresentation extends PresentationBase {type:'action';shipId:string;action:string;time:number;duration:number;soundOnly?:boolean;kind?:never;text?:never;from?:never;to?:never;start?:never;end?:never}
 export type Presentation = EffectPresentation | ProjectilePresentation | ActionPresentation;
 export interface FrameShip extends Pick<Ship,'id'|'team'|'label'|'template'|'hp'|'cfg'|'pos'|'xy'|'heading'|'guarding'|'escorting'|'catalogId'|'statuses'> {}
 export interface BattleFrame {
@@ -70,6 +72,7 @@ export interface CombatStats {
  shipsSunk:number;planesShotDown:number;damageBySource:Record<string,{dealt:number;friendly:number;taken:number}>;
 }
 export interface RoundResult {
+ torpedoWakes?:TorpedoWake[];
  historical?:import('./history.ts').HistoricalState;
  game: Game; frames: BattleFrame[]; events: BattleLog[]; counts:{count:number;hp:number}[];
  presentation: Presentation[]; combatStats:Record<string,CombatStats>;

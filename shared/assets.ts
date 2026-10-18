@@ -5,6 +5,7 @@ export interface RuntimeImage {src:string;preview:string;width:number;height:num
 export interface RuntimeSpine {skeleton:string;atlas:string;pages:Record<string,string>}
 export interface RuntimeAssetManifest {
  version:1;
+ audio?:import('./audio.ts').RuntimeAudioCatalog;
  abilityDemos?:Record<string,import('./ability-demo.ts').AbilityDemoMedia>;
  files:Record<string,RuntimeAsset>;
  images:Record<string,RuntimeImage>;

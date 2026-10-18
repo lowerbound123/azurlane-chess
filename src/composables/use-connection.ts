@@ -124,6 +124,7 @@ function receiveOnlineState(state: OnlineState, explicit: boolean = false) {
     if (onlineGame.finished && runtime.onlineReplay?.matchId === state.match.id && (state.match.stage !== 'ended' || state.match.result?.reason === '战斗结束')) return;
     if (onlineGame.finished) { runtime.stopPlayback?.(); runtime.onlineReplay=null;onlineGame.finished=null;onlineGame.playFrame=null; }
     const resetDraft=onlineGame.matchId!==state.match.id||onlineGame.game?.round!==state.match.round;
+    if(onlineGame.matchId!==state.match.id)onlineGame.wakeTimeline=null;
     onlineGame.matchId=state.match.id;
     onlineGame.game = materializeObservation(toRaw(state.match.game)); onlineGame.busy = ['resolving','playback'].includes(state.match.stage);
     if (resetDraft) { onlineGame.plans = {}; onlineGame.history = {}; onlineGame.lastMovement = {}; if (onlineActive.value) { mode.value = "move"; pendingTurn.value = 0; torpWindow.value = 0; replan.value = false; } }

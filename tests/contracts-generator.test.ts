@@ -14,5 +14,6 @@ it('generates public network contracts when local round results reference histor
   expect(contracts.RoundMessage.properties.result).toBeTruthy();
   expect(JSON.stringify(contracts)).not.toContain('scenarioId');
   expect(JSON.stringify(contracts)).not.toContain('abilityDemos');
+  expect(JSON.stringify(contracts.RoundMessage)).toContain('soundOnly');
  }finally{rmSync(directory,{recursive:true,force:true});}
 });

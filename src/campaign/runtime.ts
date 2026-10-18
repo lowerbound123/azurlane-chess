@@ -5,8 +5,8 @@ import * as E from '../engine.ts';
 import {SHIP_DEFINITIONS as D,planeForSlot,AIRCRAFT} from '../ship-definitions.ts';
 import {CAMPAIGN_CHAPTERS,campaignCheckpoint} from './content.ts';
 import {campaignMap} from './map.ts';
+import {campaignCell,campaignOffset,campaignPoint,campaignSourceRow} from './layout.ts';
 const H=E.fromCR,empty=E.emptyPlan;
-const yByChapter=[70,65,60,55,49,42,35,28,19,8];
 export const RECOMMENDED_CAMPAIGN_FLEET=['dd-2','cl-3','ca-1','bb-1','cv-3'];
 export function createCampaignState():CampaignState{return{version:1,chapter:0,checkpoint:0,status:'playing',completed:[],hintLevel:0,attempts:0,evidence:{}}}
 function place(s:Ship,pos:Hex,heading=0){s.pos={...pos};s.xy=E.hexToXY(pos);s.heading=heading;return s}
@@ -22,11 +22,12 @@ function roster(state:CampaignState):string[]{
  return['dd-3',id==='aa'?'cl-1':'cl-3','bb-1','ca-1',id==='fighter'?'cv-2':id==='heavy'?'cv-1':'cv-3'];
 }
 export function createCampaignFixture(state:CampaignState,fleet?:string[]):CampaignFixture{
- const id=campaignCheckpoint(state).id,y=yByChapter[state.chapter]??70;
+ const id=campaignCheckpoint(state).id,y=campaignSourceRow(id);
  const ids=state.chapter===9?(fleet??RECOMMENDED_CAMPAIGN_FLEET):roster(state);
  if(state.chapter===9&&(ids.length!==5||new Set(ids).size!==5||ids.some(k=>!D[k])||ids.filter(k=>D[k].role==='front').length!==3))throw new Error('终章编队需要五艘不同舰船：3 前排＋2 后排。');
  const g:Game={ruleset:'fleet-v1',seed:20261014,round:1,map:campaignMap(),ships:[],torpedoes:[],planes:[],nextId:0,log:[],winner:null,phase:state.chapter===9?'deploy':'plan',explored:[[],[]],zones:[]};
- const spots=[H(3,y+1),H(10,y+1),H(3,y+3),H(10,y+3),H(6,y+4)];
+ // Side lanes leave the current training target and the next handoff clear.
+ const spots=[H(1,y+1),H(10,y+1),H(2,y+3),H(10,y+3),H(6,y+4)];
  ids.forEach((k,i)=>g.ships.push(E.createCatalogShip(k,0,i,spots[i])));
  const get=(k:string)=>g.ships.find(s=>s.catalogId===k&&s.team===0)!;
  const actor=g.ships[0];
@@ -41,7 +42,7 @@ export function createCampaignFixture(state:CampaignState,fleet?:string[]):Campa
  if(id==='turn')place(actor,H(6,70),0);
  if(id==='exit')place(actor,H(7,70),0);
  if(id==='secondary'){place(actor,H(5,66),5);target(H(9,64));}
- if(id==='memory'){place(actor,H(3,63),0);place(target(H(8,62)),H(8,62),1);}
+ if(id==='memory'){place(actor,H(9,66),5);place(target(H(9,62)),H(9,62),5);}
  if(id==='rendezvous'){place(actor,H(4,61),5);place(get('cl-2'),H(8,61),5);}
  if(id==='split'){place(get('cl-2'),at);target(offset(at,2,0),D['cl-2'].secondary!.damage);target(offset(at,0,-2),D['cl-2'].secondary!.damage);place(actor,H(1,y+2));}
  if(id.startsWith('torpedo-')){
@@ -59,9 +60,10 @@ export function createCampaignFixture(state:CampaignState,fleet?:string[]):Campa
  }
  if(id==='musashi'){place(get('bb-2'),at);const cfg=D['bb-2'].main!;target(north,cfg.damage*cfg.centerMultiplier!);target(offset(north,1,0),cfg.damage);target(offset(north,0,-1),cfg.damage);}
  if(id==='richelieu'){place(get('bb-3'),at);place(target(north,D['bb-3'].main!.damage*4),north,0);}
- if(id==='smoke'){place(actor,at);target(offset(at,3,0),120);}
- if(id==='radar'){place(get('cl-3'),at);place(get('bb-1'),offset(at,0,2));const enemy=target(offset(at,4,0),D['bb-1'].main!.damage);g.zones=[{kind:'smoke',team:1,center:{...enemy.pos},radius:1,expires:8}];}
+ if(id==='smoke'){place(actor,at);place(get('bb-1'),H(11,y+3));target(offset(at,3,0),120);}
+ if(id==='radar'){place(actor,H(8,y+1));place(get('cl-3'),at);place(get('bb-1'),offset(at,0,2));const enemy=target(offset(at,4,0),D['bb-1'].main!.damage);g.zones=[{kind:'smoke',team:1,center:{...enemy.pos},radius:1,expires:8}];}
  if(id==='guard'){
+  place(get('bb-1'),H(6,y+3));
   const a=place(get('ca-1'),at);const mover=place(target(offset(at,-3,0),200),offset(at,-3,0),0);
   const battery=target(offset(at,0,-5),200,'bb-1');battery.cfg.main=structuredClone(D['bb-3'].main);battery.label=`训练炮台（200 HP，主炮单发 ${battery.cfg.main!.damage}）`;
   g.torpedoes=[{id:'incoming-torpedo',kind:'torpedo',team:1,owner:mover.id,xy:E.hexToXY(offset(at,3,0)),heading:3,age:0,launched:0,birth:0,armed:true,cfg:structuredClone(D['dd-2'].torpedo!)}];
@@ -85,6 +87,12 @@ export function createCampaignFixture(state:CampaignState,fleet?:string[]):Campa
   g.ships.forEach((s,i)=>place(s,H(2+i*2,8+(i>2?2:0)),5));
   ['dd-2','cl-3','ca-1','bb-1','cv-3'].forEach((k,i)=>{const s=E.createCatalogShip(k,1,i,H(2+i*2,i>2?0:4));s.hp=Math.round(s.cfg.hp*.6);s.label+=`（训练耐久 ${s.hp}）`;g.ships.push(s)});
  }
+ const delta=E.hexToXY(campaignOffset(id));
+ for(const s of g.ships){s.pos=campaignPoint(id,s.pos);s.xy={x:s.xy.x+delta.x,y:s.xy.y+delta.y};}
+ for(const unit of [...g.planes,...g.torpedoes])unit.xy={x:unit.xy.x+delta.x,y:unit.xy.y+delta.y};
+ for(const plane of g.planes)plane.target=campaignPoint(id,plane.target);
+ g.map.mines=g.map.mines.map(m=>({...m,...campaignPoint(id,m)}));
+ for(const zone of g.zones??[])zone.center=campaignPoint(id,zone.center);
  E.updateExploration(g);
  const primary=Object.keys(campaignCheckpoint(state).emphasis)[0];
  return{game:g,plans:{},selected:g.ships.find(s=>s.team===0&&s.catalogId===primary)?.id??actor.id};
@@ -133,12 +141,12 @@ export function campaignReferencePlans(state:CampaignState,game:Game):Plans{
  const id=campaignCheckpoint(state).id,plans:Plans={};for(const s of game.ships.filter(s=>s.team===0&&E.alive(s)))plans[s.id]=empty();
  const friends=game.ships.filter(s=>s.team===0),actor=friends[0],enemies=game.ships.filter(s=>s.team===1&&E.alive(s)),first=enemies[0];
  const by=(k:string)=>friends.find(s=>s.catalogId===k)!,p=(s:Ship)=>plans[s.id];
- if(['forward','turn','exit'].includes(id))p(actor).moves=navigate(game,actor,id==='forward'?H(7,69):id==='turn'?H(7,68):H(6,68));
+ if(['forward','turn','exit'].includes(id))p(actor).moves=navigate(game,actor,id==='forward'?campaignCell(id,7,69):id==='turn'?campaignCell(id,7,68):campaignCell(id,6,68));
  if(id==='secondary'||id==='memory'){
   if(id==='memory'&&game.round===1)return plans;
-  if(first){const visible=E.observe(game,0).ships.find(s=>s.id===first.id);p(actor).moves=navigate(game,actor,visible?.pos??H(9,65));}
+  if(first){const visible=E.observe(game,0).ships.find(s=>s.id===first.id),fallback=id==='memory'?campaignCell(id,10,60):campaignCell(id,9,65);p(actor).moves=navigate(game,actor,visible?.pos??fallback);}
  }
- if(id==='rendezvous'){p(actor).moves=navigate(game,actor,H(4,59));p(by('cl-2')).moves=navigate(game,by('cl-2'),H(8,59));}
+ if(id==='rendezvous'){p(actor).moves=navigate(game,actor,campaignCell(id,4,59));p(by('cl-2')).moves=navigate(game,by('cl-2'),campaignCell(id,8,59));}
  if(id==='torpedo-start'&&!game.torpedoes.some(t=>t.team===0)&&actor.torps>0)p(actor).torps=[{window:0,dir:0}];
  if(id==='torpedo-node'&&!game.torpedoes.some(t=>t.team===0)&&actor.torps>0){p(actor).moves=[{turn:0,forward:true}];p(actor).torps=[{window:1,dir:0}];}
  if(id==='torpedo-spread'&&!game.torpedoes.some(t=>t.team===0)&&actor.torps>=2)p(actor).torps=[{window:0,dir:0},{window:0,dir:4}];
@@ -170,7 +178,7 @@ export function evaluateCampaignRound(state:CampaignState,before:Game,submitted:
  const by=(k:string)=>allies.find(s=>s.catalogId===k),old=(s:Ship)=>before.ships.find(a=>a.id===s.id)!;
  const add=(k:string,n:number)=>{ev[k]=Number(ev[k]??0)+n};
  let passed=false;
- if(id==='forward'||id==='turn'||id==='exit')passed=E.same(actor.pos,id==='forward'?H(7,69):id==='turn'?H(7,68):H(6,68));
+ if(id==='forward'||id==='turn'||id==='exit')passed=E.same(actor.pos,id==='forward'?campaignCell(id,7,69):id==='turn'?campaignCell(id,7,68):campaignCell(id,6,68));
  if(id==='secondary')passed=source(actor,'secondary')>0&&enemies.every(s=>!E.alive(s));
  if(id==='memory'){
   const t=enemies[0],previous=before.ships.find(s=>s.id===t.id)!;
@@ -178,7 +186,7 @@ export function evaluateCampaignRound(state:CampaignState,before:Game,submitted:
   if(ev.seen&&!E.shipVisible(g,t,0)&&E.alive(t)&&g.explored[0].length>=before.explored[0].length)ev.lost=true;
   passed=!!ev.lost&&source(actor,'secondary')>0&&!E.alive(t);
  }
- if(id==='rendezvous')passed=E.same(actor.pos,H(4,59))&&E.same(by('cl-2')!.pos,H(8,59))&&allies.every(s=>s.hp===s.cfg.hp);
+ if(id==='rendezvous')passed=E.same(actor.pos,campaignCell(id,4,59))&&E.same(by('cl-2')!.pos,campaignCell(id,8,59))&&allies.every(s=>s.hp===s.cfg.hp);
  if(id==='split')passed=(result.combatStats[by('cl-2')!.id]?.shipsSunk??0)>=2&&source(by('cl-2'),'secondary')>=D['cl-2'].secondary!.damage*2;
  if(id.startsWith('torpedo-')){
   add('torpedoDamage',source(actor,'torpedo'));if(before.torpedoes.some(t=>t.team===0)&&source(actor,'torpedo')>0)ev.carriedHit=true;

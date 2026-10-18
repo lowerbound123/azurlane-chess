@@ -8,12 +8,12 @@ import {tmpdir} from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {installArtifact,createCancellation} from './ability-demo-io.mjs';
 import {digest} from './ability-demo-manifest.mjs';
-import {artifactRecord,isArtifactCurrent,sourceFingerprint} from './ability-demo-manifest.mjs';
+import {artifactRecord,isArtifactCurrent} from './ability-demo-manifest.mjs';
 import {ABILITY_DEMO_SHIP_IDS} from '../shared/ability-demo.ts';
 import {registerAbilityDemos,validateAbilityDemoOutputs,validatePublishedAbilityDemos} from './ability-demo-assets.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),output=path.join(root,'assets/ability-demos'),ids=[...ABILITY_DEMO_SHIP_IDS];
 const args=process.argv.slice(2);let selected=ids,force=false,check=false,verifyOnly=false;
-function usage(){console.log('npm run demos:render -- [--all | --ship 舰船ID] [--force] [--check | --verify-only]\n默认生成十五舰演示。--check 仅校验源指纹与产物完整性，不启动浏览器。\n依赖：FFmpeg (libvpx-vp9 / libx264)、ffprobe、Chrome 或 Playwright Chromium。\n可用环境变量：DEMO_BROWSER_EXECUTABLE、FFMPEG、FFPROBE。');}
+function usage(){console.log('npm run demos:render -- [--all | --ship 舰船ID] [--force] [--check | --verify-only]\n默认复用完整产物，--force 显式重录。--check 仅校验现有产物完整性、规格与登记，不启动浏览器。\n依赖：FFmpeg (libvpx-vp9 / libx264)、ffprobe、Chrome 或 Playwright Chromium。\n可用环境变量：DEMO_BROWSER_EXECUTABLE、FFMPEG、FFPROBE。');}
 for(let i=0;i<args.length;i++){const arg=args[i];if(arg==='--ship'){const id=args[++i];if(!ids.includes(id))throw new Error(`无效舰船 ${id}；可选 ${ids.join(', ')}`);selected=[id];}else if(arg==='--force')force=true;else if(arg==='--check')check=true;else if(arg==='--verify-only')verifyOnly=true;else if(arg==='--all')selected=ids;else if(arg==='--help'||arg==='-h'){usage();process.exit(0);}else throw new Error(`未知参数：${arg}`);}
 async function deadline(promise,label,ms=30000){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(`${label} 超过 ${ms/1000} 秒`)),ms);})]);}finally{clearTimeout(timer);}}
 const ffmpeg=process.env.FFMPEG??'ffmpeg',ffprobe=process.env.FFPROBE??'ffprobe';
@@ -33,9 +33,9 @@ async function verifySampling(page,id,info){
 }
 async function main(){
  let manifest;try{manifest=JSON.parse(await readFile(path.join(output,'manifest.json'),'utf8'));}catch{manifest={schema:1,clips:{}};}
- const fingerprint=await sourceFingerprint(root),pending=[];
- for(const id of selected){const valid=await isArtifactCurrent(path.join(output,id),manifest.clips[id],fingerprint);if(check){console.log(`${valid?'OK':'STALE'} ${id}`);if(!valid)process.exitCode=1;}else if(valid&&!force&&!verifyOnly)console.log(`跳过 ${id}：源文件和产物均未变化`);else pending.push(id);}
- if(check){if(!process.exitCode&&selected.length===ids.length){await validateAbilityDemoOutputs(root);await validatePublishedAbilityDemos(root,JSON.parse(await readFile(path.join(root,'assets/runtime/manifest.json'),'utf8')));}return;}if(!pending.length){if(ids.every(id=>manifest.clips[id]?.fingerprint===fingerprint)){await registerAbilityDemos(root);await (await import('./prepare-assets.mjs')).prepareAssets(root);}return;}
+ const pending=[];
+ for(const id of selected){const valid=await isArtifactCurrent(path.join(output,id),manifest.clips[id]);if(check){console.log(`${valid?'OK':'INVALID'} ${id}`);if(!valid)process.exitCode=1;}else if(valid&&!force&&!verifyOnly)console.log(`跳过 ${id}：复用完整产物`);else pending.push(id);}
+ if(check){if(!process.exitCode&&selected.length===ids.length){await validateAbilityDemoOutputs(root);await validatePublishedAbilityDemos(root,JSON.parse(await readFile(path.join(root,'assets/runtime/manifest.json'),'utf8')));}return;}if(!pending.length){await registerAbilityDemos(root);await (await import('./prepare-assets.mjs')).prepareAssets(root);return;}
  const encoders=await processJob(ffmpeg,['-hide_banner','-encoders']).done;if(!encoders.includes('libvpx-vp9')||!encoders.includes('libx264'))throw new Error('FFmpeg 需要 libvpx-vp9 和 libx264 编码器');await processJob(ffprobe,['-version']).done;
  const {chromium}=await import('playwright');const executable=process.env.DEMO_BROWSER_EXECUTABLE??[chromium.executablePath(),'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p=>existsSync(p));if(!executable)throw new Error('未找到 Chrome/Chromium；请设置 DEMO_BROWSER_EXECUTABLE');
  const {prepareAssets}=await import('./prepare-assets.mjs');await prepareAssets(root,{abilityDemos:false});
@@ -80,13 +80,12 @@ async function main(){
    await sharp({create:{width:768,height:960,channels:3,background:'#071724'}}).composite(tiles).webp({quality:88}).toFile(path.join(dir,'contact.webp'));
    const formats={webm:await probe(webm),mp4:await probe(mp4)};
    for(const [format,p]of Object.entries(formats))if(p.width!==768||p.height!==960||p.frames!==frames||p.fps!=='30/1'||p.audio||Math.abs(p.duration-info.duration)>.05||p.codec!==(format==='webm'?'vp9':'h264'))throw new Error(`视频规格不符：${id} ${format} ${JSON.stringify(p)}`);
-   const evidence=await page.evaluate(()=>window.abilityDemo.evidence());await writeFile(path.join(dir,'evidence.json'),JSON.stringify({...evidence,export:{fingerprint,formats,keyframes:keyframes.map(index=>({frame:index,time:index/info.fps}))}},null,2)+'\n');
-   const record=await artifactRecord(dir,fingerprint);await mkdir(output,{recursive:true});cancellation.check();const nextManifest={...manifest,clips:{...manifest.clips,[id]:{...info,...record,formats}}};
+   const evidence=await page.evaluate(()=>window.abilityDemo.evidence());await writeFile(path.join(dir,'evidence.json'),JSON.stringify({...evidence,export:{formats,keyframes:keyframes.map(index=>({frame:index,time:index/info.fps}))}},null,2)+'\n');
+   const record=await artifactRecord(dir);await mkdir(output,{recursive:true});cancellation.check();const nextManifest={...manifest,clips:{...manifest.clips,[id]:{...info,...record,formats}}};
    await installArtifact(dir,path.join(output,id),path.join(output,'manifest.json'),nextManifest);manifest=nextManifest;
    console.log(`完成 ${id}：WebM ${(formats.webm.bytes/1048576).toFixed(2)} MiB / MP4 ${(formats.mp4.bytes/1048576).toFixed(2)} MiB`);
   }
-  if(await sourceFingerprint(root)!==fingerprint)throw new Error('录制期间源文件发生变化；产物已保留，请重新运行以更新指纹');
-  if(!verifyOnly&&ids.every(id=>manifest.clips[id]?.fingerprint===fingerprint)){await registerAbilityDemos(root);await prepareAssets(root);console.log('十五舰演示已登记至固定资产清单');}
+  if(!verifyOnly){await registerAbilityDemos(root);await prepareAssets(root);console.log('十五舰演示已登记至固定资产清单');}
  }finally{stop();process.removeListener('SIGINT',abort);process.removeListener('SIGTERM',abort);await Promise.allSettled([...jobs].map(job=>job.done));await browser?.close();await server?.close();await rm(temp,{recursive:true,force:true});}
 }
 main().catch(e=>{console.error(e.message);process.exitCode=1;});

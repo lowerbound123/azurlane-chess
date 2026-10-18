@@ -1,4 +1,4 @@
-# 碧蓝推演棋 / azurlane chess v0.8.3
+# 碧蓝推演棋 / azurlane chess v0.8.15
 
 Vue 3 单文件组件 + TypeScript + Pinia + Vite + Three.js 3D 战棋网页游戏，支持离线游玩和 Node.js 25 联机服务。 A playable PvAI prototype with home menu, fleet selection, deployment, untimed planning, simultaneous resolution, two-layer RTS fog, contextual ranges, all-friendly plan visibility, local persistence, and illustrated/action-gated tutorials.
 
@@ -20,7 +20,7 @@ Vue 3 单文件组件 + TypeScript + Pinia + Vite + Three.js 3D 战棋网页游�
 
 ## 美术资源存储
 
-默认从本地发布包加载美术；可在后端私有配置中选择 OSS、S3／S3 兼容服务或 COS。临时 URL 在单服务进程内跨玩家复用，首次与过期访问并发合并；远端失败自动回退本地。小图、预览、Spine 缩略图及模型均保存为受版本管理的固定资源，日常构建仅校验和复制。舰娘名单由 `config/ship-assets.json` 配置；运行 `npm run assets:fetch` 仅补齐缺失资源，`npm run assets:check` 可离线校验，详见 [舰娘资源说明](docs/art/SHIP-ASSETS.md)。
+默认从本地发布包加载美术；可在后端私有配置中选择 OSS、S3／S3 兼容服务或 COS。临时 URL 在单服务进程内跨玩家复用，首次与过期访问并发合并；远端失败自动回退本地。小图、预览、Spine 缩略图及模型均保存为受版本管理的固定资源，日常构建仅校验和复制。舰娘名单由 `config/ship-assets.json` 配置；运行 `npm run assets:fetch` 仅补齐缺失资源，`npm run assets:check` 可离线校验，详见 [舰娘资源说明](docs/art/SHIP-ASSETS.md)。同一入口也准备 [战斗语音、音效和配乐](docs/art/BATTLE-AUDIO.md)：各页面播放对应 BGM，战斗播放己方舰娘的技能、阵亡、胜利语音及通用音效；顶部栏可独立静音 BGM 和角色语音。
 
 全部 41 套 CDN 小人与原创默认水手统一使用原生 Spine 3.8.99，仅保留 Spine 3.8 运行时；不兼容版本会被拒绝。全部 41 张舰娘立绘、41 张头像及默认立绘均烘焙“请支持官方碧蓝航线喵～”水印，立绘最长边 1600px、WebP 质量 80、头像最大 256px；水印在 `portraits.watermark` 配置。立绘与小人使用独立增量指纹，修改水印不会重新下载 Spine。
 
@@ -44,6 +44,7 @@ Vue 3 单文件组件 + TypeScript + Pinia + Vite + Three.js 3D 战棋网页游�
 从主菜单进入「交互教学」，选择「开始归航行动」；独立入口为 `/tutorial/campaign`。
 
 - 固定 13×72 海图，南向北十章、28 个检查点，从岛风单舰逐步增加到五舰；舰队歼灭使用 19×15 地图，占领模式使用 21×17 地图。
+- 各检查点按预计终点连续向北衔接，自动航渡走最短水路、到点原地校向；任务落点、镜头与提示坐标统一定义在 `src/campaign/layout.ts`。旧教学海图更新后保留已完成任务，从当前检查点的新起点继续。
 - 依次学习航行、迷雾、副炮、同步行动、鱼雷、排布雷、三种主炮、烟幕与雷达、三种重巡能力、四机型及防空，覆盖全部15艘舰的特色。
 - 任务须以真实结算完成。分级提示可填入参考指令，由玩家检查和执行；完成后自动沿海图航渡至下一段，无需点击继续。存续舰船沿合法航路移位，新友舰先进入已有视野，再共享视野；靶舰从雾外驶入。每段以加粗高亮提示相关能力和数值，结束时解除；重试恢复本检查点，航渡整备恢复耐久与弹药。
 - 前九章采用任务目标与训练敌舰，不受普通全灭判定和30回合限制；终章可自选3前排＋2后排并部署，敌舰使用60%初始耐久，恢复30回合限制，要求实际歼灭封锁舰队。
@@ -67,12 +68,14 @@ Vue 3 单文件组件 + TypeScript + Pinia + Vite + Three.js 3D 战棋网页游�
 
 - 使用固定特制地图、历史舰名与场景专用能力参数。简报展示舰队、目标、额外星级条件和史料；玩家决策可以改变结果。
 - 海图始终标明公开撤离区、任务区和情报区。敌军依据自身视野与最近接触规划，不读取玩家指令。
+- 历史 AI 按场景分工：斯佩保持交战距离并持续撤退；纳尔维克区分入口伏击、港口守卫和内湾后卫；丹麦海峡采用追击与出口截击；中途岛航母有限编队巡航，按来袭威胁安排防空、分区搜索和攻击批次；萨马岛重舰追击、巡洋舰侧压，友军航母兼顾规避与撤离时限。
+- 航行与武器共享战术目标；航路考虑可见鱼雷未来位置和友军交会，炮击覆盖可能的回合末位置，雷击检查已知岛岸与友军航路。旧接触情报逐步失效，敌军不能读取萨马岛的航线选择或可见敌机的隐藏攻击目标。所有行为沿用真实弹药、整备、航程与烟幕规则。
 - 萨马岛航母由 AI 操作，可选择中央航线、东侧绕行或等待一轮；航路可预览，不能连续两轮等待。
 - 所有伤害与碰撞先结算，再判定撤离和任务。撤离的舰艇记录当时耐久；任务完成后显示星级、存活/撤离情况和历史经过。
 - 规划及回合播放完成后自动保存。刷新恢复最近稳定状态，普通对局和教程存档独立保留；损坏记录显示错误并保留，确认重开后才替换。
 - 深链接为 `/history/river-plate`、`/history/narvik`、`/history/denmark-strait`、`/history/midway`、`/history/samar`。历史战斗在本机计算，不需要连接服务器。
 
-实现位于 `src/history/`，设计见 [五场历史战斗规范](docs/superpowers/specs/2026-10-15-independent-historical-battles-design.md)。已用真实引擎验证每场两条通关策略；难度和实际游玩时长仍需真人试玩校准。
+实现位于 `src/history/`，设计见 [五场历史战斗规范](docs/superpowers/specs/2026-10-15-independent-historical-battles-design.md)和[历史 AI 战术方案](docs/superpowers/specs/2026-10-18-historical-ai-doctrine.md)。已用真实引擎验证每场两条通关策略；难度和实际游玩时长仍需真人试玩校准。
 
 ## Local development
 
@@ -122,6 +125,7 @@ Numbers and AI behavior are an initial balance baseline, not a calibrated compet
 - New games initialize separate team exploration memory. Visibility is accumulated on every simulation substep and copied into each animation frame. Unknown cells hide terrain; remembered cells keep terrain without enemy ghosts. Public mines remain visible everywhere.
 - `src/planning.ts` separates player-known terrain, heading-aware BFS, known-route preference, ranges and route/history edits. Main and aircraft ranges use round-start origins; secondary/AA guides use the planned endpoint. Plane budget uses the same Euclidean/√3 flight metric as simulation. Torpedo rays show fractional current-round travel from the selected node and full lifetime limits.
 - All friendly routes, numbered steps/endpoints, torpedo windows/rays, stacked main target counts, aircraft routes and mine-sweep orders stay visible across ship selection. Opposing plans are never rendered. Range and plan layers can be hidden.
+- 舰船与鱼雷沿本回合已走过的路径留下窄幅动态尾流，以向两侧扩散的弯曲水纹和碎泡沫呈现，回放期间完整保留；下一回合规划时去除泡沫，仅保留浅淡、仍可辨认的扩散涟漪，直到下一次回放开始时清除。加速播放同样保留所有已走过的格子，隐藏航段不通过尾流暴露。
 - Click a route node to keep it and remove later steps. Segment undo, current-ship undo/redo, movement-only redraw and full reset are distinct. Changed routes prune unreachable or illegal torpedo windows with feedback.
 - Home menu opens new game, local load, illustrated guide, or 10 independent interactive lessons. The 8-section guide embeds 6 original SVG illustrations. All 32 teaching steps are gated by actual board actions; real simulation drives collisions, automatic secondary fire, fog retreat, artillery/reload, torpedoes, aircraft AA and mines.
 - Autosave captures stable deployment/planning/round-result transitions, with three confirmed-overwrite manual slots. JSON export/import supports explicit cross-device backup. Snapshots preserve aircraft Infinity readiness, exploration and plan segments. Storage failures are surfaced, malformed imports do not overwrite slots or active battle, and legacy standalone tutorial saves are memory-only; the guided campaign uses its own persistent local record. Loading resets transient playback/history/targeting state. Local saves have no automatic cloud synchronization; optional server accounts record completed online matches separately.
@@ -143,7 +147,7 @@ Verification additions: `fog-planning.test.ts` (12), `save.test.ts` (14), `tutor
 - `SOURCE_MANIFEST.json` 是初始 v0.1.0 导出记录，当前版本以 package.json 与 Git 提交为准。
 
 
-## v0.8.3 3D 海战场景
+## v0.8.15 3D 海战场景
 
 海战地图由 Three.js 渲染，包含立体岛屿、水雷、带姓名与血条的朝向镜头立牌、四机型独立飞机与鱼雷模型，以及主炮抛物线、副炮和防空轨迹。Vue 保留指令、菜单与存档界面。飞机和水雷使用本项目通过 Blender 制作并导出的固定 GLB 资产。
 

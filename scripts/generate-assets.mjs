@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {addAbilityDemos} from './ability-demo-assets.mjs';
 import {authoringState,digest} from './runtime-assets.mjs';
+import {publishAudio} from './battle-audio-assets.mjs';
 const types={'.json':'application/json','.atlas':'text/plain','.skel':'application/octet-stream','.svg':'image/svg+xml','.webp':'image/webp','.glb':'model/gltf-binary'};
 export async function generateAssets(root=fileURLToPath(new URL('../',import.meta.url)),options={}){
  const state=await authoringState(root),files={},images={},spine={},spinePreviews={},blobs=new Map();
@@ -27,6 +28,7 @@ export async function generateAssets(root=fileURLToPath(new URL('../',import.met
  const models={torpedo:publish('models/torpedo','torpedo-mk14.glb',await readFile(path.join(root,'assets/models/torpedoes/mk14.glb'))),aircraft:publish('models/aircraft','aircraft.glb',await readFile(path.join(root,'assets/models/aircraft.glb'))),mine:publish('models/mine','naval-mine.glb',await readFile(path.join(root,'assets/models/naval-mine.glb')))};
  publish('placeholder/ship','ship-placeholder.svg',Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320"><rect width="256" height="320" rx="16" fill="#102633"/><path d="M48 190h160l-28 38H76zM104 106h48v84h-48zM128 68v38" fill="#66ded2" stroke="#66ded2" stroke-width="8"/></svg>'));
  const manifest={version:1,files,images,spinePreviews,spine,models,sources:state.sources,spineFingerprints:state.fingerprints},out=path.join(root,'assets/runtime'),stage=path.join(root,'assets/.runtime-stage');
+ if(state.audio){await publishAudio(root,state.audio,publish);manifest.audio=state.audio.catalog;}
  if(options.abilityDemos!==false)await addAbilityDemos(root,manifest,publish);
  await rm(stage,{recursive:true,force:true});await mkdir(stage,{recursive:true});
  try{for(const [file,data]of blobs){const dest=path.join(stage,'files',file);await mkdir(path.dirname(dest),{recursive:true});await writeFile(dest,data);}await writeFile(path.join(stage,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');await rm(out,{recursive:true,force:true});await rename(stage,out);}finally{await rm(stage,{recursive:true,force:true});}

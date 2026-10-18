@@ -34,6 +34,7 @@ function startLesson(id: string, navigate: boolean = true) {
     }
     const fixture = T.createTutorialGame(E, id);
     tutorialFixture.value = fixture;
+    tutorialStore.wakeTimeline=null;
     tutorial.value = T.createTutorialState(id);
     game.value = fixture.game;
     E.updateExploration(game.value!);

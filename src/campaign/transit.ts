@@ -7,22 +7,33 @@ export interface CampaignTransitFrame extends BattleFrame {notice:string;cameraF
 export interface CampaignTransit {fixture:CampaignFixture;frames:CampaignTransitFrame[]}
 
 /** Noncombat sailing uses the same legal turn/forward commands as player orders. */
-function sailingRoute(game:Game,ship:Ship,goal:(pos:Hex,heading:number,steps:number)=>boolean):Move[]{
+function sailingRoute(game:Game,ship:Ship,goal:(pos:Hex,steps:number)=>boolean,northbound=false):Move[]{
  const blocked=new Set(game.ships.filter(s=>s.id!==ship.id&&E.alive(s)).map(s=>E.key(s.pos)));
- const queue:{pos:Hex;heading:number;parent:number;move?:Move;steps:number}[]=[{pos:ship.pos,heading:ship.heading,parent:-1,steps:0}];
- const seen=new Set([`${E.key(ship.pos)}:${ship.heading}`]);
- for(let i=0;i<queue.length;i++){
-  const node=queue[i];
-  if(goal(node.pos,node.heading,node.steps)){
-   const moves:Move[]=[];for(let n=i;queue[n].parent>=0;n=queue[n].parent)moves.push(queue[n].move!);return moves.reverse();
-  }
-  for(const turn of [0,-1,1])for(const forward of [true,false]){
-   const heading=E.mod(node.heading+turn),pos=forward?E.add(node.pos,heading):node.pos,key=`${E.key(pos)}:${heading}`;
-   if(!E.legal(game.map,pos)||blocked.has(E.key(pos))||seen.has(key))continue;
-   seen.add(key);queue.push({pos,heading,parent:i,move:{turn,forward},steps:node.steps+1});
+ function search(onlyNorth:boolean):number[]|undefined{
+  const queue:{pos:Hex;parent:number;direction:number;steps:number}[]=[{pos:ship.pos,parent:-1,direction:ship.heading,steps:0}],seen=new Set([E.key(ship.pos)]);
+  for(let i=0;i<queue.length;i++){
+   const node=queue[i];
+   if(goal(node.pos,node.steps)){
+    const directions:number[]=[];for(let n=i;queue[n].parent>=0;n=queue[n].parent)directions.push(queue[n].direction);return directions.reverse();
+   }
+   for(const direction of [4,5,0,3,1,2]){
+    const pos=E.add(node.pos,direction),key=E.key(pos);
+    if(onlyNorth&&pos.r>node.pos.r||!E.legal(game.map,pos)||blocked.has(key)||seen.has(key))continue;
+    seen.add(key);queue.push({pos,parent:i,direction,steps:node.steps+1});
+   }
   }
  }
- throw new Error(`${ship.label}找不到安全航渡路线`);
+ const directions=(northbound?search(true):undefined)??search(false);
+ if(!directions)throw new Error(`${ship.label}找不到安全航渡路线`);
+ const moves:Move[]=[];let heading=ship.heading;
+ for(const direction of directions){
+  let delta=E.mod(direction-heading);
+  while(delta!==0&&delta!==1&&delta!==5){
+   const turn=delta<=3?1:-1;moves.push({turn,forward:false});heading=E.mod(heading+turn);delta=E.mod(direction-heading);
+  }
+  moves.push({turn:delta===5?-1:delta,forward:true});heading=direction;
+ }
+ return moves;
 }
 
 /** No future fixture exploration enters the live map before its ships arrive. */
@@ -65,7 +76,8 @@ export function buildCampaignTransit(before:Game,target:CampaignFixture,focus:{f
    // Each command is a real legal movement step, without weapons or combat settlement.
    const node=E.route(s,{moves:[move]},game.map,game.round)[1];
    if(!node)throw new Error(`${s.label}的自动航渡指令无效`);
-   const from={...s.xy},to=E.hexToXY(node.pos),steps=Math.ceil(10/effectiveSpeed(s,game.round));
+   // Noncombat pose changes need one visible beat; sailing keeps normal speed.
+   const from={...s.xy},to=E.hexToXY(node.pos),steps=move.forward?Math.ceil(10/effectiveSpeed(s,game.round)):1;
    s.heading=node.heading;
    for(let i=1;i<=steps;i++){
     s.xy={x:from.x+(to.x-from.x)*i/steps,y:from.y+(to.y-from.y)*i/steps};
@@ -76,12 +88,16 @@ export function buildCampaignTransit(before:Game,target:CampaignFixture,focus:{f
   }
  }
  function moveTo(s:Ship,pos:Hex,heading?:number){
-  sail(s,sailingRoute(game,s,(h,d)=>E.same(h,pos)&&(heading===undefined||d===heading)));
+  sail(s,sailingRoute(game,s,h=>E.same(h,pos),pos.r<=s.pos.r));
+  // Pose alignment cannot trade a shorter instruction list for a sailing loop.
+  while(heading!==undefined&&s.heading!==heading){
+   const delta=E.mod(heading-s.heading);sail(s,[{turn:delta<=3?1:-1,forward:false}]);
+  }
  }
  function retire(s:Ship){
   observers.delete(s.id);if(s.team===0)departing.add(s.id);
   notice=`${s.label}自动驶离任务海域，其余舰船继续航行。`;
-  const visible=view();sail(s,sailingRoute(game,s,(h,_,steps)=>steps>0&&!visible.has(E.key(h))));
+  const visible=view();sail(s,sailingRoute(game,s,(h,steps)=>steps>0&&!visible.has(E.key(h))));
   departing.delete(s.id);game.ships=game.ships.filter(a=>a.id!==s.id);capture();
  }
  function entryNear(goal:Hex):Hex{
@@ -130,11 +146,23 @@ export function buildCampaignTransit(before:Game,target:CampaignFixture,focus:{f
  const destinations=fixture.game.ships.filter(s=>s.team===0),goalKeys=new Set(destinations.map(s=>E.key(s.pos)));
  const pending=new Set(destinations.map(s=>s.id));
  while(pending.size){
-  const goal=destinations.find(s=>pending.has(s.id)&&!game.ships.some(a=>a.id!==s.id&&E.alive(a)&&E.same(a.pos,s.pos)));
+  const available=destinations.filter(s=>pending.has(s.id)&&!game.ships.some(a=>a.id!==s.id&&E.alive(a)&&E.same(a.pos,s.pos)));
+  // Let a crossing hull clear its lane before sending another ship around it.
+  const reachable:{goal:Ship;northbound:boolean}[]=[];
+  for(const goal of available){
+   const current=game.ships.find(s=>s.id===goal.id)!;let moves:Move[];
+   try{moves=sailingRoute(game,current,h=>E.same(h,goal.pos),true);}catch{continue;}
+   let heading=current.heading;
+   const northbound=moves.every(move=>{heading=E.mod(heading+move.turn);return !move.forward||E.DIRS[heading][1]<=0;});
+   reachable.push({goal,northbound});
+  }
+  const goal=(reachable.find(route=>route.northbound)??reachable[0])?.goal;
   if(!goal){
-   const blocker=game.ships.find(s=>s.id!==destinations.find(d=>pending.has(d.id))!.id&&E.same(s.pos,destinations.find(d=>pending.has(d.id))!.pos))!;
+   const occupied=destinations.find(d=>pending.has(d.id)&&game.ships.some(s=>s.id!==d.id&&E.same(s.pos,d.pos)));
+   const blocker=occupied&&game.ships.find(s=>s.id!==occupied.id&&E.same(s.pos,occupied.pos));
+   if(!blocker)throw new Error('舰队找不到可用航道，请恢复当前检查点。');
    notice=`${blocker.label}自动让出航道，避免友舰相撞。`;
-   sail(blocker,sailingRoute(game,blocker,(h,_,steps)=>steps>0&&!goalKeys.has(E.key(h))));continue;
+   sail(blocker,sailingRoute(game,blocker,(h,steps)=>steps>0&&!goalKeys.has(E.key(h)),true));continue;
   }
   const current=game.ships.find(s=>s.id===goal.id)!;
   notice=`${current.label}已收到移动指令，自动前往下一段任务位置。`;moveTo(current,goal.pos,goal.heading);pending.delete(goal.id);

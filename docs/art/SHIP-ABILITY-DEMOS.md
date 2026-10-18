@@ -13,7 +13,7 @@ npm run demos:render -- --all --verify-only
 npm run demos:check
 ```
 
-默认按当前规则和实际依赖判断是否需要重录全部十五舰。`--force` 强制重录，`--verify-only` 只做真实浏览器的直接跳帧/回退/重复/顺序播放画布一致性检查。`--check` 不启动浏览器，检查产物指纹、内容哈希、元数据与正式资源登记。
+默认复用完整的十五舰产物，源码或素材变化不会使既有视频失效。仅在用户明确要求时执行重录，使用 `--force` 覆盖所选视频。`--verify-only` 只做真实浏览器的直接跳帧/回退/重复/顺序播放画布一致性检查。`--check` 不启动浏览器，检查文件内容哈希、元数据与正式资源登记，不计算或比对录制源指纹。
 
 依赖 Node 25、项目开发依赖、Chrome/Playwright Chromium、FFmpeg（libvpx-vp9 与 libx264）和 ffprobe。可用 `DEMO_BROWSER_EXECUTABLE`、`FFMPEG`、`FFPROBE` 指定路径；默认用浏览器硬件 WebGL，必要时设置 `DEMO_SOFTWARE_RENDERING=1` 使用 SwiftShader。
 
@@ -32,17 +32,17 @@ npm run demos:check
 
 场景只安排初始位置、合法指令和靶舰，不修改主角配置或附加演示状态。移动前快照与结算帧分开；旧金山的独立对比明确标记“示例 A / B”，不会将重置表现为回血。雷达、烟幕与飞机整备按照真实回合显示。
 
-纯特效或规则更新后直接执行 `npm run demos:render`。更换基础美术时，先更新对应源素材和 Spine 缩略图，再生成基础固定素材，最后重录演示：
+纯特效或规则更新后继续复用现有视频。用户明确要求重录时，再执行 `npm run demos:render -- --all --force`。更换基础美术并获得重录指令时，先更新对应源素材和 Spine 缩略图，再生成基础固定素材，最后重录演示：
 
 ```sh
 # 若修改了 Spine 美术，先显式更新其缩略图
 node scripts/render-spine-previews.mjs
 # 作者模式避免旧演示校验阻止更新基础美术
 node scripts/generate-assets.mjs --base-only
-npm run demos:render
+npm run demos:render -- --all --force
 ```
 
-普通 `build`/`assets:prepare` 仅校验和复制，绝不现场录制。缺失、损坏、规则/素材指纹过期的演示会阻止发布构建，并列出应重新生成的舰船。没有演示来源的独立作者夹具仍可只生成基础素材。指纹递归追踪实际渲染导入、配置、模型、角色源素材与依赖锁；不追踪无关选船 UI 与纯应用版本，也排除自身生成的视频，避免循环过期。
+普通 `build`/`assets:prepare` 仅校验和复制，绝不现场录制。只有产物缺失、损坏、规格或资源登记不符时才阻止构建；代码、规则、素材或依赖更新不会要求重录。现有清单中的历史源指纹作为旧字段忽略，新录制不再生成源指纹。视频文件的内容 SHA-256、尺寸、帧率、编码与 MIME 校验继续保留。没有演示来源的独立作者夹具仍可只生成基础素材。
 
 ## 验证
 

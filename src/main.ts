@@ -1,6 +1,7 @@
-import {createApp} from 'vue';
+import {createApp,h} from 'vue';
 import {createPinia} from 'pinia';
 import App from './App.vue';
+import GameStartup from './components/GameStartup.vue';
 import {createGameRouter} from './router.ts';
 import '@fontsource-variable/saira/wdth.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
@@ -12,4 +13,4 @@ import './fleet-selection.css';
 import './account.css';
 import './desktop-layout.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-createApp(App).use(createPinia()).use(createGameRouter()).mount('#app');
+createApp({render:()=>h(GameStartup,null,{default:()=>h(App)})}).use(createPinia()).use(createGameRouter()).mount('#app');

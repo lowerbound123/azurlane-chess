@@ -1,14 +1,15 @@
 import type {Point3,XY,Hex,Presentation,ProjectilePresentation} from "../shared/game.ts";
-export interface SampledVisuals {projectiles:{id:string;kind:string;team:number|null;position:Point3|null;trail:Point3[]}[];effects:{id:string;kind:string;at:Hex;age:number;text:string;duration?:number;targetId?:string;position?:XY}[];actions:{id:string;shipId:string;action:string;age:number}[]}
+export interface SampledVisuals {projectiles:{id:string;kind:string;team:number|null;position:Point3|null;trail:Point3[]}[];effects:{id:string;kind:string;at:Hex;age:number;text:string;duration?:number;targetId?:string;position?:XY}[];actions:{id:string;shipId:string;action:string;age:number;soundOnly?:boolean}[]}
 import { hexToXY, xyToHex, key } from './engine.ts';
 
 const lerp=(a: Point3,b: Point3,u: number)=>({x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u,z:a.z+(b.z-a.z)*u});
 const seen=(point: Point3,visible: Set<string>)=>visible.has(key(xyToHex({x:point.x,y:point.z})));
 const normals=Array.from({length:6},(_,i)=>({x:Math.cos(i*Math.PI/3),z:Math.sin(i*Math.PI/3)}));
+const TIME_EPSILON=1e-9;
 
 // Clip each line against the convex footprint of each visible hex. Separate
 // fragments never share a polyline across fog, even if both endpoints are seen.
-function clipSegment(a: Point3,b: Point3,centers: XY[]) {
+export function clipSegment(a: Point3,b: Point3,centers: XY[]) {
   const ranges=[];
   for(const center of centers){
     let lo=0,hi=1;
@@ -40,26 +41,29 @@ function position(event: ProjectilePresentation,u: number) {
 export function sampleBattleVisuals(events: Presentation[]=[],time: number=0,visible: Set<string>|string[]=new Set(),viewerTeam: number|null=null,targets:readonly {id:string;team:number;xy:XY}[]=[] ) {
   const cells=visible instanceof Set?visible:new Set(visible);
   const centers=[...cells].map(k=>{const [q,r]=k.split(',').map(Number);return hexToXY({q,r});});
+  const visibleTargets=new Map(targets.filter(t=>t.team===viewerTeam||cells.has(key(xyToHex(t.xy)))).map(t=>[t.id,t]));
   const projectiles:SampledVisuals["projectiles"]=[],effects:SampledVisuals["effects"]=[],actions:SampledVisuals["actions"]=[];
   for(const event of events){
     if(event.type==='action'){
       const age=time-event.time;
-      if(age>=0 && age<=event.duration && (event.team===viewerTeam || cells.has(key(event.at))))
-        actions.push({id:event.id,shipId:event.shipId,action:event.action,age});
+      if(age>=-TIME_EPSILON && age<=event.duration+TIME_EPSILON && (event.team===viewerTeam || cells.has(key(event.at))))
+        actions.push({id:event.id,shipId:event.shipId,action:event.action,age:Math.max(0,Math.min(event.duration,age)),...(event.soundOnly?{soundOnly:true}:{})});
       continue;
     }
     if(event.type==='effect'){
       const age=(time-event.time)/event.duration;
-      const target=event.targetId?targets.find(t=>t.id===event.targetId&&(t.team===viewerTeam||cells.has(key(xyToHex(t.xy))))):undefined;
-      if(age>=0&&age<=1&&(target||cells.has(key(event.at))||(viewerTeam!==null&&event.kind==='hit'&&event.team===viewerTeam)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age,text:event.text??'',duration:event.duration,...(target?{targetId:target.id,position:{...target.xy}}:event.position?{position:{...event.position}}:{})});
+      const target=event.targetId?visibleTargets.get(event.targetId):undefined;
+      if(age>=-TIME_EPSILON&&age<=1+TIME_EPSILON&&(target||cells.has(key(event.at))||(viewerTeam!==null&&event.kind==='hit'&&event.team===viewerTeam)))effects.push({id:event.id,kind:event.kind,at:{...event.at},age:Math.max(0,Math.min(1,age)),text:event.text??'',duration:event.duration,...(target?{targetId:target.id,position:{...target.xy}}:event.position?{position:{...event.position}}:{})});
       continue;
     }
-    if(event.type!=='projectile'||time<event.start||time>event.end)continue;
-    const u=(time-event.start)/(event.end-event.start),point=position(event,u);
+    if(event.type!=='projectile'||time<event.start-TIME_EPSILON||time>event.end+TIME_EPSILON)continue;
+    const target=event.kind==='shot'&&event.targetId?visibleTargets.get(event.targetId):undefined;
+    const trajectory=target?{...event,to:target.xy}:event;
+    const u=Math.max(0,Math.min(1,(time-event.start)/(event.end-event.start))),point=position(trajectory,u);
     const tail=Math.max(0,u-(event.kind==='main'?.24:.55));
     const segments=12,fragments:Point3[][]=[];
     for(let i=0;i<segments;i++){
-      const a=position(event,tail+(u-tail)*i/segments),b=position(event,tail+(u-tail)*(i+1)/segments);
+      const a=position(trajectory,tail+(u-tail)*i/segments),b=position(trajectory,tail+(u-tail)*(i+1)/segments);
       for(const segment of clipSegment(a,b,centers)){
         const last=fragments.at(-1),end=last?.at(-1);
         if(end&&Math.hypot(end.x-segment[0].x,end.z-segment[0].z)<1e-8)last!.push(segment[1]);

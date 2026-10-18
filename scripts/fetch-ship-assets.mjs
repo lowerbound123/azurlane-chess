@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,rm,mkdtemp,rename,access} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,rm,mkdtemp,rename} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
@@ -7,6 +7,9 @@ import sharp from 'sharp';
 import {parseAtlas} from '../src/vendor/parse.mjs';
 import {parseSkeleton} from '../src/vendor/parse.mjs';
 import {stampPortrait,WATERMARK_TEXT,WATERMARK_FINGERPRINT} from './portrait-watermark.mjs';
+import {activeIds,runPythonProvider} from './ship-assets-common.mjs';
+import {planBattleAudio,syncBattleAudio,checkBattleAudio} from './fetch-battle-audio.mjs';
+export {activeIds};
 const project=fileURLToPath(new URL('../',import.meta.url));
 const sha=data=>createHash('sha256').update(data).digest('hex');
 const safe=name=>typeof name==='string'&&/^[a-zA-Z0-9_-]+$/.test(name);
@@ -24,9 +27,9 @@ export function validateConfig(cfg){
  for(const ship of Object.values(cfg.ships)){validatePortraitCrop(ship.portraitCrop);if(ship.characterOffset!==undefined&&(!Array.isArray(ship.characterOffset)||ship.characterOffset.length!==2||ship.characterOffset.some(v=>!Number.isFinite(v)||Math.abs(v)>2)))throw Error('角色配准偏移必须为两个有限坐标');}
  if(!Number.isInteger(cfg.portraits?.maxEdge)||cfg.portraits.maxEdge<128||cfg.portraits.maxEdge>1600||!Number.isInteger(cfg.portraits.avatar)||cfg.portraits.avatar<32||cfg.portraits.avatar>256||cfg.portraits.quality<1||cfg.portraits.quality>100)throw Error('无效WebP设置');
  if(cfg.portraits.watermark&&cfg.portraits.watermark.text!==WATERMARK_TEXT)throw Error('立绘水印文字必须为：'+WATERMARK_TEXT);
+ if(cfg.audio!==undefined)planBattleAudio(cfg);
  return cfg;
 }
-export function activeIds(cfg){return [...new Set([...Object.values(cfg.catalog),...Object.values(cfg.historical).flatMap(Object.values),...Object.values(cfg.templates)])].sort();}
 export function componentFingerprint(cfg,id,kind){const {assetName,skinId,fallbackSources,paintingLayers,portraitCrop}=cfg.ships[id];return sha(encoded({assetName,skinId,client:cfg.client,source:fallbackSources?.[kind==='chibi'?'spine':'painting'],...(kind==='painting'?{portraits:cfg.portraits,watermark:WATERMARK_FINGERPRINT,paintingLayers,portraitCrop}:{runtimeVersion:'3.8'})}));}
 export function processingFingerprint(cfg,id){return sha(encoded({painting:componentFingerprint(cfg,id,'painting'),chibi:componentFingerprint(cfg,id,'chibi')}));}
 async function requiredComponents(root,cfg,entry,id){const damaged=await inspectFiles(root,entry,id);return ['painting','chibi'].filter(kind=>damaged.includes(kind)||entry?.componentHashes?.[kind]!==componentFingerprint(cfg,id,kind));}
@@ -41,7 +44,8 @@ export async function checkShipAssets(root=project){
  for(const id of activeIds(cfg)){const e=lock.ships[id];if(e?.configHash!==processingFingerprint(cfg,id)||['painting','chibi'].some(kind=>e?.componentHashes?.[kind]!==componentFingerprint(cfg,id,kind)))problems.push(`${id}:配置或处理参数变化`);for(const kind of await inspectFiles(root,e,id))problems.push(`${id}:${kind}缺失或损坏`);}
  const generated=await maybeJSON(path.join(root,'src/characters/ships.generated.json'),null);
  if(!generated||JSON.stringify(generated)!==JSON.stringify(buildManifest(cfg,lock)))problems.push('舰娘映射清单缺失或过期');
- return {problems,ships:activeIds(cfg).length,lock};
+ const audio=await checkBattleAudio(root,cfg);problems.push(...audio.problems);
+ return {problems,ships:activeIds(cfg).length,lock,audio};
 }
 function buildManifest(cfg,lock){
  const profiles={},identities={};
@@ -81,11 +85,10 @@ export async function preparePainting(id,bytes,settings,crop){
  return {[`public/portraits/${id}.webp`]:portrait,[`public/portraits/${id}-avatar.webp`]:avatar};
 }
 async function run(command,args,options={}){return new Promise((resolve,reject)=>{const child=spawn(command,args,{cwd:project,...options});let stdout='';child.stdout?.on('data',b=>{stdout+=b;});child.stderr?.on('data',b=>process.stderr.write(b));child.on('error',reject);child.on('close',code=>code===0?resolve(stdout):reject(Error(`${command} 退出码 ${code}`)));});}
-async function pythonExecutable(root){const executable=path.join(root,'.generated/ship-assets-python/bin/python');try{await access(executable);return executable;}catch{}await run('uv',['sync','--project',path.join(project,'scripts/ship-assets'),'--frozen','--python','3.11'],{env:{...process.env,UV_PROJECT_ENVIRONMENT:path.join(root,'.generated/ship-assets-python')}});return executable;}
 async function officialResults(root,requests,temp){
  const reportOverride=process.env.SHIP_ASSETS_PROVIDER_REPORT;
  if(reportOverride){return json(reportOverride);}
- const request=path.join(temp,'request.json');await writeFile(request,encoded({client:requests.client,ships:requests.ships}));const python=await pythonExecutable(root);const out=await run(python,[path.join(project,'scripts/ship-assets/cdn.py'),'--request',request,'--output',path.join(temp,'official')]);return JSON.parse(out);
+ return runPythonProvider({root,script:'cdn.py',request:{client:requests.client,ships:requests.ships},output:path.join(temp,'official')});
 }
 async function remote(url){for(let attempt=0;;attempt++){try{const response=await fetch(url,{signal:AbortSignal.timeout(30000)});if(response.status===404)return null;if(!response.ok)throw Error(`HTTP ${response.status}: ${url}`);return Buffer.from(await response.arrayBuffer());}catch(e){if(attempt===2)throw e;}}}
 async function fallbackComponent(ship,kind){const source=ship.fallbackSources?.[kind==='chibi'?'spine':'painting'];if(!source)return null;if(!/^[a-f0-9]{40}$/.test(source.revision)||!/^[-\w]+\/[-\w.]+$/.test(source.repository))throw Error('公开仓库源必须固定完整提交');const base=`https://raw.githubusercontent.com/${source.repository}/${source.revision}/`;
@@ -99,11 +102,11 @@ async function providerResult(ship,needs,result,report){const files={},sources={
  if(needs.every(k=>files[k]))return {status:'available',files,source:sources};
  return {status:errors.length?'error':'missing',reason:errors.join(';')||'官方及公开仓库均缺少基础资源',files,source:sources};
 }
-export async function syncShipAssets({root=project,resolveSource,dryRun=false,regenerate=true}={}){
+export async function syncShipAssets({root=project,resolveSource,resolveAudioSource,dryRun=false,regenerate=true}={}){
  const cfg=validateConfig(await json(path.join(root,'config/ship-assets.json'))),lock=await maybeJSON(path.join(root,'assets/ship-assets.lock.json'),{version:1,ships:{}}),needed=[];
  for(const id of activeIds(cfg)){const needs=await requiredComponents(root,cfg,lock.ships[id],id);if(needs.length)needed.push({id,assetName:cfg.ships[id].assetName,needs});}
  const planned=needed.map(s=>({id:s.id,needs:s.needs}));
- if(dryRun)return {planned,changed:false};
+ if(dryRun)return {planned,changed:false,...(cfg.audio?{audio:await syncBattleAudio({root,config:cfg,dryRun:true})}:{})};
  await mkdir(path.join(root,'.generated'),{recursive:true});const temp=await mkdtemp(path.join(root,'.generated/ship-assets-stage-'));
  let changed=false;
  try{
@@ -136,11 +139,13 @@ export async function syncShipAssets({root=project,resolveSource,dryRun=false,re
   changed=await put(path.join(root,'config/ship-assets.json'),encoded(cfg))||changed;
   changed=await put(path.join(root,'assets/ship-assets.lock.json'),encoded(lock))||changed;
   changed=await put(path.join(root,'src/characters/ships.generated.json'),encoded(buildManifest(cfg,lock)))||changed;
+  const audio=cfg.audio?await syncBattleAudio({root,config:cfg,resolveSource:resolveAudioSource}):null;
+  changed=audio?.changed||changed;
   const checked=await checkShipAssets(root);if(checked.problems.length)throw Error(checked.problems.join('\n'));
   if(regenerate){let valid=false;try{const {validateRuntime}=await import('./runtime-assets.mjs');await validateRuntime(root);valid=true;}catch{}if(!valid){await run(process.execPath,[path.join(root,'scripts/render-spine-previews.mjs')],{stdio:'inherit'});await run(process.execPath,[path.join(root,'scripts/generate-assets.mjs')],{stdio:'inherit'});}}
-  return {planned,changed,ships:checked.ships};
+  return {planned,changed,ships:checked.ships,...(audio?{audio}:{})};
  }finally{await rm(temp,{recursive:true,force:true});}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- try{if(process.argv.includes('--check')){const result=await checkShipAssets();if(result.problems.length)throw Error(result.problems.join('\n'));console.log(`全部 ${result.ships} 套舰娘资源通过离线校验`);}else{const result=await syncShipAssets({dryRun:process.argv.includes('--dry-run'),regenerate:!process.argv.includes('--no-generate')});console.log(encoded(result));}}catch(e){console.error(e.stack||e.message);process.exitCode=1;}
+ try{const audioOnly=process.argv.includes('--audio-only');if(process.argv.includes('--check')){const result=audioOnly?await checkBattleAudio():await checkShipAssets();if(result.problems.length)throw Error(result.problems.join('\n'));console.log(audioOnly?`全部 ${result.entries} 组战斗音频通过离线校验`:`全部 ${result.ships} 套舰娘资源、${result.audio.entries} 组战斗音频通过离线校验`);}else{const options={dryRun:process.argv.includes('--dry-run'),regenerate:!process.argv.includes('--no-generate')};const result=audioOnly?await syncBattleAudio(options):await syncShipAssets(options);console.log(encoded(result));}}catch(e){console.error(e.stack||e.message);process.exitCode=1;}
 }

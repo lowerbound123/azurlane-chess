@@ -3,20 +3,20 @@ import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {ABILITY_DEMO_SHIP_IDS} from '../shared/ability-demo.ts';
-import {isArtifactCurrent,sourceFingerprint,digest} from './ability-demo-manifest.mjs';
+import {isArtifactCurrent,digest} from './ability-demo-manifest.mjs';
 export const hasDemoSources=root=>existsSync(path.join(root,'assets/ability-demos/manifest.json'));
-export async function readAbilityDemoOutputs(root,fingerprint){
+export async function readAbilityDemoOutputs(root){
  let source;try{source=JSON.parse(await readFile(path.join(root,'assets/ability-demos/manifest.json'),'utf8'));}catch{throw new Error('能力演示清单缺失，请运行 npm run demos:render -- --all');}
  for(const id of ABILITY_DEMO_SHIP_IDS){
-  const c=source.clips?.[id],bad=()=>{throw new Error(`能力演示 ${id} 缺失、损坏或过期，请重生成：npm run demos:render -- --all`);};
-  if(!c||!await isArtifactCurrent(path.join(root,'assets/ability-demos',id),c,fingerprint))bad();
+  const c=source.clips?.[id],bad=()=>{throw new Error(`能力演示 ${id} 缺失、损坏或规格不符，请检查现有产物`);};
+  if(!c||!await isArtifactCurrent(path.join(root,'assets/ability-demos',id),c))bad();
   if(c.id!==id||!c.name||!c.ability||!Number.isFinite(c.duration)||c.duration<1||c.width!==768||c.height!==960||c.fps!==30||!Array.isArray(c.cues)||!c.cues.length)bad();
   let end=0;for(const cue of c.cues){if(cue.start!==end||cue.end<=cue.start||typeof cue.title!=='string'||typeof cue.detail!=='string'||!Number.isInteger(cue.round)||cue.round<1)bad();end=cue.end;}if(end!==c.duration)bad();
   for(const [format,codec]of [['webm','vp9'],['mp4','h264']]){const f=c.formats?.[format];if(!f||f.codec!==codec||f.width!==768||f.height!==960||f.frames!==c.duration*30||f.fps!=='30/1'||f.audio!==false||Math.abs(f.duration-c.duration)>.05||c.files[`demo.${format}`].bytes>4*1048576)bad();}
  }
  return source;
 }
-export async function validateAbilityDemoOutputs(root){return readAbilityDemoOutputs(root,await sourceFingerprint(root));}
+export async function validateAbilityDemoOutputs(root){return readAbilityDemoOutputs(root);}
 export async function appendPublishedDemos(root,source,publish){
  const demos={};for(const id of ABILITY_DEMO_SHIP_IDS){const c=source.clips[id],entry={shipId:id,name:c.name,ability:c.ability,duration:c.duration,width:c.width,height:c.height,fps:c.fps,cues:c.cues};
   for(const [kind,file,type]of [['webm','demo.webm','video/webm'],['mp4','demo.mp4','video/mp4'],['poster','poster.webp','image/webp']])entry[kind]=publish(`ability-demo/${id}/${kind}`,`ability-${id}-${file}`,await readFile(path.join(root,'assets/ability-demos',id,file)),type);

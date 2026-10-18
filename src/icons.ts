@@ -11,7 +11,7 @@ import {
   faTrophy, faHourglassHalf, faFileImport, faFileExport, faRoute, faUserPlus,
   faSatelliteDish, faHandshake, faLock, faBan, faCoins, faCircleDot, faServer,
   faChessKnight, faWater, faBinoculars, faMagnifyingGlassPlus, faMagnifyingGlassMinus,
-  faScroll, faSkull, faMedal, faKeyboard,
+  faScroll, faSkull, faMedal, faKeyboard,faMusic,faCommentDots,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const icons = {
@@ -34,5 +34,6 @@ export const icons = {
   lock:faLock, ban:faBan, coin:faCoins, mine:faCircleDot, server:faServer,
   chess:faChessKnight, sea:faWater, scout:faBinoculars, zoomIn:faMagnifyingGlassPlus,
   zoomOut:faMagnifyingGlassMinus, scroll:faScroll, defeat:faSkull, medal:faMedal, keyboard:faKeyboard,
+  music:faMusic,voice:faCommentDots,
 };
 export type IconName = keyof typeof icons;

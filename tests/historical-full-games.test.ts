@@ -13,7 +13,14 @@ function referenceOrders(save:HistoricalSave,variant=false):Plans {
  const reserved= friends.map(s=>s.pos);
  for(const ship of friends){const p=emptyPlan(),i=Number(ship.id.split('-')[1]);const targets=enemies.slice().sort((a,b)=>hexDist(ship.pos,a.pos)-hexDist(ship.pos,b.pos)||a.hp-b.hp||a.id.localeCompare(b.id));let target:typeof targets[number]|undefined=targets[0];
   let goal=target?.pos??fromCR(7,5),range=target?3:0;
-  if(h.scenarioId==='river-plate'){if(target)range=variant?2:4;else goal=fromCR(6+i,6+i);}
+  if(h.scenarioId==='river-plate'){
+   if(h.stage==='retreat'){
+    // Keep contact with an escaping ship rather than stopping behind its old position.
+    const contact=Object.entries(h.contacts).filter(([k])=>k.startsWith('0:')).sort((a,b)=>b[1].round-a[1].round)[0]?.[1];
+    const known=target??(contact?{pos:contact.at,heading:contact.heading}:undefined);
+    if(known){goal=add(known.pos,known.heading);range=variant?0:1;}
+   }else if(target)range=variant?2:4;else goal=fromCR(6+i,6+i);
+  }
   if(h.scenarioId==='denmark-strait'){goal=variant&&ship.pos.r<5&&ship.pos.q>5?fromCR(i===0?7:9,4):fromCR(i===0?2:4,12);range=0;}
   if(h.scenarioId==='narvik'){goal=target?.pos??fromCR(i===0?9:i===1?4:13,i===0?13:4);range=target?(variant?(ship.template==='bb'?5:2):(ship.cfg.main?Math.min(3,ship.cfg.main.range):2)):0;if((h.counters.sunk??0)>=(variant?6:4)){goal=fromCR(9+i,13);range=0;}}
   if(h.scenarioId==='midway'){goal=enemies.slice().sort((a,b)=>a.id.localeCompare(b.id))[0]?.pos??Object.entries(h.contacts).filter(([k])=>k.startsWith('0:')).sort((a,b)=>a[0].localeCompare(b[0]))[0]?.[1].at??fromCR(7,10);range=3;if(((h.counters.sunk??0)>=3||(variant&&g.round>=5))&&i===2){goal=fromCR(24,14);range=0;}}

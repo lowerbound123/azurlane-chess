@@ -1,5 +1,5 @@
 import type {BattleMode,DominationState} from './domination.ts';
-import type {Game,FrameShip,ShipConfig,XY,Hex,Plans,BattleLog,CombatStats,RoundResult,Plane,Torpedo} from './game.ts';
+import type {Game,FrameShip,ShipConfig,XY,Hex,Plans,BattleLog,CombatStats,RoundResult,Plane,Torpedo,TorpedoWake} from './game.ts';
 import type {DraftState} from './draft.ts';
 export const PROTOCOL_VERSION=2;
 export type ConnectionStatus='connected'|'connecting'|'reconnecting'|'disconnected';
@@ -14,7 +14,7 @@ export interface ClientFlying {statuses?:import('./status.ts').StatusInstance[];
 export interface ClientGame {battleMode?:BattleMode;domination?:DominationState;ruleset?:Game['ruleset'];zones?:Game['zones'];round:number;phase:Game['phase'];nextId:number;winner:Game['winner'];log:BattleLog[];visible:string[];explored:string[][];map:Game['map'];ships:ClientShip[];planes:ClientFlying[];torpedoes:ClientFlying[]}
 export type ClientVisuals=import('../src/battle-visuals.ts').SampledVisuals;
 export interface ClientFrame {round?:number;domination?:DominationState;t:number;visible:string[];explored:string[];ships:ClientShip[];planes:ClientFlying[];torpedoes:ClientFlying[];mines:Game['map']['mines'];zones?:Game['zones'];effects:[];visuals:ClientVisuals}
-export interface ClientResult {game:ClientGame;frames:ClientFrame[];events:BattleLog[];presentation:[]}
+export interface ClientResult {torpedoWakes?:TorpedoWake[];game:ClientGame;frames:ClientFrame[];events:BattleLog[];presentation:[]}
 export interface RoomPlayer {id:string;nickname:string;ready:boolean;roster?:string[]}
 export interface ClientRoom {battleMode?:BattleMode;code:string;hostId:string;turnSeconds:number;players:RoomPlayer[]}
 export interface ClientMatch {battleMode?:BattleMode;id:string;kind:'ai'|'pvp';myTeam:number;round:number;stage:'draft'|'deploy'|'plan'|'resolving'|'playback'|'ended';game:ClientGame|null;draft?:DraftState|null;deadline?:number|null;paused?:boolean;pausedAt?:number|null;disconnects:{team:number;remainingMs:number}[];submitted:boolean[];plans?:Plans;result?:{winner:number|'draw'|null;reason:string}|null;recordStatus?:string;aiName?:string|null;aiMode?:'standard'|'full';aiHistoryRounds?:number;aiStatus?:string|null;aiError?:string|null;playbackUntil?:number|null}

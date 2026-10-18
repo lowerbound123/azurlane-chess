@@ -76,26 +76,33 @@ def gate_versions(config):
         return list(result.pb.version)
 
 
-def discover(client):
+def discover(client, version_types=None):
     from azlassets.config import load_client_config
     from azlassets.classes import Client
     from azlassets.versioncontrol import parse_version_string, parse_hash_rows, VersionType
     config = load_client_config(Client[client])
+    version_types = (VersionType.AZL, VersionType.PAINTING) if version_types is None else tuple(version_types)
+    prefixes = tuple(f'${kind.hashname}$' for kind in version_types)
     rows = {}
     versions = []
+    discovered = set()
     for raw in retry_network(lambda: gate_versions(config)):
-        if not raw.startswith(('$azhash$', '$paintinghash$')):
+        if not raw.startswith(prefixes):
             continue
         version = parse_version_string(raw.strip())
-        if version.version_type not in (VersionType.AZL, VersionType.PAINTING):
+        if version.version_type not in version_types:
             continue
         # Modern CDN hashfiles use the complete $-delimited version string.
         data = fetch(f'{config.cdnurl}/android/hash/{version.rawstring}')
         for row in parse_hash_rows(data.decode('utf-8-sig')):
             rows[row.filepath.lower()] = row
         versions.append(raw)
+        discovered.add(version.version_type)
+    absent = set(version_types) - discovered
+    if absent:
+        raise RuntimeError('Missing requested resource hashfiles: ' + ', '.join(sorted(kind.name for kind in absent)))
     if not versions or not rows:
-        raise RuntimeError('No supported AZL/painting hashfiles in gate response')
+        raise RuntimeError('No requested resource hashfiles in gate response')
     return config.cdnurl, rows, versions
 
 

@@ -8,6 +8,7 @@ import * as E from '../engine.ts';
 import {createCampaignStorage} from '../campaign/storage.ts';
 import {fleetError,sortFleet} from '../ship-catalog.ts';
 import {playFrames} from '../playback.ts';
+import {buildWakeTimeline} from '../wake-tracks.ts';
 
 export function useCampaign(core:SessionCore,actions:SessionActions){
  const {tutorialStore,campaign,campaignNotice,campaignTransit,campaignOverview,campaignViewChapter,campaignFleet,tutorial,game,plans,selected,busy,history,mode,pendingTurn,torpWindow,planeMode,airRole,showRanges,showPlans,rangeMode,ordersOpen,swapMode,replan,mapView,router,computer,runtime}=core;
@@ -27,6 +28,7 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
  });
  function campaignAllowed(kind:string){return !campaign.value||campaignLearned.value.has(kind);}
  function resetTransient(){
+  tutorialStore.wakeTimeline=null;
   runtime.stopPlayback?.();tutorialStore.generation++;computer.dispose();
   tutorialStore.busy=false;tutorialStore.finished=null;tutorialStore.playFrame=null;tutorialStore.progress=0;tutorialStore.history={};tutorialStore.lastMovement={};tutorialStore.hover=null;
   mode.value='move';pendingTurn.value=0;torpWindow.value=0;planeMode.value='point';airRole.value='bomber';swapMode.value=false;replan.value=false;
@@ -59,8 +61,14 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
    if(!C.CAMPAIGN_CHAPTERS[save.state.chapter]?.checkpoints[save.state.checkpoint]){campaignNotice.value='教学检查点已变化，请从本章入口继续。';const state=C.createCampaignState();state.chapter=save.state.chapter;state.completed=save.state.completed;fresh(state);}
    else{
     campaignFleet.value=save.fleet&&!fleetError(save.fleet)?save.fleet:['dd-2','cl-3','ca-1','bb-1','cv-3'];
-    install(save.state,save);checkpointBase=C.createCampaignFixture(save.state,[...campaignFleet.value]);if(save.checkpointExplored)checkpointBase.game.explored=E.clone(save.checkpointExplored);
-    campaignNotice.value='已恢复教学进度';
+    if(save.state.status!=='complete'&&!C.matchesCampaignMap(save.game.map)){
+     const state=save.state.status==='checkpoint-complete'?C.advanceCampaign(save.state):{...save.state,status:'playing' as const,evidence:{},attempts:0,feedback:undefined};
+     if(state.status==='complete')install(state,save);else fresh(state);
+     campaignNotice.value='教学航道已更新；保留已完成任务，从当前检查点的新起点继续。';actions.say(campaignNotice.value);
+    }else{
+     install(save.state,save);checkpointBase=C.createCampaignFixture(save.state,[...campaignFleet.value]);if(save.checkpointExplored)checkpointBase.game.explored=E.clone(save.checkpointExplored);
+     campaignNotice.value='已恢复教学进度';
+    }
    }
   }else if(loaded.kind==='migrate'){
    const state=C.createCampaignState();state.chapter=loaded.chapter;state.completed=loaded.completed;fresh(state);campaignNotice.value='教学内容已更新，保留已完成章节，从本章入口继续。';
@@ -90,6 +98,9 @@ export function useCampaign(core:SessionCore,actions:SessionActions){
   const transit=C.buildCampaignTransit(E.clone(toRaw(game.value)),fixture,{from:C.campaignFocus(campaign.value),to:C.campaignFocus(next),fromRadius:campaign.value.chapter>=8?8:5,toRadius:next.chapter>=8?8:5});
   pending={state:next,transit,fleet};campaignTransit.value=true;busy.value=true;
   core.finished.value=null;plans.value={};showPlans.value=false;campaignOverview.value=false;campaignViewChapter.value=null;
+  // Sailing has its own frames rather than a RoundResult. Replace the previous
+  // round's trail before its clock starts; install() clears it on arrival.
+  tutorialStore.wakeTimeline=buildWakeTimeline(transit.frames,core.myTeam.value);
   const generation=++tutorialStore.generation;
   runtime.stopPlayback=playFrames(transit.frames,{speed:()=>1,render:(frame,fraction)=>{
    if(runtime.disposed||tutorialStore.generation!==generation)return;

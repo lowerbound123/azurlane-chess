@@ -1,4 +1,4 @@
-# 联机服务部署（v0.8.3）
+# 联机服务部署（v0.8.15）
 
 使用 Node.js 25。一个进程、一个端口同时提供网页、HTTP API 与 WebSocket；无需 Docker、外部数据库或 Redis。账号功能默认停用；启用后使用 Node.js 内置 SQLite，在私有本地目录持久保存账号、会话和已结束战绩。
 
@@ -159,7 +159,7 @@ PvP 部署限时 120 秒；匹配规划每轮 120 秒，好友房可选不限时
 
 当前协议版本为 2；旧客户端需刷新页面。选禁阶段快照为 `stage: draft`、`round: 0`、`game: null`，包含 `draft`、`deadline` 和用于冻结倒计时的 `pausedAt`。`draft.guess` 接收 guess/revision，`draft.action` 接收 shipId/revision，`draft.confirm` 接收 revision；三者沿用 matchId、round、请求 ID 与服务器身份校验。部署和战斗阶段继续使用原协议。
 
-### 静态资源优化（v0.8.3）
+### 静态资源优化（v0.8.15）
 
 - `npm run assets:prepare` 使用 Sharp 将 `public` 的 PNG/JPEG 原图生成有损 WebP（质量 80，保留透明度）、24px 预览和响应式尺寸，写入忽略目录 `.generated`。原图保留用于编辑，生产只发布生成的目录；构建、开发、类型检查和测试会先执行生成步骤。
 - 编队头像使用小尺寸图片，立绘先显示模糊预览，再淡入清晰图片；清晰图采用浏览器原生懒加载与异步解码，保留尺寸避免布局跳动。
